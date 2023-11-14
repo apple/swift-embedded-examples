@@ -1,0 +1,39 @@
+# Embedded Swift Example Projects
+
+This repository is a set of demonstration projects of **Embedded Swift**. Embedded Swift is a compilation and language mode that enables development of baremetal, embedded and standalone software in Swift. To learn more, see:
+- [Discussions about Embedded Swift on the Swift forums](https://forums.swift.org/t/embedded-swift/67057)
+- [Embedded Swift Vision Document](https://github.com/apple/swift-evolution/blob/main/visions/embedded-swift.md)
+- [Documentation for Embedded Swift](https://github.com/apple/swift/tree/main/docs/EmbeddedSwift)
+
+**⚠️ Embedded Swift is experimental. Some information on this page might be out of date with latest development.**
+
+**‼️ Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.**
+
+**ℹ️ This repository contains code that is not continuously developed, instead it's presented "as is" for educational and demonstrational purposes. Making major improvements to existing examples is discouraged, but additions of new examples is welcome.**
+
+## Catalog of Examples
+
+| Name      | Board | Description | Photo |
+| --------- | ----- | ----------- | ----- |
+| [stm32-blink](./stm32-blink) |STM32F746G-DISCO|Baremetal program that blinks an LED repeatedly. Does not use any vendor SDKs or external toolchains.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-blink.jpg">|
+| [stm32-lcd-logo](./stm32-lcd-logo) |STM32F746G-DISCO|Sets up layers on the built-in LCD and animates them in a loop. Does not use any vendor SDKs or external toolchains.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-lcd-logo.jpg">|
+| [stm32-neopixel](./stm32-neopixel) |STM32F746G-DISCO|Uses SPI to program a NeoPixel LED strip. Does not use any vendor SDKs or external toolchains.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-led.jpg">|
+| [stm32-uart-echo](./stm32-uart-echo) |STM32F746G-DISCO|Uses UART to implement a simple "echo" firmware. Does not use any vendor SDKs or external toolchains.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-uart-echo.png">| 
+| [pico-blink](./pico-blink) |Raspberry Pi Pico W|Baremetal program that blinks an LED repeatedly. Does not use any vendor SDKs or external toolchains.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/pico-blink.jpg">|
+| [pico-blink-sdk](./pico-blink-sdk) |Raspberry Pi Pico W|Baremetal program that blinks an LED repeatedly. Demonstrates how to use code and libraries from the Pico SDK and add Swift code on top of it.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/pico-blink-sdl.jpg">|
+| [nrfx-blink-sdk](./nrfx-blink-sdk) |nRF52840-DK|Baremetal program that blinks an LED repeatedly. Demonstrates how to use code and libraries from the Zephyr SDK and add Swift code on top of it.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/nrfx-blink-sdk.jpeg">|
+| [esp32-led-strip-sdk](./esp32-led-strip-sdk) |ESP32-C6-DevKitC-1|Demonstrates how to integrate with ESP-IDF SDK and use Swift to control the LED strip library from the SDK.|<img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/esp32-led-strip-sdk.jpg">|
+
+Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not recommendations or endorsement, the same is true for build system choice (Make, CMake, SwiftPM, shell scripts). Embedded Swift aims to be versatile and to allow for integration into more existing SDKs and build systems, and the example projects are merely showing the possibilities.
+
+## Contributing to this repository
+
+### Code of Conduct
+
+Like all Swift.org projects, we would like these Embedded Swift example projecs to foster a diverse and friendly community. We expect contributors to adhere to the [Swift.org Code of Conduct](https://swift.org/code-of-conduct/).
+
+### Contact information
+
+The current code owner of this repository is Kuba Mracek ([@kubamracek](https://github.com/kubamracek)). You can contact him [on the Swift forums](https://forums.swift.org/u/kubamracek/summary).
+
+In case of moderation issues, you can also directly contact a member of the [Swift Core Team](https://swift.org/community/#community-structure).
