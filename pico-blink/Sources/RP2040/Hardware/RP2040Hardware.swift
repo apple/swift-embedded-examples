@@ -75,8 +75,6 @@ public struct RP2040Hardware {
       let fbdiv = vcoFrequency / referenceFrequency
 
       let pdiv = postDivisor1 << 16 | postDivisor2 << 12
-      
-      // TODO: check for existing settings
 
       let resetTarget: Resets.ResetValue = pll.unsafeAddress == pllUSB.unsafeAddress ? .pll_usb : .pll_sys
       resets.reset.set(resetTarget)
@@ -85,11 +83,6 @@ public struct RP2040Hardware {
 
 
     }
-
-    // func configure(_ kind: Clocks.Kind, source: UInt32, auxiliarySource: UInt32, sourceFrequency: UInt32, frequency: UInt32) {
-
-    // }
-
     func initializeClocks() {
       let xoscKHz = UInt16(12000)
       let usbClockKHz = UInt16(48000)
@@ -109,18 +102,6 @@ public struct RP2040Hardware {
         $0.timeout = 0
       }
 
-      // xosc.control.modify {
-      //   $0.frequencyRange = .oneToFifteenMHz
-      // }
-
-      // xosc.startup.modify {
-      //   $0.delay = (((xoscKHz + 128) / 256) * multiplier)
-      // }
-
-      // xosc.control.set {
-      //   $0.enable = .enabled
-      // }
-
       while !xosc.status.value.stable { }
 
       clocks.system.control.clearSource()
@@ -134,10 +115,6 @@ public struct RP2040Hardware {
       
       RP2040Hardware.referenceClockHz = clocks.reference.configure(UInt32(xoscKHz) * UInt32(KHz), UInt32(xoscKHz) * UInt32(KHz))
       RP2040Hardware.systemClockHz = clocks.system.configure(systemClockKHz * UInt32(KHz), systemClockKHz * UInt32(KHz))
-      // clocks.usb.configure()
-      // clocks.adc.configure()
-      // clocks.rtc.configure()
-      // clocks.peripheral.configure()
     }
   }
 
