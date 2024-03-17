@@ -336,7 +336,5 @@ extension RP2040Hardware {
         return result
       }
     }
-
-    // // FC0_REF_KHZ
   }
 }
