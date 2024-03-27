@@ -34,6 +34,6 @@ Like all Swift.org projects, we would like these Embedded Swift example projecs 
 
 ### Contact information
 
-The current code owner of this repository is Kuba Mracek ([@kubamracek](https://github.com/kubamracek)). You can contact him [on the Swift forums](https://forums.swift.org/u/kubamracek/summary).
+The current code owners of this repository are Kuba Mracek ([@kubamracek](https://github.com/kubamracek)) and Rauhul Varma ([@rauhul](https://github.com/rauhul)). You can contact them on the Swift forums via the handles [@kubamracek](https://forums.swift.org/u/kubamracek/summary) and [@rauhul](https://forums.swift.org/u/rauhul/summary).
 
 In case of moderation issues, you can also directly contact a member of the [Swift Core Team](https://swift.org/community/#community-structure).
