@@ -1,6 +1,8 @@
 # Embedded Swift Example Projects
 
 This repository is a set of demonstration projects of **Embedded Swift**. Embedded Swift is a compilation and language mode that enables development of baremetal, embedded and standalone software in Swift. To learn more, see:
+- [Blog post introducing this repository](https://www.swift.org/blog/embedded-swift-examples/)
+- [Swift forums thread about this repository](https://forums.swift.org/t/embedded-swift-example-projects-for-arm-and-risc-v-microcontrollers/71066)
 - [Discussions about Embedded Swift on the Swift forums](https://forums.swift.org/t/embedded-swift/67057)
 - [Embedded Swift Vision Document](https://github.com/apple/swift-evolution/blob/main/visions/embedded-swift.md)
 - [Documentation for Embedded Swift](https://github.com/apple/swift/tree/main/docs/EmbeddedSwift)
