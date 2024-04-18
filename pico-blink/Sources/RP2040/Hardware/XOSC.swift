@@ -55,7 +55,7 @@ extension RP2040Hardware {
           case reserved1       = 0xaa1
           case reserved2       = 0xaa2
           case reserved3       = 0xaa3
-          case unknwon         = 0xfa5 // somehow this is a value?
+          case unknown         = 0xfa5 // somehow this is a value?
 
           init(decoding value: UInt32) {
             self.init(rawValue: value)!

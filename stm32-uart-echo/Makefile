@@ -25,7 +25,7 @@ MACHO2BIN := $(SRCROOT)/../Tools/macho2bin.py
 
 .PHONY: build
 build:
-	@echo "compling..."
+	@echo "compiling..."
 	$(SWIFT_BUILD) \
 		--configuration release \
 		--verbose \

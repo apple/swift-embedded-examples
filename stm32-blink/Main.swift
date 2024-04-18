@@ -37,8 +37,8 @@ enum STM32F746Board {
         setRegisterBit(baseAddress: GPIO.GPIOi_BaseAddress, offset: GPIO.Offsets.ODR, bit: 1, value: 0)
     }
     
-    static func delay(miliseconds: Int) {
-        for _ in 0 ..< 10_000 * miliseconds {
+    static func delay(milliseconds: Int) {
+        for _ in 0 ..< 10_000 * milliseconds {
             nop()
         }
     }
@@ -53,9 +53,9 @@ struct Main {
 
         while true {
             Board.ledOn()
-            Board.delay(miliseconds: 100)
+            Board.delay(milliseconds: 100)
             Board.ledOff()
-            Board.delay(miliseconds: 300)
+            Board.delay(milliseconds: 300)
         }
     }
 }

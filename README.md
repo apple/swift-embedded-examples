@@ -32,7 +32,7 @@ Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not reco
 
 ### Code of Conduct
 
-Like all Swift.org projects, we would like these Embedded Swift example projecs to foster a diverse and friendly community. We expect contributors to adhere to the [Swift.org Code of Conduct](https://swift.org/code-of-conduct/).
+Like all Swift.org projects, we would like these Embedded Swift example projects to foster a diverse and friendly community. We expect contributors to adhere to the [Swift.org Code of Conduct](https://swift.org/code-of-conduct/).
 
 ### Contact information
 

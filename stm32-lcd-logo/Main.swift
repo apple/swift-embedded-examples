@@ -16,12 +16,12 @@ struct Main {
 
         let blink = {
             board.ledOn()
-            board.delay(miliseconds: 10)
+            board.delay(milliseconds: 10)
             board.ledOff()
-            board.delay(miliseconds: 20)
+            board.delay(milliseconds: 20)
         }
         
-        board.delay(miliseconds: 10)
+        board.delay(milliseconds: 10)
         
         let maxLogoPosition = Point(x: board.displaySize.width - board.logoLayerSize.width, y: board.displaySize.height - board.logoLayerSize.height)
         
@@ -33,7 +33,7 @@ struct Main {
         var iteration = 0
         
         while true {
-            board.delay(miliseconds: 10)
+            board.delay(milliseconds: 10)
             
             logoPosition = logoPosition.offset(by: logoDelta)
             board.moveLogo(to: logoPosition)
