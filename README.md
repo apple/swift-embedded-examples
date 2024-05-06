@@ -39,7 +39,7 @@ Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not reco
 | [PlaydateKit](https://github.com/finnvoor/PlaydateKit) | Playdate | A full featured framework for building Playdate games using Embedded Swift. |
 | [swift-playdate-examples](https://github.com/apple/swift-playdate-examples) | Playdate | A technical demonstration of Embedded Swift running on Playdate by Panic. |
 
-Please note that the presence of community repositories and devices in this list does not constitute a recommendation or endorsement. If there's a project you'd like to see included here, please [submit a PR](https://github.com/apple/swift-playdate-examples/compare) with the details.
+Please note that the presence of community repositories and devices in this list does not constitute a recommendation or endorsement. If there's a project you'd like to see included here, please [submit an issue](https://github.com/apple/swift-embedded-examples/issues/new) with the details.
 
 ## Contributing to this repository
 
