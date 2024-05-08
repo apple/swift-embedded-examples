@@ -106,7 +106,7 @@ public func defaultHandler() {
   while true { }
 }
 
-@_silgen_name("putchar")
+@_cdecl("putchar")
 public func putchar(_ value: CInt) -> CInt {
   waitTxBufferEmpty()
   tx(value: UInt8(value))
