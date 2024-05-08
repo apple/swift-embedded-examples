@@ -134,7 +134,7 @@ public func defaultHandler() {
   while true { }
 }
 
-@_silgen_name("putchar")
+@_cdecl("putchar")
 public func putchar(_ value: CInt) -> CInt {
   while usart1.isr.read().raw.txe == 0 { }
   usart1.tdr.modify { $0.raw.tdr_field = UInt32(value) }
