@@ -2,7 +2,7 @@
 
 This example demonstrates how to integrate with the Pico SDK which is using CMake as its build system -- the simplest way to integrate with it is to also use CMake to build a Swift firmware application on top of the SDK and the libraries from it.
 
-<img src="https://github.com/apple/swift-embedded-examples/assets/26223064/a802cd82-140d-4906-86a5-dda36d14e43f">
+<img src="https://github.com/apple/swift-embedded-examples/assets/26223064/a4949a2e-1887-4325-8f5f-a681963c93d7">
 
 ## Requirements
 
