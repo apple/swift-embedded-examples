@@ -8,16 +8,19 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 - [Embedded Swift Vision Document](https://github.com/apple/swift-evolution/blob/main/visions/embedded-swift.md)
 - [Documentation for Embedded Swift](https://github.com/apple/swift/tree/main/docs/EmbeddedSwift)
 
-**⚠️ Embedded Swift is experimental. Some information on this page might be out of date with latest development.**
+> [!WARNING]
+> Embedded Swift is experimental. Some information on this page might be out of date with latest development.
 
-**‼️ Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.**
+> [!IMPORTANT]  
+> Use the latest downloadable 'main' [Development Snapshot](https://www.swift.org/install/macos/#development-snapshots) from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
 
-**ℹ️ This repository contains code that is not continuously developed, instead it's presented "as is" for educational and demonstrational purposes. Making major improvements to existing examples is discouraged, but additions of new examples is welcome.**
+> [!NOTE]  
+> This repository contains code that is not continuously developed, instead it's presented "as is" for educational and demonstrational purposes. Making major improvements to existing examples is discouraged, but additions of new examples is welcome.
 
 ## Catalog of Examples
 
-| Name      | Board | Description | Photo |
-| --------- | ----- | ----------- | ----- |
+| Name | Platform | Description | Photo |
+| ---- | -------- | ----------- | ----- |
 | [stm32-blink](./stm32-blink) | STM32F746G-DISCO | Baremetal program that blinks an LED repeatedly. Does not use any vendor SDKs or external toolchains. | <img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-blink.jpg"> |
 | [stm32-lcd-logo](./stm32-lcd-logo) | STM32F746G-DISCO | Sets up layers on the built-in LCD and animates them in a loop. Does not use any vendor SDKs or external toolchains. | <img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-lcd-logo.jpg"> |
 | [stm32-neopixel](./stm32-neopixel) | STM32F746G-DISCO | Uses SPI to program a NeoPixel LED strip. Does not use any vendor SDKs or external toolchains. | <img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-led.jpg"> |
@@ -34,11 +37,12 @@ Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not reco
 
 <!-- Please keep this list sorted by "Board" then "Name" -->
 
-| Name | Board    | Description |
+| Name | Platform | Description |
 | ---- | -------- | ----------- |
+| [swift-matter-examples](https://github.com/apple/swift-matter-examples) | ESP32 | An Embedded Swift Matter application running on ESP32-C6. |
 | [swift-flipperzero-hello](https://github.com/Sameesunkaria/swift-flipperzero-hello) | Flipper Zero | A demonstration of running Swift apps on the Flipper Zero. |
 | [PlaydateKit](https://github.com/finnvoor/PlaydateKit) | Playdate | A full featured framework for building Playdate games using Embedded Swift. |
-| [swift-playdate-examples](https://github.com/apple/swift-playdate-examples) | Playdate | A technical demonstration of Embedded Swift running on Playdate by Panic. |
+| [swift-playdate-examples](https://github.com/apple/swift-playdate-examples) | Playdate | An Embedded Swift game running on Playdate by Panic. |
 | [swift-for-wasm-examples](https://github.com/apple/swift-for-wasm-examples) | Web | A "Swift Audio Workstation" example built with Swift for WebAssembly running in the browser using Embedded Swift. |
 
 Please note that the presence of community repositories and devices in this list does not constitute a recommendation or endorsement. If there's a project you'd like to see included here, please [submit an issue](https://github.com/apple/swift-embedded-examples/issues/new) with the details.
