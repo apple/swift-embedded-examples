@@ -1,8 +1,9 @@
 # esp32-led-strip-sdk
 
-This example demonstrates how to integrate with the ESP-IDF SDK via CMake and how to use the existing LED strip library to control WS8212 lights from Swift. This example is specifically made for the RISC-V MCUs from ESP32 (the Xtensa MCUs are not currently supported by Swift).
+This example demonstrates how to integrate with the ESP-IDF SDK via CMake and how to use the standard GPIO library to control LED from Swift. This example is specifically made for the RISC-V MCUs from ESP32 (the Xtensa MCUs are not currently supported by Swift).
 
-<img src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/esp32-led-strip-sdk.jpg">
+![Led on](https://github.com/allexoK/swift-embedded-examples/assets/50021377/c40d4b3a-670b-4743-a8ae-a90c90b905b4)
+![Led off](https://github.com/allexoK/swift-embedded-examples/assets/50021377/8a0e11d7-3799-48da-9407-6f9e9e38d065)
 
 ## Requirements
 
@@ -27,12 +28,12 @@ $ idf.py build
 
 ## Running
 
-- Connect the ESP32-C6-DevKitC-1 board over a USB cable to your Mac.
-- Wire up an external WS8212 LED strip and use GPIO pin 0 as the data pin. You might need to use a level shifter.
+- Connect the Esp32-C6-Bug board(Or any other board with integrated LED on GPIO pin 8) over a USB cable to your Mac. Alternatively you can just connect external LED to GPIO pin 8 on any other board.
+- Connect RX pin of USB-UART converter to TX0 pin of your board if you need serial ouput.(You may also need to connect GND converter pin to the GND pin of the board)
 - Use `idf.py` to upload the firmware and to run it:
 
 ```console
 $ idf.py flash
 ```
 
-- The LED strip should now be animating a sequence of random colors moving in one direction.
+- The LED should be blinking now.
