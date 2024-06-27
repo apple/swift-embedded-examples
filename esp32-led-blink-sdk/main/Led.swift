@@ -2,8 +2,7 @@
 //
 // This source file is part of the Swift open source project
 //
-// Modified by Karavaev Aleksei
-// Copyright (c) 2023 Apple Inc. and the Swift project authors.
+// Copyright (c) 2024 Apple Inc. and the Swift project authors.
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 // See https://swift.org/LICENSE.txt for license information
@@ -20,7 +19,7 @@ struct Led {
       fatalError("cannot reset led")
     }
 
-    guard gpio_set_direction(ledPin,GPIO_MODE_OUTPUT) == ESP_OK else {
+    guard gpio_set_direction(ledPin, GPIO_MODE_OUTPUT) == ESP_OK else {
       fatalError("cannot reset led")
     }
   }
