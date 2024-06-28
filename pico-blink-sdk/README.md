@@ -31,7 +31,7 @@ $ cmake --build build
 
 ## Running
 
-- Connect the Pico W board via a USB cable to your Mac, and make sure it's in the USB Mass Storage firmware upload mode (either hold the BOOTSEL button while plugging the board, or make sure your Flash memory doesn't contain any valid firmware).
+- Connect the Pico board via a USB cable to your Mac, and make sure it's in the USB Mass Storage firmware upload mode (either hold the BOOTSEL button while plugging the board, or make sure your Flash memory doesn't contain any valid firmware).
 - Copy the UF2 firmware to the Mass Storage device:
 
 ```console
