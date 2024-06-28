@@ -2,8 +2,8 @@
 
 This example demonstrates how to integrate with the ESP-IDF SDK via CMake and how to use the standard GPIO library to control LED from Swift. This example is specifically made for the RISC-V MCUs from ESP32 (the Xtensa MCUs are not currently supported by Swift).
 
-![Led on](pics/ledon.jpg)
-![Led off](pics/ledoff.jpg)
+![Led on](assets/images/ledon.jpg)
+![Led off](assets/images/ledoff.jpg)
 
 ## Requirements
 
