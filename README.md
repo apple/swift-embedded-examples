@@ -30,6 +30,8 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 | [pico-w-blink-sdk](./pico-w-blink-sdk) | Raspberry Pi Pico W | Baremetal program that blinks an LED to signal 'SOS' in Morse code. Demonstrates how to use code and libraries from the Pico SDK and add Swift code on top of it. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/26223064/a4949a2e-1887-4325-8f5f-a681963c93d7"> |
 | [nrfx-blink-sdk](./nrfx-blink-sdk) | nRF52840-DK | Baremetal program that blinks an LED repeatedly. Demonstrates how to use code and libraries from the Zephyr SDK and add Swift code on top of it. | <img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/nrfx-blink-sdk.jpeg"> |
 | [esp32-led-strip-sdk](./esp32-led-strip-sdk) | ESP32-C6-DevKitC-1 | Demonstrates how to integrate with ESP-IDF SDK and use Swift to control the LED strip library from the SDK. | <img width="300" src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/esp32-led-strip-sdk.jpg"> |
+| [esp32-led-blink-sdk](./esp32-led-blink-sdk) | ESP32-C6-Bug | Demonstrates how to integrate with ESP-IDF SDK and use Swift to control the standard LED from the SDK. | <img width="300" src="esp32-led-blink-sdk/assets/images/ledon.jpg"> |
+
 
 Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not recommendations or endorsement, the same is true for build system choice (Make, CMake, SwiftPM, shell scripts). Embedded Swift aims to be versatile and to allow for integration into more existing SDKs and build systems, and the example projects are merely showing the possibilities.
 
