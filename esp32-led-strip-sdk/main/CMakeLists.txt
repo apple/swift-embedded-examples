@@ -1,6 +1,7 @@
 idf_component_register(
     SRCS "Dummy.c"
     INCLUDE_DIRS "."
+    LDFRAGMENTS "linker.lf"
 )
 
 execute_process(COMMAND xcrun -f swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
