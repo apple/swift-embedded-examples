@@ -1,6 +1,7 @@
 idf_component_register(
     SRCS "Dummy.c"
     INCLUDE_DIRS "."
+    LDFRAGMENTS "linker.lf"
 )
 
 idf_build_get_property(target IDF_TARGET)
