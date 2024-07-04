@@ -3,7 +3,12 @@ include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 project(swift-blinky)
 pico_sdk_init()
+
+if(APPLE)
 execute_process(COMMAND xcrun -f swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
+else()
+execute_process(COMMAND which swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
+endif()
 
 add_executable(swift-blinky)
 add_custom_command(
