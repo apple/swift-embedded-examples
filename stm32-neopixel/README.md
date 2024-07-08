@@ -18,8 +18,6 @@ We recommend including a capacitor across the LED strip power supply.
 
 ## How to build and run this example:
 
-**⚠️ This example relies on a SwiftPM feature that is not yet present in the nightly downloadable toolchain, https://github.com/apple/swift-package-manager/pull/7353. Currently, it will only build if you have a locally built toolchain with the mentioned PR merged in.**
-
 - Connect the STM32F746G-DISCO board via the ST-LINK USB port to your Mac.
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
 - Install the `stlink` (https://github.com/stlink-org/stlink) command line tools, e.g. via `brew install stlink`.

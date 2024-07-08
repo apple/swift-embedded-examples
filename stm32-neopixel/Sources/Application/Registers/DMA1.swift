@@ -3,214 +3,214 @@
 import MMIO
 
 /// DMA controller
-@RegisterBank
+@RegisterBlock
 struct DMA1 {
   /// low interrupt status register
-  @RegisterBank(offset: 0x0)
+  @RegisterBlock(offset: 0x0)
   var lisr: Register<LISR>
 
   /// high interrupt status register
-  @RegisterBank(offset: 0x4)
+  @RegisterBlock(offset: 0x4)
   var hisr: Register<HISR>
 
   /// low interrupt flag clear register
-  @RegisterBank(offset: 0x8)
+  @RegisterBlock(offset: 0x8)
   var lifcr: Register<LIFCR>
 
   /// high interrupt flag clear register
-  @RegisterBank(offset: 0xc)
+  @RegisterBlock(offset: 0xc)
   var hifcr: Register<HIFCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0x10)
+  @RegisterBlock(offset: 0x10)
   var s0cr: Register<S0CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0x14)
+  @RegisterBlock(offset: 0x14)
   var s0ndtr: Register<S0NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0x18)
+  @RegisterBlock(offset: 0x18)
   var s0par: Register<S0PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0x1c)
+  @RegisterBlock(offset: 0x1c)
   var s0m0ar: Register<S0M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0x20)
+  @RegisterBlock(offset: 0x20)
   var s0m1ar: Register<S0M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0x24)
+  @RegisterBlock(offset: 0x24)
   var s0fcr: Register<S0FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0x28)
+  @RegisterBlock(offset: 0x28)
   var s1cr: Register<S1CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0x2c)
+  @RegisterBlock(offset: 0x2c)
   var s1ndtr: Register<S1NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0x30)
+  @RegisterBlock(offset: 0x30)
   var s1par: Register<S1PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0x34)
+  @RegisterBlock(offset: 0x34)
   var s1m0ar: Register<S1M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0x38)
+  @RegisterBlock(offset: 0x38)
   var s1m1ar: Register<S1M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0x3c)
+  @RegisterBlock(offset: 0x3c)
   var s1fcr: Register<S1FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0x40)
+  @RegisterBlock(offset: 0x40)
   var s2cr: Register<S2CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0x44)
+  @RegisterBlock(offset: 0x44)
   var s2ndtr: Register<S2NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0x48)
+  @RegisterBlock(offset: 0x48)
   var s2par: Register<S2PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0x4c)
+  @RegisterBlock(offset: 0x4c)
   var s2m0ar: Register<S2M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0x50)
+  @RegisterBlock(offset: 0x50)
   var s2m1ar: Register<S2M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0x54)
+  @RegisterBlock(offset: 0x54)
   var s2fcr: Register<S2FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0x58)
+  @RegisterBlock(offset: 0x58)
   var s3cr: Register<S3CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0x5c)
+  @RegisterBlock(offset: 0x5c)
   var s3ndtr: Register<S3NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0x60)
+  @RegisterBlock(offset: 0x60)
   var s3par: Register<S3PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0x64)
+  @RegisterBlock(offset: 0x64)
   var s3m0ar: Register<S3M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0x68)
+  @RegisterBlock(offset: 0x68)
   var s3m1ar: Register<S3M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0x6c)
+  @RegisterBlock(offset: 0x6c)
   var s3fcr: Register<S3FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0x70)
+  @RegisterBlock(offset: 0x70)
   var s4cr: Register<S4CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0x74)
+  @RegisterBlock(offset: 0x74)
   var s4ndtr: Register<S4NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0x78)
+  @RegisterBlock(offset: 0x78)
   var s4par: Register<S4PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0x7c)
+  @RegisterBlock(offset: 0x7c)
   var s4m0ar: Register<S4M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0x80)
+  @RegisterBlock(offset: 0x80)
   var s4m1ar: Register<S4M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0x84)
+  @RegisterBlock(offset: 0x84)
   var s4fcr: Register<S4FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0x88)
+  @RegisterBlock(offset: 0x88)
   var s5cr: Register<S5CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0x8c)
+  @RegisterBlock(offset: 0x8c)
   var s5ndtr: Register<S5NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0x90)
+  @RegisterBlock(offset: 0x90)
   var s5par: Register<S5PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0x94)
+  @RegisterBlock(offset: 0x94)
   var s5m0ar: Register<S5M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0x98)
+  @RegisterBlock(offset: 0x98)
   var s5m1ar: Register<S5M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0x9c)
+  @RegisterBlock(offset: 0x9c)
   var s5fcr: Register<S5FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0xa0)
+  @RegisterBlock(offset: 0xa0)
   var s6cr: Register<S6CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0xa4)
+  @RegisterBlock(offset: 0xa4)
   var s6ndtr: Register<S6NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0xa8)
+  @RegisterBlock(offset: 0xa8)
   var s6par: Register<S6PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0xac)
+  @RegisterBlock(offset: 0xac)
   var s6m0ar: Register<S6M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0xb0)
+  @RegisterBlock(offset: 0xb0)
   var s6m1ar: Register<S6M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0xb4)
+  @RegisterBlock(offset: 0xb4)
   var s6fcr: Register<S6FCR>
 
   /// stream x configuration register
-  @RegisterBank(offset: 0xb8)
+  @RegisterBlock(offset: 0xb8)
   var s7cr: Register<S7CR>
 
   /// stream x number of data register
-  @RegisterBank(offset: 0xbc)
+  @RegisterBlock(offset: 0xbc)
   var s7ndtr: Register<S7NDTR>
 
   /// stream x peripheral address register
-  @RegisterBank(offset: 0xc0)
+  @RegisterBlock(offset: 0xc0)
   var s7par: Register<S7PAR>
 
   /// stream x memory 0 address register
-  @RegisterBank(offset: 0xc4)
+  @RegisterBlock(offset: 0xc4)
   var s7m0ar: Register<S7M0AR>
 
   /// stream x memory 1 address register
-  @RegisterBank(offset: 0xc8)
+  @RegisterBlock(offset: 0xc8)
   var s7m1ar: Register<S7M1AR>
 
   /// stream x FIFO control register
-  @RegisterBank(offset: 0xcc)
+  @RegisterBlock(offset: 0xcc)
   var s7fcr: Register<S7FCR>
 }
 
