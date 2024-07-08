@@ -3,110 +3,110 @@
 import MMIO
 
 /// Reset and clock control
-@RegisterBank
+@RegisterBlock
 struct RCC {
   /// clock control register
-  @RegisterBank(offset: 0x0)
+  @RegisterBlock(offset: 0x0)
   var cr: Register<CR>
 
   /// PLL configuration register
-  @RegisterBank(offset: 0x4)
+  @RegisterBlock(offset: 0x4)
   var pllcfgr: Register<PLLCFGR>
 
   /// clock configuration register
-  @RegisterBank(offset: 0x8)
+  @RegisterBlock(offset: 0x8)
   var cfgr: Register<CFGR>
 
   /// clock interrupt register
-  @RegisterBank(offset: 0xc)
+  @RegisterBlock(offset: 0xc)
   var cir: Register<CIR>
 
   /// AHB1 peripheral reset register
-  @RegisterBank(offset: 0x10)
+  @RegisterBlock(offset: 0x10)
   var ahb1rstr: Register<AHB1RSTR>
 
   /// AHB2 peripheral reset register
-  @RegisterBank(offset: 0x14)
+  @RegisterBlock(offset: 0x14)
   var ahb2rstr: Register<AHB2RSTR>
 
   /// AHB3 peripheral reset register
-  @RegisterBank(offset: 0x18)
+  @RegisterBlock(offset: 0x18)
   var ahb3rstr: Register<AHB3RSTR>
 
   /// APB1 peripheral reset register
-  @RegisterBank(offset: 0x20)
+  @RegisterBlock(offset: 0x20)
   var apb1rstr: Register<APB1RSTR>
 
   /// APB2 peripheral reset register
-  @RegisterBank(offset: 0x24)
+  @RegisterBlock(offset: 0x24)
   var apb2rstr: Register<APB2RSTR>
 
   /// AHB1 peripheral clock register
-  @RegisterBank(offset: 0x30)
+  @RegisterBlock(offset: 0x30)
   var ahb1enr: Register<AHB1ENR>
 
   /// AHB2 peripheral clock enable register
-  @RegisterBank(offset: 0x34)
+  @RegisterBlock(offset: 0x34)
   var ahb2enr: Register<AHB2ENR>
 
   /// AHB3 peripheral clock enable register
-  @RegisterBank(offset: 0x38)
+  @RegisterBlock(offset: 0x38)
   var ahb3enr: Register<AHB3ENR>
 
   /// APB1 peripheral clock enable register
-  @RegisterBank(offset: 0x40)
+  @RegisterBlock(offset: 0x40)
   var apb1enr: Register<APB1ENR>
 
   /// APB2 peripheral clock enable register
-  @RegisterBank(offset: 0x44)
+  @RegisterBlock(offset: 0x44)
   var apb2enr: Register<APB2ENR>
 
   /// AHB1 peripheral clock enable in low power mode register
-  @RegisterBank(offset: 0x50)
+  @RegisterBlock(offset: 0x50)
   var ahb1lpenr: Register<AHB1LPENR>
 
   /// AHB2 peripheral clock enable in low power mode register
-  @RegisterBank(offset: 0x54)
+  @RegisterBlock(offset: 0x54)
   var ahb2lpenr: Register<AHB2LPENR>
 
   /// AHB3 peripheral clock enable in low power mode register
-  @RegisterBank(offset: 0x58)
+  @RegisterBlock(offset: 0x58)
   var ahb3lpenr: Register<AHB3LPENR>
 
   /// APB1 peripheral clock enable in low power mode register
-  @RegisterBank(offset: 0x60)
+  @RegisterBlock(offset: 0x60)
   var apb1lpenr: Register<APB1LPENR>
 
   /// APB2 peripheral clock enabled in low power mode register
-  @RegisterBank(offset: 0x64)
+  @RegisterBlock(offset: 0x64)
   var apb2lpenr: Register<APB2LPENR>
 
   /// Backup domain control register
-  @RegisterBank(offset: 0x70)
+  @RegisterBlock(offset: 0x70)
   var bdcr: Register<BDCR>
 
   /// clock control & status register
-  @RegisterBank(offset: 0x74)
+  @RegisterBlock(offset: 0x74)
   var csr: Register<CSR>
 
   /// spread spectrum clock generation register
-  @RegisterBank(offset: 0x80)
+  @RegisterBlock(offset: 0x80)
   var sscgr: Register<SSCGR>
 
   /// PLLI2S configuration register
-  @RegisterBank(offset: 0x84)
+  @RegisterBlock(offset: 0x84)
   var plli2scfgr: Register<PLLI2SCFGR>
 
   /// PLL configuration register
-  @RegisterBank(offset: 0x88)
+  @RegisterBlock(offset: 0x88)
   var pllsaicfgr: Register<PLLSAICFGR>
 
   /// dedicated clocks configuration register
-  @RegisterBank(offset: 0x8c)
+  @RegisterBlock(offset: 0x8c)
   var dkcfgr1: Register<DKCFGR1>
 
   /// dedicated clocks configuration register
-  @RegisterBank(offset: 0x90)
+  @RegisterBlock(offset: 0x90)
   var dkcfgr2: Register<DKCFGR2>
 }
 

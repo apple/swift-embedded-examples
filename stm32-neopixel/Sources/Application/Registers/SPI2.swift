@@ -3,42 +3,42 @@
 import MMIO
 
 /// Serial peripheral interface
-@RegisterBank
+@RegisterBlock
 struct SPI2 {
   /// control register 1
-  @RegisterBank(offset: 0x0)
+  @RegisterBlock(offset: 0x0)
   var cr1: Register<CR1>
 
   /// control register 2
-  @RegisterBank(offset: 0x4)
+  @RegisterBlock(offset: 0x4)
   var cr2: Register<CR2>
 
   /// status register
-  @RegisterBank(offset: 0x8)
+  @RegisterBlock(offset: 0x8)
   var sr: Register<SR>
 
   /// data register
-  @RegisterBank(offset: 0xc)
+  @RegisterBlock(offset: 0xc)
   var dr: Register<DR>
 
   /// CRC polynomial register
-  @RegisterBank(offset: 0x10)
+  @RegisterBlock(offset: 0x10)
   var crcpr: Register<CRCPR>
 
   /// RX CRC register
-  @RegisterBank(offset: 0x14)
+  @RegisterBlock(offset: 0x14)
   var rxcrcr: Register<RXCRCR>
 
   /// TX CRC register
-  @RegisterBank(offset: 0x18)
+  @RegisterBlock(offset: 0x18)
   var txcrcr: Register<TXCRCR>
 
   /// I2S configuration register
-  @RegisterBank(offset: 0x1c)
+  @RegisterBlock(offset: 0x1c)
   var i2scfgr: Register<I2SCFGR>
 
   /// I2S prescaler register
-  @RegisterBank(offset: 0x20)
+  @RegisterBlock(offset: 0x20)
   var i2spr: Register<I2SPR>
 }
 
