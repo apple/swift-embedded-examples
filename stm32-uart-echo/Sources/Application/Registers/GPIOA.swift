@@ -3,50 +3,50 @@
 import MMIO
 
 /// General-purpose I/Os
-@RegisterBank
+@RegisterBlock
 struct GPIOA {
   /// GPIO port mode register
-  @RegisterBank(offset: 0x0)
+  @RegisterBlock(offset: 0x0)
   var moder: Register<MODER>
 
   /// GPIO port output type register
-  @RegisterBank(offset: 0x4)
+  @RegisterBlock(offset: 0x4)
   var otyper: Register<OTYPER>
 
   /// GPIO port output speed register
-  @RegisterBank(offset: 0x8)
+  @RegisterBlock(offset: 0x8)
   var ospeedr: Register<OSPEEDR>
 
   /// GPIO port pull-up/pull-down register
-  @RegisterBank(offset: 0xc)
+  @RegisterBlock(offset: 0xc)
   var pupdr: Register<PUPDR>
 
   /// GPIO port input data register
-  @RegisterBank(offset: 0x10)
+  @RegisterBlock(offset: 0x10)
   var idr: Register<IDR>
 
   /// GPIO port output data register
-  @RegisterBank(offset: 0x14)
+  @RegisterBlock(offset: 0x14)
   var odr: Register<ODR>
 
   /// GPIO port bit set/reset register
-  @RegisterBank(offset: 0x18)
+  @RegisterBlock(offset: 0x18)
   var bsrr: Register<BSRR>
 
   /// GPIO port configuration lock register
-  @RegisterBank(offset: 0x1c)
+  @RegisterBlock(offset: 0x1c)
   var lckr: Register<LCKR>
 
   /// GPIO alternate function low register
-  @RegisterBank(offset: 0x20)
+  @RegisterBlock(offset: 0x20)
   var afrl: Register<AFRL>
 
   /// GPIO alternate function high register
-  @RegisterBank(offset: 0x24)
+  @RegisterBlock(offset: 0x24)
   var afrh: Register<AFRH>
 
   /// GPIO port bit reset register
-  @RegisterBank(offset: 0x28)
+  @RegisterBlock(offset: 0x28)
   var brr: Register<BRR>
 }
 

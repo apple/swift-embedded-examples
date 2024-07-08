@@ -3,50 +3,50 @@
 import MMIO
 
 /// Universal synchronous asynchronous receiver transmitter
-@RegisterBank
+@RegisterBlock
 struct USART1 {
   /// Control register 1
-  @RegisterBank(offset: 0x0)
+  @RegisterBlock(offset: 0x0)
   var cr1: Register<CR1>
 
   /// Control register 2
-  @RegisterBank(offset: 0x4)
+  @RegisterBlock(offset: 0x4)
   var cr2: Register<CR2>
 
   /// Control register 3
-  @RegisterBank(offset: 0x8)
+  @RegisterBlock(offset: 0x8)
   var cr3: Register<CR3>
 
   /// Baud rate register
-  @RegisterBank(offset: 0xc)
+  @RegisterBlock(offset: 0xc)
   var brr: Register<BRR>
 
   /// Guard time and prescaler register
-  @RegisterBank(offset: 0x10)
+  @RegisterBlock(offset: 0x10)
   var gtpr: Register<GTPR>
 
   /// Receiver timeout register
-  @RegisterBank(offset: 0x14)
+  @RegisterBlock(offset: 0x14)
   var rtor: Register<RTOR>
 
   /// Request register
-  @RegisterBank(offset: 0x18)
+  @RegisterBlock(offset: 0x18)
   var rqr: Register<RQR>
 
   /// Interrupt & status register
-  @RegisterBank(offset: 0x1c)
+  @RegisterBlock(offset: 0x1c)
   var isr: Register<ISR>
 
   /// Interrupt flag clear register
-  @RegisterBank(offset: 0x20)
+  @RegisterBlock(offset: 0x20)
   var icr: Register<ICR>
 
   /// Receive data register
-  @RegisterBank(offset: 0x24)
+  @RegisterBlock(offset: 0x24)
   var rdr: Register<RDR>
 
   /// Transmit data register
-  @RegisterBank(offset: 0x28)
+  @RegisterBlock(offset: 0x28)
   var tdr: Register<TDR>
 }
 
