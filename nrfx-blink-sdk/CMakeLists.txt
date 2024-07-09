@@ -34,7 +34,10 @@ add_compile_options(
 
 target_sources(app PRIVATE Stubs.c)
 
-add_library(app_swift STATIC Main.swift)
+# The Swift code providing "main" needs to be in an OBJECT library (instead of STATIC library) to make sure it actually gets linker.
+# A STATIC library would get dropped from linking because Zephyr provides a default weak empty main definition.
+add_library(app_swift OBJECT Main.swift)
+
 add_dependencies(app_swift syscall_list_h_target)
 target_compile_options(app_swift PRIVATE
     -parse-as-library
