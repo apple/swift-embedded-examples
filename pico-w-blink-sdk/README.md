@@ -6,6 +6,7 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 
 ## Requirements
 
+- A Raspberry Pi Pico W board. If you have a Pico (non-W) instead, refer to the [pico-blink-sdk](../pico-blink-sdk) sample instead.
 - Follow the setup steps at https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf, in particular you'll need:
   - A checkout of the [pico-sdk](https://github.com/raspberrypi/pico-sdk.git), with git submodules checked out.
   - A checkout of the [pico-examples](https://github.com/raspberrypi/pico-examples.git).
