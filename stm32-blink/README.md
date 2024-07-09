@@ -2,7 +2,7 @@
 
 This example shows a simple baremetal firmware for an STM32 board that blinks an LED repeatedly. The example does not use any vendor SDKs or external toolchains, the entire firmware is only built from code in this example directory.
 
-<img src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-blink.jpg">
+<img src="https://github.com/apple/swift-embedded-examples/assets/1186214/739e98fd-a438-4a64-a7aa-9dddee25034b">
 
 ## How to build and run this example:
 

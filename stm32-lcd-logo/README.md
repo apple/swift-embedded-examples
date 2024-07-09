@@ -1,6 +1,6 @@
 # stm32-lcd-logo
 
-<img src="https://raw.githubusercontent.com/kubamracek/swift-evolution/branch/assets/stm32-lcd-logo.jpg">
+<img src="https://github.com/apple/swift-embedded-examples/assets/1186214/9e117d81-e808-493e-a20c-7284ea630f37">
 
 ## How to build and run this example:
 
