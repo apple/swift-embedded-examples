@@ -20,7 +20,7 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 ``` console
-$ cd pico-blink-sdk
+$ cd pico-w-blink-sdk
 $ export TOOLCHAINS='<toolchain-name>'
 $ export PICO_BOARD=pico_w
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
