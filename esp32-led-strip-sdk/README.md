@@ -36,3 +36,25 @@ $ idf.py flash
 ```
 
 - The LED strip should now be animating a sequence of random colors moving in one direction.
+
+## Simulating
+
+The project can be simulated using Wokwi Simulator in [IDE](https://docs.wokwi.com/vscode/getting-started).
+
+- Build the UF2 image recognized by the simulator:
+
+```console
+idf.py uf2
+```
+
+- Open the directory with the project in the IDE.
+
+- Start the simulator.
+
+Alternatively the project can be launched with pre-built binary in web browser:
+
+[![ESP32-S3-BOX-3 Graphical Bootloader](assets/images/esp32-led-strip-sdk.webp)](https://wokwi.com/experimental/viewer?diagram=https://raw.githubusercontent.com/georgik/swift-embedded-examples/feature/wokwi/esp32-led-strip-sdk/diagram.json&firmware=https://github.com/georgik/swift-embedded-examples/releases/download/v0.1/embedded-swift-esp32-c6-led-strip-sdk.uf2.bin
+)
+
+[Run on-line in Wokwi Simulator](https://wokwi.com/experimental/viewer?diagram=https://raw.githubusercontent.com/georgik/swift-embedded-examples/feature/wokwi/esp32-led-strip-sdk/diagram.json&firmware=https://github.com/georgik/swift-embedded-examples/releases/download/v0.1/embedded-swift-esp32-c6-led-strip-sdk.uf2.bin
+)
