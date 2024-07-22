@@ -53,7 +53,7 @@ idf.py uf2
 
 Alternatively the project can be launched with pre-built binary in web browser:
 
-[![ESP32-S3-BOX-3 Graphical Bootloader](assets/images/esp32-led-blink-sdk.webp)](https://wokwi.com/experimental/viewer?diagram=https://raw.githubusercontent.com/georgik/swift-embedded-examples/feature/wokwi/esp32-led-blink-sdk/diagram.json&firmware=https://github.com/georgik/swift-embedded-examples/releases/download/v0.1/embedded-swift-esp32-c6-led-blink-sdk.uf2.bin
+[![ESP32-C6 Embedded Swift Example](assets/images/esp32-led-blink-sdk.webp)](https://wokwi.com/experimental/viewer?diagram=https://raw.githubusercontent.com/georgik/swift-embedded-examples/feature/wokwi/esp32-led-blink-sdk/diagram.json&firmware=https://github.com/georgik/swift-embedded-examples/releases/download/v0.1/embedded-swift-esp32-c6-led-blink-sdk.uf2.bin
 )
 
 [Run on-line in Wokwi Simulator](https://wokwi.com/experimental/viewer?diagram=https://raw.githubusercontent.com/georgik/swift-embedded-examples/feature/wokwi/esp32-led-blink-sdk/diagram.json&firmware=https://github.com/georgik/swift-embedded-examples/releases/download/v0.1/embedded-swift-esp32-c6-led-blink-sdk.uf2.bin
