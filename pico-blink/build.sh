@@ -13,9 +13,6 @@ SWIFT_FLAGS="-enable-experimental-feature Embedded -disable-stack-protector"
 CLANG_FLAGS="-D__MACH__ -ffreestanding -mcpu=cortex-m0plus -mthumb"
 LD_FLAGS="-static -Wl,-e,_reset -dead_strip -Wl,-no_zero_fill_sections -Wl,-segalign,4 -Wl,-segaddr,__RESET,0x20000000 -Wl,-segaddr,__VECTORS,0x20000100 -Wl,-seg1addr,0x20000200 -Wl,-pagezero_size,0"
 
-XCODE_RESOURCE_DIR=`env TOOLCHAINS="" xcrun clang -print-resource-dir`
-LD_FLAGS+=" $XCODE_RESOURCE_DIR/lib/darwin/macho_embedded/libclang_rt.soft_static.a"
-
 SWIFT_BUILD_FLAGS="--triple armv6m-apple-none-macho --configuration release --verbose"
 for SWIFT_FLAG in $SWIFT_FLAGS; do
 	SWIFT_BUILD_FLAGS+=" -Xswiftc $SWIFT_FLAG"
