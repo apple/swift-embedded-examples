@@ -10,10 +10,22 @@
 
 - Connect the Pico board via a USB cable to your Mac, and make sure it's in the USB Mass Storage firmware upload mode (either hold the BOOTSEL button while plugging the board, or make sure your Flash memory doesn't contain any valid firmware).
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
+- Before building, you need to install the python dependencies (ideally in a virtual environment):
+
+```console
+cd swift-embedded-examples
+mkdir pyenv
+cd pyenv
+python3 -m venv .
+source bin/activate
+cd ../Tools
+pip3 install -r requirements.txt
+```
+
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 ``` console
 $ cd pico-blink
-$ TOOLCHAINS='<toolchain-name>' ./build.sh
+$ TOOLCHAINS='<toolchain-name>' ./build.sh # toolchain-name is typically `swift`
 $ cp .build/blink.uf2 /Volumes/RP2040
 ```
 - The green LED should now be blinking in a pattern.
