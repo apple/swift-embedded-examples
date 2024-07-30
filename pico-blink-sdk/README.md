@@ -25,7 +25,7 @@ $ cd pico-blink-sdk
 $ export TOOLCHAINS='<toolchain-name>'
 $ export PICO_BOARD=pico
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
-$ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>'
+$ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>' # A default `brew` install will be located at `/Applications/ArmGNUToolchain/[version]/arm-none-eabi`
 $ cmake -B build -G Ninja .
 $ cmake --build build
 ```
