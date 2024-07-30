@@ -1,6 +1,7 @@
+# Register the app as an IDF component
 idf_component_register(
-    SRCS "Dummy.c"
-    INCLUDE_DIRS "."
+    SRCS /dev/null # We don't have any C++ sources
+    PRIV_INCLUDE_DIRS "."
     LDFRAGMENTS "linker.lf"
 )
 
@@ -22,33 +23,45 @@ else()
     set(mabi_flag "ilp32")
 endif()
 
-if(APPLE)
-execute_process(COMMAND xcrun -f swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
-else()
-execute_process(COMMAND which swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
-endif()
+# Clear the default COMPILE_OPTIONS which include a lot of C/C++ specific compiler flags that the Swift compiler will not accept
+get_target_property(var ${COMPONENT_LIB} COMPILE_OPTIONS)
+set_target_properties(${COMPONENT_LIB} PROPERTIES COMPILE_OPTIONS "")
 
-add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
-    COMMAND
-        ${SWIFTC}
+# Compute -Xcc flags to set up the C and C++ header search paths for Swift (for bridging header).
+set(SWIFT_INCLUDES)
+foreach(dir ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES})
+    string(CONCAT SWIFT_INCLUDES ${SWIFT_INCLUDES} "-Xcc ")
+    string(CONCAT SWIFT_INCLUDES ${SWIFT_INCLUDES} "-I${dir} ")
+endforeach()
+foreach(dir ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+    string(CONCAT SWIFT_INCLUDES ${SWIFT_INCLUDES} "-Xcc ")
+    string(CONCAT SWIFT_INCLUDES ${SWIFT_INCLUDES} "-I${dir} ")
+endforeach()
+
+# Swift compiler flags to build in Embedded Swift mode, optimize for size, choose the right ISA, ABI, etc.
+target_compile_options(${COMPONENT_LIB} PUBLIC "$<$<COMPILE_LANGUAGE:Swift>:SHELL:
         -target riscv32-none-none-eabi
         -Xfrontend -function-sections -enable-experimental-feature Embedded -wmo -parse-as-library -Osize
         -Xcc -march=${march_flag} -Xcc -mabi=${mabi_flag}
-        $$\( echo '$<TARGET_PROPERTY:__idf_main,INCLUDE_DIRECTORIES>' | tr '\;' '\\n' | sed -e 's/\\\(.*\\\)/-Xcc -I\\1/g' \)
-        $$\( echo '${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES}'           | tr ' '  '\\n' | sed -e 's/\\\(.*\\\)/-Xcc -I\\1/g' \)
-        -import-bridging-header ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
-        ${CMAKE_CURRENT_LIST_DIR}/Main.swift
-        ${CMAKE_CURRENT_LIST_DIR}/Led.swift
-        -c -o ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
-    DEPENDS
-        ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
-        ${CMAKE_CURRENT_LIST_DIR}/Main.swift
-        ${CMAKE_CURRENT_LIST_DIR}/Led.swift
-)
-add_custom_target(main-swiftcode DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o)
+        
+        -pch-output-dir /tmp
+        -Xfrontend -enable-single-module-llvm-emission
+        
+        ${SWIFT_INCLUDES}
 
-target_link_libraries(__idf_main
-    ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
+        -import-bridging-header ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
+    >")
+
+# Enable Swift support in CMake, force Whole Module builds (required by Embedded Swift), and use "CMAKE_Swift_COMPILER_WORKS" to
+# skip the trial compilations which don't (yet) correctly work when cross-compiling.
+set(CMAKE_Swift_COMPILER_WORKS YES)
+set(CMAKE_Swift_COMPILATION_MODE_DEFAULT wholemodule)
+set(CMAKE_Swift_COMPILATION_MODE wholemodule)
+enable_language(Swift)
+
+# List of Swift source files to build.
+target_sources(${COMPONENT_LIB}
+    PRIVATE
+    Main.swift
+    LED.swift
 )
-add_dependencies(__idf_main main-swiftcode)
