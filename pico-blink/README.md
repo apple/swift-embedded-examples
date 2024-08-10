@@ -23,9 +23,10 @@ pip3 install -r requirements.txt
 ```
 
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
+  - (determining your toolchain identifier is step 5 in this [matter tutorial](https://apple.github.io/swift-matter-examples/tutorials/swiftmatterexamples/setup-macos/))
 ``` console
 $ cd pico-blink
-$ TOOLCHAINS='<toolchain-name>' ./build.sh # toolchain-name is typically `swift`
+$ TOOLCHAINS='<toolchain-identifier>' ./build.sh
 $ cp .build/blink.uf2 /Volumes/RP2040
 ```
 - The green LED should now be blinking in a pattern.
