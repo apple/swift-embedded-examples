@@ -40,43 +40,64 @@ def main():
     parser.add_argument('output')
     parser.add_argument('--base-address', required=True)
     parser.add_argument('--segments', required=True)    
+    parser.add_argument('--pico-family', required=True)    
     args = parser.parse_args()
     args.base_address = int(args.base_address, 16)
     args.segments = args.segments.split(",")
+    if args.pico_family == "rp2040":
+        family_id = 0xE48BFF56
+        add_errata_block = False
+    elif args.pico_family == "rp2350":
+        family_id = 0XE48BFF59
+        add_errata_block = True
+    else:
+        assert False
 
     subprocess.check_call([MY_DIR + "/macho2bin.py", args.input, args.input + ".bin", "--base-address", "0x%08x" % args.base_address, "--segments", ",".join(args.segments)])
 
+    def emit_block(output, block, vmaddr, block_number, num_blocks, family_id):
+        assert len(block) <= 256
+        
+        if len(block) < 256:
+            block += b'\0' * (256 - len(block))
+        
+        # UF2_Block header
+        output += struct.pack("<I", 0x0A324655) # magicStart0
+        output += struct.pack("<I", 0x9E5D5157) # magicStart1
+        output += struct.pack("<I", 0x2000) # flags: familyID present
+        output += struct.pack("<I", vmaddr) # targetAddr
+        output += struct.pack("<I", 256) # payloadSize
+        output += struct.pack("<I", block_number) # blockNo
+        output += struct.pack("<I", num_blocks) # numBlocks
+        output += struct.pack("<I", family_id) # fileSize / familyID: rp2040/rp2350 family ID
+
+        # Data
+        if len(block) < 476:
+            block += b'\0' * (476 - len(block))
+        output += block
+
+        # UF2_Block footer
+        output += struct.pack("<I", 0x0AB16F30) # magicEnd
+        
+        return output
+
     output = b''
-    total_size = os.stat(args.input + ".bin").st_size
-    num_blocks = (total_size + 255) // 256
-    vmaddr = args.base_address
     with open(args.input + ".bin", "rb") as f:
+        if add_errata_block:
+            # RP2350-E10 errata
+            block = struct.pack("<I", 0xEFEFEFEF) * 64
+            vmaddr = 0x10FFFF00
+            output = emit_block(output, block, vmaddr, 0, 2, 0xE48BFF57)
+
+        total_size = os.stat(args.input + ".bin").st_size
+        num_blocks = (total_size + 255) // 256
         block_number = 0
+        vmaddr = args.base_address
         while True:
             block = f.read(256)
             if len(block) == 0:
                 break
-            if len(block) < 256:
-                block += b'\0' * (256 - len(block))
-            
-            # UF2_Block header
-            output += struct.pack("<I", 0x0A324655) # magicStart0
-            output += struct.pack("<I", 0x9E5D5157) # magicStart1
-            output += struct.pack("<I", 0x2000) # flags: familyID present
-            output += struct.pack("<I", vmaddr) # targetAddr
-            output += struct.pack("<I", 256) # payloadSize
-            output += struct.pack("<I", block_number) # blockNo
-            output += struct.pack("<I", num_blocks) # numBlocks
-            output += struct.pack("<I", 0xE48BFF56) # fileSize / familyID: rp2040 family ID
-
-            # Data
-            if len(block) < 476:
-                block += b'\0' * (476 - len(block))
-            output += block
-
-            # UF2_Block footer
-            output += struct.pack("<I", 0x0AB16F30) # magicEnd
-
+            output = emit_block(output, block, vmaddr, block_number, num_blocks, family_id)
             block_number += 1
             vmaddr += 256
 

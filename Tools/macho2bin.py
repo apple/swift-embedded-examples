@@ -71,8 +71,9 @@ def main():
             if gap != 0:
                 print(f"Writing gap of size {gap} (0x{gap:0x}) at vmaddr 0x{vmaddr:08x}")
                 f.write(b'\0' * gap)
+            assert gap >= 0
             vmaddr = segment["vmaddr"]
-            print(f"Writing segment {segment['name']} size {len(segment['data'])} (0x{len(segment['data'])}) at vmaddr 0x{vmaddr:08x}")
+            print(f"Writing segment {segment['name']} size {len(segment['data'])} (0x{len(segment['data']):x}) at vmaddr 0x{vmaddr:08x}")
             f.write(segment["data"])
             vmaddr = segment["vmaddr"] + len(segment["data"])
 
