@@ -25,6 +25,9 @@ add_compile_options(
     # Use compacted C enums matching GCC
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fshort-enums>"
 
+    # Disable PIC
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pic>"
+
     # Assortment of defines for Zephyr
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -DKERNEL -Xcc -DNRF52840_XXAA -Xcc -DPICOLIBC_INTEGER_PRINTF_SCANF -Xcc -D_FORTIFY_SOURCE=1 -Xcc -D_POSIX_C_SOURCE=200809 -Xcc -D__LINUX_ERRNO_EXTENSIONS__ -Xcc -D__PROGRAM_START -Xcc -D__ZEPHYR__=1>"
 
@@ -41,6 +44,10 @@ add_library(app_swift OBJECT Main.swift)
 add_dependencies(app_swift syscall_list_h_target)
 target_compile_options(app_swift PRIVATE
     -parse-as-library
+
+    -Osize
+
+    -Xfrontend -disable-stack-protector
 
     # FIXME: add dependency on BridgingHeader.h
     -import-bridging-header ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
