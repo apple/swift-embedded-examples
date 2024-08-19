@@ -11,10 +11,10 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 > [!WARNING]
 > Embedded Swift is experimental. Some information on this page might be out of date with latest development.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Use the latest downloadable 'main' [Development Snapshot](https://www.swift.org/install/macos/#development-snapshots) from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
 
-> [!NOTE]  
+> [!NOTE]
 > This repository contains code that is not continuously developed, instead it's presented "as is" for educational and demonstrational purposes. Making major improvements to existing examples is discouraged, but additions of new examples is welcome.
 
 ## Catalog of Examples
@@ -28,6 +28,7 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 | [pico-blink](./pico-blink) | Raspberry Pi Pico | Baremetal program that blinks an LED repeatedly. Does not use any vendor SDKs or external toolchains. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
 | [pico-blink-sdk](./pico-blink-sdk) | Raspberry Pi Pico | Baremetal program that blinks an LED repeatedly. Demonstrates how to use code and libraries from the Pico SDK and add Swift code on top of it. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
 | [pico-w-blink-sdk](./pico-w-blink-sdk) | Raspberry Pi Pico W | Baremetal program that blinks an LED to signal 'SOS' in Morse code. Demonstrates how to use code and libraries from the Pico SDK and add Swift code on top of it. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/26223064/a4949a2e-1887-4325-8f5f-a681963c93d7"> |
+| [pico2-neopixel](./pico2-neopixel) | Raspberry Pi Pico2 | Drive a Neopixel LED using the RP2350 PIO. Does not use any vendor SDKs or external toolchains. | <img width="300" src="pico2-neopixel/assets/images/example.jpg"> |
 | [nrfx-blink-sdk](./nrfx-blink-sdk) | nRF52840-DK | Baremetal program that blinks an LED repeatedly. Demonstrates how to use code and libraries from the Zephyr SDK and add Swift code on top of it. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0"> |
 | [esp32-led-strip-sdk](./esp32-led-strip-sdk) | ESP32-C6-DevKitC-1 | Demonstrates how to integrate with ESP-IDF SDK and use Swift to control the LED strip library from the SDK. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be"> |
 | [esp32-led-blink-sdk](./esp32-led-blink-sdk) | ESP32-C6-Bug | Demonstrates how to integrate with ESP-IDF SDK and use Swift to control the standard LED from the SDK. | <img width="300" src="esp32-led-blink-sdk/assets/images/ledon.jpg"> |
