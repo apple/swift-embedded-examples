@@ -63,5 +63,5 @@ enable_language(Swift)
 target_sources(${COMPONENT_LIB}
     PRIVATE
     Main.swift
-    LED.swift
+    Led.swift
 )
