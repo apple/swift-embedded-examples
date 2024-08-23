@@ -10,7 +10,7 @@ An example project demonstrating how to drive a Neopixel RGB LED from an RP2350.
 
 ## Configuring
 
-This example uses the hard coded constant `LED_PIN` in `Application.swift` to select the GPIO pin used to drive the attached Neopixel RGB LED. If you are using the "SparkFun Pro Micro - RP2350" no configuration is necessary, if you are using a different board you will likely need to adjust this constant to pin used to drive the LED in your setup.
+This example uses the hard coded constant `LED_PIN` in `Application.swift` to select the GPIO pin used to drive the attached Neopixel RGB LED. If you are using the "SparkFun Pro Micro - RP2350" no configuration is necessary, if you are using a different board you will need to adjust this constant to the pin used to drive your LED.
 
 Example diff:
 
