@@ -12,7 +12,7 @@ This example shows a simple baremetal firmware for an STM32 board that blinks an
 - Build and upload the program to flash memory of the microcontroller:
 ```console
 $ cd stm32-blink
-$ TOOLCHAINS='<toolchain-name>' ./build.sh
+$ TOOLCHAINS='<toolchain-identifier>' ./build.sh
 $ st-flash --reset write .build/blink.bin 0x08000000
 ```
 - The green LED next to the RESET button should now be blinking in a pattern.

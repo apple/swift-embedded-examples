@@ -11,11 +11,22 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 > [!WARNING]
 > Embedded Swift is experimental. Some information on this page might be out of date with latest development.
 
-> [!IMPORTANT]
-> Use the latest downloadable 'main' [Development Snapshot](https://www.swift.org/install/macos/#development-snapshots) from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
+## Building the examples
 
-> [!NOTE]
-> This repository contains code that is not continuously developed, instead it's presented "as is" for educational and demonstrational purposes. Making major improvements to existing examples is discouraged, but additions of new examples is welcome.
+Each example in this repository contains build and deployment instructions, however there are a couple common steps needed for many of the examples included below:
+
+1. Install the latest downloadable 'main' [Development Snapshot](https://www.swift.org/install/macos/#development-snapshots) from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
+	
+  You can follow the [tutorial here](https://apple.github.io/swift-matter-examples/tutorials/swiftmatterexamples/setup-macos/) for instructions on installing and using nighly Swift toolchains.
+
+2. Install the Python3 dependencies listed in `requirements.txt`.
+
+  ```console
+  $ cd swift-embedded-examples
+  $ python3 -m venv .venv
+  $ source .venv/bin/activate
+  $ python3 -m pip install -r Tools/requirements.txt
+  ```
 
 ## Catalog of Examples
 
@@ -54,6 +65,8 @@ Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not reco
 Please note that the presence of community repositories and devices in this list does not constitute a recommendation or endorsement. If there's a project you'd like to see included here, please [submit an issue](https://github.com/apple/swift-embedded-examples/issues/new) with the details.
 
 ## Contributing to this repository
+
+This repository contains code that is not continuously developed, instead it's presented "as is" for educational and demonstrational purposes. Making major improvements to existing examples is discouraged, but additions of new examples is welcome.
 
 ### Code of Conduct
 

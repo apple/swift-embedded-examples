@@ -37,7 +37,7 @@ index f6867b5..a2291db 100644
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 ``` console
 $ cd pico2-neopixel
-$ TOOLCHAINS='<toolchain-name>' make
+$ TOOLCHAINS='<toolchain-identifier>' make
 $ cp .build/release/Application.uf2 /Volumes/RP2350
 ```
 - The RGB LED should be animating through the color wheel.
