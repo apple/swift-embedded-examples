@@ -11,10 +11,12 @@
 
 import RP2350
 
+let LED_PIN: UInt32 = 25
+
 /// Configures GPIO pin 25 as a front-end to PIO0.
 func configure_output_pin() {
   // Configure GPIO general properties
-  pads_bank0.gpio25.modify { rw in
+  pads_bank0.gpio[LED_PIN].modify { rw in
     rw.raw.od = 0 // Enable output
     rw.raw.ie = 0 // Disable input
     rw.raw.pue = 1 // Disable pull up
@@ -24,12 +26,12 @@ func configure_output_pin() {
   }
 
   // Configure GPIO function selection to use PIO0
-  io_bank0.gpio25_ctrl.modify { rw in
+  io_bank0.gpio[LED_PIN].gpio_ctrl.modify { rw in
     rw.raw.funcsel = 0x6 // Forward output from pio0 to this pin
   }
 
   // Remove pad isolation now that the correct peripheral is driving the pad
-  pads_bank0.gpio25.modify { rw in
+  pads_bank0.gpio[LED_PIN].modify { rw in
     rw.raw.iso = 0 // Disable isolation
   }
 }
@@ -45,22 +47,16 @@ func configure_output_pin() {
 /// `clkdiv_restart` to clear any persisted state.
 func configure_pio() {
   // Load the assembled program directly into the PIO's instruction memory.
-  //
-  // Ideally instr_mem would be an array but the svd2swift doesn't currently
-  // do that.
   withUnsafeBytes(of: WS2812.pio_instructions) { pointer in
     let pio_instructions = pointer.assumingMemoryBound(to: UInt16.self)
-    var instr_mem = pio0.instr_mem0
-    for pio_instr in pio_instructions {
-      instr_mem.write { w in
-        w.raw.instr_mem0_field = UInt32(pio_instr)
+    for (index, pio_instr) in pio_instructions.enumerated() {
+      pio0.instr_mem[index].write { w in
+        w.raw.instr_mem0 = UInt32(pio_instr)
       }
-      // Unsafely move to the next instr_mem address.
-      instr_mem.unsafeAddress += 0x4 
     }
 
     // Configure the PIO program wrap boundaries.
-    pio0.sm0_execctrl.modify { r, w in
+    pio0.sm[0].sm_execctrl.modify { r, w in
       w.raw.wrap_bottom = 1 // Continue at 1
       w.raw.wrap_top = UInt32(pio_instructions.count - 1) // Wrap after last.
     }
@@ -82,7 +78,7 @@ func configure_pio() {
   //
   // int:  floor(1.375) = 1
   // frac: floor(0.375 * 255) = 95
-  pio0.sm0_clkdiv.write { rw in
+  pio0.sm[0].sm_clkdiv.write { rw in
     rw.raw.int = 1
     rw.raw.frac = 95
   }
@@ -93,7 +89,7 @@ func configure_pio() {
   // every 24 bits. If no data is in the txfifo, the state machine will stall.
   // Additional bond the RX TX fifos into one larger TX fifo so we can buffer
   // more pixel data.
-  pio0.sm0_shiftctrl.modify { rw in
+  pio0.sm[0].sm_shiftctrl.modify { rw in
     rw.raw.autopull = 1 // Enable autopull
     rw.raw.pull_thresh = 24 // 24 bit pull threshold
     rw.raw.out_shiftdir = 0 // Left shift from OSR
@@ -101,10 +97,10 @@ func configure_pio() {
   }
 
   // Setup the PIO state machine to output to the correct gpio pins.
-  pio0.sm0_pinctrl.modify { rw in
-    rw.raw.set_base = 25
+  pio0.sm[0].sm_pinctrl.modify { rw in
+    rw.raw.set_base = LED_PIN
     rw.raw.set_count = 1
-    rw.raw.sideset_base = 25
+    rw.raw.sideset_base = LED_PIN
     rw.raw.sideset_count = 1
   }
 
@@ -132,8 +128,8 @@ func pio_write_pixel(_ hsv: HSV8Pixel) {
   // Wait for the TX fifo to have space before writing to it.
   while tx_fifo_full() { }
   // Write the pixel value to TX fifo.
-  pio0.txf0.write { w in
-    w.raw.txf0_field = ws2812Value
+  pio0.txf[0].write { w in
+    w.raw.txf0 = ws2812Value
   }
 }
 
