@@ -13,7 +13,7 @@
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 ``` console
 $ cd pico-blink
-$ TOOLCHAINS='<toolchain-name>' ./build.sh
+$ TOOLCHAINS='<toolchain-identifier>' ./build.sh
 $ cp .build/blink.uf2 /Volumes/RP2040
 ```
 - The green LED should now be blinking in a pattern.

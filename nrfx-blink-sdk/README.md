@@ -23,7 +23,7 @@ This example demonstrates how to integrate with the Zephyr SDK via CMake and how
 ``` console
 $ cd nrfx-blink-sdk
 $ source ~/zephyrproject/.venv/bin/activate
-(.venv) export TOOLCHAINS='<toolchain-name>'
+(.venv) export TOOLCHAINS='<toolchain-identifier>'
 (.venv) cmake -B build -G Ninja -DBOARD=nrf52840dk_nrf52840 -DUSE_CCACHE=0 .
 (.venv) cmake --build build
 ```
