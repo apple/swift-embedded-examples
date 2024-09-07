@@ -24,7 +24,7 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 ``` console
 $ cd pico-blink-sdk
 $ export TOOLCHAINS='<toolchain-identifier>'
-$ export PICO_BOARD=pico
+$ export PICO_BOARD='<board-name>' # Examples: pico, pico2
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
 $ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>' # A default `brew` install will be located at `/Applications/ArmGNUToolchain/[version]/arm-none-eabi`
 $ cmake -B build -G Ninja .
