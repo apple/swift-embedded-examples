@@ -2,6 +2,9 @@
 
 set -vex
 
+# Either rp2040 or rp2350
+PICO_FAMILY=rp2040
+
 # Determine file paths
 REPOROOT=$(git rev-parse --show-toplevel)
 TOOLSROOT=$REPOROOT/Tools
@@ -35,7 +38,7 @@ BUILDROOT=$($SWIFT_EXEC build $SWIFT_BUILD_FLAGS --show-bin-path)
 $CLANG .build/release/Support.build/{Support.c,crt0.S}.o .build/release/Blinky.build/*.o -target armv6m-apple-none-macho -o $BUILDROOT/blinky $LD_FLAGS
 
 # Extract sections from executable into flashable binary
-$PYTHON_EXEC $MACHO2UF2 $BUILDROOT/blinky $BUILDROOT/blinky.uf2 --base-address 0x20000000 --segments '__TEXT,__DATA,__VECTORS,__RESET'
+$PYTHON_EXEC $MACHO2UF2 --pico-family $PICO_FAMILY $BUILDROOT/blinky $BUILDROOT/blinky.uf2 --base-address 0x20000000 --segments '__TEXT,__DATA,__VECTORS,__RESET'
 
 # Echo final binary path
 ls -al $BUILDROOT/blinky.uf2
