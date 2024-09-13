@@ -1,0 +1,61 @@
+##===----------------------------------------------------------------------===##
+##
+## This source file is part of the Swift.org open source project
+##
+## Copyright (c) 2024 Apple Inc. and the Swift project authors
+## Licensed under Apache License v2.0 with Runtime Library Exception
+##
+## See https://swift.org/LICENSE.txt for license information
+## See https://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
+##
+##===----------------------------------------------------------------------===##
+
+name: Build embedded Swift examples
+
+on:
+  # Run at 9 AM UTC
+  schedule:
+    - cron: '0 9 * * *' 
+  # Allow for starting this workflow from the GitHub web UI, API and CLI
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download development snapshot toolchain
+      run: |
+        for (( i=0; i < 30; i++ ))
+        do
+          # try to find latest toolchain
+          TOOLCHAIN_DATE=$(date -v-${i}d +"%Y-%m-%d")
+          TOOLCHAIN_FILE="swift-DEVELOPMENT-SNAPSHOT-$TOOLCHAIN_DATE-a-osx.pkg"
+          TOOLCHAIN_URL="https://download.swift.org/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2024-09-11-a/$TOOLCHAIN_FILE"
+          if wget --spider $TOOLCHAIN_URL 2>/dev/null; then
+            break # toolchain found
+          fi
+        done
+        echo +++ Downloading $TOOLCHAIN_URL
+        wget --quiet $TOOLCHAIN_URL
+        sudo installer -pkg ./$TOOLCHAIN_FILE -target /
+        TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-*-a.xctoolchain/Info.plist)
+        echo +++ Using TOOLCHAINS=$TOOLCHAINS
+        TOOLCHAINS=$TOOLCHAINS swift --version
+        echo "TOOLCHAINS=$TOOLCHAINS" >> $GITHUB_ENV
+    - name: Install Python dependencies
+      run: |
+        python3 -m venv .venv
+        source .venv/bin/activate
+        python3 -m pip install -r Tools/requirements.txt
+    - name: Build pico-blink
+      run: |
+        echo +++ Using TOOLCHAINS=$TOOLCHAINS
+        python3 -m venv .venv
+        source .venv/bin/activate
+        echo +++ Building pico-blink
+        cd pico-blink
+        ./build.sh
+
+        
