@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
 include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
-include(hacky_cmake_helper.cmake)
 
 project(swift-blinky)
 pico_sdk_init()
@@ -34,13 +33,54 @@ target_link_libraries(swift-blinky
     pico_stdlib hardware_uart hardware_gpio
 )
 
-gather_vars(COMPILE_DEFINITIONS INTERFACE_COMPILE_DEFINITIONS _touched_cd swift-blinky)
+# Gather compile definitions from all dependencies
+
+set_property(GLOBAL PROPERTY visited_targets "")
+set_property(GLOBAL PROPERTY compilerdefs_list "")
+
+function(gather_compile_definitions_recursive target)
+    # Get the current value of visited_targets
+    get_property(visited_targets GLOBAL PROPERTY visited_targets)
+    
+    # make sure we don't visit the same target twice
+    # and that we don't visit the special generator expressions
+    if (${target} MATCHES "\\$<" OR ${target} MATCHES "::@" OR ${target} IN_LIST visited_targets)
+        return()
+    endif()
+
+    # Append the target to visited_targets
+    list(APPEND visited_targets ${target})
+    set_property(GLOBAL PROPERTY visited_targets "${visited_targets}")
+
+    # Get the current value of compilerdefs_list
+    get_property(compilerdefs_list GLOBAL PROPERTY compilerdefs_list)
+
+    get_target_property(target_definitions ${target} INTERFACE_COMPILE_DEFINITIONS)
+    if (target_definitions)
+        # Append the target definitions to compilerdefs_list
+        list(APPEND compilerdefs_list ${target_definitions})
+        set_property(GLOBAL PROPERTY compilerdefs_list "${compilerdefs_list}")
+    endif()
+
+    get_target_property(target_linked_libs ${target} INTERFACE_LINK_LIBRARIES)
+    if (target_linked_libs)
+        foreach(linked_target ${target_linked_libs})
+            # Recursively gather compile definitions from dependencies
+            gather_compile_definitions_recursive(${linked_target})
+        endforeach()
+    endif()
+endfunction()
+
+gather_compile_definitions_recursive(swift-blinky)
+get_property(COMPILE_DEFINITIONS GLOBAL PROPERTY compilerdefs_list)
+
+# Parse compiler definitions into a format that swiftc can understand
 list(REMOVE_DUPLICATES COMPILE_DEFINITIONS)
 list(PREPEND COMPILE_DEFINITIONS "") # -Xcc -D
 string(REPLACE "$<TARGET_PROPERTY:PICO_TARGET_BINARY_TYPE>" "$<TARGET_PROPERTY:swift-blinky,PICO_TARGET_BINARY_TYPE>" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
 string(REPLACE ";" " -Xcc -D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
 
-
+# Write the compiler definitions to a file (this way CMake will evaluate the compiler definitions)
 file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/swiftc_flags.txt CONTENT "${COMPILE_DEFINITIONS}")
 
 
