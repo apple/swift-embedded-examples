@@ -61,9 +61,6 @@ list(PREPEND COMPILE_DEFINITIONS "") # adds a semicolon at the beginning
 string(REPLACE "$<TARGET_PROPERTY:PICO_TARGET_BINARY_TYPE>" "$<TARGET_PROPERTY:swift-blinky,PICO_TARGET_BINARY_TYPE>" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
 string(REPLACE ";" ";-Xcc;-D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
 
-# Write the compiler definitions to a file (this way CMake will evaluate the compiler definitions)
-file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/swiftc_flags.txt CONTENT "${COMPILE_DEFINITIONS}")
-
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
     COMMAND
