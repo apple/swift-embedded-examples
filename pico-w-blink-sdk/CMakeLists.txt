@@ -57,9 +57,9 @@ get_property(COMPILE_DEFINITIONS GLOBAL PROPERTY compilerdefs_list)
 
 # Parse compiler definitions into a format that swiftc can understand
 list(REMOVE_DUPLICATES COMPILE_DEFINITIONS)
-list(PREPEND COMPILE_DEFINITIONS "") # -Xcc -D
+list(PREPEND COMPILE_DEFINITIONS "") # adds a semicolon at the beginning
 string(REPLACE "$<TARGET_PROPERTY:PICO_TARGET_BINARY_TYPE>" "$<TARGET_PROPERTY:swift-blinky,PICO_TARGET_BINARY_TYPE>" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
-string(REPLACE ";" " -Xcc -D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
+string(REPLACE ";" ";-Xcc;-D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
 
 # Write the compiler definitions to a file (this way CMake will evaluate the compiler definitions)
 file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/swiftc_flags.txt CONTENT "${COMPILE_DEFINITIONS}")
@@ -69,7 +69,7 @@ add_custom_command(
     COMMAND
         ${SWIFTC}
         -target armv6m-none-none-eabi -Xcc -mfloat-abi=soft -Xcc -fshort-enums
-        @${CMAKE_BINARY_DIR}/swiftc_flags.txt
+        ${COMPILE_DEFINITIONS}
         -Xcc -DCYW43_LWIP
         -Xcc -DPICO_CYW43_ARCH_THREADSAFE_BACKGROUND
         -Xcc -I$ENV{PICO_SDK_PATH}/lib/lwip/src/include
