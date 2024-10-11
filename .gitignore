@@ -7,3 +7,5 @@
 */managed_components
 */dependencies.lock
 /.venv
+activate-venv.sh
+test.sh

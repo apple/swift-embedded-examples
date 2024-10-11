@@ -22,17 +22,18 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-
     steps:
     - uses: actions/checkout@v4
+      with:
+        repository: apple/swift-embedded-examples
     - name: Download development snapshot toolchain
       run: |
-        for (( i=0; i < 30; i++ ))
+        for (( i=0; i < 90; i++ ))
         do
           # try to find latest toolchain
           TOOLCHAIN_DATE=$(date -v-${i}d +"%Y-%m-%d")
           TOOLCHAIN_FILE="swift-DEVELOPMENT-SNAPSHOT-$TOOLCHAIN_DATE-a-osx.pkg"
-          TOOLCHAIN_URL="https://download.swift.org/development/xcode/swift-DEVELOPMENT-SNAPSHOT-2024-09-11-a/$TOOLCHAIN_FILE"
+          TOOLCHAIN_URL="https://download.swift.org/development/xcode/swift-DEVELOPMENT-SNAPSHOT-$TOOLCHAIN_DATE-a/$TOOLCHAIN_FILE"
           if wget --spider $TOOLCHAIN_URL 2>/dev/null; then
             break # toolchain found
           fi
