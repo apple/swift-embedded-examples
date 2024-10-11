@@ -10,21 +10,19 @@ else()
 execute_process(COMMAND which swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 
-
 set(SWIFT_TARGET "armv6m-none-none-eabi") # default for rp2040
-list(APPEND CLANG_ARCH_ABI_FLAGS "-Xcc") 
 
 if(PICO_PLATFORM STREQUAL "rp2350-arm-s")
     message(STATUS "PICO_PLATFORM is set to rp2350-arm-s, using armv7em")
     set(SWIFT_TARGET "armv7em-none-none-eabi")
-    list(APPEND CLANG_ARCH_ABI_FLAGS "-mfloat-abi=soft")
+    list(APPEND CLANG_ARCH_ABI_FLAGS "-Xcc" "-mfloat-abi=soft")
 elseif(PICO_PLATFORM STREQUAL "rp2040")
     message(STATUS "PICO_PLATFORM is set to RP2040, using armv6m")
-    list(APPEND CLANG_ARCH_ABI_FLAGS "-mfloat-abi=soft")
+    list(APPEND CLANG_ARCH_ABI_FLAGS "-Xcc" "-mfloat-abi=soft")
 elseif(PICO_PLATFORM STREQUAL "rp2350-riscv")
     message(STATUS "PICO_PLATFORM is set to rp2350-riscv, using riscv32.")
     set(SWIFT_TARGET "riscv32-none-none-eabi")
-    list(APPEND CLANG_ARCH_ABI_FLAGS "-march=rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb" "-Xcc" "-mabi=ilp32")
+    list(APPEND CLANG_ARCH_ABI_FLAGS "-Xcc" "-march=rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb" "-Xcc" "-mabi=ilp32")
 endif()
 
 add_executable(swift-blinky)
