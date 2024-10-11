@@ -74,20 +74,16 @@ get_property(COMPILE_DEFINITIONS GLOBAL PROPERTY compilerdefs_list)
 
 # Parse compiler definitions into a format that swiftc can understand
 list(REMOVE_DUPLICATES COMPILE_DEFINITIONS)
-list(PREPEND COMPILE_DEFINITIONS "") # -Xcc -D
+list(PREPEND COMPILE_DEFINITIONS "")
 string(REPLACE "$<TARGET_PROPERTY:PICO_TARGET_BINARY_TYPE>" "$<TARGET_PROPERTY:swift-blinky,PICO_TARGET_BINARY_TYPE>" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
-string(REPLACE ";" " -Xcc -D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
-
-# Write the compiler definitions to a file (this way CMake will evaluate the compiler definitions)
-file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/swiftc_flags.txt CONTENT "${COMPILE_DEFINITIONS}")
-
+string(REPLACE ";" ";-Xcc;-D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS}")
 
 add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
     COMMAND
         ${SWIFTC}
         -target ${SWIFT_TARGET} -Xcc -fshort-enums
-        @${CMAKE_BINARY_DIR}/swiftc_flags.txt
+        ${COMPILE_DEFINITIONS}
         ${CLANG_ARCH_ABI_FLAGS}
         -Xfrontend -function-sections -enable-experimental-feature Embedded -wmo -parse-as-library
         $$\( echo '$<TARGET_PROPERTY:swift-blinky,INCLUDE_DIRECTORIES>' | tr '\;' '\\n' | sed -e 's/\\\(.*\\\)/-Xcc -I\\1/g' \)
