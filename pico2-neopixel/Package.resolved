@@ -16,7 +16,7 @@
       "location" : "https://github.com/apple/swift-mmio.git",
       "state" : {
         "branch" : "swift-embedded-examples",
-        "revision" : "275a877cbdd9d301a783425dbbccc630db364d37"
+        "revision" : "06d96ed4916739f2edafde87f3951b2d2a04df65"
       }
     },
     {
