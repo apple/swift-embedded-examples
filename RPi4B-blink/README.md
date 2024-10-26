@@ -14,7 +14,8 @@
 ``` console
 $ cd RPi4B-blink
 $ export TOOLCHAINS='<toolchain-identifier>' # Your Swift nightly toolchain identifier
-$ make
+$ chmod u+x ./build.sh # make build script executable
+$ ./build.sh
 $ cp .build/kernel8.img /Volumes/bootfs
 ```
 - Place the SD card in your Raspberry Pi 4B, and connect it to power.
