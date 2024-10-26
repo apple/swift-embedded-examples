@@ -8,6 +8,7 @@ echo "🛠️  Building with Swift Package Manager... "
 
 # Build the Swift package and get the path to the build directory
 BUILDROOT=$($SWIFT_EXEC build --triple aarch64-none-none-elf -Xcc -D__APPLE__ -Xcc -D__MACH__ -Xswiftc -Xfrontend -Xswiftc -disable-stack-protector --show-bin-path)
+$SWIFT_EXEC build --triple aarch64-none-none-elf -Xcc -D__APPLE__ -Xcc -D__MACH__ -Xswiftc -Xfrontend -Xswiftc -disable-stack-protector
 
 echo "🔗 Linking with clang..."
 
