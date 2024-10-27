@@ -1,6 +1,6 @@
 # rpi5-blink
 
-`[TBA: image here]`
+<img src="assets/raspi5.png">
 
 ## Requirements
 

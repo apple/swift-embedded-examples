@@ -1,6 +1,6 @@
 # rpi4b-blink
 
-`[TBA: image here]`
+<img src="assets/rpi4.png">
 
 ## Requirements
 
