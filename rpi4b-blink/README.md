@@ -14,8 +14,7 @@
 ``` console
 $ cd rpi4b-blink
 $ export TOOLCHAINS='<toolchain-identifier>' # Your Swift nightly toolchain identifier
-$ chmod u+x ./build.sh # make build script executable
-$ ./build.sh
+X$ ./build.sh
 $ cp kernel8.img /Volumes/bootfs
 ```
 - If your original OS is not 64-bit, make sure to set `arm_64bit=1` in `config.txt`.
