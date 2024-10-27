@@ -1,4 +1,4 @@
-# RPi4B-blink
+# rpi4b-blink
 
 `[TBA: image here]`
 
@@ -12,12 +12,13 @@
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
 - Build the program, then copy the kernel image to the SD card.
 ``` console
-$ cd RPi4B-blink
+$ cd rpi4b-blink
 $ export TOOLCHAINS='<toolchain-identifier>' # Your Swift nightly toolchain identifier
 $ chmod u+x ./build.sh # make build script executable
 $ ./build.sh
-$ cp .build/kernel8.img /Volumes/bootfs
+$ cp kernel8.img /Volumes/bootfs
 ```
+- If your original OS is not 64-bit, make sure to set `arm_64bit=1` in `config.txt`.
 - Place the SD card in your Raspberry Pi 4B, and connect it to power.
 - After the boot sequence, the green (ACT) led will start blinking in a regular pattern.
 
