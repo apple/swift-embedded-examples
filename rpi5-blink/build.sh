@@ -2,7 +2,7 @@
 
 SWIFT_EXEC=${SWIFT_EXEC:-`xcrun -f swift`}
 CLANG=${CLANG:-`xcrun -f clang`}
-LLVM_OBJCOPY=/opt/homebrew/opt/llvm@17/bin/llvm-objcopy #${LLVM_OBJCOPY:-`xcrun -f llvm-objcopy`}
+LLVM_OBJCOPY=${LLVM_OBJCOPY:-`xcrun -f llvm-objcopy`}
 
 echo "🛠️  Building with Swift Package Manager... "
 

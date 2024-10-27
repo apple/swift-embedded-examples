@@ -6,6 +6,7 @@
 
 - A Raspberry Pi 5 board
 - An SD Card, with a Raspberry Pi OS installed (this way, we don't need to create the configuration files from scratch). You may backup `kernel8.img` and `kernel_2712.img` if you need the Linux install later, since we will change these files.
+- LLVM installed (`brew install llvm`) and added to PATH. This is needed to convert the resulted ELF file to binary image format using `llvm-objcopy`.
 
 ## How to build and run this example:
 
