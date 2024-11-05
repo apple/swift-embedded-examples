@@ -2,7 +2,6 @@
 idf_component_register(
     SRCS /dev/null # We don't have any C++ sources
     PRIV_INCLUDE_DIRS "."
-    LDFRAGMENTS "linker.lf"
 )
 
 idf_build_get_property(target IDF_TARGET)
@@ -42,7 +41,7 @@ endforeach()
 target_compile_options(${COMPONENT_LIB} PUBLIC "$<$<COMPILE_LANGUAGE:Swift>:SHELL:
         -target riscv32-none-none-eabi
         -Xfrontend -function-sections -enable-experimental-feature Embedded -wmo -parse-as-library -Osize
-        -Xcc -march=${march_flag} -Xcc -mabi=${mabi_flag}
+        -Xcc -march=${march_flag} -Xcc -mabi=${mabi_flag} -Xcc -fno-pic -Xcc -fno-pie
         
         -pch-output-dir /tmp
         -Xfrontend -enable-single-module-llvm-emission
@@ -64,4 +63,11 @@ target_sources(${COMPONENT_LIB}
     PRIVATE
     Main.swift
     LedStrip.swift
+)
+
+add_custom_command(
+    TARGET ${COMPONENT_LIB}
+    POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} --remove-section .swift_modhash
+            $<TARGET_FILE:${COMPONENT_LIB}> $<TARGET_FILE:${COMPONENT_LIB}>
 )
