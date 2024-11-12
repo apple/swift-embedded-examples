@@ -43,6 +43,8 @@ Each example in this repository contains build and deployment instructions, howe
 | [nrfx-blink-sdk](./nrfx-blink-sdk) | nRF52840-DK | Zephyr SDK | Blink an LED repeatedly with Swift & Zephyr. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0"> |
 | [esp32-led-strip-sdk](./esp32-led-strip-sdk) | ESP32-C6-DevKitC-1 | ESP-IDF SDK | Control NeoPixel LEDs with Swift & the ESP-IDF. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be"> |
 | [esp32-led-blink-sdk](./esp32-led-blink-sdk) | ESP32-C6-Bug | ESP-IDF SDK | Blink an LED repeatedly with Swift & the ESP-IDF. | <img width="300" src="esp32-led-blink-sdk/assets/images/ledon.jpg"> |
+| [rpi4b-blink](./rpi4b-blink) | Raspberry Pi 4B | None | Blink the Pi's status green LED repeatedly using Swift MMIO. | <img width="300" src="rpi4b-blink/assets/rpi4.png"> |
+| [rpi5-blink](./rpi5-blink) | Raspberry Pi 5 | None | Blink the Pi's status green LED repeatedly with Swift MMIO. | <img width="300" src="rpi5-blink/assets/raspi5.png"> |
 
 Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not recommendations or endorsement, the same is true for build system choice (Make, CMake, SwiftPM, shell scripts). Embedded Swift aims to be versatile and to allow for integration into more existing SDKs and build systems, and the example projects are merely showing the possibilities.
 
