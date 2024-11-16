@@ -36,3 +36,12 @@ $ idf.py flash
 ```
 
 - The LED strip should now be animating a sequence of random colors moving in one direction.
+
+### Simulating in VS Code
+
+- Build the project, to generate binaries for simulation
+- Install [Wokwi for VS Code](https://docs.wokwi.com/vscode/getting-started/).
+- Open the `diagram.json` file.
+- Click the Play button to start simulation.
+- Click the Pause button to freeze simulation and display states of GPIOs.
+

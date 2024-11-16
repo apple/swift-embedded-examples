@@ -8,10 +8,10 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 
 - A Raspberry Pi Pico (non-W) board. If you have a Pico W instead, refer to the [pico-w-blink-sdk](../pico-w-blink-sdk) sample instead.
 - Follow the setup steps at https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf, in particular you'll need:
-  - A checkout of the [pico-sdk](https://github.com/raspberrypi/pico-sdk.git), with git submodules checked out.
+  - A checkout of the [pico-sdk](https://github.com/raspberrypi/pico-sdk.git), with git submodules checked out. If you'd like to try RISC-V support for RP2350, you'll need Pico SDK 2.0.1 or later (currently in the *development branch only*).
   - A checkout of the [pico-examples](https://github.com/raspberrypi/pico-examples.git).
   - CMake.
-  - The [Arm Embedded Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+  - The [Arm Embedded Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), or the RISC-V tollchain if you want to build for the RISC-V cores on the RP2350.
 - Before trying to use Swift with the Pico SDK, make sure your environment works and can build the provided C/C++ sample projects, in particular:
   - Try building and running the "blink" example from pico-examples written in C.
 
@@ -25,8 +25,9 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 $ cd pico-blink-sdk
 $ export TOOLCHAINS='<toolchain-identifier>'
 $ export PICO_BOARD='<board-name>' # Examples: pico, pico2
+$ export PICO_PLATFORM='<optional-platform-name>' # Optional; useful if you'd like to compile for RISC-V. Examples: rp2040, rp2350-arm-s, rp2350-riscv 
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
-$ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>' # A default `brew` install will be located at `/Applications/ArmGNUToolchain/[version]/arm-none-eabi`
+$ export PICO_TOOLCHAIN_PATH='<path-to-the-compiler-toolchain>' # A default `brew` install will be located at `/Applications/ArmGNUToolchain/[version]/arm-none-eabi`. This can also be a RISC-V toolchain for the RP2350.
 $ cmake -B build -G Ninja .
 $ cmake --build build
 ```
