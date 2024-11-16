@@ -2,7 +2,6 @@
 idf_component_register(
     SRCS /dev/null # We don't have any C++ sources
     PRIV_INCLUDE_DIRS "."
-    LDFRAGMENTS "linker.lf"
 )
 
 idf_build_get_property(target IDF_TARGET)
@@ -12,15 +11,14 @@ if("${arch}" STREQUAL "xtensa")
     message(FATAL_ERROR "Not supported target: ${target}")
 endif()
 
-if(${target} STREQUAL "esp32c2" OR ${target} STREQUAL "esp32c3")
-    set(march_flag "rv32imc_zicsr_zifencei")
-    set(mabi_flag "ilp32")
-elseif(${target} STREQUAL "esp32p4")
-    set(march_flag "rv32imafc_zicsr_zifencei")
-    set(mabi_flag "ilp32f")
-else()
-    set(march_flag "rv32imac_zicsr_zifencei")
-    set(mabi_flag "ilp32")
+# Extract the -march flag and remove any vendor-specific extensions (_x*)
+string(REGEX MATCH "-march=[^ ]+" march_flag "${CMAKE_C_FLAGS}")
+string(REGEX REPLACE "_x[^ ]*" "" march_flag "${march_flag}")
+
+# Extract the -mabi flag or set a default value if not present
+string(REGEX MATCH "-mabi=[^ ]+" mabi_flag "${CMAKE_C_FLAGS}")
+if("${mabi_flag}" STREQUAL "")
+    set(mabi_flag "-mabi=ilp32")
 endif()
 
 # Clear the default COMPILE_OPTIONS which include a lot of C/C++ specific compiler flags that the Swift compiler will not accept
@@ -42,7 +40,7 @@ endforeach()
 target_compile_options(${COMPONENT_LIB} PUBLIC "$<$<COMPILE_LANGUAGE:Swift>:SHELL:
         -target riscv32-none-none-eabi
         -Xfrontend -function-sections -enable-experimental-feature Embedded -wmo -parse-as-library -Osize
-        -Xcc -march=${march_flag} -Xcc -mabi=${mabi_flag}
+        -Xcc ${march_flag} -Xcc ${mabi_flag} -Xcc -fno-pic -Xcc -fno-pie
         
         -pch-output-dir /tmp
         -Xfrontend -enable-single-module-llvm-emission
@@ -64,4 +62,11 @@ target_sources(${COMPONENT_LIB}
     PRIVATE
     Main.swift
     LedStrip.swift
+)
+
+add_custom_command(
+    TARGET ${COMPONENT_LIB}
+    POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} --remove-section .swift_modhash
+            $<TARGET_FILE:${COMPONENT_LIB}> $<TARGET_FILE:${COMPONENT_LIB}>
 )
