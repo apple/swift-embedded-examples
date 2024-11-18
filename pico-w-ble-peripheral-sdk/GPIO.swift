@@ -24,7 +24,7 @@ extension CYW43 {
         get {
             cyw43_arch_gpio_get(gpio.rawValue)
         }
-        nonmutating set {
+        set {
             cyw43_arch_gpio_put(gpio.rawValue, newValue)
         }
     }

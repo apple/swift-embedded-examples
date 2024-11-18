@@ -9,7 +9,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-struct CYW43: ~Copyable {
+final class CYW43 {
 
     /// Initialize the CYW43 architecture. 
     /// 

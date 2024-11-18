@@ -16,7 +16,14 @@ struct Main {
 
     static let peripheral = BTStackPeripheral(hostController: hostController)
     
-    nonisolated(unsafe) static var lightState = false
+    nonisolated(unsafe) static var lightState = false {
+        didSet {
+            print("Light State: \(oldValue) -> \(lightState)")
+            cyw43?[.led] = lightState
+        }
+    }
+
+    static var cyw43: CYW43!
 
     static func main() {
         
@@ -24,7 +31,6 @@ struct Main {
 
         print("Hello World!")
 
-        let cyw43: CYW43
         do {
             cyw43 = try CYW43()
         }
@@ -134,19 +140,43 @@ struct Main {
             case lightStateUUID:
                 let oldValue = lightState
                 let newState = write.value.first != 0
-                print("Light State: \(oldValue) -> \(newState)")
                 self.lightState = newState
-                
             default:
                 break
             }
         }
+
+        guard peripheral.storage.database.isEmpty == false else {
+            print("Empty database")
+            return 
+        }
+
+        peripheral.storage.database.dump()
 
         // start advertisment
         try peripheral.start(options: .init(
             advertisingData: advertisement,
             scanResponse: scanResponse)
         )
+    }
+}
+
+extension GATTDatabase {
+    
+    func dump() {
+        
+        print("GATT Database:")
+        
+        for attribute in self {
+            
+            let value: String = BluetoothUUID(data: attribute.value)?.littleEndian.description
+                ?? ((attribute.value.count > 1) ? String(utf8: attribute.value) : attribute.value.toHexadecimal())
+                ?? attribute.value.toHexadecimal()
+            
+            print("\(attribute.handle) - \(attribute.uuid)")
+            print("Permissions: \(attribute.permissions)")
+            print("Value: \(value)")
+        }
     }
 }
 
