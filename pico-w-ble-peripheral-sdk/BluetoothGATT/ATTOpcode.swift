@@ -71,6 +71,17 @@ public enum ATTOpcode: UInt8, Sendable, CaseIterable {
     case handleValueConfirmation                    = 0x1E
 }
 
+// MARK: - CustomStringConvertible
+
+#if hasFeature(Embedded)
+extension ATTOpcode: CustomStringConvertible {
+    
+    public var description: String {
+        "0x" + rawValue.toHexadecimal()
+    }
+}
+#endif
+
 // MARK: - Opcode Type
 
 /// ATT protocol opcode categories.
