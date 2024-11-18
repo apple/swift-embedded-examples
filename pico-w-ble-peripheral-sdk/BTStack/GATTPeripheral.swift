@@ -75,7 +75,7 @@ public final class BTStackPeripheral: PeripheralManager, @unchecked Sendable {
         
     private var _storage = Storage()
     
-    private var storage: Storage {
+    internal var storage: Storage {
         get {
             #if canImport(Foundation)
             lock.lock()
@@ -336,9 +336,11 @@ internal extension BTStackPeripheral {
             )
             storage.newConnection(connection)
             do {
-                    sleep_ms(100)
+                    while true {
+                        sleep_ms(10)
                         // read and write
                         try connection.run()
+                    }
                 }
                 catch {
                     //log?("[\(central)]: " + error.rawValue.description)

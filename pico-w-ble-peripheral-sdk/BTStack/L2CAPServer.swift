@@ -20,6 +20,8 @@ internal extension BTStackPeripheral {
         private var hciCallbackRegistration = btstack_packet_callback_registration_t()
             
         public var log: (@Sendable (String) -> ())?
+
+        internal fileprivate(set) var connections = [UInt16: BTStackPeripheral.L2CAP.Connection]()
         
         internal fileprivate(set) var recievedData = [UInt16: [BTStackPeripheral.L2CAP.Connection.Data]]()
         
@@ -97,7 +99,9 @@ internal extension BTStackPeripheral {
             guard canAccept() else {
                 return nil
             }
-            return self.pendingConnections.removeFirst()
+            let connection = self.pendingConnections.removeFirst()
+            self.connections[connection.handle] = connection
+            return connection
         }
     }
 }
@@ -205,7 +209,7 @@ internal extension BTStackPeripheral.L2CAP {
                 send: l2cap.canWrite(handle),
                 recieve: l2cap.canRead(handle),
                 accept: false,
-                error: nil
+                error: l2cap.connections[handle] == nil ? BTStackError(.noConnection) : nil
             )
         }
     }
@@ -271,6 +275,7 @@ internal extension BTStackPeripheral.L2CAP {
         let handle = hci_event_disconnection_complete_get_connection_handle(data.baseAddress)
         log?("Disconnected - Handle \(handle)")
         self.recievedData[handle] = nil
+        self.connections[handle] = nil
         self.pendingConnections.removeAll(where: { $0.handle == handle })
     }
     
