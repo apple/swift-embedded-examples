@@ -9,14 +9,23 @@
 //
 //===----------------------------------------------------------------------===//
 
-#pragma once
+extension CYW43 {
 
-#include "pico/stdlib.h"
-#include "pico/cyw43_arch.h"
-#include "pico/btstack_cyw43.h"
-#include "btstack.h"
-#include "hci_transport.h"
-#include "hci_transport_usb.h"
-#include "pico/btstack_hci_transport_cyw43.h"
+    enum GPIO: UInt32, CaseIterable, Copyable, Sendable {
 
-uint8_t l2cap_send_connectionless(hci_con_handle_t con_handle, uint16_t cid, uint8_t *data, uint16_t len);
+        case led = 0
+
+        case vsys = 1
+
+        case vbus = 2
+    }
+    
+    subscript (gpio: GPIO) -> Bool {
+        get {
+            cyw43_arch_gpio_get(gpio.rawValue)
+        }
+        nonmutating set {
+            cyw43_arch_gpio_put(gpio.rawValue, newValue)
+        }
+    }
+}

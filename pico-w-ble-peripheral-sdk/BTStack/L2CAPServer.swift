@@ -45,9 +45,11 @@ internal extension BTStackPeripheral {
         }
         
         public func disconnect(connection: UInt16) throws(BTStackError) {
+            #if L2CAP_USES_CHANNELS
             try l2cap_disconnect(connection).throwsError()
+            #endif
         }
-        
+
         public func canRead(_ handle: UInt16) -> Bool {
             self.recievedData[handle, default: []].isEmpty == false
         }
@@ -222,8 +224,7 @@ internal func _l2cap_gattserver_packet_handler(
         case HCI_EVENT_PACKET:
             switch UInt32(hci_event_packet_get_type(packetPointer)) {
                 case L2CAP_EVENT_INCOMING_CONNECTION:
-                    let local_cid = l2cap_event_incoming_connection_get_local_cid(packetPointer)
-                    l2cap_accept_connection(local_cid)
+                    break
                 case L2CAP_EVENT_CHANNEL_OPENED:
                     break
                 case L2CAP_EVENT_CHANNEL_CLOSED:
@@ -263,7 +264,6 @@ internal extension BTStackPeripheral.L2CAP {
         guard data.isEmpty == false, let opcode = ATTOpcode(rawValue: data[0]) else {
             return
         }
-        log?("ATT Opcode \(opcode)")
         recieved(connection, data)
     }
     

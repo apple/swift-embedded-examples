@@ -80,6 +80,9 @@ add_custom_command(
         $$\( echo '${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES}'             | tr ' '  '\\n' | sed -e 's/\\\(.*\\\)/-Xcc -I\\1/g' \)
         -import-bridging-header ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
         ${CMAKE_CURRENT_LIST_DIR}/Main.swift
+        ${CMAKE_CURRENT_LIST_DIR}/PicoError.swift
+        ${CMAKE_CURRENT_LIST_DIR}/CYW43.swift
+        ${CMAKE_CURRENT_LIST_DIR}/GPIO.swift
         ${CMAKE_CURRENT_LIST_DIR}/Bluetooth/Extensions/Hexadecimal.swift
         ${CMAKE_CURRENT_LIST_DIR}/Bluetooth/Extensions/Integer.swift
         ${CMAKE_CURRENT_LIST_DIR}/Bluetooth/Extensions/String.swift
@@ -171,6 +174,9 @@ add_custom_command(
     DEPENDS
         ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
         ${CMAKE_CURRENT_LIST_DIR}/Main.swift
+        ${CMAKE_CURRENT_LIST_DIR}/PicoError.swift
+        ${CMAKE_CURRENT_LIST_DIR}/CYW43.swift
+        ${CMAKE_CURRENT_LIST_DIR}/GPIO.swift
         ${CMAKE_CURRENT_LIST_DIR}/Bluetooth/Extensions/Hexadecimal.swift
         ${CMAKE_CURRENT_LIST_DIR}/Bluetooth/Extensions/Integer.swift
         ${CMAKE_CURRENT_LIST_DIR}/Bluetooth/Extensions/String.swift

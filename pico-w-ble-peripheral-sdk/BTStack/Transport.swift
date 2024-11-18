@@ -8,12 +8,12 @@
 // See https://swift.org/LICENSE.txt for license information
 //
 //===----------------------------------------------------------------------===//
-
 public extension HostController {
     
     enum Transport {
         
-        case usb(USB = USB())
+        case usb(USB)
+        case cyw43(CYW43)
     }
 }
 
@@ -22,8 +22,8 @@ public extension HostController.Transport {
     static var `default`: HostController.Transport {
         #if os(macOS) || os(Linux)
         return .usb(USB())
-        #else
-        return .usb(USB())
+        #elseif hasFeature(Embedded)
+        return .cyw43(CYW43())
         #endif
     }
 }
@@ -33,6 +33,8 @@ internal extension HostController.Transport {
     var pointer: UnsafePointer<hci_transport_t> {
         switch self {
         case let .usb(transport):
+            return transport.pointer
+        case let .cyw43(transport):
             return transport.pointer
         }
     }
@@ -49,6 +51,7 @@ public extension HostController.Transport {
             self.pointer = pointer
         }
         
+        #if os(macOS) || os(Linux)
         public init() {
             self.init(hci_transport_usb_instance()) // singleton
         }
@@ -61,5 +64,25 @@ public extension HostController.Transport {
         public func addDevice(vendor: UInt16, product: UInt16) {
             hci_transport_usb_add_device(vendor, product)
         }
+        #endif
+    }
+}
+
+public extension HostController.Transport {
+    
+    /// USB Transport
+    struct CYW43 {
+        
+        internal let pointer: UnsafePointer<hci_transport_t>
+        
+        internal init(_ pointer: UnsafePointer<hci_transport_t>) {
+            self.pointer = pointer
+        }
+        
+        #if hasFeature(Embedded)
+        public init() {
+            self.init(hci_transport_cyw43_instance()) // singleton
+        }
+        #endif
     }
 }
