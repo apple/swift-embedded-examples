@@ -453,3 +453,83 @@ public enum HCIError: UInt8, Error {
     /// The MAC of the 802.11 AMP was requested to connect to a peer, but the connection failed.
     case macConnectionFailed                = 0x3F
 }
+
+// MARK: - CustomStringConvertible
+
+extension HCIError: CustomStringConvertible {
+    
+    public var description: String {
+        return name
+    }
+    
+    public var name: String {
+        return Self.names[Int(rawValue)]
+    }
+    
+    internal static let names = [
+        "Success",
+        "Unknown HCI Command",
+        "Unknown Connection Identifier",
+        "Hardware Failure",
+        "Page Timeout",
+        "Authentication Failure",
+        "PIN or Key Missing",
+        "Memory Capacity Exceeded",
+        "Connection Timeout",
+        "Connection Limit Exceeded",
+        "Synchronous Connection to a Device Exceeded",
+        "ACL Connection Already Exists",
+        "Command Disallowed",
+        "Connection Rejected due to Limited Resources",
+        "Connection Rejected due to Security Reasons",
+        "Connection Rejected due to Unacceptable BD_ADDR",
+        "Connection Accept Timeout Exceeded",
+        "Unsupported Feature or Parameter Value",
+        "Invalid HCI Command Parameters",
+        "Remote User Terminated Connection",
+        "Remote Device Terminated Connection due to Low Resources",
+        "Remote Device Terminated Connection due to Power Off",
+        "Connection Terminated by Local Host",
+        "Repeated Attempts",
+        "Pairing Not Allowed",
+        "Unknown LMP PDU",
+        "Unsupported Remote Feature / Unsupported LMP Feature",
+        "SCO Offset Rejected",
+        "SCO Interval Rejected",
+        "SCO Air Mode Rejected",
+        "Invalid LMP Parameters / Invalid LL Parameters",
+        "Unspecified Error",
+        "Unsupported LMP Parameter Value / Unsupported LL Parameter Value",
+        "Role Change Not Allowed",
+        "LMP Response Timeout",
+        "LMP Error Transaction Collision",
+        "LMP PDU Not Allowed",
+        "Encryption Mode Not Acceptable",
+        "Link Key Can Not be Changed",
+        "Requested QoS Not Supported",
+        "Instant Passed",
+        "Pairing with Unit Key Not Supported",
+        "Different Transaction Collision",
+        "Reserved",
+        "QoS Unacceptable Parameter",
+        "QoS Rejected",
+        "Channel Classification Not Supported",
+        "Insufficient Security",
+        "Parameter out of Mandatory Range",
+        "Reserved",
+        "Role Switch Pending",
+        "Reserved",
+        "Reserved Slot Violation",
+        "Role Switch Failed",
+        "Extended Inquiry Response Too Large",
+        "Simple Pairing Not Supported by Host",
+        "Host Busy - Pairing",
+        "Connection Rejected due to No Suitable Channel Found",
+        "Controller Busy",
+        "Unacceptable Connection Parameters",
+        "Directed Advertising Timeout",
+        "Connection Terminated Due to MIC Failure",
+        "Connection Failed to be Established",
+        "MAC Connection Failed"
+    ]
+}
