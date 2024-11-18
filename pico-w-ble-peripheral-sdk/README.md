@@ -36,8 +36,8 @@ $ cmake --build build
 - Copy the UF2 firmware to the Mass Storage device:
 
 ```console
-$ cp build/swift-peripheral.uf2 /Volumes/RP2040
+$ cp build/swift-peripheral.uf2 /Volumes/RPI-RP2
 ```
 
-- Use a Bluetooth LE client app like Nrf Connect or LightBlue to connect to the device.
-- Write 0x01 to the Light State characteristic to turn LED on.
+- Use a Bluetooth LE client app like Nrf Connect or LightBlue and connect to your device, with name "Pico W XX:XX:XX:XX:XX:XX" where the suffix is the Bluetooth address of your Pico W.
+- Write 0x01 to the Light State characteristic 6170CEE6-9E3A-47B5-A621-B8BF7EC843D2 to turn LED on.
