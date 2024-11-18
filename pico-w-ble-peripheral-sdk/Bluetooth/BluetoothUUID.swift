@@ -15,7 +15,7 @@ import Foundation
 
 /// Bluetooth UUID
 @frozen
-public enum BluetoothUUID: Equatable, Hashable, Sendable {
+public enum BluetoothUUID: Hashable, Sendable {
     
     case bit16(UInt16)
     case bit32(UInt32)
@@ -44,6 +44,24 @@ extension BluetoothUUID: CustomStringConvertible {
         #else
         return rawValue
         #endif
+    }
+}
+
+// MARK: - Equatable
+
+extension BluetoothUUID: Equatable {
+    
+    public static func == (lhs: BluetoothUUID, rhs: BluetoothUUID) -> Bool {
+        switch (lhs, rhs) {
+        case let (.bit16(lhsValue), .bit16(rhsValue)):
+            return lhsValue == rhsValue
+        case let (.bit32(lhsValue), .bit32(rhsValue)):
+            return lhsValue == rhsValue
+        case let (.bit128(lhsValue), .bit128(rhsValue)):
+            return lhsValue == rhsValue
+        default:
+            return false
+        }
     }
 }
 
