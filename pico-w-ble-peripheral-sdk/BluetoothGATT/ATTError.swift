@@ -114,17 +114,12 @@ public enum ATTError: UInt8, Error {
 extension ATTError: CustomStringConvertible {
     
     public var description: String {
-        #if hasFeature(Embedded)
-        return "0x" + rawValue.toHexadecimal()
-        #else
         return name
-        #endif
     }
 }
 
 // MARK: - Description Values
 
-#if !hasFeature(Embedded)
 public extension ATTError {
     
     var name: String {
@@ -167,6 +162,7 @@ public extension ATTError {
         }
     }
     
+    #if !hasFeature(Embedded)
     var errorDescription: String {
         
         switch self {
@@ -206,8 +202,8 @@ public extension ATTError {
             return "Insufficient Resources to complete the request."
         }
     }
+    #endif
 }
-#endif
 
 // MARK: - CustomNSError
 
