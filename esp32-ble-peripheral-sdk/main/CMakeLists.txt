@@ -88,7 +88,10 @@ target_sources(${COMPONENT_LIB}
     UUID.swift
     iBeacon.swift
     Integer.swift
+    ATTError.swift
     ATTAttributePermissions.swift
     GATTAttributes.swift
     GATTCharacteristicProperties.swift
+    Peer.swift
+    PeripheralProtocol.swift
 )
