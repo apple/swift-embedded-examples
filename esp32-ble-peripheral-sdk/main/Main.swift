@@ -29,7 +29,15 @@ func app_main() {
             uuid: .bit16(0x180A),
             isPrimary: true,
             characteristics: [
-                
+                .init(
+                  uuid: .bit16(0x2A29),
+                  value: Array("Test Inc.".utf8),
+                  permissions: [.read],
+                  properties: [.read],
+                  descriptors: [
+                      
+                  ]
+              )
             ]
         )
         try server.add(services: [service])
@@ -67,7 +75,6 @@ func app_main() {
     }
 
     while bluetooth.hostController.isEnabled {
-        
         vTaskDelay(500 / (1000 / UInt32(configTICK_RATE_HZ)))
     }
 
