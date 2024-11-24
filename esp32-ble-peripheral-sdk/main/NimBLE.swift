@@ -199,6 +199,7 @@ public extension NimBLE {
     var server: GATTServer { GATTServer(context: context) }
 }
 
+
 /// NimBLE GATT Server interface.
 public struct GATTServer {
     
@@ -209,6 +210,8 @@ public struct GATTServer {
         var servicesBuffer = [ble_gatt_svc_def]()
         
         var characteristicsBuffers = [[ble_gatt_chr_def]]()
+        
+        var descriptorBuffers = [[[ble_gatt_dsc_def]]]()
         
         var buffers = [[UInt8]]()
         
@@ -259,6 +262,7 @@ public struct GATTServer {
         var characteristicsBuffers = [[ble_gatt_chr_def]].init(repeating: [], count: services.count)
         var buffers = [[UInt8]]()
         var valueHandles = [[UInt16]].init(repeating: [], count: services.count)
+        var descriptorBuffers = [[[ble_gatt_dsc_def]]].init(repeating: [], count: services.count)
         for (serviceIndex, service) in services.enumerated() {
             // set type
             cServices[serviceIndex].type = service.isPrimary ? UInt8(BLE_GATT_SVC_TYPE_PRIMARY) : UInt8(BLE_GATT_SVC_TYPE_SECONDARY)
@@ -274,6 +278,7 @@ public struct GATTServer {
             assert(ble_uuid_any_t(cServices[serviceIndex].uuid) == serviceUUID)
             assert(serviceUUID.dataLength == service.uuid.dataLength)
             var characteristicHandles = [UInt16](repeating: 0, count: service.characteristics.count)
+            descriptorBuffers[serviceIndex] = .init(repeating: [], count: service.characteristics.count)
             // add characteristics
             var cCharacteristics = [ble_gatt_chr_def].init(repeating: .init(), count: service.characteristics.count + 1)
             for (characteristicIndex, characteristic) in service.characteristics.enumerated() {
@@ -296,6 +301,28 @@ public struct GATTServer {
                 characteristicHandles.withUnsafeBufferPointer {
                     cCharacteristics[characteristicIndex].val_handle = .init(mutating: $0.baseAddress?.advanced(by: characteristicIndex))
                 }
+                // descriptors
+                var cDescriptors = [ble_gatt_dsc_def].init(repeating: .init(), count: characteristic.descriptors.count + 1)
+                for (descriptorIndex, descriptor) in characteristic.descriptors.enumerated() {
+                    // set flags
+                    cDescriptors[descriptorIndex].att_flags = .init(descriptor.permissions.rawValue)
+                    // set access callback
+                    cDescriptors[descriptorIndex].access_cb = _ble_gatt_access
+                    cDescriptors[descriptorIndex].arg = .init(context)
+                    // set UUID
+                    let descriptorUUID = ble_uuid_any_t(descriptor.uuid)
+                    withUnsafeBytes(of: descriptorUUID) {
+                        let buffer = [UInt8]($0)
+                        buffers.append(buffer)
+                        buffer.withUnsafeBytes {
+                            cDescriptors[descriptorIndex].uuid = .init(OpaquePointer($0.baseAddress))
+                        }
+                    }
+                }
+                cDescriptors.withUnsafeMutableBufferPointer {
+                    cCharacteristics[characteristicIndex].descriptors = $0.baseAddress
+                }
+                descriptorBuffers[serviceIndex][characteristicIndex] = cDescriptors // retain buffer
             }
             cCharacteristics.withUnsafeBufferPointer {
                 cServices[serviceIndex].characteristics = $0.baseAddress
@@ -312,6 +339,7 @@ public struct GATTServer {
         cServices.removeLast() // nil terminator
         self.context.pointee.gattServer.servicesBuffer = cServices
         self.context.pointee.gattServer.characteristicsBuffers = characteristicsBuffers
+        self.context.pointee.gattServer.descriptorBuffers = descriptorBuffers
         self.context.pointee.gattServer.buffers = buffers
         self.context.pointee.gattServer.services = services
         self.context.pointee.gattServer.characteristicValueHandles = valueHandles
@@ -332,6 +360,7 @@ public struct GATTServer {
         self.context.pointee.gattServer.services.removeAll(keepingCapacity: false)
         self.context.pointee.gattServer.characteristicsBuffers.removeAll(keepingCapacity: false)
         self.context.pointee.gattServer.characteristicValueHandles.removeAll(keepingCapacity: false)
+        self.context.pointee.gattServer.descriptorBuffers.removeAll(keepingCapacity: false)
     }
     
     public func dump() {
@@ -340,6 +369,20 @@ public struct GATTServer {
 }
 
 internal extension GATTServer.Context {
+    
+    func descriptor(for pointer: UnsafePointer<ble_gatt_dsc_def>) -> GATTAttribute<[UInt8]>.Descriptor? {
+        for (serviceIndex, service) in services.enumerated() {
+            for (characteristicIndex, characteristic) in service.characteristics.enumerated() {
+                for (descriptorIndex, descriptor) in characteristic.descriptors.enumerated() {
+                    guard descriptorBuffers[serviceIndex][characteristicIndex].withUnsafeBufferPointer({
+                        $0.baseAddress?.advanced(by: descriptorIndex) == pointer
+                    }) else { continue }
+                    return descriptor
+                }
+            }
+        }
+        return nil
+    }
     
     func characteristic(for handle: UInt16) -> GATTAttribute<[UInt8]>.Characteristic? {
         for (serviceIndex, service) in services.enumerated() {
@@ -379,22 +422,34 @@ internal func _ble_gatt_access(
         return BLE_ATT_ERR_UNLIKELY
     }
     let log = context.pointee.log
+    let address = (try? GAP(context: context).connection(for: connectionHandle)).map { BluetoothAddress(bytes: $0.peer_ota_addr.val) } ?? .zero
     switch Int32(accessContext.pointee.op) {
     case BLE_GATT_ACCESS_OP_READ_CHR:
-        // fetch characteristic
+        // read characteristic
         guard let characteristic = context.pointee.gattServer.characteristic(for: attributeHandle) else {
             assertionFailure()
             return BLE_ATT_ERR_UNLIKELY
         }
-        let address = (try? GAP(context: context).connection(for: connectionHandle)).map { BluetoothAddress(bytes: $0.peer_ota_addr.val) } ?? .zero
-        log?("[\(address)] Read characteristic \(characteristic.uuid) - Handle \(attributeHandle)")       
-         // respond with memory
+        log?("[\(address)] Read characteristic \(characteristic.uuid) - Handle \(attributeHandle.toHexadecimal())")
+        // respond with memory
         var memoryBuffer = MemoryBuffer(accessContext.pointee.om, retain: false)
         memoryBuffer.append(contentsOf: characteristic.value)
         
     case BLE_GATT_ACCESS_OP_WRITE_CHR:
-        
+        guard let characteristic = context.pointee.gattServer.characteristic(for: attributeHandle) else {
+            assertionFailure()
+            return BLE_ATT_ERR_UNLIKELY
+        }
+        log?("[\(address)] Write characteristic \(characteristic.uuid) - Handle \(attributeHandle.toHexadecimal())")
         break
+    case BLE_GATT_ACCESS_OP_READ_DSC:
+        guard let descriptor = context.pointee.gattServer.descriptor(for: accessContext.pointee.dsc) else {
+            assertionFailure()
+            return BLE_ATT_ERR_UNLIKELY
+        }
+        log?("[\(address)] Read descriptor \(descriptor.uuid) - Handle \(attributeHandle.toHexadecimal())")
+        var memoryBuffer = MemoryBuffer(accessContext.pointee.om, retain: false)
+        memoryBuffer.append(contentsOf: descriptor.value)
     default:
         break
     }

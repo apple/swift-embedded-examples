@@ -36,8 +36,8 @@ func app_main() {
                   permissions: [.read],
                   properties: [.read],
                   descriptors: [
-                      
-                  ]
+                    .init(uuid: .bit16(0x2901), value: Array("Manufacturer Name String".utf8), permissions: .read)
+                ]
               )
             ]
         )
