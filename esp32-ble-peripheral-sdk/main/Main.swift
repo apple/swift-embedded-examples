@@ -17,6 +17,7 @@ func app_main() {
     do {
         try nvs_flash_init().throwsESPError()
         bluetooth = try NimBLE()
+        bluetooth.log = { print($0) }
     }
     catch {
         print("Bluetooth init failed \(error)")
@@ -40,8 +41,7 @@ func app_main() {
               )
             ]
         )
-        try server.add(services: [service])
-        try server.start()
+        try server.set(services: [service])
         server.dump()
 
         while bluetooth.hostController.isEnabled == false {
@@ -71,7 +71,7 @@ func app_main() {
         try bluetooth.gap.startAdvertising()
     }
     catch {
-        print("Bluetooth error \(error.rawValue)")
+        print("Bluetooth error")
     }
 
     while bluetooth.hostController.isEnabled {

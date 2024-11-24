@@ -26,12 +26,19 @@ public struct NimBLE: ~Copyable {
         context.deallocate()
         nimble_port_freertos_deinit()
     }
+
+    public var log: (@Sendable (String) -> ())? {
+        get { context.pointee.log }
+        set { context.pointee.log = newValue }
+    }
 }
 
 internal extension NimBLE {
     
     struct Context {
         
+        var log: (@Sendable (String) -> ())?
+
         var gap = GAP.Context()
         
         var gattServer = GATTServer.Context()
@@ -156,13 +163,21 @@ public struct GAP {
 }
 
 internal func _gap_callback(event: UnsafeMutablePointer<ble_gap_event>?, context contextPointer: UnsafeMutableRawPointer?) -> Int32 {
-    guard let context = contextPointer?.assumingMemoryBound(to: NimBLE.Context.self) else {
+    guard let context = contextPointer?.assumingMemoryBound(to: NimBLE.Context.self),
+        let event else {
         return 0
+    }
+    let log = context.pointee.log
+    switch Int32(event.pointee.type) {
+    case BLE_GAP_EVENT_CONNECT:
+        let handle = event.pointee.connect.conn_handle
+        log?("Connected - Handle \(handle)")
+    default:
+        break
     }
     
     return 0
 }
-
 
 public extension NimBLE {
     
@@ -174,11 +189,15 @@ public struct GATTServer {
     
     internal struct Context {
         
-        var services = [ble_gatt_svc_def]()
-
-        var characteristics = [ble_gatt_chr_def]()
+        var services = [GATTAttribute<[UInt8]>.Service]()
+        
+        var servicesBuffer = [ble_gatt_svc_def]()
+        
+        var characteristicsBuffers = [[ble_gatt_chr_def]]()
         
         var buffers = [[UInt8]]()
+        
+        var characteristicValueHandles = [[UInt16]]()
         
         /// Callback to handle GATT read requests.
         var willRead: ((GATTReadRequest<Central, [UInt8]>) -> ATTError?)?
@@ -214,14 +233,17 @@ public struct GATTServer {
     
     // MARK: - Methods
     
-    public func start() throws(NimBLEError) {
+    internal func start() throws(NimBLEError) {
         try ble_gatts_start().throwsError()
     }
     
     /// Attempts to add the specified service to the GATT database.
-    public func add(services: [GATTAttribute<[UInt8]>.Service]) throws(NimBLEError) {
+    public func set(services: [GATTAttribute<[UInt8]>.Service]) throws(NimBLEError) -> [[UInt16]] {
+        removeAllServices()
         var cServices = [ble_gatt_svc_def].init(repeating: .init(), count: services.count + 1)
+        var characteristicsBuffers = [[ble_gatt_chr_def]].init(repeating: [], count: services.count)
         var buffers = [[UInt8]]()
+        var valueHandles = [[UInt16]].init(repeating: [], count: services.count)
         for (serviceIndex, service) in services.enumerated() {
             // set type
             cServices[serviceIndex].type = service.isPrimary ? UInt8(BLE_GATT_SVC_TYPE_PRIMARY) : UInt8(BLE_GATT_SVC_TYPE_SECONDARY)
@@ -236,11 +258,15 @@ public struct GATTServer {
             }
             assert(ble_uuid_any_t(cServices[serviceIndex].uuid) == serviceUUID)
             assert(serviceUUID.dataLength == service.uuid.dataLength)
+            var characteristicHandles = [UInt16](repeating: 0, count: service.characteristics.count)
             // add characteristics
             var cCharacteristics = [ble_gatt_chr_def].init(repeating: .init(), count: service.characteristics.count + 1)
             for (characteristicIndex, characteristic) in service.characteristics.enumerated() {
-                // set callback
+                // set flags
+                cCharacteristics[characteristicIndex].flags = ble_gatt_chr_flags(characteristic.properties.rawValue)
+                // set access callback
                 cCharacteristics[characteristicIndex].access_cb = _ble_gatt_access
+                cCharacteristics[characteristicIndex].arg = .init(context)
                 // set UUID
                 let characteristicUUID = ble_uuid_any_t(characteristic.uuid)
                 withUnsafeBytes(of: characteristicUUID) {
@@ -250,19 +276,32 @@ public struct GATTServer {
                         cCharacteristics[characteristicIndex].uuid = .init(OpaquePointer($0.baseAddress))
                     }
                 }
+                // set handle
+                characteristicHandles[characteristicIndex] = 0x0000
+                characteristicHandles.withUnsafeBufferPointer {
+                    cCharacteristics[characteristicIndex].val_handle = .init(mutating: $0.baseAddress?.advanced(by: characteristicIndex))
+                }
             }
             cCharacteristics.withUnsafeBufferPointer {
                 cServices[serviceIndex].characteristics = $0.baseAddress
             }
-            self.context.pointee.gattServer.characteristics = cCharacteristics
+            characteristicsBuffers[serviceIndex] = cCharacteristics
+            valueHandles[serviceIndex] = characteristicHandles
         }
         // queue service registration
         try ble_gatts_count_cfg(cServices).throwsError()
         try ble_gatts_add_svcs(cServices).throwsError()
+        // register services
+        try start()
         // store buffers
         cServices.removeLast() // nil terminator
-        self.context.pointee.gattServer.services = cServices
+        self.context.pointee.gattServer.servicesBuffer = cServices
+        self.context.pointee.gattServer.characteristicsBuffers = characteristicsBuffers
         self.context.pointee.gattServer.buffers = buffers
+        self.context.pointee.gattServer.services = services
+        self.context.pointee.gattServer.characteristicValueHandles = valueHandles
+        // get handles
+        return valueHandles
     }
     
     /// Removes the service with the specified handle.
@@ -273,8 +312,11 @@ public struct GATTServer {
     /// Clears the local GATT database.
     public func removeAllServices() {
         ble_gatts_reset()
-        self.context.pointee.gattServer.buffers.removeAll()
-        self.context.pointee.gattServer.services.removeAll()
+        self.context.pointee.gattServer.services.removeAll(keepingCapacity: false)
+        self.context.pointee.gattServer.buffers.removeAll(keepingCapacity: false)
+        self.context.pointee.gattServer.services.removeAll(keepingCapacity: false)
+        self.context.pointee.gattServer.characteristicsBuffers.removeAll(keepingCapacity: false)
+        self.context.pointee.gattServer.characteristicValueHandles.removeAll(keepingCapacity: false)
     }
     
     public func dump() {
@@ -282,15 +324,114 @@ public struct GATTServer {
     }
 }
 
+internal extension GATTServer.Context {
+    
+    func characteristic(for handle: UInt16) -> GATTAttribute<[UInt8]>.Characteristic? {
+        for (serviceIndex, service) in services.enumerated() {
+            for (characteristicIndex, characteristic) in service.characteristics.enumerated() {
+                guard characteristicsBuffers[serviceIndex][characteristicIndex].val_handle.pointee == handle else {
+                    continue
+                }
+                return characteristic
+            }
+        }
+        return nil
+    }
+    
+    mutating func didWriteCharacteristic(_ value: [UInt8], for handle: UInt16) -> Bool {
+        for (serviceIndex, service) in services.enumerated() {
+            for (characteristicIndex, _) in service.characteristics.enumerated() {
+                guard characteristicsBuffers[serviceIndex][characteristicIndex].val_handle.pointee == handle else {
+                    continue
+                }
+                services[serviceIndex].characteristics[characteristicIndex].value = value
+                return true
+            }
+        }
+        return false
+    }
+}
+
 // typedef int ble_gatt_access_fn(uint16_t conn_handle, uint16_t attr_handle, struct ble_gatt_access_ctxt *ctxt, void *arg);
 internal func _ble_gatt_access(
-    conn_handle: UInt16,
-    attr_handle: UInt16,
+    connectionHandle: UInt16,
+    attributeHandle: UInt16,
     accessContext: UnsafeMutablePointer<ble_gatt_access_ctxt>?,
-    context: UnsafeMutableRawPointer?
+    context contextPointer: UnsafeMutableRawPointer?
 ) -> CInt {
-    
+    guard let context = contextPointer?.assumingMemoryBound(to: NimBLE.Context.self),
+          let accessContext = accessContext else {
+        return BLE_ATT_ERR_UNLIKELY
+    }
+    switch Int32(accessContext.pointee.op) {
+    case BLE_GATT_ACCESS_OP_READ_CHR:
+        // read characteristic
+        guard let characteristic = context.pointee.gattServer.characteristic(for: attributeHandle) else {
+            assertionFailure()
+            return BLE_ATT_ERR_UNLIKELY
+        }
+        
+        // respond with memory
+        var memoryBuffer = MemoryBuffer(accessContext.pointee.om, retain: false)
+        memoryBuffer.append(contentsOf: characteristic.value)
+        
+    case BLE_GATT_ACCESS_OP_WRITE_CHR:
+        
+        break
+    default:
+        break
+    }
     return 0
+}
+
+/// NimBLE Memory Buffer
+public struct MemoryBuffer: ~Copyable {
+    
+    var pointer: UnsafeMutablePointer<os_mbuf>
+    
+    let retain: Bool
+    
+    public init(_ other: borrowing MemoryBuffer) {
+        guard let pointer = r_os_mbuf_dup(other.pointer) else {
+            fatalError("Unable to duplicate buffer")
+        }
+        self.init(pointer, retain: true)
+    }
+    
+    init(_ pointer: UnsafeMutablePointer<os_mbuf>, retain: Bool) {
+        self.pointer = pointer
+        self.retain = retain
+    }
+    
+    deinit {
+        if retain {
+            r_os_mbuf_free(pointer)
+        }
+    }
+    
+    public mutating func append(_ pointer: UnsafeRawPointer, count: UInt16) throws(NimBLEError) {
+        try r_os_mbuf_append(self.pointer, pointer, count).throwsError()
+    }
+    
+    public mutating func append(_ pointer: UnsafePointer<UInt8>, count: Int) {
+        do { try append(UnsafeRawPointer(pointer), count: UInt16(count)) }
+        catch {
+            //fatalError("Unable to append to buffer")
+        }
+    }
+    
+    public mutating func append <C: Collection> (contentsOf bytes: C) where C.Element == UInt8 {
+        guard bytes.isEmpty == false else {
+            return
+        }
+        bytes.withContiguousStorageIfAvailable {
+            append($0.baseAddress!, count: $0.count)
+        }
+    }
+    
+    public var count: Int {
+        Int(r_os_mbuf_len(self.pointer))
+    }
 }
 
 
