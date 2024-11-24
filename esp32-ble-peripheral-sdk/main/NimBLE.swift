@@ -160,6 +160,12 @@ public struct GAP {
             ble_gap_adv_rsp_set_data($0, Int32(data.length))
         }.throwsError()
     }
+
+    public func connection(for handle: UInt16) throws(NimBLEError) -> ble_gap_conn_desc {
+        var connection = ble_gap_conn_desc()
+        try ble_gap_conn_find(handle, &connection).throwsError()
+        return connection
+    }
 }
 
 internal func _gap_callback(event: UnsafeMutablePointer<ble_gap_event>?, context contextPointer: UnsafeMutableRawPointer?) -> Int32 {
@@ -380,8 +386,9 @@ internal func _ble_gatt_access(
             assertionFailure()
             return BLE_ATT_ERR_UNLIKELY
         }
-        log?("Read characteristic \(characteristic.uuid) - Handle \(attributeHandle)")
-        // respond with memory
+        let address = (try? GAP(context: context).connection(for: connectionHandle)).map { BluetoothAddress(bytes: $0.peer_ota_addr.val) } ?? .zero
+        log?("[\(address)] Read characteristic \(characteristic.uuid) - Handle \(attributeHandle)")       
+         // respond with memory
         var memoryBuffer = MemoryBuffer(accessContext.pointee.om, retain: false)
         memoryBuffer.append(contentsOf: characteristic.value)
         
