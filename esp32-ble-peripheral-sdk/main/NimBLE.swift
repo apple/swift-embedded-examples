@@ -172,6 +172,15 @@ internal func _gap_callback(event: UnsafeMutablePointer<ble_gap_event>?, context
     case BLE_GAP_EVENT_CONNECT:
         let handle = event.pointee.connect.conn_handle
         log?("Connected - Handle \(handle)")
+    case BLE_GAP_EVENT_DISCONNECT:
+        let handle = event.pointee.connect.conn_handle
+        log?("Disconnected - Handle \(handle)")
+        do {
+            try GAP(context: context).startAdvertising()
+        }
+        catch {
+            log?("Unable to advertise")
+        }
     default:
         break
     }
@@ -363,14 +372,15 @@ internal func _ble_gatt_access(
           let accessContext = accessContext else {
         return BLE_ATT_ERR_UNLIKELY
     }
+    let log = context.pointee.log
     switch Int32(accessContext.pointee.op) {
     case BLE_GATT_ACCESS_OP_READ_CHR:
-        // read characteristic
+        // fetch characteristic
         guard let characteristic = context.pointee.gattServer.characteristic(for: attributeHandle) else {
             assertionFailure()
             return BLE_ATT_ERR_UNLIKELY
         }
-        
+        log?("Read characteristic \(characteristic.uuid) - Handle \(attributeHandle)")
         // respond with memory
         var memoryBuffer = MemoryBuffer(accessContext.pointee.om, retain: false)
         memoryBuffer.append(contentsOf: characteristic.value)
