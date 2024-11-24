@@ -64,9 +64,9 @@ enable_language(Swift)
 target_sources(${COMPONENT_LIB}
     PRIVATE
     Main.swift
+    Led.swift
     Error.swift
     NimBLE.swift
-    Error.swift
     BluetoothAddress.swift
     BluetoothUUID.swift
     ByteValue.swift
