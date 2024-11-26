@@ -65,6 +65,7 @@ target_sources(${COMPONENT_LIB}
     PRIVATE
     Main.swift
     Led.swift
+    LedStrip.swift
     Error.swift
     NimBLE.swift
     BluetoothAddress.swift

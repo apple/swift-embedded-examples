@@ -26,6 +26,7 @@
 //#include "nvs_flash.h"
 #include "esp_bt.h"
 #include "os/os.h"
+#include "led_strip.h"
 
 #ifndef MYNEWT_VAL_BLE_LL_WHITELIST_SIZE
 #define MYNEWT_VAL_BLE_LL_WHITELIST_SIZE CONFIG_BT_NIMBLE_WHITELIST_SIZE

@@ -13,6 +13,9 @@
 func app_main() {
     print("Hello from Swift on ESP32-C6!")
 
+    let ledStrip: LedStrip = LedStrip(gpioPin: 8, maxLeds: 1)
+    ledStrip.clear()
+
     var bluetooth: NimBLE
     do {
         try nvs_flash_init().throwsESPError()
@@ -88,8 +91,8 @@ func app_main() {
             case ledStateCharacteristicUUID:
                 let newState = write.value.first != 0
                 print("Light State: \(newState)")
-                let led = Led(gpioPin: 8)
-                led.setLed(newState)
+                ledStrip.setPixel(index: 0, color: newState ? .lightWhite : .off)
+                ledStrip.refresh()
             default:
                 break
             }
