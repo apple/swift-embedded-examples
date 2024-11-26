@@ -396,14 +396,31 @@ internal extension GATTServer.Context {
         return nil
     }
     
-    mutating func didWriteCharacteristic(_ value: [UInt8], for handle: UInt16) -> Bool {
+    @discardableResult
+    mutating func didWriteCharacteristic(_ newValue: [UInt8], for handle: UInt16) -> Bool {
         for (serviceIndex, service) in services.enumerated() {
             for (characteristicIndex, _) in service.characteristics.enumerated() {
                 guard characteristicsBuffers[serviceIndex][characteristicIndex].val_handle.pointee == handle else {
                     continue
                 }
-                services[serviceIndex].characteristics[characteristicIndex].value = value
+                services[serviceIndex].characteristics[characteristicIndex].value = newValue
                 return true
+            }
+        }
+        return false
+    }
+    
+    @discardableResult
+    mutating func didWriteDescriptor(_ newValue: [UInt8], for pointer: UnsafePointer<ble_gatt_dsc_def>) -> Bool {
+        for (serviceIndex, service) in services.enumerated() {
+            for (characteristicIndex, characteristic) in service.characteristics.enumerated() {
+                for (descriptorIndex, _) in characteristic.descriptors.enumerated() {
+                    guard descriptorBuffers[serviceIndex][characteristicIndex].withUnsafeBufferPointer({
+                        $0.baseAddress?.advanced(by: descriptorIndex) == pointer
+                    }) else { continue }
+                    services[serviceIndex].characteristics[characteristicIndex].descriptors[descriptorIndex].value = newValue
+                    return true
+                }
             }
         }
         return false
@@ -425,7 +442,7 @@ internal extension NimBLE.Context {
         log?("[\(address)] Read characteristic \(characteristic.uuid) - Handle 0x\(attributeHandle.toHexadecimal())")
         let central = Central(id: address)
         let maximumUpdateValueLength = 20 // TODO: Get MTU
-        let offset = 0
+        let offset = accessContext.offset
         let data = characteristic.value
         // ask delegate
         let request = GATTReadRequest(
@@ -457,7 +474,7 @@ internal extension NimBLE.Context {
         log?("[\(address)] Read descriptor \(descriptor.uuid) - Handle 0x\(attributeHandle.toHexadecimal())")
         let central = Central(id: address)
         let maximumUpdateValueLength = 20 // TODO: Get MTU
-        let offset = 0
+        let offset = accessContext.offset
         let data = descriptor.value
         // ask delegate
         let request = GATTReadRequest(
@@ -476,7 +493,7 @@ internal extension NimBLE.Context {
         memoryBuffer.append(contentsOf: data)
     }
     
-    func writeCharacteristic(
+    mutating func writeCharacteristic(
         handle attributeHandle: UInt16,
         connection: ble_gap_conn_desc,
         accessContext: borrowing GATTServer.AttributeAccessContext
@@ -491,6 +508,7 @@ internal extension NimBLE.Context {
         let central = Central(id: address)
         let maximumUpdateValueLength = 20 // TODO: Get MTU
         let oldValue = characteristic.value
+        
         // ask delegate
         let request = GATTWriteRequest(
             central: central,
@@ -504,6 +522,9 @@ internal extension NimBLE.Context {
         if let error = gattServer.willWrite?(request) {
             throw error
         }
+        // update value
+        let isValidAttribute = gattServer.didWriteCharacteristic(newValue, for: attributeHandle)
+        assert(isValidAttribute)
         // confirmation
         let confirmation = GATTWriteConfirmation(
             central: central,
@@ -515,15 +536,47 @@ internal extension NimBLE.Context {
         gattServer.didWrite?(confirmation)
     }
     
-    func writeDescriptor(
+    mutating func writeDescriptor(
         handle attributeHandle: UInt16,
         connection: ble_gap_conn_desc,
         accessContext: borrowing GATTServer.AttributeAccessContext
     ) throws(ATTError) {
-        guard let descriptor = gattServer.descriptor(for: accessContext.pointer.pointee.dsc) else {
+        guard let descriptor = gattServer.descriptor(for: accessContext.pointer.pointee.dsc),
+              let newValue = try? [UInt8](accessContext.memoryBuffer) else {
             throw .unlikelyError
         }
+        let address = BluetoothAddress(bytes: connection.peer_ota_addr.val)
+        assert(address != .zero)
+        log?("[\(address)] Write descriptor \(descriptor.uuid) - Handle 0x\(attributeHandle.toHexadecimal())")
+        let central = Central(id: address)
+        let maximumUpdateValueLength = 20 // TODO: Get MTU
+        let oldValue = descriptor.value
         
+        // ask delegate
+        let request = GATTWriteRequest(
+            central: central,
+            maximumUpdateValueLength: maximumUpdateValueLength,
+            uuid: descriptor.uuid,
+            handle: attributeHandle,
+            value: oldValue,
+            newValue: newValue
+        )
+        // ask delegate
+        if let error = gattServer.willWrite?(request) {
+            throw error
+        }
+        // update value
+        let isValidAttribute = gattServer.didWriteDescriptor(newValue, for: accessContext.pointer.pointee.dsc)
+        assert(isValidAttribute)
+        // confirmation
+        let confirmation = GATTWriteConfirmation(
+            central: central,
+            maximumUpdateValueLength: maximumUpdateValueLength,
+            uuid: descriptor.uuid,
+            handle: attributeHandle,
+            value: newValue
+        )
+        gattServer.didWrite?(confirmation)
     }
 }
 
@@ -596,6 +649,10 @@ internal extension GATTServer {
         
         var operationType: Int32 {
             Int32(pointer.pointee.op)
+        }
+
+        var offset: Int {
+            0
         }
     }
 }
