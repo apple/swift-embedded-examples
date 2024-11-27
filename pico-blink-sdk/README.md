@@ -11,7 +11,7 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
   - A checkout of the [pico-sdk](https://github.com/raspberrypi/pico-sdk.git), with git submodules checked out. If you'd like to try RISC-V support for RP2350, you'll need Pico SDK 2.1.0 or later.
   - A checkout of the [pico-examples](https://github.com/raspberrypi/pico-examples.git).
   - CMake.
-  - The [Arm Embedded Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), or the RISC-V tollchain if you want to build for the RISC-V cores on the RP2350.
+  - The [Arm Embedded Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), or the RISC-V toolchain if you want to build for the RISC-V cores on the RP2350.
 - Before trying to use Swift with the Pico SDK, make sure your environment works and can build the provided C/C++ sample projects, in particular:
   - Try building and running the "blink" example from pico-examples written in C.
 
