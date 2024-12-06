@@ -14,8 +14,13 @@ jobs:
     runs-on: ubuntu-22.04
     container: swiftlang/swift:nightly-main-jammy
     strategy:
+      fail-fast: false
       matrix:
-        example: [pico-blink-sdk, pico-w-blink-sdk]
+        example:
+          - name: pico-blink-sdk
+            board: pico
+          - name: pico-w-blink-sdk
+            board: pico-w
 
     steps:
       - name: Checkout repo
@@ -51,12 +56,12 @@ jobs:
       - name: Set PICO environment variables
         run: |
           ARCH=`uname -m`
-          echo "PICO_BOARD=pico" >> $GITHUB_ENV
+          echo "PICO_BOARD=${{ matrix.example.board }}" >> $GITHUB_ENV
           echo "PICO_SDK_PATH=`pwd`/pico-sdk" >> $GITHUB_ENV
           echo "PICO_TOOLCHAIN_PATH=`pwd`/arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi" >> $GITHUB_ENV
 
-      - name: Build ${{ matrix.example }}
+      - name: Build ${{ matrix.example.name }}
         run: |
-          cd ${{ matrix.example }}
+          cd ${{ matrix.example.name }}
           cmake -B build -G Ninja .
           cmake --build build
