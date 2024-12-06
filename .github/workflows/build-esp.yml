@@ -10,7 +10,7 @@ on:
     - cron:  '0 17 * * 1'
 
 jobs:
-  build:
+  build-esp:
     runs-on: ubuntu-24.04
     container: espressif/idf:latest
     strategy:
