@@ -1,0 +1,23 @@
+name: Lint
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container: swift:6.0-jammy
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get common swift-format config
+        run: |
+          curl https://github.com/apple/swift-mmio/blob/main/SupportingFiles/Tools/swift-format/.swift-format -o .swift-format
+      - name: Lint
+        run: |
+          swift-format lint --recursive --strict .
+

@@ -8,4 +8,6 @@ manifest:
       remote: zephyrproject-rtos
       revision: main
       import:
-        name-allowlist: []
+        name-allowlist:
+          - cmsis      # required by the ARM port
+          - hal_nordic # required by the custom_plank board (Nordic based)
