@@ -13,11 +13,14 @@ jobs:
     container: swift:6.0-jammy
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Get common swift-format config
-        run: |
-          curl https://github.com/apple/swift-mmio/blob/main/SupportingFiles/Tools/swift-format/.swift-format -o .swift-format
-      - name: Lint
-        run: |
-          swift-format lint --recursive --strict .
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
+      - name: Install apt dependencies
+        run: apt-get -qq update && apt-get -qq -y install curl
+
+      - name: Get common swift-format config
+        run: curl -L https://github.com/apple/swift-mmio/blob/main/SupportingFiles/Tools/swift-format/.swift-format -O
+
+      - name: Lint
+        run: swift-format lint --recursive --strict .
