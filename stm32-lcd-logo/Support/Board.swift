@@ -10,65 +10,70 @@
 //===----------------------------------------------------------------------===//
 
 struct STM32F746Board {
-    var led: HALGPIO<STM32F746>
-    
-    init() {
-        // Configure LED on I1
-        STM32F746.enableGPIOPortClock(.i)
-        led = HALGPIO<STM32F746>(pin: .init(port: .i, number: 1))
-        led.configure(configuration: .init(mode: .output, outputType: .pushPull, outputSpeed: .high, pull: .down, alternateFunction: .none, activeHigh: true))
-        led.deassert()
-        
-        STM32F746.initializeLTCD()
-        
-        STM32F746.configureFlash()
+  var led: HALGPIO<STM32F746>
 
-        STM32F746.configureLTCD()
-    }
-    
-    mutating func ledOn() {
-        led.assert()
-    }
-    
-    mutating func ledOff() {
-        led.deassert()
-    }
-    
-    mutating func delay(milliseconds: Int) {
-        for _ in 0 ..< 100_000 * milliseconds {
-            nop()
-        }
-    }
-    
-    mutating func moveLogo(to point: Point) {
-        STM32F746.setLayer2Position(point)
-    }
-    
-    mutating func setBackgroundColor(color: Color) {
-        STM32F746.setBackgroundColor(color)
-    }
+  init() {
+    // Configure LED on I1
+    STM32F746.enableGPIOPortClock(.i)
+    led = HALGPIO<STM32F746>(pin: .init(port: .i, number: 1))
+    led.configure(
+      configuration: .init(
+        mode: .output, outputType: .pushPull, outputSpeed: .high, pull: .down,
+        alternateFunction: .none, activeHigh: true))
+    led.deassert()
 
-    var displaySize: Size {
-        Size(width: STM32F746.LTDCConstants.DISPLAY_WIDTH, height: STM32F746.LTDCConstants.DISPLAY_HEIGHT)
-    }
+    STM32F746.initializeLTCD()
 
-    var logoLayerSize: Size {
-        Size(width: 50, height: 50)
+    STM32F746.configureFlash()
+
+    STM32F746.configureLTCD()
+  }
+
+  mutating func ledOn() {
+    led.assert()
+  }
+
+  mutating func ledOff() {
+    led.deassert()
+  }
+
+  mutating func delay(milliseconds: Int) {
+    for _ in 0..<100_000 * milliseconds {
+      nop()
     }
+  }
+
+  mutating func moveLogo(to point: Point) {
+    STM32F746.setLayer2Position(point)
+  }
+
+  mutating func setBackgroundColor(color: Color) {
+    STM32F746.setBackgroundColor(color)
+  }
+
+  var displaySize: Size {
+    Size(
+      width: STM32F746.LTDCConstants.DISPLAY_WIDTH,
+      height: STM32F746.LTDCConstants.DISPLAY_HEIGHT)
+  }
+
+  var logoLayerSize: Size {
+    Size(width: 50, height: 50)
+  }
 }
 
 struct Point {
-    var x, y: Int
+  var x, y: Int
 
-    func offset(by: Point) -> Point {
-        return Point(x: x + by.x, y: y + by.y)
-    }
+  func offset(by: Point) -> Point {
+    Point(x: x + by.x, y: y + by.y)
+  }
 }
 
 struct Size {
-    var width, height: Int
+  var width, height: Int
 }
 
 struct Color {
-    var r, g, b: Int
+  var r, g, b: Int
 }

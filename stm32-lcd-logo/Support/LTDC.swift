@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 /// LCD-TFT Controller
 public struct LTDC {
     public var baseAddress: UnsafeMutableRawPointer

@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var padsBank0: PadsBank {
     PadsBank(unsafeAddress: 0x4001c000)

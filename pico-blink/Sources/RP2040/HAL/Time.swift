@@ -44,14 +44,14 @@ extension RP2040 {
   }
 
   public func sleep(forMilliseconds milliseconds: Int) {
-    for _ in 0 ..< milliseconds * 1000 {
+    for _ in 0..<milliseconds * 1000 {
       nop()
     }
-  }  
+  }
 
   public func sleep(for duration: Duration) {
     let (seconds, attoseconds) = duration.components
-    let microseconds = attoseconds / 1000000000000 + seconds * 1000000
+    let microseconds = attoseconds / 1_000_000_000_000 + seconds * 1_000_000
     if microseconds > 0 {
       sleep(forMicroseconds: UInt64(microseconds))
     }

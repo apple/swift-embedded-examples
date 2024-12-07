@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var clocks: Clocks {
     Clocks(unsafeAddress: 0x40008000)

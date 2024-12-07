@@ -10,20 +10,24 @@
 //===----------------------------------------------------------------------===//
 
 @_silgen_name("memset")
-func memset(_ dst: UnsafeMutableRawPointer, _ val: CInt, _ len: Int) -> UnsafeMutableRawPointer {
-    let dst = dst.bindMemory(to: UInt8.self, capacity: len)
-    for i in 0 ..< len {
-        dst[i] = UInt8(truncatingIfNeeded: val)
-    }
-    return UnsafeMutableRawPointer(dst)
+func memset(_ dst: UnsafeMutableRawPointer, _ val: CInt, _ len: Int)
+  -> UnsafeMutableRawPointer
+{
+  let dst = dst.bindMemory(to: UInt8.self, capacity: len)
+  for i in 0..<len {
+    dst[i] = UInt8(truncatingIfNeeded: val)
+  }
+  return UnsafeMutableRawPointer(dst)
 }
 
 @_silgen_name("memcpy")
-func memcpy(_ dst: UnsafeMutableRawPointer, _ src: UnsafeRawPointer, _ len: Int) -> UnsafeMutableRawPointer {
-    let src = src.bindMemory(to: UInt8.self, capacity: len)
-    let dst = dst.bindMemory(to: UInt8.self, capacity: len)
-    for i in 0 ..< len {
-        dst[i] = src[i]
-    }
-    return UnsafeMutableRawPointer(dst)
+func memcpy(_ dst: UnsafeMutableRawPointer, _ src: UnsafeRawPointer, _ len: Int)
+  -> UnsafeMutableRawPointer
+{
+  let src = src.bindMemory(to: UInt8.self, capacity: len)
+  let dst = dst.bindMemory(to: UInt8.self, capacity: len)
+  for i in 0..<len {
+    dst[i] = src[i]
+  }
+  return UnsafeMutableRawPointer(dst)
 }

@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var timer: Timer {
     Timer(unsafeAddress: 0x40054000)

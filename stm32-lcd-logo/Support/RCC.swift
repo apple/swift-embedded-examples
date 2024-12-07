@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 /// Reset and clock control
 struct RCC {
     var baseAddress: UnsafeMutableRawPointer

@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var ioBank0: IOBank {
     IOBank(unsafeAddress: 0x40014000)

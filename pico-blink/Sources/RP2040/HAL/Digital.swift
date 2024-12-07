@@ -33,7 +33,13 @@ extension RP2040 {
     }
   }
 
-  public func write(_ byte: UInt8, to pins: (some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin)) {
+  public func write(
+    _ byte: UInt8,
+    to pins: (
+      some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin,
+      some DigitalPin, some DigitalPin, some DigitalPin, some DigitalPin
+    )
+  ) {
     var set = UInt32(0)
     var clear = UInt32(0)
 
@@ -81,7 +87,10 @@ extension RP2040 {
     hardware.sio.clearOutput(clear)
   }
 
-  func setFunction(_ pin: some DigitalPin, _ function: RP2040Hardware.IOBank.GPIOControl.Projection.FuncSel) {
+  func setFunction(
+    _ pin: some DigitalPin,
+    _ function: RP2040Hardware.IOBank.GPIOControl.Projection.FuncSel
+  ) {
     hardware.padsBank0.gpio[pin.rawValue].modify {
       $0.outputDisable = false
       $0.inputEnable = true

@@ -11,28 +11,29 @@
 
 import RP2350
 
+// swift-format-ignore: AlwaysUseLowerCamelCase
 let LED_PIN: UInt32 = 25
 
 /// Configures GPIO pin 25 as a front-end to PIO0.
-func configure_output_pin() {
+func configureOutputPin() {
   // Configure GPIO general properties
   pads_bank0.gpio[LED_PIN].modify { rw in
-    rw.raw.od = 0 // Enable output
-    rw.raw.ie = 0 // Disable input
-    rw.raw.pue = 1 // Disable pull up
-    rw.raw.pde = 1 // Enable pull down
-    rw.raw.schmitt = 1 // Enable schmitt trigger
-    rw.raw.slewfast = 0 // Use slow slew rate
+    rw.raw.od = 0  // Enable output
+    rw.raw.ie = 0  // Disable input
+    rw.raw.pue = 1  // Disable pull up
+    rw.raw.pde = 1  // Enable pull down
+    rw.raw.schmitt = 1  // Enable schmitt trigger
+    rw.raw.slewfast = 0  // Use slow slew rate
   }
 
   // Configure GPIO function selection to use PIO0
   io_bank0.gpio[LED_PIN].gpio_ctrl.modify { rw in
-    rw.raw.funcsel = 0x6 // Forward output from pio0 to this pin
+    rw.raw.funcsel = 0x6  // Forward output from pio0 to this pin
   }
 
   // Remove pad isolation now that the correct peripheral is driving the pad
   pads_bank0.gpio[LED_PIN].modify { rw in
-    rw.raw.iso = 0 // Disable isolation
+    rw.raw.iso = 0  // Disable isolation
   }
 }
 
@@ -45,11 +46,11 @@ func configure_output_pin() {
 /// Additionally, this method doesn't reset any state in the PIO or state
 /// machines. A more complete implementation will want to use `sm_reset` and
 /// `clkdiv_restart` to clear any persisted state.
-func configure_pio() {
+func configurePio() {
   // Load the assembled program directly into the PIO's instruction memory.
   withUnsafeBytes(of: WS2812.pio_instructions) { pointer in
-    let pio_instructions = pointer.assumingMemoryBound(to: UInt16.self)
-    for (index, pio_instr) in pio_instructions.enumerated() {
+    let pioInstructions = pointer.assumingMemoryBound(to: UInt16.self)
+    for (index, pio_instr) in pioInstructions.enumerated() {
       pio0.instr_mem[index].write { w in
         w.raw.instr_mem0 = UInt32(pio_instr)
       }
@@ -57,8 +58,8 @@ func configure_pio() {
 
     // Configure the PIO program wrap boundaries.
     pio0.sm[0].sm_execctrl.modify { r, w in
-      w.raw.wrap_bottom = 1 // Continue at 1
-      w.raw.wrap_top = UInt32(pio_instructions.count - 1) // Wrap after last.
+      w.raw.wrap_bottom = 1  // Continue at 1
+      w.raw.wrap_top = UInt32(pioInstructions.count - 1)  // Wrap after last.
     }
   }
 
@@ -67,7 +68,7 @@ func configure_pio() {
   // From section 8.3.1. Ring Oscillator (ROSC) Overview
   // > The Ring Oscillator (ROSC) ... provides the clock to the cores during
   // > boot, ... the ROSC runs at a nominal 11MHz.
-  // 
+  //
   // Given the 11MHz input clock, the desired output frequency of 800KHz, and
   // that each pio program cycle takes 10 cpu cycles. We can derive an
   // approximate clock division factor.
@@ -90,10 +91,10 @@ func configure_pio() {
   // Additional bond the RX TX fifos into one larger TX fifo so we can buffer
   // more pixel data.
   pio0.sm[0].sm_shiftctrl.modify { rw in
-    rw.raw.autopull = 1 // Enable autopull
-    rw.raw.pull_thresh = 24 // 24 bit pull threshold
-    rw.raw.out_shiftdir = 0 // Left shift from OSR
-    rw.raw.fjoin_tx = 1 // Join RX TX fifos
+    rw.raw.autopull = 1  // Enable autopull
+    rw.raw.pull_thresh = 24  // 24 bit pull threshold
+    rw.raw.out_shiftdir = 0  // Left shift from OSR
+    rw.raw.fjoin_tx = 1  // Join RX TX fifos
   }
 
   // Setup the PIO state machine to output to the correct gpio pins.
@@ -106,27 +107,26 @@ func configure_pio() {
 
   // Start the state machine, it should immediately stall waiting for data in
   // the txfifo.
-  pio0.ctrl.modify { _, w in 
-    w.raw.sm_enable = 1 << 0 // Enable state machine 0
+  pio0.ctrl.modify { _, w in
+    w.raw.sm_enable = 1 << 0  // Enable state machine 0
   }
 }
 
 /// Writes an HSV8Pixel to the PIO TX fifo.
-func pio_write_pixel(_ hsv: HSV8Pixel) {
+func pioWritePixel(_ hsv: HSV8Pixel) {
   let rgb = RGB8Pixel(hsv)
 
   // Pixels need to be G R B 0 left to right.
-  let ws2812Value: UInt32 = 
-    UInt32(rgb.green) << 24 |
-    UInt32(rgb.red)   << 16 |
-    UInt32(rgb.blue)  << 8
+  let ws2812Value: UInt32 =
+    UInt32(rgb.green) << 24 | UInt32(rgb.red) << 16 | UInt32(rgb.blue) << 8
 
-  func tx_fifo_full() -> Bool {
+  func txFifoFull() -> Bool {
     pio0.fstat.read().raw.txfull & 0x1 != 0
   }
 
   // Wait for the TX fifo to have space before writing to it.
-  while tx_fifo_full() { }
+  while txFifoFull() {}
+
   // Write the pixel value to TX fifo.
   pio0.txf[0].write { w in
     w.raw.txf0 = ws2812Value
@@ -136,24 +136,23 @@ func pio_write_pixel(_ hsv: HSV8Pixel) {
 @main
 struct Application {
   static func main() {
-   // Take peripherals out of reset
-   resets.reset.modify { rw in
-     rw.raw.pio0 = 0
-     rw.raw.pads_bank0 = 0
-     rw.raw.io_bank0 = 0
-   }
+    // Take peripherals out of reset
+    resets.reset.modify { rw in
+      rw.raw.pio0 = 0
+      rw.raw.pads_bank0 = 0
+      rw.raw.io_bank0 = 0
+    }
 
-   var done = false
-   while !done {
-     let reset_done = resets.reset_done.read()
-     done =
-       reset_done.raw.pio0 == 1 &&
-       reset_done.raw.pads_bank0 == 1 &&
-       reset_done.raw.io_bank0 == 1
-   }
+    var done = false
+    while !done {
+      let resetDone = resets.reset_done.read().raw
+      done =
+        resetDone.pio0 == 1 && resetDone.pads_bank0 == 1
+        && resetDone.io_bank0 == 1
+    }
 
-    configure_output_pin()
-    configure_pio()
+    configureOutputPin()
+    configurePio()
 
     // Infinitely loop, cycling through colors.
     var color = HSV8Pixel(hue: 0, saturation: .max, value: 64)
@@ -163,7 +162,7 @@ struct Application {
       // this program should setup the system clocks at a chosen frequency and
       // use the timer peripheral to sleep for N ms.
       if x.isMultiple(of: 1 << 16) {
-        pio_write_pixel(color)
+        pioWritePixel(color)
         color.hue &+= 1
       }
       x &+= 1

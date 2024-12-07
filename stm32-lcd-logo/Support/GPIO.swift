@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 /// General-purpose I/Os
 struct GPIO {
     var baseAddress: UnsafeMutableRawPointer

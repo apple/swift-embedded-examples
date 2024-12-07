@@ -3,13 +3,13 @@
 import MMIO
 
 /// General-purpose I/Os
-let gpioa = GPIOA(unsafeAddress: 0x40020000)
+let gpioa = GPIOA(unsafeAddress: 0x4002_0000)
 
 /// General-purpose I/Os
-let gpiob = GPIOB(unsafeAddress: 0x40020400)
+let gpiob = GPIOB(unsafeAddress: 0x4002_0400)
 
 /// Reset and clock control
-let rcc = RCC(unsafeAddress: 0x40023800)
+let rcc = RCC(unsafeAddress: 0x4002_3800)
 
 /// Universal synchronous asynchronous receiver transmitter
-let usart1 = USART1(unsafeAddress: 0x40011000)
+let usart1 = USART1(unsafeAddress: 0x4001_1000)

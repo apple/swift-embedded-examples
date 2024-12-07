@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 /// Universal synchronous asynchronous receiver transmitter
 struct USART {
     var baseAddress: UnsafeMutableRawPointer
