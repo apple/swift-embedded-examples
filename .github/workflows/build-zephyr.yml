@@ -1,4 +1,4 @@
-name: Build ESP Examples
+name: Build Zephyr Examples
 
 on:
   push:
@@ -10,21 +10,29 @@ on:
     - cron:  '0 17 * * 1'
 
 jobs:
-  build-esp:
+  build-zephyr:
     runs-on: ubuntu-24.04
-    container: espressif/idf:latest
+    container: node:23
     strategy:
       fail-fast: false
       matrix:
-        example: [esp32-led-blink-sdk, esp32-led-strip-sdk]
+        example: [nrfx-blink-sdk]
         swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install apt dependencies
-        run: apt-get -qq update && apt-get -qq -y install pkg-config
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Setup Zephyr project
+        uses: zephyrproject-rtos/action-zephyr-setup@v1
+        with:
+          app-path: ${{ matrix.example }}
+          toolchains: arm-zephyr-eabi
 
       - name: Install ${{ matrix.swift }}
         run: |
@@ -34,11 +42,12 @@ jobs:
           echo "PATH=$PATH" >> $GITHUB_ENV
           swiftc --version
 
-      - name: Build ${{ matrix.example }}
+      - name: Build firmware
+        working-directory: ${{ matrix.example }}
         run: |
-          cd $IDF_PATH
-          . ./export.sh
-          cd -
-          cd ${{ matrix.example }}
-          idf.py set-target esp32c6
-          idf.py build
+          west twister -T app -v --inline-logs --integration $EXTRA_TWISTER_FLAGS
+
+      - name: Twister Tests
+        working-directory: ${{ matrix.example }}
+        run: |
+          west twister -T tests -v --inline-logs --integration $EXTRA_TWISTER_FLAGS
