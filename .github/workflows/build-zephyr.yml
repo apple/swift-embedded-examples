@@ -44,4 +44,4 @@ jobs:
 
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
-        run: west build -b nrf52840dk_nrf52840
+        run: west build -b nrf52840dk
