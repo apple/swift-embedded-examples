@@ -20,7 +20,7 @@ jobs:
           - name: pico-blink-sdk
             board: pico
           - name: pico-w-blink-sdk
-            board: pico-w
+            board: pico_w
 
     steps:
       - name: Checkout repo
