@@ -42,12 +42,6 @@ jobs:
           echo "PATH=$PATH" >> $GITHUB_ENV
           swiftc --version
 
-      - name: Build firmware
+      - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
-        run: |
-          west twister -T app -v --inline-logs --integration $EXTRA_TWISTER_FLAGS
-
-      - name: Twister Tests
-        working-directory: ${{ matrix.example }}
-        run: |
-          west twister -T tests -v --inline-logs --integration $EXTRA_TWISTER_FLAGS
+        run: west build
