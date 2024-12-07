@@ -23,4 +23,4 @@ jobs:
         run: curl -L https://github.com/apple/swift-mmio/blob/main/SupportingFiles/Tools/swift-format/.swift-format -O
 
       - name: Lint
-        run: swift-format lint --recursive --strict .
+        run: ls -asl && swift-format lint --recursive --strict .

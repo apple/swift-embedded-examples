@@ -51,7 +51,7 @@ jobs:
           curl -L https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz -O
           tar xf arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz
 
-      - name: Set PICO environment variables
+      - name: Set Pico environment variables
         run: |
           ARCH=`uname -m`
           echo "PICO_BOARD=${{ matrix.example.board }}" >> $GITHUB_ENV
