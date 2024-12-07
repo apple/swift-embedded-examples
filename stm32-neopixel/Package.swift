@@ -5,13 +5,15 @@ import PackageDescription
 let package = Package(
   name: "stm32-neopixel",
   platforms: [
-    .macOS(.v10_15),
+    .macOS(.v10_15)
   ],
   products: [
-      .library(name: "Application", type: .static, targets: ["Application"]),
+    .library(name: "Application", type: .static, targets: ["Application"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-mmio", branch: "swift-embedded-examples"),
+    .package(
+      url: "https://github.com/apple/swift-mmio",
+      branch: "swift-embedded-examples")
   ],
   targets: [
     .target(
@@ -21,7 +23,7 @@ let package = Package(
         "Support",
       ],
       swiftSettings: [
-        .enableExperimentalFeature("Embedded"),
+        .enableExperimentalFeature("Embedded")
       ]),
     .target(name: "Support"),
   ])
