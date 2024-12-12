@@ -13,7 +13,7 @@ Run blink rv32-blink_leds (QEMU) example on NuttX RTOS.
 - [kconfig-frontends](https://bitbucket.org/nuttx/tools)
 - [CMake](https://cmake.org/download/)
 - [QEMU](https://www.qemu.org/)
-- [Swift 6](https://swift.org/download/)
+- [Swift 6](https://swift.org/download/) - Swift 6.1 or greater
 - [RISC-V GNU Toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain/releases)
 
 ## How to build
