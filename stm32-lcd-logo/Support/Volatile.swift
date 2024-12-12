@@ -10,11 +10,11 @@
 //===----------------------------------------------------------------------===//
 
 extension UnsafeMutablePointer where Pointee == UInt32 {
-    func volatileLoad() -> Pointee {
-        return volatile_load_uint32_t(self)
-    }
+  func volatileLoad() -> Pointee {
+    volatile_load_uint32_t(self)
+  }
 
-    func volatileStore(_ value: Pointee) {
-        volatile_store_uint32_t(self, value)
-    }
+  func volatileStore(_ value: Pointee) {
+    volatile_store_uint32_t(self, value)
+  }
 }

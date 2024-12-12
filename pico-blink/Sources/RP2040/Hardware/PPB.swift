@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var ppb: PPB {
     PPB(unsafeAddress: 0xe0000000)

@@ -51,7 +51,7 @@ public struct Application {
 
     // Configure UART1
     // Set the baud rate to 16Mhz
-    usart1.brr.modify { $0.raw.storage = 16000000/115200 }
+    usart1.brr.modify { $0.raw.storage = 16_000_000 / 115200 }
 
     usart1.cr1.modify { rw in
       // Enable USART 1
@@ -85,7 +85,7 @@ public struct Application {
 
 func waitTxBufferEmpty() {
   // Spin while tx buffer not empty
-  while usart1.isr.read().raw.txe == 0 { }
+  while usart1.isr.read().raw.txe == 0 {}
 }
 
 func tx(value: UInt8) {
@@ -94,7 +94,7 @@ func tx(value: UInt8) {
 
 func waitRxBufferFull() {
   // Spin while rx buffer empty
-  while usart1.isr.read().raw.rxne == 0 { }
+  while usart1.isr.read().raw.rxne == 0 {}
 }
 
 func rx() -> UInt8 {
@@ -103,7 +103,7 @@ func rx() -> UInt8 {
 
 @_cdecl("Default_Handler")
 public func defaultHandler() {
-  while true { }
+  while true {}
 }
 
 @_cdecl("putchar")

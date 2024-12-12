@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var pllSystem: PLL {
     PLL(unsafeAddress: 0x40028000)

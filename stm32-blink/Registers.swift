@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension UnsafeMutablePointer where Pointee == UInt32 {
     func volatileLoad() -> Pointee {
         return volatile_load_uint32_t(self)
