@@ -2,6 +2,9 @@
   "fileScopedDeclarationPrivacy" : {
     "accessLevel" : "private"
   },
+  "indentation" : {
+    "spaces" : 2
+  },
   "indentConditionalCompilationBlocks" : false,
   "indentSwitchCaseLabels" : false,
   "lineBreakAroundMultilineExpressionChainComponents" : false,

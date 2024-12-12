@@ -21,8 +21,7 @@ jobs:
 
       - name: Compare against swift-mmio swift-format config
         run: |
-          curl -L https://raw.githubusercontent.com/apple/swift-mmio/refs/heads/main/SupportingFiles/Tools/swift-format/.swift-format \
-            -o .swift-format-mmio
+          curl -sL https://raw.githubusercontent.com/apple/swift-mmio/refs/heads/main/SupportingFiles/Tools/swift-format/.swift-format -o .swift-format-mmio
           diff .swift-format .swift-format-mmio
 
       - name: Lint
