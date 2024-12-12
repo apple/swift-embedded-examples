@@ -1,0 +1,28 @@
+name: Lint
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container: swift:6.0-jammy
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install apt dependencies
+        run: apt-get -qq update && apt-get -qq -y install curl
+
+      - name: Compare against swift-mmio swift-format config
+        run: |
+          curl -sL https://raw.githubusercontent.com/apple/swift-mmio/refs/heads/main/SupportingFiles/Tools/swift-format/.swift-format -o .swift-format-mmio
+          diff .swift-format .swift-format-mmio
+
+      - name: Lint
+        run: swift-format lint --recursive --strict .

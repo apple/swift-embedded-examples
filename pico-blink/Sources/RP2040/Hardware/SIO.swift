@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var sio: SIO {
     SIO(unsafeAddress: 0xd0000000)

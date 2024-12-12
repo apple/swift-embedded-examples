@@ -12,5 +12,5 @@
 public struct RP2040 {
   let hardware = RP2040Hardware()
 
-  public init() { }
+  public init() {}
 }

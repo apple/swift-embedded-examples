@@ -5,15 +5,15 @@ import PackageDescription
 let package = Package(
   name: "pico2-neopixel",
   platforms: [
-    .macOS(.v14),
+    .macOS(.v14)
   ],
   products: [
-    .library(name: "Application", type: .static, targets: ["Application"]),
+    .library(name: "Application", type: .static, targets: ["Application"])
   ],
   dependencies: [
     .package(
       url: "https://github.com/apple/swift-mmio.git",
-      branch: "swift-embedded-examples"),
+      branch: "swift-embedded-examples")
   ],
   targets: [
     .target(
@@ -21,7 +21,7 @@ let package = Package(
       dependencies: ["RP2350", "Support"],
       swiftSettings: [
         .enableExperimentalFeature("Embedded"),
-        .unsafeFlags(["-Xfrontend", "-function-sections"])
+        .unsafeFlags(["-Xfrontend", "-function-sections"]),
       ]),
     .target(
       name: "RP2350",

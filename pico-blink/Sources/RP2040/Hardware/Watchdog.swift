@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+// swift-format-ignore-file
+
 extension RP2040Hardware {
   public var watchdog: Watchdog {
     Watchdog(unsafeAddress: 0x40058000) 

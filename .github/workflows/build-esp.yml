@@ -1,0 +1,44 @@
+name: Build ESP Examples
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Build on Mondays at 9am PST every week
+    - cron:  '0 17 * * 1'
+
+jobs:
+  build-esp:
+    runs-on: ubuntu-24.04
+    container: espressif/idf:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        example: [esp32-led-blink-sdk, esp32-led-strip-sdk]
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install apt dependencies
+        run: apt-get -qq update && apt-get -qq -y install pkg-config
+
+      - name: Install ${{ matrix.swift }}
+        run: |
+          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
+          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
+          export PATH="$PATH:`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          swiftc --version
+
+      - name: Build ${{ matrix.example }}
+        run: |
+          cd $IDF_PATH
+          . ./export.sh
+          cd -
+          cd ${{ matrix.example }}
+          idf.py set-target esp32c6
+          idf.py build
