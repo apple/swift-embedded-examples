@@ -6,8 +6,8 @@ project(blink
     LANGUAGES Swift
 )
 
-if("${CMAKE_Swift_COMPILER_VERSION}" VERSION_LESS 6.0)
-    message(FATAL_ERROR "Swift 6.0 or later is required")
+if("${CMAKE_Swift_COMPILER_VERSION}" VERSION_LESS 6.1)
+    message(FATAL_ERROR "Swift 6.1 or later is required")
 endif()
 
 if(POLICY CMP0169)
