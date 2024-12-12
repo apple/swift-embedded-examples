@@ -10,7 +10,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    container: swift:6.1-jammy
+    container: swift:6.0-jammy
 
     steps:
       - name: Checkout repo
