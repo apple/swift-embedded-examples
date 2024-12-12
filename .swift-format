@@ -62,6 +62,7 @@
     "UseWhereClausesInForLoops" : false,
     "ValidateDocumentationComments" : true
   },
+  "spacesBeforeEndOfLineComments": 2,
   "spacesAroundRangeFormationOperators" : false,
   "tabWidth" : 2,
   "version" : 1
