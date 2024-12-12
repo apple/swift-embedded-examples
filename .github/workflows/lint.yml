@@ -19,8 +19,11 @@ jobs:
       - name: Install apt dependencies
         run: apt-get -qq update && apt-get -qq -y install curl
 
-      - name: Get common swift-format config
-        run: curl -L https://raw.githubusercontent.com/apple/swift-mmio/refs/heads/main/SupportingFiles/Tools/swift-format/.swift-format -O
+      - name: Compare against swift-mmio swift-format config
+        run: |
+          curl -L https://raw.githubusercontent.com/apple/swift-mmio/refs/heads/main/SupportingFiles/Tools/swift-format/.swift-format \
+            -o .swift-format-mmio
+          diff .swift-format .swift-format-mmio
 
       - name: Lint
         run: swift-format lint --recursive --strict .
