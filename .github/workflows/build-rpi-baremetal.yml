@@ -25,7 +25,7 @@ jobs:
       - name: Install apt dependencies
         run: apt-get -qq update && apt-get -qq -y install llvm make
 
-      - name: Build ${{ matrix.example.name }}
+      - name: Build ${{ matrix.example }}
         run: |
-          cd ${{ matrix.example.name }}
+          cd ${{ matrix.example }}
           make
