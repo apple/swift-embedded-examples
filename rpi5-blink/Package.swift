@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "RPI4B-Blink",
+    name: "RPi5-Blink",
     platforms: [
     .macOS(.v14),
   ],

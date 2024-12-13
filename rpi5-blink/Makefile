@@ -2,7 +2,7 @@ SWIFT_EXEC ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f swift; e
 CLANG ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f clang; else which clang; fi)
 LLVM_OBJCOPY ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f llvm-objcopy; else which llvm-objcopy; fi)
 
-BUILDROOT := $(shell $(SWIFT_EXEC) build --triple aarch64-none-none-elf -Xcc -D__APPLE__ -Xcc -D__MACH__ -Xswiftc -Xfrontend -Xswiftc -disable-stack-protector --show-bin-path)
+BUILDROOT := $(shell $(SWIFT_EXEC) build --triple aarch64-none-none-elf -Xswiftc -Xfrontend -Xswiftc -disable-stack-protector --show-bin-path)
 
 .PHONY: all clean
 
