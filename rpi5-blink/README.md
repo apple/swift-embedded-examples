@@ -15,7 +15,7 @@
 ``` console
 $ cd rpi5-blink
 $ export TOOLCHAINS='<toolchain-identifier>' # Your Swift nightly toolchain identifier
-$ ./build.sh
+$ make
 $ cp kernel8.img /Volumes/bootfs  # Copy kernel image to SD card
 $ rm /Volumes/bootfs/kernel_2712.img # Delete this kernel image so our kernel8.img is used
 $ # You can also rename our kernel8.img to kernel_2712.img, or set it to anything you want and specify "kernel=[your-img-name]" in config.txt.
