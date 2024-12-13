@@ -1,0 +1,31 @@
+name: Build Pico SDK Examples
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Build on Mondays at 9am PST every week
+    - cron:  '0 17 * * 1'
+
+jobs:
+  build-pico-sdk:
+    runs-on: ubuntu-22.04
+    container: swiftlang/swift:nightly-main-jammy
+    strategy:
+      fail-fast: false
+      matrix:
+        example: [rpi5-blink, rpi4b-blink]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install apt dependencies
+        run: apt-get -qq update && apt-get -qq -y install llvm
+
+      - name: Build ${{ matrix.example.name }}
+        run: |
+          cd ${{ matrix.example.name }}
+          make
