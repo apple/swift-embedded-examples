@@ -21,7 +21,7 @@ kernel8.elf: $(BUILDROOT)/libMainApp.a $(BUILDROOT)/Support.build/boot.S.o link.
 
 $(BUILDROOT)/libMainApp.a $(BUILDROOT)/Support.build/boot.S.o: 
 	@echo "🛠️  Building with Swift Package Manager..."
-	$(SWIFT_EXEC) build --triple aarch64-none-none-elf -Xcc -D__APPLE__ -Xcc -D__MACH__ -Xswiftc -Xfrontend -Xswiftc -disable-stack-protector
+	$(SWIFT_EXEC) build --triple aarch64-none-none-elf -Xswiftc -Xfrontend -Xswiftc -disable-stack-protector
 	@echo ""
 
 clean:
