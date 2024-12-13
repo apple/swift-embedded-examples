@@ -6,12 +6,12 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 
 ## Requirements
 
-- A Raspberry Pi Pico W board. If you have a Pico (non-W) instead, refer to the [pico-blink-sdk](../pico-blink-sdk) sample instead.
+- A Raspberry Pi Pico W / Pico 2 W board. If you have a Pico (non-W) instead, refer to the [pico-blink-sdk](../pico-blink-sdk) sample instead.
 - Follow the setup steps at https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf, in particular you'll need:
-  - A checkout of the [pico-sdk](https://github.com/raspberrypi/pico-sdk.git), with git submodules checked out.
+  - A checkout of the [pico-sdk](https://github.com/raspberrypi/pico-sdk.git), with git submodules checked out. If you'd like to try RISC-V support for RP2350, you'll need Pico SDK 2.1.0 or later.
   - A checkout of the [pico-examples](https://github.com/raspberrypi/pico-examples.git).
   - CMake.
-  - The [Arm Embedded Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+  - The [Arm Embedded Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), or the RISC-V toolchain if you want to build for the RISC-V cores on the RP2350.
 - Before trying to use Swift with the Pico SDK, make sure your environment works and can build the provided C/C++ sample projects, in particular:
   - Try building and running the "blink" example from pico-examples written in C.
 
@@ -23,9 +23,9 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 ``` console
 $ cd pico-w-blink-sdk
 $ export TOOLCHAINS='<toolchain-identifier>'
-$ export PICO_BOARD=pico_w
+$ export PICO_BOARD='<board-name>' # pico_w or pico2_w
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
-$ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>'
+$ export PICO_TOOLCHAIN_PATH='<path-to-the-compiler-toolchain>' # ARM / RISC-V toolchain
 $ cmake -B build -G Ninja .
 $ cmake --build build
 ```

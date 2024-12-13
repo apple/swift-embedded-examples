@@ -1,4 +1,4 @@
-name: Build Pico SDK Examples
+  name: Build Raspberry Pi Baremetal Examples
 
 on:
   push:
