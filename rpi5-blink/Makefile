@@ -1,4 +1,4 @@
-SWIFT_EXEC ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f swift; else which swiftc; fi)
+SWIFT_EXEC ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f swift; else which swift; fi)
 CLANG ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f clang; else which clang; fi)
 LLVM_OBJCOPY ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f llvm-objcopy; else which llvm-objcopy; fi)
 
