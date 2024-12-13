@@ -1,4 +1,4 @@
-  name: Build Raspberry Pi Baremetal Examples
+name: Build Raspberry Pi Baremetal Examples
 
 on:
   push:
