@@ -7,7 +7,7 @@ on:
     branches: ["main"]
   schedule:
     # Build on Mondays at 9am PST every week
-    - cron:  '0 17 * * 1'
+    - cron: '0 17 * * 1'
 
 jobs:
   build-zephyr:
