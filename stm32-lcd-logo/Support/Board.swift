@@ -53,8 +53,8 @@ struct STM32F746Board {
 
   var displaySize: Size {
     Size(
-      width: STM32F746.LTDCConstants.DISPLAY_WIDTH,
-      height: STM32F746.LTDCConstants.DISPLAY_HEIGHT)
+      width: STM32F746.LTDCConstants.displayWidth,
+      height: STM32F746.LTDCConstants.displayHeight)
   }
 
   var logoLayerSize: Size {
