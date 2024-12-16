@@ -48,7 +48,7 @@ func configureOutputPin() {
 /// `clkdiv_restart` to clear any persisted state.
 func configurePio() {
   // Load the assembled program directly into the PIO's instruction memory.
-  withUnsafeBytes(of: WS2812.pio_instructions) { pointer in
+  withUnsafeBytes(of: WS2812.pioInstructions) { pointer in
     let pioInstructions = pointer.assumingMemoryBound(to: UInt16.self)
     for (index, pio_instr) in pioInstructions.enumerated() {
       pio0.instr_mem[index].write { w in
