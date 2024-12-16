@@ -21,7 +21,8 @@ target_link_libraries(app
 target_include_directories(app PRIVATE "${CMAKE_CURRENT_LIST_DIR}/include")
 
 # Uncomment to debug lwIP.
-# target_compile_definitions(pico_standard_link INTERFACE "LWIP_DEBUG=1")
+target_compile_definitions(pico_standard_link INTERFACE "LWIP_DEBUG=1")
+target_compile_definitions(pico_standard_link INTERFACE "WANT_HCI_DUMP=1")
 
 # Gather compile definitions from all dependencies
 set_property(GLOBAL PROPERTY visited_targets "")
@@ -87,7 +88,9 @@ endforeach()
 # Swift compiler flags to build in Embedded Swift mode, optimize for size, choose the right ISA, ABI, etc.
 target_compile_options(app PUBLIC "$<$<COMPILE_LANGUAGE:Swift>:SHELL:
         -target armv6m-none-none-eabi
-        -Xfrontend -function-sections -enable-experimental-feature Embedded -wmo -parse-as-library -Osize
+        -Xfrontend -function-sections -wmo -parse-as-library -Osize
+        -enable-experimental-feature Embedded
+        -enable-experimental-feature Extern
         -Xcc -mfloat-abi=soft -Xcc -fshort-enums
 
         -Xcc -I${CMAKE_CURRENT_LIST_DIR}/include
