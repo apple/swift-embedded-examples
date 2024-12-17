@@ -119,6 +119,7 @@ target_sources(app
     PRIVATE
     Main.swift
     Stubs.c
+    CDemoImpl.c
 )
 
 pico_add_extra_outputs(app)

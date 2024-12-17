@@ -237,7 +237,108 @@ struct Main {
         
     // Packet handlers would be defined here (placeholders)
     private static func a2dpSinkPacketHandler(_ packet: A2DPPacket) {
-        print("a2dpSinkPacketHandler - subevent \(packet.subevent.rawValue)")
+        print("a2dpSinkPacketHandler - subevent \(packet.subevent)")
+        
+        let a2dpConnection = A2DPConnection.shared
+        
+        switch packet.subevent {
+        case .SIGNALING_MEDIA_CODEC_OTHER_CONFIGURATION:
+            print("A2DP Sink: Received non SBC codec - not implemented")
+            
+        case .SIGNALING_MEDIA_CODEC_SBC_CONFIGURATION:
+            print("A2DP Sink: Received SBC codec configuration")
+            
+            // Extract SBC configuration from packet
+            let sbc = SBCConfiguration(
+                reconfigure: a2dp_subevent_signaling_media_codec_sbc_configuration_get_reconfigure(packet.cPacket),
+                numChannels: a2dp_subevent_signaling_media_codec_sbc_configuration_get_num_channels(packet.cPacket),
+                samplingFrequency: a2dp_subevent_signaling_media_codec_sbc_configuration_get_sampling_frequency(packet.cPacket),
+                blockLength: a2dp_subevent_signaling_media_codec_sbc_configuration_get_block_length(packet.cPacket),
+                subbands: a2dp_subevent_signaling_media_codec_sbc_configuration_get_subbands(packet.cPacket),
+                minBitpool: a2dp_subevent_signaling_media_codec_sbc_configuration_get_min_bitpool_value(packet.cPacket),
+                maxBitpool: a2dp_subevent_signaling_media_codec_sbc_configuration_get_max_bitpool_value(packet.cPacket)
+            )
+            
+            // Handle allocation method
+            let allocationMethod = a2dp_subevent_signaling_media_codec_sbc_configuration_get_allocation_method(packet.cPacket)
+            sbc.allocationMethod = AllocationMethod(rawValue: allocationMethod - 1) ?? .loudness
+            
+            // Handle channel mode
+            let channelMode = a2dp_subevent_signaling_media_codec_sbc_configuration_get_channel_mode(packet.cPacket)
+            switch avdtp_channel_mode_t(rawValue: channelMode) {
+            case AVDTP_CHANNEL_MODE_JOINT_STEREO:
+                sbc.channelMode = .jointStereo
+            case AVDTP_CHANNEL_MODE_STEREO:
+                sbc.channelMode = .stereo
+            case AVDTP_CHANNEL_MODE_DUAL_CHANNEL:
+                sbc.channelMode = .dualChannel
+            case AVDTP_CHANNEL_MODE_MONO:
+                sbc.channelMode = .mono
+            default:
+                print("Unknown channel mode")
+            }
+            
+            a2dpConnection.sbcConfiguration = sbc
+            sbc.dump() // Print configuration details
+            
+        case .STREAM_ESTABLISHED:
+            let status = a2dp_subevent_stream_established_get_status(packet.cPacket)
+            if status != ERROR_CODE_SUCCESS {
+                print("A2DP Sink: Streaming connection failed, status \(hex: Int(status))")
+                a2dpConnection.reset()
+                return
+            }
+            
+            // Get connection details
+            var addr: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8) = (0,0,0,0,0,0)
+            a2dp_subevent_stream_established_get_bd_addr(packet.cPacket, &addr.0)
+            let cid = a2dp_subevent_stream_established_get_a2dp_cid(packet.cPacket)
+            let seid = a2dp_subevent_stream_established_get_local_seid(packet.cPacket)
+            
+            // Update connection state
+            a2dpConnection.address = addr
+            a2dpConnection.cid = cid
+            a2dpConnection.localSEID = seid
+            a2dpConnection.streamState = .open
+            
+            print("A2DP Sink: Streaming connection established, address \(addr), cid \(hex: Int(cid)), local seid \(seid)")
+            
+        case .START_STREAM_REQUESTED:
+            #if ENABLE_AVDTP_ACCEPTOR_EXPLICIT_START_STREAM_CONFIRMATION
+            print("A2DP Sink: Explicit Accept to start stream, local_seid \(a2dp_subevent_start_stream_requested_get_local_seid(packet.cPacket))")
+            a2dp_sink_start_stream_accept(a2dpConnection.cid, a2dpConnection.localSEID)
+            #endif
+            
+        case .STREAM_STARTED:
+            print("A2DP Sink: Stream started")
+            a2dpConnection.streamState = .playing
+            
+            if let sbc = a2dpConnection.sbcConfiguration, sbc.reconfigure {
+                MediaProcessor.close()
+            }
+            
+            if let sbc = a2dpConnection.sbcConfiguration {
+                MediaProcessor.initialize(configuration: sbc)
+            }
+            
+        case .STREAM_SUSPENDED:
+            print("A2DP Sink: Stream paused")
+            a2dpConnection.streamState = .paused
+            MediaProcessor.pause()
+            
+        case .STREAM_RELEASED:
+            print("A2DP Sink: Stream released")
+            a2dpConnection.streamState = .closed
+            MediaProcessor.close()
+            
+        case .SIGNALING_CONNECTION_RELEASED:
+            print("A2DP Sink: Signaling connection released")
+            a2dpConnection.cid = 0
+            MediaProcessor.close()
+            
+        default:
+            break
+        }
     }
     private static func handleL2CAPMediaDataPacket(_ mediaData: UnsafeBufferPointer<UInt8>) {
         print("handleL2CAPMediaDataPacket")
@@ -598,5 +699,90 @@ struct AVDTPStreamEndpoint {
 enum AudioSink {
     static func getInstance() -> Any? {
         return btstack_audio_sink_get_instance()
+    }
+}
+
+enum StreamState {
+    case closed
+    case open
+    case playing
+    case paused
+}
+
+enum AllocationMethod: UInt8 {
+    case snr = 0
+    case loudness = 1
+}
+
+enum ChannelMode {
+    case mono
+    case dualChannel
+    case stereo
+    case jointStereo
+}
+
+class SBCConfiguration {
+    var reconfigure: Bool
+    var numChannels: UInt8
+    var samplingFrequency: UInt16
+    var blockLength: UInt8
+    var subbands: UInt8
+    var minBitpool: UInt8
+    var maxBitpool: UInt8
+    var channelMode: ChannelMode = .stereo
+    var allocationMethod: AllocationMethod = .loudness
+    
+    init(reconfigure: UInt8, numChannels: UInt8, samplingFrequency: UInt16,
+         blockLength: UInt8, subbands: UInt8, minBitpool: UInt8, maxBitpool: UInt8) {
+        self.reconfigure = reconfigure != 0
+        self.numChannels = numChannels
+        self.samplingFrequency = samplingFrequency
+        self.blockLength = blockLength
+        self.subbands = subbands
+        self.minBitpool = minBitpool
+        self.maxBitpool = maxBitpool
+    }
+    
+    func dump() {
+        print("    - num_channels: \(numChannels)")
+        print("    - sampling_frequency: \(samplingFrequency)")
+        print("    - channel_mode: \(channelMode)")
+        print("    - block_length: \(blockLength)")
+        print("    - subbands: \(subbands)")
+        print("    - allocation_method: \(allocationMethod)")
+        print("    - bitpool_value [\(minBitpool), \(maxBitpool)]")
+        print("")
+    }
+}
+
+class A2DPConnection {
+    static let shared = A2DPConnection()
+    
+    var address: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8) = (0,0,0,0,0,0)
+    var cid: UInt16 = 0
+    var localSEID: UInt8 = 0
+    var streamState: StreamState = .closed
+    var sbcConfiguration: SBCConfiguration?
+    
+    func reset() {
+        cid = 0
+        localSEID = 0
+        streamState = .closed
+        sbcConfiguration = nil
+    }
+}
+
+enum MediaProcessor {
+    static func initialize(configuration: SBCConfiguration) {
+        // Initialize media processing with given configuration
+        // This would need to be implemented based on your audio processing needs
+    }
+    
+    static func pause() {
+        // Pause media processing
+    }
+    
+    static func close() {
+        // Close media processing
     }
 }
