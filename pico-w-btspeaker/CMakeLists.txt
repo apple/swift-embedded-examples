@@ -12,6 +12,7 @@ target_link_libraries(app
     pico_stdlib
     pico_btstack_ble
     pico_btstack_classic
+    pico_btstack_sbc_decoder
     pico_btstack_cyw43
     pico_cyw43_arch_lwip_threadsafe_background
     hardware_adc
@@ -71,8 +72,13 @@ string(REPLACE "$<TARGET_PROPERTY:PICO_TARGET_BINARY_TYPE>" "$<TARGET_PROPERTY:a
 string(REPLACE ";" " -Xcc -D" COMPILE_DEFINITIONS "${COMPILE_DEFINITIONS} ")
 message("COMPILE_DEFINITIONS: ${COMPILE_DEFINITIONS}")
 
+# Clear out "-ffunction-sections -fdata-sections" from INTERFACE_COMPILE_OPTIONS, swiftc doesn't accept those
 get_target_property(var pico_standard_link INTERFACE_COMPILE_OPTIONS)
 set_target_properties(pico_standard_link PROPERTIES INTERFACE_COMPILE_OPTIONS "")
+# ... and instead set them for C only.
+target_compile_options(app PUBLIC "$<$<COMPILE_LANGUAGE:C>:SHELL:
+        -ffunction-sections -fdata-sections
+    >")
 
 # Compute -Xcc flags to set up the C and C++ header search paths for Swift (for bridging header).
 set(SWIFT_INCLUDES)
@@ -103,6 +109,7 @@ target_compile_options(app PUBLIC "$<$<COMPILE_LANGUAGE:Swift>:SHELL:
 
         -import-bridging-header ${CMAKE_CURRENT_LIST_DIR}/BridgingHeader.h
     >")
+
 
 # Enable Swift support in CMake, force Whole Module builds (required by Embedded Swift), and use "CMAKE_Swift_COMPILER_WORKS" to
 # skip the trial compilations which don't (yet) correctly work when cross-compiling.
