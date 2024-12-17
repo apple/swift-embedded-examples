@@ -23,11 +23,6 @@ extension DefaultStringInterpolation {
     }
 }
 
-@_extern(c) func init_protocols()
-@_extern(c) func init_profiles()
-@_extern(c) func config_sdp()
-@_extern(c) func config_gap()
-
 @main
 struct Main {
     static func main() {
@@ -242,7 +237,7 @@ struct Main {
         
     // Packet handlers would be defined here (placeholders)
     private static func a2dpSinkPacketHandler(_ packet: A2DPPacket) {
-        print("a2dpSinkPacketHandler")
+        print("a2dpSinkPacketHandler - subevent \(packet.subevent.rawValue)")
     }
     private static func handleL2CAPMediaDataPacket(_ mediaData: UnsafeBufferPointer<UInt8>) {
         print("handleL2CAPMediaDataPacket")
@@ -528,8 +523,39 @@ struct LinkPolicySettings: OptionSet {
 struct A2DPPacket {
     let cPacket: UnsafePointer<UInt8>
     let size: Int
+
+    enum Subevent: UInt8 {
+        case STREAMING_CAN_SEND_MEDIA_PACKET_NOW = 0x01
+        case SIGNALING_MEDIA_CODEC_SBC_CONFIGURATION = 0x02
+        case SIGNALING_MEDIA_CODEC_MPEG_AUDIO_CONFIGURATION = 0x03
+        case SIGNALING_MEDIA_CODEC_MPEG_AAC_CONFIGURATION = 0x04
+        case SIGNALING_MEDIA_CODEC_ATRAC_CONFIGURATION = 0x05
+        case SIGNALING_MEDIA_CODEC_OTHER_CONFIGURATION = 0x06
+        case STREAM_ESTABLISHED = 0x07
+        case START_STREAM_REQUESTED = 0x08
+        case STREAM_STARTED = 0x09
+        case STREAM_SUSPENDED = 0x0A
+        case STREAM_STOPPED = 0x0B
+        case STREAM_RELEASED = 0x0C
+        case COMMAND_ACCEPTED = 0x0D
+        case COMMAND_REJECTED = 0x0E
+        case SIGNALING_CONNECTION_ESTABLISHED = 0x0F
+        case SIGNALING_CONNECTION_RELEASED = 0x10
+        case STREAM_RECONFIGURED = 0x12
+        case SIGNALING_MEDIA_CODEC_SBC_CAPABILITY = 0x13
+        case SIGNALING_MEDIA_CODEC_MPEG_AUDIO_CAPABILITY = 0x14
+        case SIGNALING_MEDIA_CODEC_MPEG_AAC_CAPABILITY = 0x15
+        case SIGNALING_MEDIA_CODEC_ATRAC_CAPABILITY = 0x16
+        case SIGNALING_MEDIA_CODEC_OTHER_CAPABILITY = 0x17
+        case SIGNALING_DELAY_REPORTING_CAPABILITY = 0x18
+        case SIGNALING_DELAY_REPORT = 0x19
+        case SIGNALING_CAPABILITIES_DONE = 0x1A
+        case SIGNALING_CAPABILITIES_COMPLETE = 0x1B
+    }
     
-    // Add methods to extract packet information
+    var subevent: Subevent {
+        Subevent(rawValue: hci_event_a2dp_meta_get_subevent_code(cPacket))!
+    }
 }
 
 struct AVRCPPacket {
