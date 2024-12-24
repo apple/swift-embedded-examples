@@ -57,13 +57,13 @@ Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not reco
 | ---- | -------- | ----------- |
 | [swift-matter-examples](https://github.com/apple/swift-matter-examples) | ESP32 | An Embedded Swift Matter application running on ESP32-C6. |
 | [swift-flipperzero-hello](https://github.com/Sameesunkaria/swift-flipperzero-hello) | Flipper Zero | A demonstration of running Swift apps on the Flipper Zero. |
+| [EmbeddedSwift nRF52 Examples](https://github.com/nelcea/EmbeddedSwift-nRF52-Examples) | nRF52840 (developer kit) | A collection of examples using Embedded Swift on top of nRF Connect SDK (Zephyr). |
+| [Swatak](https://github.com/nelcea/EmbeddedSwift-nRF52-Swatak/tree/main) | nRF52840 (Seeed Studio XIAO nRF52840) | A reaction time game inspired by BATAK© boards, implemented in Embedded Swift using nRF Connect SDK. |
 | [swift-picosystem-example](https://github.com/jerrodputman/swift-picosystem-example) | PicoSystem | An Embedded Swift demo running on the Pimoroni PicoSystem |
 | [PlaydateKit](https://github.com/finnvoor/PlaydateKit) | Playdate | A full featured framework for building Playdate games using Embedded Swift. |
 | [swift-playdate-examples](https://github.com/apple/swift-playdate-examples) | Playdate | An Embedded Swift game running on Playdate by Panic. |
 | [swift-stm32c011-examples](https://github.com/xtremekforever/swift-stm32c011-examples) | STM32 | Examples of running Embedded Swift on the STM32C011, which is a tiny MCU with only 6KB of SRAM and 32KB of flash. |
 | [swift-for-wasm-examples](https://github.com/apple/swift-for-wasm-examples) | Web | A "Swift Audio Workstation" example built with Swift for WebAssembly running in the browser using Embedded Swift. |
-| [EmbeddedSwift nRF52 Examples](https://github.com/nelcea/EmbeddedSwift-nRF52-Examples) | Nordic Semiconductor nRF52840dk | A collection of examples using Embedded Swift on top of nRF Connect SDK (Zephyr). |
-| [Swatak](https://github.com/nelcea/EmbeddedSwift-nRF52-Swatak/tree/main) | Seeed Studio XIAO nRF52840 | A reaction time game inspired by BATAK© boards, implemented in Embedded Swift using nRF Connect SDK. |
 
 Please note that the presence of community repositories and devices in this list does not constitute a recommendation or endorsement. If there's a project you'd like to see included here, please [submit an issue](https://github.com/apple/swift-embedded-examples/issues/new) with the details.
 
