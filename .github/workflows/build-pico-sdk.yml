@@ -11,8 +11,7 @@ on:
 
 jobs:
   build-pico-sdk:
-    runs-on: ubuntu-22.04
-    container: swiftlang/swift:nightly-main-jammy
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -21,6 +20,7 @@ jobs:
             board: pico
           - name: pico-w-blink-sdk
             board: pico_w
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
 
     steps:
       - name: Checkout repo
@@ -38,18 +38,26 @@ jobs:
           echo "PATH=$PATH" >> $GITHUB_ENV
           cmake --version
 
+      - name: Install GNU ARM toolchain
+        run: |
+          ARCH=`uname -m`
+          curl -sL https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz -O
+          tar xf arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz
+
+      - name: Install ${{ matrix.swift }}
+        run: |
+          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
+          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
+          export PATH="$PATH:`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          swiftc --version
+
       - name: Clone Pico SDK
         run: |
           git clone https://github.com/raspberrypi/pico-sdk.git
           cd pico-sdk
           git submodule update --init --recursive
           cd ..
-
-      - name: Download GNU ARM toolchain
-        run: |
-          ARCH=`uname -m`
-          curl -sL https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz -O
-          tar xf arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz
 
       - name: Set Pico environment variables
         run: |
