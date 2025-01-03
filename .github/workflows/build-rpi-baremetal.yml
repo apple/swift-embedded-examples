@@ -1,0 +1,39 @@
+name: Build Raspberry Pi Baremetal Examples
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Build on Mondays at 9am PST every week
+    - cron: '0 17 * * 1'
+jobs:
+  build-rpi-baremetal:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        example: [rpi5-blink, rpi4b-blink]
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install apt dependencies
+        run: sudo apt-get -qq update && sudo apt-get -qq -y install make llvm
+
+      - name: Install ${{ matrix.swift }}
+        run: |
+          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
+          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
+          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          which swiftc
+          swiftc --version
+
+      - name: Build ${{ matrix.example }}
+        run: |
+          cd ${{ matrix.example }}
+          make
