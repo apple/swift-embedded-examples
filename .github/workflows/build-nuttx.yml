@@ -17,36 +17,37 @@ jobs:
       fail-fast: false
       matrix:
         example: [nuttx-riscv-blink]
-        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-10-a]
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-22-a]
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up CMake + Ninja
-        uses: lukka/get-cmake@latest
-        with:
-          cmakeVersion: latest
-          ninjaVersion: latest
-
-      - name: Install ${{ matrix.swift }} and remove old version
+      - name: Install ${{ matrix.swift }}
         run: |
-          sudo rm /usr/local/bin/swift*
           wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
           tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="$PATH:`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/"
+          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
           echo "PATH=$PATH" >> $GITHUB_ENV
           swiftc --version
 
-      - name: Install Build tools
+      - name: Install apt dependencies
         run: |
-          sudo apt -y update
-          sudo apt -y install \
+          sudo apt-get -qq update && sudo apt-get -qq -y install \
             bison flex gettext texinfo libncurses5-dev libncursesw5-dev \
             gperf automake libtool pkg-config build-essential gperf genromfs \
             libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
             libexpat-dev gcc-multilib g++-multilib u-boot-tools util-linux \
-            kconfig-frontends
+            kconfig-frontends ninja-build
+
+      - name: Install CMake 3.30.2
+        run: |
+          ARCH=`uname -m`
+          curl -sL https://github.com/Kitware/CMake/releases/download/v3.30.2/cmake-3.30.2-linux-$ARCH.tar.gz -O
+          tar xzf cmake-3.30.2-linux-$ARCH.tar.gz
+          export PATH="`pwd`/cmake-3.30.2-linux-$ARCH/bin:$PATH"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          cmake --version
 
       - name: Install RISC-V toolchain
         run: |
