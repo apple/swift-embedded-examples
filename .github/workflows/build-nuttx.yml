@@ -23,14 +23,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install ${{ matrix.swift }}
-        run: |
-          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
-          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-          swiftc --version
-
       - name: Install apt dependencies
         run: |
           sudo apt-get -qq update && sudo apt-get -qq -y install \
@@ -57,6 +49,14 @@ jobs:
           export PATH="$PATH:`pwd`/riscv-none-elf-gcc/bin/"
           echo "PATH=$PATH" >> $GITHUB_ENV
           riscv-none-elf-gcc --version
+
+      - name: Install ${{ matrix.swift }}
+        run: |
+          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
+          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
+          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          swiftc --version
 
       - name: Config ${{ matrix.example }}
         working-directory: ${{ matrix.example }}

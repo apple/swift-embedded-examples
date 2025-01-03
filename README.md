@@ -32,19 +32,20 @@ Each example in this repository contains build and deployment instructions, howe
 
 | Name | Platform | SDK | Description | Photo |
 | ---- | -------- | --- | ----------- | ----- |
+| [esp32-led-blink-sdk](./esp32-led-blink-sdk) | ESP32-C6-Bug | ESP-IDF SDK | Blink an LED repeatedly with Swift & the ESP-IDF. | <img width="300" src="esp32-led-blink-sdk/assets/images/ledon.jpg"> |
+| [esp32-led-strip-sdk](./esp32-led-strip-sdk) | ESP32-C6-DevKitC-1 | ESP-IDF SDK | Control NeoPixel LEDs with Swift & the ESP-IDF. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be"> |
+| [nrfx-blink-sdk](./nrfx-blink-sdk) | nRF52840-DK | Zephyr SDK | Blink an LED repeatedly with Swift & Zephyr. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0"> |
+| [nuttx-riscv-blink] | QEMU | NuttX | Blink a virualized led in QEMU using the Apache NuttX RTOS | |
+| [pico-blink-sdk](./pico-blink-sdk) | Raspberry Pi Pico, Pico 2 | Pico SDK | Blink an LED repeatedly with Swift & the Pico SDK. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
+| [pico-blink](./pico-blink) | Raspberry Pi Pico | None  | Blink an LED repeatedly. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
+| [pico-w-blink-sdk](./pico-w-blink-sdk) | Raspberry Pi Pico W | Pico SDK | Blink an LED to signal 'SOS' in Morse code repeatedly with Swift & the Pico SDK. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/26223064/a4949a2e-1887-4325-8f5f-a681963c93d7"> |
+| [pico2-neopixel](./pico2-neopixel) | Raspberry Pi Pico 2 | None | Control Neopixel LEDs using the RP2350 PIO. | <img width="300" src="pico2-neopixel/assets/images/example.jpg"> |
 | [stm32-blink](./stm32-blink) | STM32F746G-DISCO | None | Blink an LED repeatedly. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/739e98fd-a438-4a64-a7aa-9dddee25034b"> |
 | [stm32-lcd-logo](./stm32-lcd-logo) | STM32F746G-DISCO | None | Animate the Swift Logo on the built-in LCD. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/9e117d81-e808-493e-a20c-7284ea630f37"> |
 | [stm32-neopixel](./stm32-neopixel) | STM32F746G-DISCO | None | Control NeoPixel LEDs using SPI. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/9c5d8f74-f8aa-4632-831e-212a3e35e75a"> |
 | [stm32-uart-echo](./stm32-uart-echo) | STM32F746G-DISCO | None | Echo user input using UART. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/97d3c465-9a07-4b86-9654-0c2aaaa43b3d">|
-| [pico-blink](./pico-blink) | Raspberry Pi Pico | None  | Blink an LED repeatedly. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
-| [pico-blink-sdk](./pico-blink-sdk) | Raspberry Pi Pico, Pico 2 | Pico SDK | Blink an LED repeatedly with Swift & the Pico SDK. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
-| [pico-w-blink-sdk](./pico-w-blink-sdk) | Raspberry Pi Pico W | Pico SDK | Blink an LED to signal 'SOS' in Morse code repeatedly with Swift & the Pico SDK. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/26223064/a4949a2e-1887-4325-8f5f-a681963c93d7"> |
-| [pico2-neopixel](./pico2-neopixel) | Raspberry Pi Pico 2 | None | Control Neopixel LEDs using the RP2350 PIO. | <img width="300" src="pico2-neopixel/assets/images/example.jpg"> |
-| [nrfx-blink-sdk](./nrfx-blink-sdk) | nRF52840-DK | Zephyr SDK | Blink an LED repeatedly with Swift & Zephyr. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0"> |
-| [esp32-led-strip-sdk](./esp32-led-strip-sdk) | ESP32-C6-DevKitC-1 | ESP-IDF SDK | Control NeoPixel LEDs with Swift & the ESP-IDF. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be"> |
-| [esp32-led-blink-sdk](./esp32-led-blink-sdk) | ESP32-C6-Bug | ESP-IDF SDK | Blink an LED repeatedly with Swift & the ESP-IDF. | <img width="300" src="esp32-led-blink-sdk/assets/images/ledon.jpg"> |
 
-Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not recommendations or endorsement, the same is true for build system choice (Make, CMake, SwiftPM, shell scripts). Embedded Swift aims to be versatile and to allow for integration into more existing SDKs and build systems, and the example projects are merely showing the possibilities.
+Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not recommendations or endorsement, the same is true for build system choice (Make, CMake, SwiftPM, shell scripts). Embedded Swift aims to be versatile and allowing integration into existing SDKs and build systems, and the example projects show some of the possibilities.
 
 ## Community Examples
 
