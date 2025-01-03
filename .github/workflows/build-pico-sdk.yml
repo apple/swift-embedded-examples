@@ -50,6 +50,7 @@ jobs:
           tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
           export PATH="$PATH:`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/"
           echo "PATH=$PATH" >> $GITHUB_ENV
+          which swiftc
           swiftc --version
 
       - name: Clone Pico SDK
