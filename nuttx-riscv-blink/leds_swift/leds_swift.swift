@@ -9,18 +9,16 @@
 //
 //===----------------------------------------------------------------------===//
 
-// swift-format-ignore-file
-
 @_cdecl("leds_swift_main")
-public func cMain(_ argc: Int32, _ argv: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>) -> Int32
-{
+public func cMain(
+  _ argc: Int32, _ argv: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>
+) -> Int32 {
   let ret = task_create(
     "led_daemon",
     LEDS_PRIORITY,
     LEDS_STACKSIZE,
     led_daemon,
-    nil,
-  )
+    nil)
 
   if ret < 0 {
     print("leds_main: ERROR: Failed to start led_daemon")

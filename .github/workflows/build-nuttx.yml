@@ -42,21 +42,21 @@ jobs:
         run: |
           sudo apt -y update
           sudo apt -y install \
-          bison flex gettext texinfo libncurses5-dev libncursesw5-dev \
-          gperf automake libtool pkg-config build-essential gperf genromfs \
-          libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
-          libexpat-dev gcc-multilib g++-multilib u-boot-tools util-linux \
-          kconfig-frontends
-      
+            bison flex gettext texinfo libncurses5-dev libncursesw5-dev \
+            gperf automake libtool pkg-config build-essential gperf genromfs \
+            libgmp-dev libmpc-dev libmpfr-dev libisl-dev binutils-dev libelf-dev \
+            libexpat-dev gcc-multilib g++-multilib u-boot-tools util-linux \
+            kconfig-frontends
+
       - name: Install RISC-V toolchain
         run: |
           mkdir -p riscv-none-elf-gcc && \
           curl -s -L "https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v13.2.0-2/xpack-riscv-none-elf-gcc-13.2.0-2-linux-x64.tar.gz" \
-          | tar -C riscv-none-elf-gcc --strip-components 1 -xz
+            | tar -C riscv-none-elf-gcc --strip-components 1 -xz
           export PATH="$PATH:`pwd`/riscv-none-elf-gcc/bin/"
           echo "PATH=$PATH" >> $GITHUB_ENV
           riscv-none-elf-gcc --version
-        
+
       - name: Config ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
         run: cmake -B build -GNinja -DBOARD_CONFIG=rv-virt:leds_swift -DENABLE_NUTTX_TRACE=ON
