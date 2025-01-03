@@ -8,15 +8,14 @@ on:
   schedule:
     # Build on Mondays at 9am PST every week
     - cron:  '0 17 * * 1'
-
 jobs:
-  build-pico-sdk:
+  build-rpi-baremetal:
     runs-on: ubuntu-22.04
-    container: swiftlang/swift:nightly-main-jammy
     strategy:
       fail-fast: false
       matrix:
         example: [rpi5-blink, rpi4b-blink]
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
 
     steps:
       - name: Checkout repo
