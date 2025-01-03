@@ -38,7 +38,7 @@ jobs:
         run: |
           wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
           tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="$PATH:`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/"
+          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
           echo "PATH=$PATH" >> $GITHUB_ENV
           swiftc --version
 
