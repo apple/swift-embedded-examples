@@ -57,6 +57,8 @@ Note that the SDK integration examples (Pico SDK, Zephyr SDK, etc.) are not reco
 | ---- | -------- | ----------- |
 | [swift-matter-examples](https://github.com/apple/swift-matter-examples) | ESP32 | An Embedded Swift Matter application running on ESP32-C6. |
 | [swift-flipperzero-hello](https://github.com/Sameesunkaria/swift-flipperzero-hello) | Flipper Zero | A demonstration of running Swift apps on the Flipper Zero. |
+| [EmbeddedSwift nRF52 Examples](https://github.com/nelcea/EmbeddedSwift-nRF52-Examples) | nRF52840 (Development Kit) | A collection of examples using Embedded Swift on top of nRF Connect SDK (Zephyr). |
+| [Swatak](https://github.com/nelcea/EmbeddedSwift-nRF52-Swatak) | nRF52840 (Seeed Studio XIAO) | A reaction time game inspired by BATAK© boards, implemented in Embedded Swift using nRF Connect SDK. |
 | [swift-picosystem-example](https://github.com/jerrodputman/swift-picosystem-example) | PicoSystem | An Embedded Swift demo running on the Pimoroni PicoSystem |
 | [PlaydateKit](https://github.com/finnvoor/PlaydateKit) | Playdate | A full featured framework for building Playdate games using Embedded Swift. |
 | [swift-playdate-examples](https://github.com/apple/swift-playdate-examples) | Playdate | An Embedded Swift game running on Playdate by Panic. |
