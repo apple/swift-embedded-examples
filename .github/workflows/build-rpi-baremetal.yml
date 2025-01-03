@@ -7,7 +7,7 @@ on:
     branches: ["main"]
   schedule:
     # Build on Mondays at 9am PST every week
-    - cron:  '0 17 * * 1'
+    - cron: '0 17 * * 1'
 jobs:
   build-rpi-baremetal:
     runs-on: ubuntu-24.04
@@ -32,7 +32,7 @@ jobs:
           echo "PATH=$PATH" >> $GITHUB_ENV
           which swiftc
           swiftc --version
-        
+
       - name: Build ${{ matrix.example }}
         run: |
           cd ${{ matrix.example }}
