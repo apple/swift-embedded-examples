@@ -23,6 +23,15 @@ jobs:
 
       - name: Install apt dependencies
         run: sudo apt-get -qq update && sudo apt-get -qq -y install make llvm
+
+      - name: Install ${{ matrix.swift }}
+        run: |
+          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
+          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
+          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          which swiftc
+          swiftc --version
         
       - name: Build ${{ matrix.example }}
         run: |
