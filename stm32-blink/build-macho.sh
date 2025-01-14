@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -vex
 
@@ -7,6 +7,9 @@ REPOROOT=$(git rev-parse --show-toplevel)
 TOOLSROOT="$REPOROOT/Tools"
 SRCROOT="$REPOROOT/stm32-blink"
 BUILDROOT="$SRCROOT/.build"
+
+# Clean the build directory
+rm -r $BUILDROOT || true
 
 # Setup tools and build flags
 TARGET=armv7-apple-none-macho
@@ -27,13 +30,13 @@ MACHO2BIN="$TOOLSROOT/macho2bin.py"
 mkdir -p "$BUILDROOT"
 
 # Build Swift sources
-"$SWIFT_EXEC" "$SWIFT_FLAGS" -c "$SRCROOT/*.swift" -o "$BUILDROOT/blink.o"
+"$SWIFT_EXEC" $SWIFT_FLAGS -c $SRCROOT/*.swift -o "$BUILDROOT/blink.o"
 
 # Build C sources
-"$CLANG_EXEC" "$CLANG_FLAGS" -c "$SRCROOT/Startup.c" -o "$BUILDROOT/Startup.o"
+"$CLANG_EXEC" $CLANG_FLAGS -c "$SRCROOT/Startup.c" -o "$BUILDROOT/Startup.o"
 
 # Link objects into executable
-"$LD_EXEC" "$LD_FLAGS" "$BUILDROOT/blink.o" "$BUILDROOT/Startup.o" -o "$BUILDROOT/blink"
+"$LD_EXEC" $LD_FLAGS "$BUILDROOT/blink.o" "$BUILDROOT/Startup.o" -o "$BUILDROOT/blink"
 
 # Extract sections from executable into flashable binary
 "$PYTHON_EXEC" "$MACHO2BIN" "$BUILDROOT/blink" "$BUILDROOT/blink.bin" --base-address 0x00200000 --segments '__TEXT,__DATA,__VECTORS'

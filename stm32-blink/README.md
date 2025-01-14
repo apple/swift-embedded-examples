@@ -4,18 +4,37 @@ This example shows a simple baremetal firmware for an STM32 board that blinks an
 
 <img src="https://github.com/apple/swift-embedded-examples/assets/1186214/739e98fd-a438-4a64-a7aa-9dddee25034b">
 
-## How to build and run this example:
+## Requirements
 
 - Connect the STM32F746G-DISCO board via the ST-LINK USB port to your Mac.
-- Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
+- Download and install a [recent nightly Swift toolchain](https://swift.org/download). Use the "Development Snapshot" from "main".
 - Install the [`stlink`](https://github.com/stlink-org/stlink) command line tools, e.g. via `brew install stlink`.
+
+## Building and running the firmware as Mach-O on macOS
+
 - Build and upload the program to flash memory of the microcontroller:
 ```console
 $ cd stm32-blink
-$ TOOLCHAINS='<toolchain-identifier>' ./build.sh
+$ export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/swift-latest.xctoolchain/Info.plist)
+$ ./build-macho.sh
 $ st-flash --reset write .build/blink.bin 0x08000000
 ```
 - The green LED next to the RESET button should now be blinking in a pattern.
+
+## Building and running the firmware as ELF (on either macOS or Linux)
+
+- Build and upload the program to flash memory of the microcontroller:
+```console
+$ cd stm32-blink
+$ export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/swift-latest.xctoolchain/Info.plist)
+$ ./build-elf.sh
+$ st-util
+(then in a separate terminal)
+$ st-flash --reset write .build/blink.elf 0x08000000
+```
+- The green LED next to the RESET button should now be blinking in a pattern.
+
+## Binary size
 
 The resulting size of the compiled and linked binary is very small (which shouldn't be surprising given that this toy example only blinks an LED), and demonstrates how the Embedded Swift compilation mode doesn't include unnecessary code or data in the resulting program:
 

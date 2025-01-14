@@ -21,35 +21,12 @@ extension UnsafeMutablePointer where Pointee == UInt32 {
     }
 }
 
+#if STM32F74_F75
+
 enum RCC {
     static let BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40023800 as UInt)!
     enum Offsets {
-        static let CR = 0x0
-        static let PLLCFGR = 0x4
-        static let CFGR = 0x8
-        static let CIR = 0xc
-        static let AHB1RSTR = 0x10
-        static let AHB2RSTR = 0x14
-        static let AHB3RSTR = 0x18
-        static let APB1RSTR = 0x20
-        static let APB2RSTR = 0x24
         static let AHB1ENR = 0x30
-        static let AHB2ENR = 0x34
-        static let AHB3ENR = 0x38
-        static let APB1ENR = 0x40
-        static let APB2ENR = 0x44
-        static let AHB1LPENR = 0x50
-        static let AHB2LPENR = 0x54
-        static let AHB3LPENR = 0x58
-        static let APB1LPENR = 0x60
-        static let APB2LPENR = 0x64
-        static let BDCR = 0x70
-        static let CSR = 0x74
-        static let SSCGR = 0x80
-        static let PLLI2SCFGR = 0x84
-        static let PLLSAICFGR = 0x88
-        static let DKCFGR1 = 0x8c
-        static let DKCFGR2 = 0x90
     }
 }
 
@@ -73,13 +50,119 @@ enum GPIO {
         static let PUPDR = 0xc
         static let IDR = 0x10
         static let ODR = 0x14
-        static let BSRR = 0x18
-        static let LCKR = 0x1c
-        static let AFRL = 0x20
-        static let AFRH = 0x24
-        static let BRR = 0x28
     }
 }
+
+#elseif STM32F1
+
+enum RCC {
+    static let BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40021000 as UInt)!
+    enum Offsets {
+        static let APB2ENR = 0x18
+    }
+    enum Bits {
+        static let APB2ENR_IOPAEN = 2
+        static let APB2ENR_IOPBEN = 3
+        static let APB2ENR_IOPCEN = 4
+        static let APB2ENR_IOPDEN = 5
+        static let APB2ENR_IOPEEN = 6
+        static let APB2ENR_IOPFEN = 7
+        static let APB2ENR_IOPGEN = 8
+    }
+
+    static func APB2ENRBit(for bank: GPIOBank) -> Int {
+        return switch bank {
+            case .a: Bits.APB2ENR_IOPAEN
+            case .b: Bits.APB2ENR_IOPBEN
+            case .c: Bits.APB2ENR_IOPCEN
+            case .d: Bits.APB2ENR_IOPDEN
+            case .e: Bits.APB2ENR_IOPEEN
+            case .f: Bits.APB2ENR_IOPFEN
+            case .g: Bits.APB2ENR_IOPGEN
+            default: fatalError("invalid bank")
+        }
+    }
+}
+
+enum GPIO {
+    static let GPIOa_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40010800 as UInt)!
+    static let GPIOb_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40010c00 as UInt)!
+    static let GPIOc_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40011000 as UInt)!
+    static let GPIOd_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40011400 as UInt)!
+    static let GPIOe_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40011800 as UInt)!
+    static let GPIOf_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40011c00 as UInt)!
+    static let GPIOg_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40012000 as UInt)!
+
+    static func GPIOBaseAddress(for bank: GPIOBank) -> UnsafeMutablePointer<UInt32> {
+        return switch bank {
+            case .a: GPIOa_BaseAddress
+            case .b: GPIOb_BaseAddress
+            case .c: GPIOc_BaseAddress
+            case .d: GPIOd_BaseAddress
+            case .e: GPIOe_BaseAddress
+            case .f: GPIOf_BaseAddress
+            case .g: GPIOg_BaseAddress
+            default: fatalError("invalid bank")
+        }
+    }
+
+    enum Offsets {
+        static let CRL = 0x0
+        static let CRH = 0x4
+        static let IDR = 0x8
+        static let ODR = 0xc
+    }
+}
+
+#elseif STM32C0
+
+enum RCC {
+    static let BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x40021000 as UInt)!
+    enum Offsets {
+        static let IOPENR = 0x34
+    }
+    enum Bits {
+        static let IOPENR_GPIOAEN = 0
+        static let IOPENR_GPIOBEN = 1
+        static let IOPENR_GPIOCEN = 2
+        static let IOPENR_GPIODEN = 3
+        static let IOPENR_GPIOFEN = 5
+    }
+}
+
+enum GPIO {
+    static let GPIOa_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x50000000 as UInt)!
+    static let GPIOb_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x50000400 as UInt)!
+    static let GPIOc_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x50000800 as UInt)!
+    static let GPIOd_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x50000c00 as UInt)!
+    static let GPIOf_BaseAddress = UnsafeMutablePointer<UInt32>(bitPattern: 0x50001400 as UInt)!
+
+    static func GPIOBaseAddress(for bank: GPIOBank) -> UnsafeMutablePointer<UInt32> {
+        return switch bank {
+            case .a: GPIOa_BaseAddress
+            case .b: GPIOb_BaseAddress
+            case .c: GPIOc_BaseAddress
+            case .d: GPIOd_BaseAddress
+            case .f: GPIOf_BaseAddress
+            default: fatalError("invalid bank")
+        }
+    }
+
+    enum Offsets {
+        static let MODER = 0x0
+        static let OTYPER = 0x4
+        static let OSPEEDR = 0x8
+        static let PUPDR = 0xc
+        static let IDR = 0x10
+        static let ODR = 0x14
+    }
+}
+
+#else
+
+#error("Unknown MCU")
+
+#endif
 
 func setRegisterBit(baseAddress: UnsafeMutablePointer<UInt32>, offset: Int, bit: Int, value: Int) {
     precondition(offset % 4 == 0)
@@ -93,7 +176,7 @@ func setRegisterBit(baseAddress: UnsafeMutablePointer<UInt32>, offset: Int, bit:
 
 func setRegisterTwoBitField(baseAddress: UnsafeMutablePointer<UInt32>, offset: Int, bitsStartingAt: Int, value: Int) {
     precondition(offset % 4 == 0)
-    precondition(bitsStartingAt >= 0 && bitsStartingAt < 16)
+    precondition(bitsStartingAt >= 0 && bitsStartingAt < 31)
     precondition(value >= 0 && value < 4)
     let p = baseAddress.advanced(by: offset / 4)
     let previousValue: UInt32 = p.volatileLoad()
