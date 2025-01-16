@@ -31,7 +31,7 @@ __attribute((section("__VECTORS,__text")))
 #error Unknown file format
 #endif
 void *vector_table[114] = {
-    (void *)0x20002ffc, // initial SP, assume we have 12 KB of SRAM
+    (void *)0x20001ffc, // initial SP, assume we have 8 KB of SRAM
     reset, // Reset
 
     interrupt, // NMI

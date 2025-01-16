@@ -40,4 +40,5 @@ jobs:
         working-directory: ${{ matrix.example }}
         run: |
           pip3 install -r ../Tools/requirements.txt
+          export STM_BOARD=STM32F746G_DISCOVERY
           ./build-elf.sh
