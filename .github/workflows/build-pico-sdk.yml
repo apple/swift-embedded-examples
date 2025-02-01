@@ -20,6 +20,8 @@ jobs:
             board: pico
           - name: pico-w-blink-sdk
             board: pico_w
+          - name: harmony
+            board: pico_w
         swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
 
     steps:
@@ -41,8 +43,8 @@ jobs:
       - name: Install GNU ARM toolchain
         run: |
           ARCH=`uname -m`
-          curl -sL https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz -O
-          tar xf arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi.tar.xz
+          curl -sL https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-$ARCH-arm-none-eabi.tar.xz -O
+          tar xf arm-gnu-toolchain-14.2.rel1-$ARCH-arm-none-eabi.tar.xz
 
       - name: Install ${{ matrix.swift }}
         run: |
@@ -60,12 +62,20 @@ jobs:
           git submodule update --init --recursive
           cd ..
 
+      - name: Clone Pico Extras
+        run: |
+          git clone https://github.com/raspberrypi/pico-extras.git
+          cd pico-extras
+          git submodule update --init --recursive
+          cd ..
+
       - name: Set Pico environment variables
         run: |
           ARCH=`uname -m`
           echo "PICO_BOARD=${{ matrix.example.board }}" >> $GITHUB_ENV
           echo "PICO_SDK_PATH=`pwd`/pico-sdk" >> $GITHUB_ENV
-          echo "PICO_TOOLCHAIN_PATH=`pwd`/arm-gnu-toolchain-13.3.rel1-$ARCH-arm-none-eabi" >> $GITHUB_ENV
+          echo "PICO_EXTRAS_PATH=`pwd`/pico-extras" >> $GITHUB_ENV
+          echo "PICO_TOOLCHAIN_PATH=`pwd`/arm-gnu-toolchain-14.2.rel1-$ARCH-arm-none-eabi" >> $GITHUB_ENV
 
       - name: Build ${{ matrix.example.name }}
         run: |
