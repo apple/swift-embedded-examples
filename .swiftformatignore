@@ -1,0 +1,3 @@
+./harmony/*
+./stm32-neopixel/Sources/Application/Registers/*
+./stm32-uart-echo/Sources/Application/Registers/*

@@ -594,7 +594,7 @@ extension STM32F746 {
     b4Pin.configure(
       configuration: .init(
         mode: .alternateFunction, outputType: .pushPull, outputSpeed: .high,
-        pull: .none, alternateFunction: .alternateFunction9 /*!*/,
+        pull: .none, alternateFunction: .alternateFunction9,
         activeHigh: true))
     b5Pin.configure(
       configuration: .init(
