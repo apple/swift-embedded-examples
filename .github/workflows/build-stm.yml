@@ -1,0 +1,44 @@
+name: Build STM32 Examples
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    # Build on Mondays at 9am PST every week
+    - cron: '0 17 * * 1'
+
+jobs:
+  build-stm32:
+    runs-on: ubuntu-24.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        example: [stm32-blink]
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install ${{ matrix.swift }}
+        run: |
+          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
+          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
+          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
+          echo "PATH=$PATH" >> $GITHUB_ENV
+          swiftc --version
+
+      - name: Build ${{ matrix.example }}
+        working-directory: ${{ matrix.example }}
+        run: |
+          pip3 install -r ../Tools/requirements.txt
+          export STM_BOARD=STM32F746G_DISCOVERY
+          ./build-elf.sh
