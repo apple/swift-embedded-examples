@@ -103,11 +103,11 @@ struct RCC {
 
   /// dedicated clocks configuration register
   @RegisterBlock(offset: 0x8c)
-  var dkcfgr1: Register<DKCFGR1>
+  var dckcfgr1: Register<DCKCFGR1>
 
   /// dedicated clocks configuration register
   @RegisterBlock(offset: 0x90)
-  var dkcfgr2: Register<DKCFGR2>
+  var dckcfgr2: Register<DCKCFGR2>
 }
 
 extension RCC {
@@ -131,11 +131,11 @@ extension RCC {
     var pllon: PLLON
 
     /// Clock security system enable
-    @ReadWrite(bits: 19..<20)
+    @ReadWrite(bits: 19..<20, as: CSSONValues.self)
     var csson: CSSON
 
     /// HSE clock bypass
-    @ReadWrite(bits: 18..<19)
+    @ReadWrite(bits: 18..<19, as: HSEBYPValues.self)
     var hsebyp: HSEBYP
 
     /// HSE clock ready flag
@@ -159,107 +159,47 @@ extension RCC {
     var hsirdy: HSIRDY
 
     /// Internal high-speed clock enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: HSIONValues.self)
     var hsion: HSION
+
+    /// PLLSAI clock ready flag
+    @ReadOnly(bits: 29..<30)
+    var pllsairdy: PLLSAIRDY
+
+    /// PLLSAI enable
+    @ReadWrite(bits: 28..<29)
+    var pllsaion: PLLSAION
   }
 
   /// PLL configuration register
   @Register(bitWidth: 32)
   struct PLLCFGR {
-    /// Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-    @ReadWrite(bits: 27..<28)
-    var pllq3: PLLQ3
-
-    /// Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-    @ReadWrite(bits: 26..<27)
-    var pllq2: PLLQ2
-
-    /// Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-    @ReadWrite(bits: 25..<26)
-    var pllq1: PLLQ1
-
-    /// Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-    @ReadWrite(bits: 24..<25)
-    var pllq0: PLLQ0
-
     /// Main PLL(PLL) and audio PLL (PLLI2S) entry clock source
-    @ReadWrite(bits: 22..<23)
+    @ReadWrite(bits: 22..<23, as: PLLSRCValues.self)
     var pllsrc: PLLSRC
 
+    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
+    @ReadWrite(bits: 0..<6)
+    var pllm: PLLM
+
+    /// Main PLL (PLL) multiplication factor for VCO
+    @ReadWrite(bits: 6..<15)
+    var plln: PLLN
+
     /// Main PLL (PLL) division factor for main system clock
-    @ReadWrite(bits: 17..<18)
-    var pllp1: PLLP1
+    @ReadWrite(bits: 16..<18, as: PLLPValues.self)
+    var pllp: PLLP
 
-    /// Main PLL (PLL) division factor for main system clock
-    @ReadWrite(bits: 16..<17)
-    var pllp0: PLLP0
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 14..<15)
-    var plln8: PLLN8
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 13..<14)
-    var plln7: PLLN7
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 12..<13)
-    var plln6: PLLN6
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 11..<12)
-    var plln5: PLLN5
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 10..<11)
-    var plln4: PLLN4
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 9..<10)
-    var plln3: PLLN3
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 8..<9)
-    var plln2: PLLN2
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 7..<8)
-    var plln1: PLLN1
-
-    /// Main PLL (PLL) multiplication factor for VCO
-    @ReadWrite(bits: 6..<7)
-    var plln0: PLLN0
-
-    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-    @ReadWrite(bits: 5..<6)
-    var pllm5: PLLM5
-
-    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-    @ReadWrite(bits: 4..<5)
-    var pllm4: PLLM4
-
-    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-    @ReadWrite(bits: 3..<4)
-    var pllm3: PLLM3
-
-    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-    @ReadWrite(bits: 2..<3)
-    var pllm2: PLLM2
-
-    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-    @ReadWrite(bits: 1..<2)
-    var pllm1: PLLM1
-
-    /// Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-    @ReadWrite(bits: 0..<1)
-    var pllm0: PLLM0
+    /// Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
+    @ReadWrite(bits: 24..<28)
+    var pllq: PLLQ
   }
 
   /// clock configuration register
   @Register(bitWidth: 32)
   struct CFGR {
     /// Microcontroller clock output 2
-    @ReadWrite(bits: 30..<32)
+    @ReadWrite(bits: 30..<32, as: MCO2Values.self)
     var mco2: MCO2
 
     /// MCO2 prescaler
@@ -267,15 +207,15 @@ extension RCC {
     var mco2pre: MCO2PRE
 
     /// MCO1 prescaler
-    @ReadWrite(bits: 24..<27)
+    @ReadWrite(bits: 24..<27, as: MCO1PREValues.self)
     var mco1pre: MCO1PRE
 
     /// I2S clock selection
-    @ReadWrite(bits: 23..<24)
+    @ReadWrite(bits: 23..<24, as: I2SSRCValues.self)
     var i2ssrc: I2SSRC
 
     /// Microcontroller clock output 1
-    @ReadWrite(bits: 21..<23)
+    @ReadWrite(bits: 21..<23, as: MCO1Values.self)
     var mco1: MCO1
 
     /// HSE division factor for RTC clock
@@ -287,28 +227,20 @@ extension RCC {
     var ppre2: PPRE2
 
     /// APB Low speed prescaler (APB1)
-    @ReadWrite(bits: 10..<13)
+    @ReadWrite(bits: 10..<13, as: PPRE1Values.self)
     var ppre1: PPRE1
 
     /// AHB prescaler
-    @ReadWrite(bits: 4..<8)
+    @ReadWrite(bits: 4..<8, as: HPREValues.self)
     var hpre: HPRE
 
-    /// System clock switch status
-    @ReadOnly(bits: 3..<4)
-    var sws1: SWS1
-
-    /// System clock switch status
-    @ReadOnly(bits: 2..<3)
-    var sws0: SWS0
-
     /// System clock switch
-    @ReadWrite(bits: 1..<2)
-    var sw1: SW1
+    @Reserved(bits: 0..<2, as: SWValues.self)
+    var sw: SW
 
-    /// System clock switch
-    @ReadWrite(bits: 0..<1)
-    var sw0: SW0
+    /// System clock switch status
+    @Reserved(bits: 2..<4)
+    var sws: SWS
   }
 
   /// clock interrupt register
@@ -371,7 +303,7 @@ extension RCC {
     var lserdyie: LSERDYIE
 
     /// LSI ready interrupt enable
-    @ReadWrite(bits: 8..<9)
+    @ReadWrite(bits: 8..<9, as: LSIRDYIEValues.self)
     var lsirdyie: LSIRDYIE
 
     /// Clock security system interrupt flag
@@ -475,7 +407,7 @@ extension RCC {
     var gpiobrst: GPIOBRST
 
     /// IO port A reset
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: GPIOARSTValues.self)
     var gpioarst: GPIOARST
   }
 
@@ -499,7 +431,7 @@ extension RCC {
     var cryprst: CRYPRST
 
     /// Camera interface reset
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: DCMIRSTValues.self)
     var dcmirst: DCMIRST
   }
 
@@ -507,7 +439,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct AHB3RSTR {
     /// Flexible memory controller module reset
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: FMCRSTValues.self)
     var fmcrst: FMCRST
 
     /// Quad SPI memory controller reset
@@ -519,7 +451,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct APB1RSTR {
     /// TIM2 reset
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: TIM2RSTValues.self)
     var tim2rst: TIM2RST
 
     /// TIM3 reset
@@ -568,11 +500,11 @@ extension RCC {
 
     /// USART 2 reset
     @ReadWrite(bits: 17..<18)
-    var uart2rst: UART2RST
+    var usart2rst: USART2RST
 
     /// USART 3 reset
     @ReadWrite(bits: 18..<19)
-    var uart3rst: UART3RST
+    var usart3rst: USART3RST
 
     /// USART 4 reset
     @ReadWrite(bits: 19..<20)
@@ -639,7 +571,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct APB2RSTR {
     /// TIM1 reset
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: TIM1RSTValues.self)
     var tim1rst: TIM1RST
 
     /// TIM8 reset
@@ -748,7 +680,7 @@ extension RCC {
 
     /// CCM data RAM clock enable
     @ReadWrite(bits: 20..<21)
-    var ccmdataramen: CCMDATARAMEN
+    var dtcmramen: DTCMRAMEN
 
     /// Backup SRAM interface clock enable
     @ReadWrite(bits: 18..<19)
@@ -799,7 +731,7 @@ extension RCC {
     var gpioben: GPIOBEN
 
     /// IO port A clock enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: GPIOAENValues.self)
     var gpioaen: GPIOAEN
   }
 
@@ -823,7 +755,7 @@ extension RCC {
     var crypen: CRYPEN
 
     /// Camera interface enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: DCMIENValues.self)
     var dcmien: DCMIEN
   }
 
@@ -831,7 +763,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct AHB3ENR {
     /// Flexible memory controller module clock enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: FMCENValues.self)
     var fmcen: FMCEN
 
     /// Quad SPI memory controller clock enable
@@ -843,7 +775,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct APB1ENR {
     /// TIM2 clock enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: TIM2ENValues.self)
     var tim2en: TIM2EN
 
     /// TIM3 clock enable
@@ -936,11 +868,11 @@ extension RCC {
 
     /// UART7 clock enable
     @ReadWrite(bits: 30..<31)
-    var uart7enr: UART7ENR
+    var uart7en: UART7EN
 
     /// UART8 clock enable
     @ReadWrite(bits: 31..<32)
-    var uart8enr: UART8ENR
+    var uart8en: UART8EN
 
     /// SPDIF-RX clock enable
     @ReadWrite(bits: 16..<17)
@@ -952,7 +884,7 @@ extension RCC {
 
     /// Low power timer 1 clock enable
     @ReadWrite(bits: 9..<10)
-    var lptmi1en: LPTMI1EN
+    var lptim1en: LPTIM1EN
 
     /// I2C4 clock enable
     @ReadWrite(bits: 24..<25)
@@ -963,7 +895,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct APB2ENR {
     /// TIM1 clock enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: TIM1ENValues.self)
     var tim1en: TIM1EN
 
     /// TIM8 clock enable
@@ -996,7 +928,7 @@ extension RCC {
 
     /// SPI4 clock enable
     @ReadWrite(bits: 13..<14)
-    var spi4enr: SPI4ENR
+    var spi4en: SPI4EN
 
     /// System configuration controller clock enable
     @ReadWrite(bits: 14..<15)
@@ -1016,11 +948,11 @@ extension RCC {
 
     /// SPI5 clock enable
     @ReadWrite(bits: 20..<21)
-    var spi5enr: SPI5ENR
+    var spi5en: SPI5EN
 
     /// SPI6 clock enable
     @ReadWrite(bits: 21..<22)
-    var spi6enr: SPI6ENR
+    var spi6en: SPI6EN
 
     /// SAI1 clock enable
     @ReadWrite(bits: 22..<23)
@@ -1043,7 +975,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct AHB1LPENR {
     /// IO port A clock enable during sleep mode
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: GPIOALPENValues.self)
     var gpioalpen: GPIOALPEN
 
     /// IO port B clock enable during Sleep mode
@@ -1145,6 +1077,14 @@ extension RCC {
     /// USB OTG HS ULPI clock enable during Sleep mode
     @ReadWrite(bits: 30..<31)
     var otghsulpilpen: OTGHSULPILPEN
+
+    /// AXI to AHB bridge clock enable during Sleep mode
+    @ReadWrite(bits: 13..<14)
+    var axilpen: AXILPEN
+
+    /// DTCM RAM interface clock enable during Sleep mode
+    @ReadWrite(bits: 20..<21)
+    var dtcmlpen: DTCMLPEN
   }
 
   /// AHB2 peripheral clock enable in low power mode register
@@ -1167,7 +1107,7 @@ extension RCC {
     var cryplpen: CRYPLPEN
 
     /// Camera interface enable during Sleep mode
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: DCMILPENValues.self)
     var dcmilpen: DCMILPEN
   }
 
@@ -1175,7 +1115,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct AHB3LPENR {
     /// Flexible memory controller module clock enable during Sleep mode
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: FMCLPENValues.self)
     var fmclpen: FMCLPEN
 
     /// Quand SPI memory controller clock enable during Sleep mode
@@ -1187,7 +1127,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct APB1LPENR {
     /// TIM2 clock enable during Sleep mode
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: TIM2LPENValues.self)
     var tim2lpen: TIM2LPEN
 
     /// TIM3 clock enable during Sleep mode
@@ -1307,7 +1247,7 @@ extension RCC {
   @Register(bitWidth: 32)
   struct APB2LPENR {
     /// TIM1 clock enable during Sleep mode
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: TIM1LPENValues.self)
     var tim1lpen: TIM1LPEN
 
     /// TIM8 clock enable during Sleep mode
@@ -1387,23 +1327,15 @@ extension RCC {
   @Register(bitWidth: 32)
   struct BDCR {
     /// Backup domain software reset
-    @ReadWrite(bits: 16..<17)
+    @ReadWrite(bits: 16..<17, as: BDRSTValues.self)
     var bdrst: BDRST
 
     /// RTC clock enable
-    @ReadWrite(bits: 15..<16)
+    @ReadWrite(bits: 15..<16, as: RTCENValues.self)
     var rtcen: RTCEN
 
-    /// RTC clock source selection
-    @ReadWrite(bits: 9..<10)
-    var rtcsel1: RTCSEL1
-
-    /// RTC clock source selection
-    @ReadWrite(bits: 8..<9)
-    var rtcsel0: RTCSEL0
-
     /// External low-speed oscillator bypass
-    @ReadWrite(bits: 2..<3)
+    @ReadWrite(bits: 2..<3, as: LSEBYPValues.self)
     var lsebyp: LSEBYP
 
     /// External low-speed oscillator ready
@@ -1411,8 +1343,16 @@ extension RCC {
     var lserdy: LSERDY
 
     /// External low-speed oscillator enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: LSEONValues.self)
     var lseon: LSEON
+
+    /// LSE oscillator drive capability
+    @ReadWrite(bits: 3..<5, as: LSEDRVValues.self)
+    var lsedrv: LSEDRV
+
+    /// RTC clock source selection
+    @Reserved(bits: 8..<10, as: RTCSELValues.self)
+    var rtcsel: RTCSEL
   }
 
   /// clock control & status register
@@ -1455,7 +1395,7 @@ extension RCC {
     var lsirdy: LSIRDY
 
     /// Internal low-speed oscillator enable
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: LSIONValues.self)
     var lsion: LSION
   }
 
@@ -1463,11 +1403,11 @@ extension RCC {
   @Register(bitWidth: 32)
   struct SSCGR {
     /// Spread spectrum modulation enable
-    @ReadWrite(bits: 31..<32)
+    @ReadWrite(bits: 31..<32, as: SSCGENValues.self)
     var sscgen: SSCGEN
 
     /// Spread Select
-    @ReadWrite(bits: 30..<31)
+    @ReadWrite(bits: 30..<31, as: SPREADSELValues.self)
     var spreadsel: SPREADSEL
 
     /// Incrementation step
@@ -1493,6 +1433,10 @@ extension RCC {
     /// PLLI2S multiplication factor for VCO
     @ReadWrite(bits: 6..<15)
     var plli2sn: PLLI2SN
+
+    /// PLLI2S division factor for SPDIFRX clock
+    @ReadWrite(bits: 16..<18, as: PLLI2SPValues.self)
+    var plli2sp: PLLI2SP
   }
 
   /// PLL configuration register
@@ -1503,7 +1447,7 @@ extension RCC {
     var pllsain: PLLSAIN
 
     /// PLLSAI division factor for 48MHz clock
-    @ReadWrite(bits: 16..<18)
+    @ReadWrite(bits: 16..<18, as: PLLSAIPValues.self)
     var pllsaip: PLLSAIP
 
     /// PLLSAI division factor for SAI clock
@@ -1517,41 +1461,41 @@ extension RCC {
 
   /// dedicated clocks configuration register
   @Register(bitWidth: 32)
-  struct DKCFGR1 {
+  struct DCKCFGR1 {
     /// PLLI2S division factor for SAI1 clock
-    @ReadWrite(bits: 0..<5)
-    var plli2sdiv: PLLI2SDIV
+    @ReadWrite(bits: 0..<5, as: PLLI2SDIVQValues.self)
+    var plli2sdivq: PLLI2SDIVQ
 
     /// PLLSAI division factor for SAI1 clock
-    @ReadWrite(bits: 8..<13)
+    @ReadWrite(bits: 8..<13, as: PLLSAIDIVQValues.self)
     var pllsaidivq: PLLSAIDIVQ
 
     /// division factor for LCD_CLK
-    @ReadWrite(bits: 16..<18)
+    @ReadWrite(bits: 16..<18, as: PLLSAIDIVRValues.self)
     var pllsaidivr: PLLSAIDIVR
 
     /// SAI1 clock source selection
-    @ReadWrite(bits: 20..<22)
+    @ReadWrite(bits: 20..<22, as: SAI1SELValues.self)
     var sai1sel: SAI1SEL
 
     /// SAI2 clock source selection
-    @ReadWrite(bits: 22..<24)
+    @ReadWrite(bits: 22..<24, as: SAI2SELValues.self)
     var sai2sel: SAI2SEL
 
     /// Timers clocks prescalers selection
-    @ReadWrite(bits: 24..<25)
+    @ReadWrite(bits: 24..<25, as: TIMPREValues.self)
     var timpre: TIMPRE
   }
 
   /// dedicated clocks configuration register
   @Register(bitWidth: 32)
-  struct DKCFGR2 {
+  struct DCKCFGR2 {
     /// USART 1 clock source selection
-    @ReadWrite(bits: 0..<2)
+    @ReadWrite(bits: 0..<2, as: USART1SELValues.self)
     var usart1sel: USART1SEL
 
     /// USART 2 clock source selection
-    @ReadWrite(bits: 2..<4)
+    @ReadWrite(bits: 2..<4, as: USART2SELValues.self)
     var usart2sel: USART2SEL
 
     /// USART 3 clock source selection
@@ -1579,7 +1523,7 @@ extension RCC {
     var uart8sel: UART8SEL
 
     /// I2C1 clock source selection
-    @ReadWrite(bits: 16..<18)
+    @ReadWrite(bits: 16..<18, as: I2C1SELValues.self)
     var i2c1sel: I2C1SEL
 
     /// I2C2 clock source selection
@@ -1595,19 +1539,1295 @@ extension RCC {
     var i2c4sel: I2C4SEL
 
     /// Low power timer 1 clock source selection
-    @ReadWrite(bits: 24..<26)
+    @ReadWrite(bits: 24..<26, as: LPTIM1SELValues.self)
     var lptim1sel: LPTIM1SEL
 
     /// HDMI-CEC clock source selection
-    @ReadWrite(bits: 26..<27)
+    @ReadWrite(bits: 26..<27, as: CECSELValues.self)
     var cecsel: CECSEL
 
     /// 48MHz clock source selection
-    @ReadWrite(bits: 27..<28)
+    @ReadWrite(bits: 27..<28, as: CK48MSELValues.self)
     var ck48msel: CK48MSEL
 
     /// SDMMC clock source selection
-    @ReadWrite(bits: 28..<29)
-    var sdmmcsel: SDMMCSEL
+    @ReadWrite(bits: 28..<29, as: SDMMC1SELValues.self)
+    var sdmmc1sel: SDMMC1SEL
+  }
+}
+
+extension RCC.CR {
+  struct CSSONValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Clock security system disabled (clock detector OFF)
+    static let Off = Self(rawValue: 0x0)
+
+    /// Clock security system enable (clock detector ON if the HSE is ready, OFF if not)
+    static let On = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CR {
+  struct HSEBYPValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// HSE crystal oscillator not bypassed
+    static let NotBypassed = Self(rawValue: 0x0)
+
+    /// HSE crystal oscillator bypassed with external clock
+    static let Bypassed = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CR {
+  struct HSIONValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Clock Off
+    static let Off = Self(rawValue: 0x0)
+
+    /// Clock On
+    static let On = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.PLLCFGR {
+  struct PLLSRCValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// HSI clock selected as PLL and PLLI2S clock entry
+    static let HSI = Self(rawValue: 0x0)
+
+    /// HSE oscillator clock selected as PLL and PLLI2S clock entry
+    static let HSE = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.PLLCFGR {
+  struct PLLPValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// PLLP=2
+    static let Div2 = Self(rawValue: 0x0)
+
+    /// PLLP=4
+    static let Div4 = Self(rawValue: 0x1)
+
+    /// PLLP=6
+    static let Div6 = Self(rawValue: 0x2)
+
+    /// PLLP=8
+    static let Div8 = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct MCO2Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// System clock (SYSCLK) selected
+    static let SYSCLK = Self(rawValue: 0x0)
+
+    /// PLLI2S clock selected
+    static let PLLI2S = Self(rawValue: 0x1)
+
+    /// HSE oscillator clock selected
+    static let HSE = Self(rawValue: 0x2)
+
+    /// PLL clock selected
+    static let PLL = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct MCO1PREValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 3
+
+    /// No division
+    static let Div1 = Self(rawValue: 0x0)
+
+    /// Division by 2
+    static let Div2 = Self(rawValue: 0x4)
+
+    /// Division by 3
+    static let Div3 = Self(rawValue: 0x5)
+
+    /// Division by 4
+    static let Div4 = Self(rawValue: 0x6)
+
+    /// Division by 5
+    static let Div5 = Self(rawValue: 0x7)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct I2SSRCValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// PLLI2S clock used as I2S clock source
+    static let PLLI2S = Self(rawValue: 0x0)
+
+    /// External clock mapped on the I2S_CKIN pin used as I2S clock source
+    static let CKIN = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct MCO1Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// HSI clock selected
+    static let HSI = Self(rawValue: 0x0)
+
+    /// LSE oscillator selected
+    static let LSE = Self(rawValue: 0x1)
+
+    /// HSE oscillator clock selected
+    static let HSE = Self(rawValue: 0x2)
+
+    /// PLL clock selected
+    static let PLL = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct PPRE1Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 3
+
+    /// HCLK not divided
+    static let Div1 = Self(rawValue: 0x0)
+
+    /// HCLK divided by 2
+    static let Div2 = Self(rawValue: 0x4)
+
+    /// HCLK divided by 4
+    static let Div4 = Self(rawValue: 0x5)
+
+    /// HCLK divided by 8
+    static let Div8 = Self(rawValue: 0x6)
+
+    /// HCLK divided by 16
+    static let Div16 = Self(rawValue: 0x7)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct HPREValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 4
+
+    /// SYSCLK not divided
+    static let Div1 = Self(rawValue: 0x0)
+
+    /// SYSCLK divided by 2
+    static let Div2 = Self(rawValue: 0x8)
+
+    /// SYSCLK divided by 4
+    static let Div4 = Self(rawValue: 0x9)
+
+    /// SYSCLK divided by 8
+    static let Div8 = Self(rawValue: 0xa)
+
+    /// SYSCLK divided by 16
+    static let Div16 = Self(rawValue: 0xb)
+
+    /// SYSCLK divided by 64
+    static let Div64 = Self(rawValue: 0xc)
+
+    /// SYSCLK divided by 128
+    static let Div128 = Self(rawValue: 0xd)
+
+    /// SYSCLK divided by 256
+    static let Div256 = Self(rawValue: 0xe)
+
+    /// SYSCLK divided by 512
+    static let Div512 = Self(rawValue: 0xf)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CFGR {
+  struct SWValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// HSI selected as system clock
+    static let HSI = Self(rawValue: 0x0)
+
+    /// HSE selected as system clock
+    static let HSE = Self(rawValue: 0x1)
+
+    /// PLL selected as system clock
+    static let PLL = Self(rawValue: 0x2)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CIR {
+  struct LSIRDYIEValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Interrupt disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// Interrupt enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB1RSTR {
+  struct GPIOARSTValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Reset the selected module
+    static let Reset = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB2RSTR {
+  struct DCMIRSTValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Reset the selected module
+    static let Reset = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB3RSTR {
+  struct FMCRSTValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Reset the selected module
+    static let Reset = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.APB1RSTR {
+  struct TIM2RSTValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Reset the selected module
+    static let Reset = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.APB2RSTR {
+  struct TIM1RSTValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Reset the selected module
+    static let Reset = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB1ENR {
+  struct GPIOAENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// The selected clock is disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// The selected clock is enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB2ENR {
+  struct DCMIENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// The selected clock is disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// The selected clock is enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB3ENR {
+  struct FMCENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// The selected clock is disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// The selected clock is enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.APB1ENR {
+  struct TIM2ENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// The selected clock is disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// The selected clock is enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.APB2ENR {
+  struct TIM1ENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// The selected clock is disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// The selected clock is enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB1LPENR {
+  struct GPIOALPENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Selected module is disabled during Sleep mode
+    static let DisabledInSleep = Self(rawValue: 0x0)
+
+    /// Selected module is enabled during Sleep mode
+    static let EnabledInSleep = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB2LPENR {
+  struct DCMILPENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Selected module is disabled during Sleep mode
+    static let DisabledInSleep = Self(rawValue: 0x0)
+
+    /// Selected module is enabled during Sleep mode
+    static let EnabledInSleep = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.AHB3LPENR {
+  struct FMCLPENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Selected module is disabled during Sleep mode
+    static let DisabledInSleep = Self(rawValue: 0x0)
+
+    /// Selected module is enabled during Sleep mode
+    static let EnabledInSleep = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.APB1LPENR {
+  struct TIM2LPENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Selected module is disabled during Sleep mode
+    static let DisabledInSleep = Self(rawValue: 0x0)
+
+    /// Selected module is enabled during Sleep mode
+    static let EnabledInSleep = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.APB2LPENR {
+  struct TIM1LPENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Selected module is disabled during Sleep mode
+    static let DisabledInSleep = Self(rawValue: 0x0)
+
+    /// Selected module is enabled during Sleep mode
+    static let EnabledInSleep = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.BDCR {
+  struct BDRSTValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Reset not activated
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// Reset the entire RTC domain
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.BDCR {
+  struct RTCENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// RTC clock disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// RTC clock enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.BDCR {
+  struct LSEBYPValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// LSE crystal oscillator not bypassed
+    static let NotBypassed = Self(rawValue: 0x0)
+
+    /// LSE crystal oscillator bypassed with external clock
+    static let Bypassed = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.BDCR {
+  struct LSEONValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// LSE oscillator Off
+    static let Off = Self(rawValue: 0x0)
+
+    /// LSE oscillator On
+    static let On = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.BDCR {
+  struct LSEDRVValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// Low drive capacity
+    static let Low = Self(rawValue: 0x0)
+
+    /// Medium-high drive capacity
+    static let MediumHigh = Self(rawValue: 0x1)
+
+    /// Medium-low drive capacity
+    static let MediumLow = Self(rawValue: 0x2)
+
+    /// High drive capacity
+    static let High = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.BDCR {
+  struct RTCSELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// No clock
+    static let NoClock = Self(rawValue: 0x0)
+
+    /// LSE oscillator clock used as RTC clock
+    static let LSE = Self(rawValue: 0x1)
+
+    /// LSI oscillator clock used as RTC clock
+    static let LSI = Self(rawValue: 0x2)
+
+    /// HSE oscillator clock divided by a prescaler used as RTC clock
+    static let HSE = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.CSR {
+  struct LSIONValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// LSI oscillator Off
+    static let Off = Self(rawValue: 0x0)
+
+    /// LSI oscillator On
+    static let On = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.SSCGR {
+  struct SSCGENValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Spread spectrum modulation disabled
+    static let Disabled = Self(rawValue: 0x0)
+
+    /// Spread spectrum modulation enabled
+    static let Enabled = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.SSCGR {
+  struct SPREADSELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Center spread
+    static let Center = Self(rawValue: 0x0)
+
+    /// Down spread
+    static let Down = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.PLLI2SCFGR {
+  struct PLLI2SPValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// PLL*P=2
+    static let Div2 = Self(rawValue: 0x0)
+
+    /// PLL*P=4
+    static let Div4 = Self(rawValue: 0x1)
+
+    /// PLL*P=6
+    static let Div6 = Self(rawValue: 0x2)
+
+    /// PLL*P=8
+    static let Div8 = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.PLLSAICFGR {
+  struct PLLSAIPValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// PLL*P=2
+    static let Div2 = Self(rawValue: 0x0)
+
+    /// PLL*P=4
+    static let Div4 = Self(rawValue: 0x1)
+
+    /// PLL*P=6
+    static let Div6 = Self(rawValue: 0x2)
+
+    /// PLL*P=8
+    static let Div8 = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR1 {
+  struct PLLI2SDIVQValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 5
+
+    /// PLLI2SDIVQ = /1
+    static let Div1 = Self(rawValue: 0x0)
+
+    /// PLLI2SDIVQ = /2
+    static let Div2 = Self(rawValue: 0x1)
+
+    /// PLLI2SDIVQ = /3
+    static let Div3 = Self(rawValue: 0x2)
+
+    /// PLLI2SDIVQ = /4
+    static let Div4 = Self(rawValue: 0x3)
+
+    /// PLLI2SDIVQ = /5
+    static let Div5 = Self(rawValue: 0x4)
+
+    /// PLLI2SDIVQ = /6
+    static let Div6 = Self(rawValue: 0x5)
+
+    /// PLLI2SDIVQ = /7
+    static let Div7 = Self(rawValue: 0x6)
+
+    /// PLLI2SDIVQ = /8
+    static let Div8 = Self(rawValue: 0x7)
+
+    /// PLLI2SDIVQ = /9
+    static let Div9 = Self(rawValue: 0x8)
+
+    /// PLLI2SDIVQ = /10
+    static let Div10 = Self(rawValue: 0x9)
+
+    /// PLLI2SDIVQ = /11
+    static let Div11 = Self(rawValue: 0xa)
+
+    /// PLLI2SDIVQ = /12
+    static let Div12 = Self(rawValue: 0xb)
+
+    /// PLLI2SDIVQ = /13
+    static let Div13 = Self(rawValue: 0xc)
+
+    /// PLLI2SDIVQ = /14
+    static let Div14 = Self(rawValue: 0xd)
+
+    /// PLLI2SDIVQ = /15
+    static let Div15 = Self(rawValue: 0xe)
+
+    /// PLLI2SDIVQ = /16
+    static let Div16 = Self(rawValue: 0xf)
+
+    /// PLLI2SDIVQ = /17
+    static let Div17 = Self(rawValue: 0x10)
+
+    /// PLLI2SDIVQ = /18
+    static let Div18 = Self(rawValue: 0x11)
+
+    /// PLLI2SDIVQ = /19
+    static let Div19 = Self(rawValue: 0x12)
+
+    /// PLLI2SDIVQ = /20
+    static let Div20 = Self(rawValue: 0x13)
+
+    /// PLLI2SDIVQ = /21
+    static let Div21 = Self(rawValue: 0x14)
+
+    /// PLLI2SDIVQ = /22
+    static let Div22 = Self(rawValue: 0x15)
+
+    /// PLLI2SDIVQ = /23
+    static let Div23 = Self(rawValue: 0x16)
+
+    /// PLLI2SDIVQ = /24
+    static let Div24 = Self(rawValue: 0x17)
+
+    /// PLLI2SDIVQ = /25
+    static let Div25 = Self(rawValue: 0x18)
+
+    /// PLLI2SDIVQ = /26
+    static let Div26 = Self(rawValue: 0x19)
+
+    /// PLLI2SDIVQ = /27
+    static let Div27 = Self(rawValue: 0x1a)
+
+    /// PLLI2SDIVQ = /28
+    static let Div28 = Self(rawValue: 0x1b)
+
+    /// PLLI2SDIVQ = /29
+    static let Div29 = Self(rawValue: 0x1c)
+
+    /// PLLI2SDIVQ = /30
+    static let Div30 = Self(rawValue: 0x1d)
+
+    /// PLLI2SDIVQ = /31
+    static let Div31 = Self(rawValue: 0x1e)
+
+    /// PLLI2SDIVQ = /32
+    static let Div32 = Self(rawValue: 0x1f)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR1 {
+  struct PLLSAIDIVQValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 5
+
+    /// PLLSAIDIVQ = /1
+    static let Div1 = Self(rawValue: 0x0)
+
+    /// PLLSAIDIVQ = /2
+    static let Div2 = Self(rawValue: 0x1)
+
+    /// PLLSAIDIVQ = /3
+    static let Div3 = Self(rawValue: 0x2)
+
+    /// PLLSAIDIVQ = /4
+    static let Div4 = Self(rawValue: 0x3)
+
+    /// PLLSAIDIVQ = /5
+    static let Div5 = Self(rawValue: 0x4)
+
+    /// PLLSAIDIVQ = /6
+    static let Div6 = Self(rawValue: 0x5)
+
+    /// PLLSAIDIVQ = /7
+    static let Div7 = Self(rawValue: 0x6)
+
+    /// PLLSAIDIVQ = /8
+    static let Div8 = Self(rawValue: 0x7)
+
+    /// PLLSAIDIVQ = /9
+    static let Div9 = Self(rawValue: 0x8)
+
+    /// PLLSAIDIVQ = /10
+    static let Div10 = Self(rawValue: 0x9)
+
+    /// PLLSAIDIVQ = /11
+    static let Div11 = Self(rawValue: 0xa)
+
+    /// PLLSAIDIVQ = /12
+    static let Div12 = Self(rawValue: 0xb)
+
+    /// PLLSAIDIVQ = /13
+    static let Div13 = Self(rawValue: 0xc)
+
+    /// PLLSAIDIVQ = /14
+    static let Div14 = Self(rawValue: 0xd)
+
+    /// PLLSAIDIVQ = /15
+    static let Div15 = Self(rawValue: 0xe)
+
+    /// PLLSAIDIVQ = /16
+    static let Div16 = Self(rawValue: 0xf)
+
+    /// PLLSAIDIVQ = /17
+    static let Div17 = Self(rawValue: 0x10)
+
+    /// PLLSAIDIVQ = /18
+    static let Div18 = Self(rawValue: 0x11)
+
+    /// PLLSAIDIVQ = /19
+    static let Div19 = Self(rawValue: 0x12)
+
+    /// PLLSAIDIVQ = /20
+    static let Div20 = Self(rawValue: 0x13)
+
+    /// PLLSAIDIVQ = /21
+    static let Div21 = Self(rawValue: 0x14)
+
+    /// PLLSAIDIVQ = /22
+    static let Div22 = Self(rawValue: 0x15)
+
+    /// PLLSAIDIVQ = /23
+    static let Div23 = Self(rawValue: 0x16)
+
+    /// PLLSAIDIVQ = /24
+    static let Div24 = Self(rawValue: 0x17)
+
+    /// PLLSAIDIVQ = /25
+    static let Div25 = Self(rawValue: 0x18)
+
+    /// PLLSAIDIVQ = /26
+    static let Div26 = Self(rawValue: 0x19)
+
+    /// PLLSAIDIVQ = /27
+    static let Div27 = Self(rawValue: 0x1a)
+
+    /// PLLSAIDIVQ = /28
+    static let Div28 = Self(rawValue: 0x1b)
+
+    /// PLLSAIDIVQ = /29
+    static let Div29 = Self(rawValue: 0x1c)
+
+    /// PLLSAIDIVQ = /30
+    static let Div30 = Self(rawValue: 0x1d)
+
+    /// PLLSAIDIVQ = /31
+    static let Div31 = Self(rawValue: 0x1e)
+
+    /// PLLSAIDIVQ = /32
+    static let Div32 = Self(rawValue: 0x1f)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR1 {
+  struct PLLSAIDIVRValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// PLLSAIDIVR = /2
+    static let Div2 = Self(rawValue: 0x0)
+
+    /// PLLSAIDIVR = /4
+    static let Div4 = Self(rawValue: 0x1)
+
+    /// PLLSAIDIVR = /8
+    static let Div8 = Self(rawValue: 0x2)
+
+    /// PLLSAIDIVR = /16
+    static let Div16 = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR1 {
+  struct SAI1SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// SAI1 clock frequency = f(PLLSAI_Q) / PLLSAIDIVQ
+    static let PLLSAI = Self(rawValue: 0x0)
+
+    /// SAI1 clock frequency = f(PLLI2S_Q) / PLLI2SDIVQ
+    static let PLLI2S = Self(rawValue: 0x1)
+
+    /// SAI1 clock frequency = Alternate function input frequency
+    static let AFIF = Self(rawValue: 0x2)
+
+    /// SAI1 clock frequency = HSI or HSE
+    static let HSI_HSE = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR1 {
+  struct SAI2SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// SAI2 clock frequency = f(PLLSAI_Q) / PLLSAIDIVQ
+    static let PLLSAI = Self(rawValue: 0x0)
+
+    /// SAI2 clock frequency = f(PLLI2S_Q) / PLLI2SDIVQ
+    static let PLLI2S = Self(rawValue: 0x1)
+
+    /// SAI2 clock frequency = Alternate function input frequency
+    static let AFIF = Self(rawValue: 0x2)
+
+    /// SAI2 clock frequency = HSI or HSE
+    static let HSI_HSE = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR1 {
+  struct TIMPREValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// If the APB prescaler is configured 1, TIMxCLK = PCLKx. Otherwise, TIMxCLK = 2xPCLKx
+    static let Mul1Or2 = Self(rawValue: 0x0)
+
+    /// If the APB prescaler is configured 1, 2 or 4, TIMxCLK = HCLK. Otherwise, TIMxCLK = 4xPCLKx
+    static let Mul1Or4 = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct USART1SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// APB2 clock (PCLK2) is selected as USART clock
+    static let APB2 = Self(rawValue: 0x0)
+
+    /// System clock is selected as USART clock
+    static let SYSCLK = Self(rawValue: 0x1)
+
+    /// HSI clock is selected as USART clock
+    static let HSI = Self(rawValue: 0x2)
+
+    /// LSE clock is selected as USART clock
+    static let LSE = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct USART2SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// APB1 clock (PCLK1) is selected as USART clock
+    static let APB1 = Self(rawValue: 0x0)
+
+    /// System clock is selected as USART clock
+    static let SYSCLK = Self(rawValue: 0x1)
+
+    /// HSI clock is selected as USART clock
+    static let HSI = Self(rawValue: 0x2)
+
+    /// LSE clock is selected as USART clock
+    static let LSE = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct I2C1SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// APB clock selected as I2C clock
+    static let APB = Self(rawValue: 0x0)
+
+    /// System clock selected as I2C clock
+    static let SYSCLK = Self(rawValue: 0x1)
+
+    /// HSI clock selected as I2C clock
+    static let HSI = Self(rawValue: 0x2)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct LPTIM1SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// APB1 clock (PCLK1) selected as LPTILM1 clock
+    static let APB1 = Self(rawValue: 0x0)
+
+    /// LSI clock is selected as LPTILM1 clock
+    static let LSI = Self(rawValue: 0x1)
+
+    /// HSI clock is selected as LPTILM1 clock
+    static let HSI = Self(rawValue: 0x2)
+
+    /// LSE clock is selected as LPTILM1 clock
+    static let LSE = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct CECSELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// LSE clock is selected as HDMI-CEC clock
+    static let LSE = Self(rawValue: 0x0)
+
+    /// HSI divided by 488 clock is selected as HDMI-CEC clock
+    static let HSI_Div488 = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct CK48MSELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// 48MHz clock from PLL is selected
+    static let PLL = Self(rawValue: 0x0)
+
+    /// 48MHz clock from PLLSAI is selected
+    static let PLLSAI = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension RCC.DCKCFGR2 {
+  struct SDMMC1SELValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// 48 MHz clock is selected as SD clock
+    static let CK48M = Self(rawValue: 0x0)
+
+    /// System clock is selected as SD clock
+    static let SYSCLK = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
   }
 }
