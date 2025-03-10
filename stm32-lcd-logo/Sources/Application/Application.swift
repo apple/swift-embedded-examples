@@ -12,7 +12,7 @@
 import Support
 
 @main
-struct Main {
+struct Application {
   static func main() {
     var board = STM32F746Board()
 

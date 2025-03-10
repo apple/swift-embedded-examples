@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 6.1
 
 import PackageDescription
 
@@ -14,6 +14,10 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-mmio", branch: "main")
   ],
   targets: [
+    // SVD2Swift \
+    // --input Tools/SVDs/stm32f7x6.patched.svd \
+    // --output stm32-lcd-logo/Sources/STM32F7x6 \
+    // --peripherals LTDC RCC GPIOA GPIOB GPIOC GPIOD GPIOE GPIOF GPIOG GPIOH GPIOI GPIOJ GPIOK
     .executableTarget(
       name: "Application",
       dependencies: [

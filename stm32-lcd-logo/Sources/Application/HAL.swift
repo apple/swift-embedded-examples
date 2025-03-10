@@ -118,10 +118,10 @@ public struct HALGPIO<Platform: GPIOPlatform> {
 extension Mode {
   var rawValue: UInt8 {
     switch self {
-    case .input: return 0x0
-    case .output: return 0x1
-    case .alternateFunction: return 0x2
-    case .analog: return 0x3
+    case .input: 0x0
+    case .output: 0x1
+    case .alternateFunction: 0x2
+    case .analog: 0x3
     }
   }
 }
@@ -129,10 +129,8 @@ extension Mode {
 extension OutputType {
   var rawValue: UInt8 {
     switch self {
-    case .pushPull:
-      return 0x0
-    case .openDrain:
-      return 0x1
+    case .pushPull: 0x0
+    case .openDrain: 0x1
     }
   }
 }
@@ -140,10 +138,10 @@ extension OutputType {
 extension OutputSpeed {
   var rawValue: UInt8 {
     switch self {
-    case .low: return 0x0
-    case .medium: return 0x1
-    case .high: return 0x2
-    case .max: return 0x3
+    case .low: 0x0
+    case .medium: 0x1
+    case .high: 0x2
+    case .max: 0x3
     }
   }
 }
@@ -151,9 +149,9 @@ extension OutputSpeed {
 extension Pull {
   var rawValue: UInt8 {
     switch self {
-    case .none: return 0x0
-    case .up: return 0x1
-    case .down: return 0x2
+    case .none: 0x0
+    case .up: 0x1
+    case .down: 0x2
     }
   }
 }
@@ -161,23 +159,23 @@ extension Pull {
 extension AlternateFunction {
   var rawValue: UInt8 {
     switch self {
-    case .alternateFunction0: return 0
-    case .alternateFunction1: return 1
-    case .alternateFunction2: return 2
-    case .alternateFunction3: return 3
-    case .alternateFunction4: return 4
-    case .alternateFunction5: return 5
-    case .alternateFunction6: return 6
-    case .alternateFunction7: return 7
-    case .alternateFunction8: return 8
-    case .alternateFunction9: return 9
-    case .alternateFunction10: return 10
-    case .alternateFunction11: return 11
-    case .alternateFunction12: return 12
-    case .alternateFunction13: return 13
-    case .alternateFunction14: return 14
-    case .alternateFunction15: return 15
-    case .none: return .max
+    case .alternateFunction0: 0
+    case .alternateFunction1: 1
+    case .alternateFunction2: 2
+    case .alternateFunction3: 3
+    case .alternateFunction4: 4
+    case .alternateFunction5: 5
+    case .alternateFunction6: 6
+    case .alternateFunction7: 7
+    case .alternateFunction8: 8
+    case .alternateFunction9: 9
+    case .alternateFunction10: 10
+    case .alternateFunction11: 11
+    case .alternateFunction12: 12
+    case .alternateFunction13: 13
+    case .alternateFunction14: 14
+    case .alternateFunction15: 15
+    case .none: .max
     }
   }
 }
@@ -201,60 +199,57 @@ extension STM32F746: GPIOPlatform {
 
     func setMode(_ mode: Mode) {
       var rawValue = self.port.port
-      rawValue.moder.setModer(n: Int(self.number), value: mode.rawValue)
+      // FIXME: rawValue.moder.setModer(n: Int(self.number), value: mode.rawValue)
     }
 
     func setOutputType(_ outputType: OutputType) {
       var rawValue = self.port.port
-      rawValue.otyper.setOt(n: Int(self.number), value: outputType.rawValue)
+      // FIXME: rawValue.otyper.setOt(n: Int(self.number), value: outputType.rawValue)
     }
 
     func setOutputSpeed(_ outputSpeed: OutputSpeed) {
       var rawValue = self.port.port
-      rawValue.ospeedr.setOspeed(
-        n: Int(self.number), value: outputSpeed.rawValue)
+      // FIXME: rawValue.ospeedr.setOspeed(n: Int(self.number), value: outputSpeed.rawValue)
     }
 
     func setPull(_ pull: Pull) {
       var rawValue = self.port.port
-      rawValue.pupdr.setPupd(n: Int(self.number), value: pull.rawValue)
+      // FIXME: rawValue.pupdr.setPupd(n: Int(self.number), value: pull.rawValue)
     }
 
     func setAlternateFunction(_ alternateFunction: AlternateFunction) {
       var rawValue = self.port.port
       if self.number < 8 {
-        rawValue.afrl.setAf(
-          n: Int(self.number), value: alternateFunction.rawValue)
+        // FIXME: rawValue.afrl.setAf(n: Int(self.number), value: alternateFunction.rawValue)
       } else {
-        rawValue.afrh.setAf(
-          n: Int(self.number), value: alternateFunction.rawValue)
+        // FIXME: rawValue.afrh.setAf(n: Int(self.number), value: alternateFunction.rawValue)
       }
     }
 
     func setOutputData(_ data: UInt8) {
       var rawValue = self.port.port
-      rawValue.odr.setOd(n: Int(self.number), value: data)
+      // FIXME: rawValue.odr.setOd(n: Int(self.number), value: data)
     }
 
     func getInputData() -> UInt8 {
-      let rawValue = self.port.port
+      let rawValue = self.port.port.idr.read().raw
       switch self.number {
-      case 0: return rawValue.idr.idr0
-      case 1: return rawValue.idr.idr1
-      case 2: return rawValue.idr.idr2
-      case 3: return rawValue.idr.idr3
-      case 4: return rawValue.idr.idr4
-      case 5: return rawValue.idr.idr5
-      case 6: return rawValue.idr.idr6
-      case 7: return rawValue.idr.idr7
-      case 8: return rawValue.idr.idr8
-      case 9: return rawValue.idr.idr9
-      case 10: return rawValue.idr.idr10
-      case 11: return rawValue.idr.idr11
-      case 12: return rawValue.idr.idr12
-      case 13: return rawValue.idr.idr13
-      case 14: return rawValue.idr.idr14
-      case 15: return rawValue.idr.idr15
+      case 0: return UInt8(rawValue.idr0)
+      case 1: return UInt8(rawValue.idr1)
+      case 2: return UInt8(rawValue.idr2)
+      case 3: return UInt8(rawValue.idr3)
+      case 4: return UInt8(rawValue.idr4)
+      case 5: return UInt8(rawValue.idr5)
+      case 6: return UInt8(rawValue.idr6)
+      case 7: return UInt8(rawValue.idr7)
+      case 8: return UInt8(rawValue.idr8)
+      case 9: return UInt8(rawValue.idr9)
+      case 10: return UInt8(rawValue.idr10)
+      case 11: return UInt8(rawValue.idr11)
+      case 12: return UInt8(rawValue.idr12)
+      case 13: return UInt8(rawValue.idr13)
+      case 14: return UInt8(rawValue.idr14)
+      case 15: return UInt8(rawValue.idr15)
       default: fatalError("STM32F746: invalid GPIO pin number")
       }
     }
@@ -298,100 +293,94 @@ extension STM32F746: GPIOPlatform {
 public enum GPIOPort: Int {
   case a, b, c, d, e, f, g, h, i, j, k
 
-  var port: GPIO {
-    // swift-format-ignore: NeverForceUnwrap
-    GPIO(
-      baseAddress: UnsafeMutableRawPointer(
-        bitPattern: (0x4002_0000 + 0x400 * UInt(self.rawValue - Self.a.rawValue))
-      )!)
+  var port: GPIOA {
+    switch self {
+    case .a: gpioa
+    case .b: gpiob
+    case .c: gpioc
+    case .d: gpiod
+    case .e: gpioe
+    case .f: gpiof
+    case .g: gpiog
+    case .h: gpioh
+    case .i: gpioi
+    case .j: gpioj
+    case .k: gpiok
+    }
   }
 }
 
 extension STM32F746 {
   public static func enableGPIOPortClock(_ port: GPIOPort) {
-    // swift-format-ignore: NeverForceUnwrap
-    var rcc = RCC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4002_3800)!)
+
     switch port {
-    case .a: rcc.ahb1enr.gpioaen = 1
-    case .b: rcc.ahb1enr.gpioben = 1
-    case .c: rcc.ahb1enr.gpiocen = 1
-    case .d: rcc.ahb1enr.gpioden = 1
-    case .e: rcc.ahb1enr.gpioeen = 1
-    case .f: rcc.ahb1enr.gpiofen = 1
-    case .g: rcc.ahb1enr.gpiogen = 1
-    case .h: rcc.ahb1enr.gpiohen = 1
-    case .i: rcc.ahb1enr.gpioien = 1
-    case .j: rcc.ahb1enr.gpiojen = 1
-    case .k: rcc.ahb1enr.gpioken = 1
+    case .a: rcc.ahb1enr.modify { $0.raw.gpioaen = 1 }
+    case .b: rcc.ahb1enr.modify { $0.raw.gpioben = 1 }
+    case .c: rcc.ahb1enr.modify { $0.raw.gpiocen = 1 }
+    case .d: rcc.ahb1enr.modify { $0.raw.gpioden = 1 }
+    case .e: rcc.ahb1enr.modify { $0.raw.gpioeen = 1 }
+    case .f: rcc.ahb1enr.modify { $0.raw.gpiofen = 1 }
+    case .g: rcc.ahb1enr.modify { $0.raw.gpiogen = 1 }
+    case .h: rcc.ahb1enr.modify { $0.raw.gpiohen = 1 }
+    case .i: rcc.ahb1enr.modify { $0.raw.gpioien = 1 }
+    case .j: rcc.ahb1enr.modify { $0.raw.gpiojen = 1 }
+    case .k: rcc.ahb1enr.modify { $0.raw.gpioken = 1 }
     }
   }
 
   public static func enableUARTClock(_ uartNum: UInt8) {
-    // swift-format-ignore: NeverForceUnwrap
-    var rcc = RCC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4002_3800)!)
     switch uartNum {
-    case 1: rcc.apb2enr.usart1en = 1
-    case 2: rcc.apb1enr.usart2en = 1
-    case 3: rcc.apb1enr.usart3en = 1
-    case 4: rcc.apb1enr.uart4en = 1
-    case 5: rcc.apb1enr.uart5en = 1
-    case 6: rcc.apb2enr.usart6en = 1
-    case 7: rcc.apb1enr.uart7enr = 1
-    case 8: rcc.apb1enr.uart8enr = 1
+    case 1: rcc.apb2enr.modify { $0.raw.usart1en = 1 }
+    case 2: rcc.apb1enr.modify { $0.raw.usart2en = 1 }
+    case 3: rcc.apb1enr.modify { $0.raw.usart3en = 1 }
+    case 4: rcc.apb1enr.modify { $0.raw.uart4en = 1 }
+    case 5: rcc.apb1enr.modify { $0.raw.uart5en = 1 }
+    case 6: rcc.apb2enr.modify { $0.raw.usart6en = 1 }
+// FIXME: ?
+//    case 7: rcc.apb1enr.modify { $0.raw.uart7enr = 1 }
+//    case 8: rcc.apb1enr.modify { $0.raw.uart8enr = 1 }
     default: return
     }
   }
 
   public static func enableI2CClock(_ i2cNum: UInt8) {
-    // swift-format-ignore: NeverForceUnwrap
-    var rcc = RCC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4002_3800)!)
     switch i2cNum {
-    case 1: rcc.apb1enr.i2c1en = 1
-    case 2: rcc.apb1enr.i2c2en = 1
-    case 3: rcc.apb1enr.i2c3en = 1
-    case 4: rcc.apb1enr.i2c4en = 1
+    case 1: rcc.apb1enr.modify { $0.raw.i2c1en = 1 }
+    case 2: rcc.apb1enr.modify { $0.raw.i2c2en = 1 }
+    case 3: rcc.apb1enr.modify { $0.raw.i2c3en = 1 }
+    case 4: rcc.apb1enr.modify { $0.raw.i2c4en = 1 }
     default: return
     }
   }
 
   public static func enableSPIClock(_ spiNum: UInt8) {
-    // swift-format-ignore: NeverForceUnwrap
-    var rcc = RCC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4002_3800)!)
     switch spiNum {
-    case 1: rcc.apb2enr.spi1en = 1
-    case 2: rcc.apb1enr.spi2en = 1
-    case 3: rcc.apb1enr.spi3en = 1
-    case 4: rcc.apb2enr.spi4enr = 1
-    case 5: rcc.apb2enr.spi5enr = 1
-    case 6: rcc.apb2enr.spi6enr = 1
+    case 1: rcc.apb2enr.modify { $0.raw.spi1en = 1 }
+    case 2: rcc.apb1enr.modify { $0.raw.spi2en = 1 }
+    case 3: rcc.apb1enr.modify { $0.raw.spi3en = 1 }
+// FIXME: case 4: rcc.apb2enr.modify { $0.raw.spi4enr = 1 }
+// FIXME: case 5: rcc.apb2enr.modify { $0.raw.spi5enr = 1 }
+// FIXME: case 6: rcc.apb2enr.modify { $0.raw.spi6enr = 1 }
     default: return
     }
   }
 
   public static func configureFlash() {
     let flash = UnsafeMutableRawPointer(bitPattern: (0x4002_3C00))
-    // swift-format-ignore: NeverForceUnwrap
     let flashAcr = UnsafeMutablePointer<UInt32>(
       bitPattern: UInt(bitPattern: flash))!
     // Set FLASH_ACR to 0x5
-    flashAcr.volatileStore(0x5)
+    // FIXME: flashAcr.volatileStore(0x5)
   }
 
   public static func initializeLTCD() {
-    // swift-format-ignore: NeverForceUnwrap
-    var rcc = RCC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4002_3800)!)
-    rcc.cfgr.rawValue = 0
-    rcc.cr.hsion = 1
-    rcc.cr.csson = 0
-    rcc.cr.pllon = 0
-    rcc.cr.hsebyp = 0
-    rcc.cr.hseon = 1
-    while rcc.cr.hserdy == 0 {}
+    // FIXME: rcc.cfgr.rawValue = 0
+    // FIXME: rcc.cr.hsion = 1
+    // FIXME: rcc.cr.csson = 0
+    // FIXME: rcc.cr.pllon = 0
+    // FIXME: rcc.cr.hsebyp = 0
+    // FIXME: rcc.cr.hseon = 1
+    // FIXME: while rcc.cr.hserdy == 0 {}
   }
 
   enum LTDCConstants {
@@ -412,36 +401,30 @@ extension STM32F746 {
   }
 
   public static func configureLTCD() {
-    // swift-format-ignore: NeverForceUnwrap
-    var ltdc = LTDC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4001_6800)!)
-    // swift-format-ignore: NeverForceUnwrap
-    var rcc = RCC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4002_3800)!)
 
-    rcc.pllcfgr.rawValue = 0
-    rcc.pllcfgr.pllm0 = 1
-    rcc.pllcfgr.pllm3 = 1
-    rcc.pllcfgr.pllm4 = 1
-    rcc.pllcfgr.plln4 = 1
-    rcc.pllcfgr.plln5 = 1
-    rcc.pllcfgr.plln7 = 1
-    rcc.pllcfgr.plln8 = 1
-    rcc.pllcfgr.pllsrc = 1
+    // FIXME: rcc.pllcfgr.modify { $0.raw.rawValue = 0 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.pllm0 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.pllm3 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.pllm4 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.plln4 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.plln5 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.plln7 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.plln8 = 1 }
+    // FIXME: rcc.pllcfgr.modify { $0.raw.pllsrc = 1 }
 
-    rcc.cr.pllon = 1
-    while rcc.cr.pllrdy == 0 {}
+    // FIXME:     rcc.cr.pllon = 1
+    // FIXME: while rcc.cr.pllrdy == 0 {}
 
-    rcc.cfgr.rawValue &= 0b11
-    rcc.cfgr.rawValue |= 0b10
-    while rcc.cfgr.rawValue & 0b1100 != 0b1000 {}
+    // FIXME:     rcc.cfgr.rawValue &= 0b11
+    // FIXME:     rcc.cfgr.rawValue |= 0b10
+    // FIXME: while rcc.cfgr.rawValue & 0b1100 != 0b1000 {}
 
-    rcc.pllsaicfgr.pllsain = 192
-    rcc.pllsaicfgr.pllsair = 5
-    rcc.dkcfgr1.pllsaidivr = 1
+    // FIXME:     rcc.pllsaicfgr.pllsain = 192
+    // FIXME:     rcc.pllsaicfgr.pllsair = 5
+    // FIXME:     rcc.dkcfgr1.pllsaidivr = 1
 
-    rcc.cr.pllsaion = 1
-    while rcc.cr.pllsairdy == 0 {}
+    // FIXME:     rcc.cr.pllsaion = 1
+    // FIXME: while rcc.cr.pllsairdy == 0 {}
 
     STM32F746.enableGPIOPortClock(.i)
 
@@ -594,8 +577,7 @@ extension STM32F746 {
     b4Pin.configure(
       configuration: .init(
         mode: .alternateFunction, outputType: .pushPull, outputSpeed: .high,
-        pull: .none, alternateFunction: .alternateFunction9,
-        activeHigh: true))
+        pull: .none, alternateFunction: .alternateFunction9, activeHigh: true))
     b5Pin.configure(
       configuration: .init(
         mode: .alternateFunction, outputType: .pushPull, outputSpeed: .high,
@@ -623,65 +605,48 @@ extension STM32F746 {
 
     lcdDispPin.assert()
     backlightPin.assert()
-    rcc.apb2enr.ltdcen = 1
+    // FIXME: rcc.apb2enr.ltdcen = 1
 
-    ltdc.sscr.vsh = UInt16(LTDCConstants.vsync - 1)
-    ltdc.sscr.hsw = UInt16(LTDCConstants.hsync - 1)
-    ltdc.bpcr.ahbp = UInt16(LTDCConstants.hsync + LTDCConstants.hbp - 1)
-    ltdc.bpcr.avbp = UInt16(LTDCConstants.vsync + LTDCConstants.vbp - 1)
-    ltdc.awcr.aah = UInt16(
-      LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp - 1
-    )
-    ltdc.awcr.aav = UInt16(
-      LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp - 1)
-    ltdc.twcr.totalw = UInt16(
-      LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp
-        + LTDCConstants.hfp - 1)
-    ltdc.twcr.totalh = UInt16(
-      LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp
-        + LTDCConstants.vfp - 1)
+    // FIXME: ltdc.sscr.vsh = UInt16(LTDCConstants.vsync - 1)
+    // FIXME: ltdc.sscr.hsw = UInt16(LTDCConstants.hsync - 1)
+    // FIXME: ltdc.bpcr.ahbp = UInt16(LTDCConstants.hsync + LTDCConstants.hbp - 1)
+    // FIXME: ltdc.bpcr.avbp = UInt16(LTDCConstants.vsync + LTDCConstants.vbp - 1)
+    // FIXME: ltdc.awcr.aah = UInt16(LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp - 1)
+    // FIXME: ltdc.awcr.aav = UInt16(LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp - 1)
+    // FIXME: ltdc.twcr.totalw = UInt16(LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp + LTDCConstants.hfp - 1)
+    // FIXME: ltdc.twcr.totalh = UInt16(LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp + LTDCConstants.vfp - 1)
 
-    ltdc.bccr.rawValue = 0x00_00_00_00  // background color
+    // FIXME: ltdc.bccr.rawValue = 0x00_00_00_00  // background color
 
     setLayer2Position(Point(x: 0, y: 0))
 
-    ltdc.l2pfcr.rawValue = 0  // Format ARGB8888
-    ltdc.l2cfbar.rawValue = UInt32(UInt(bitPattern: logoPixelDataStartPointer))
-    ltdc.l2cacr.consta = 255
-    ltdc.l2bfcr.bf1 = 5
-    ltdc.l2bfcr.bf2 = 4
-    ltdc.l2cfblr.rawValue =
-      UInt32(UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth) << 16)
-      | UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth + 3)
-    ltdc.l2cfblnr.cfblnbr = UInt16(LTDCConstants.layerHeight)
-    ltdc.l2cr.len = 1
+    // FIXME: ltdc.l2pfcr.rawValue = 0  // Format ARGB8888
+    // FIXME: ltdc.l2cfbar.rawValue = UInt32(UInt(bitPattern: logoPixelDataStartPointer))
+    // FIXME: ltdc.l2cacr.consta = 255
+    // FIXME: ltdc.l2bfcr.bf1 = 5
+    // FIXME: ltdc.l2bfcr.bf2 = 4
+    // FIXME: ltdc.l2cfblr.rawValue = UInt32(UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth) << 16) | UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth + 3)
+    // FIXME: ltdc.l2cfblnr.cfblnbr = UInt16(LTDCConstants.layerHeight)
+    // FIXME: ltdc.l2cr.len = 1
 
-    ltdc.srcr.vbr = 1  // reload
+    // FIXME: ltdc.srcr.vbr = 1  // reload
 
-    ltdc.gcr.ltdcen = 1
+    // FIXME: ltdc.gcr.ltdcen = 1
   }
 
   static func setLayer2Position(_ point: Point) {
-    // swift-format-ignore: NeverForceUnwrap
-    var ltdc = LTDC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4001_6800)!)
-
     let i: Int =
       ((LTDCConstants.layerWidth + LTDCConstants.hbp + LTDCConstants.hsync - 1
         + point.x) << 16) | (LTDCConstants.hbp + LTDCConstants.hsync + point.x)
-    ltdc.l2whpcr.rawValue = UInt32(i)
+    // FIXME: ltdc.l2whpcr.rawValue = UInt32(i)
     let j: Int =
       ((LTDCConstants.layerHeight + LTDCConstants.vsync + LTDCConstants.vbp - 1
         + point.y) << 16) | (LTDCConstants.vsync + LTDCConstants.vbp + point.y)
-    ltdc.l2wvpcr.rawValue = UInt32(j)
-    ltdc.srcr.vbr = 1
+    // FIXME: ltdc.l2wvpcr.rawValue = UInt32(j)
+    // FIXME: ltdc.srcr.vbr = 1
   }
 
   static func setBackgroundColor(_ color: Color) {
-    // swift-format-ignore: NeverForceUnwrap
-    var ltdc = LTDC(
-      baseAddress: UnsafeMutableRawPointer(bitPattern: 0x4001_6800)!)
-
-    ltdc.bccr.rawValue = UInt32(color.r | (color.g << 8) | (color.b << 16))
+    // FIXME: ltdc.bccr.rawValue = UInt32(color.r | (color.g << 8) | (color.b << 16))
   }
 }
