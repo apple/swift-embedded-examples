@@ -9,7 +9,7 @@ let package = Package(
   ],
   targets: [
     .target(name: "Blinky", dependencies: ["RP2040"]),
-    .target(name: "Support"),
     .target(name: "RP2040", dependencies: ["Support"]),
+    .target(name: "Support"),
   ]
 )

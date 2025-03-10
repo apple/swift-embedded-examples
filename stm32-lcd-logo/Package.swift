@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "stm32-neopixel",
+  name: "stm32-lcd-logo",
   platforms: [
     .macOS(.v10_15)
   ],

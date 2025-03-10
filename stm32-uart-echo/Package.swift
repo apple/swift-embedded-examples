@@ -1,29 +1,24 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.2
 
 import PackageDescription
 
 let package = Package(
   name: "stm32-uart-echo",
   platforms: [
-    .macOS(.v10_15)
+    .macOS(.v10_15),
   ],
   products: [
-    .library(name: "Application", type: .static, targets: ["Application"])
+    .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    .package(
-      url: "https://github.com/apple/swift-mmio",
-      branch: "swift-embedded-examples")
+    .package(url: "https://github.com/apple/swift-mmio", branch: "main")
   ],
   targets: [
-    .target(
+    .executableTarget(
       name: "Application",
       dependencies: [
         .product(name: "MMIO", package: "swift-mmio"),
         "Support",
-      ],
-      swiftSettings: [
-        .enableExperimentalFeature("Embedded")
       ]),
     .target(name: "Support"),
   ])

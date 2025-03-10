@@ -1,0 +1,58 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift-embedded-examples}/stm32-uart-echo",
+            "name": "Debug Application (stm32-uart-echo)",
+            "program": "${workspaceFolder:swift-embedded-examples}/stm32-uart-echo/.build/debug/Application",
+            "preLaunchTask": "swift: Build Debug Application (stm32-uart-echo)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift-embedded-examples}/stm32-uart-echo",
+            "name": "Release Application (stm32-uart-echo)",
+            "program": "${workspaceFolder:swift-embedded-examples}/stm32-uart-echo/.build/release/Application",
+            "preLaunchTask": "swift: Build Release Application (stm32-uart-echo)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift-embedded-examples}/stm32-neopixel",
+            "name": "Debug Application (stm32-neopixel)",
+            "program": "${workspaceFolder:swift-embedded-examples}/stm32-neopixel/.build/debug/Application",
+            "preLaunchTask": "swift: Build Debug Application (stm32-neopixel)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift-embedded-examples}/stm32-neopixel",
+            "name": "Release Application (stm32-neopixel)",
+            "program": "${workspaceFolder:swift-embedded-examples}/stm32-neopixel/.build/release/Application",
+            "preLaunchTask": "swift: Build Release Application (stm32-neopixel)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift-embedded-examples}/stm32-lcd-logo",
+            "name": "Debug Application (stm32-lcd-logo)",
+            "program": "${workspaceFolder:swift-embedded-examples}/stm32-lcd-logo/.build/debug/Application",
+            "preLaunchTask": "swift: Build Debug Application (stm32-lcd-logo)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:swift-embedded-examples}/stm32-lcd-logo",
+            "name": "Release Application (stm32-lcd-logo)",
+            "program": "${workspaceFolder:swift-embedded-examples}/stm32-lcd-logo/.build/release/Application",
+            "preLaunchTask": "swift: Build Release Application (stm32-lcd-logo)"
+        }
+    ]
+}
