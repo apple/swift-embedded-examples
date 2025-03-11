@@ -1,13 +1,22 @@
 {
-  "originHash" : "eec4757ca93ed00faee743a9768814ea771fdc3d40cb6cc5e8aad8fe1cca3247",
+  "originHash" : "6cb86ca13388a3e1bc80e08faf649e2b204a338d78f6f33edf45182f8737bce4",
   "pins" : [
     {
       "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "0fbc8848e389af3bb55c182bc19ca9d5dc2f255b",
-        "version" : "1.4.0"
+        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
+        "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "swift-mmio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-mmio",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ddd4250a856891f1bd8c7990d675d076c55a7bc6"
       }
     },
     {

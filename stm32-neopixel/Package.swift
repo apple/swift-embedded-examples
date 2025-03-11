@@ -11,9 +11,7 @@ let package = Package(
     .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    .package(
-      path: "/Users/rauhul/Developer/org.swift/swift-mmio")
-      // url: "https://github.com/apple/swift-mmio", branch: "main")
+    .package(url: "https://github.com/apple/swift-mmio", branch: "main")
   ],
   targets: [
     .executableTarget(
