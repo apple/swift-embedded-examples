@@ -22,7 +22,8 @@ TARGET           := $(ARCH)-apple-none-macho
 SWIFT_BUILD_ARGS := \
 	--configuration release \
 	--triple $(TARGET) \
-	--toolset $(TOOLSET)
+	--toolset $(TOOLSET) \
+	--disable-local-rpath
 BUILDROOT        := $(shell $(SWIFT_BUILD) $(SWIFT_BUILD_ARGS) --show-bin-path)
 
 .PHONY: build
