@@ -22,12 +22,13 @@ TARGET           := $(ARCH)-apple-none-macho
 SWIFT_BUILD_ARGS := \
 	--configuration release \
 	--triple $(TARGET) \
-	--toolset $(TOOLSET)
+	--toolset $(TOOLSET) \
+	--disable-local-rpath
 BUILDROOT        := $(shell $(SWIFT_BUILD) $(SWIFT_BUILD_ARGS) --show-bin-path)
 
 .PHONY: build
 build:
-	@echo "compiling..."
+	@echo "building..."
 	$(SWIFT_BUILD) \
 		$(SWIFT_BUILD_ARGS) \
 		-Xlinker -map -Xlinker $(BUILDROOT)/Application.mangled.map \

@@ -10,8 +10,8 @@
 //===----------------------------------------------------------------------===//
 
 import Support
-
-@main
+// asdasd
+@main 
 public struct Application {
   public static func main() {
     // MARK: Clock configuration
