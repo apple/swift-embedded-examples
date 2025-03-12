@@ -57,14 +57,14 @@ struct Application {
       }
 
       logoPosition = logoPosition.offset(by: logoDelta)
-      self.moveLogo(to: logoPosition)
+      STM32F746.set(layer: 1, position: logoPosition)
 
       if backgroundGray == .min || backgroundGray == .max {
         backgroundDelta *= -1
       }
 
       backgroundGray = UInt8(Int16(backgroundGray) + Int16(backgroundDelta))
-      self.setBackgroundColor(color: .gray(backgroundGray))
+      STM32F746.set(backgroundColor: .gray(backgroundGray))
     }
   }
 
@@ -91,14 +91,6 @@ struct Application {
     for _ in 0..<100_000 * milliseconds {
       nop()
     }
-  }
-
-  func moveLogo(to point: Point) {
-    STM32F746.setLayer2Position(point)
-  }
-
-  func setBackgroundColor(color: Color) {
-    STM32F746.setBackgroundColor(color)
   }
 
   func configureFlash() {

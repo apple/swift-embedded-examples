@@ -9,11 +9,10 @@
 //
 //===----------------------------------------------------------------------===//
 
+import Support
+
 extension LTDC {
-  
 }
-
-
 
 public enum STM32F746 {
   enum LTDCConstants {
@@ -186,48 +185,52 @@ public enum STM32F746 {
     gpioi.set(pin: lcdDispPin, to: true)
     gpiok.set(pin: backlightPin, to: true)
 
-    // FIXME: rcc.apb2enr.ltdcen = 1
+    rcc.apb2enr.modify { $0.raw.ltdcen = 1 }
 
-    // FIXME: ltdc.sscr.vsh = UInt16(LTDCConstants.vsync - 1)
-    // FIXME: ltdc.sscr.hsw = UInt16(LTDCConstants.hsync - 1)
-    // FIXME: ltdc.bpcr.ahbp = UInt16(LTDCConstants.hsync + LTDCConstants.hbp - 1)
-    // FIXME: ltdc.bpcr.avbp = UInt16(LTDCConstants.vsync + LTDCConstants.vbp - 1)
-    // FIXME: ltdc.awcr.aah = UInt16(LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp - 1)
-    // FIXME: ltdc.awcr.aav = UInt16(LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp - 1)
-    // FIXME: ltdc.twcr.totalw = UInt16(LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp + LTDCConstants.hfp - 1)
-    // FIXME: ltdc.twcr.totalh = UInt16(LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp + LTDCConstants.vfp - 1)
+    ltdc.sscr.modify { $0.raw.vsh = UInt32(LTDCConstants.vsync - 1) }
+    ltdc.sscr.modify { $0.raw.hsw = UInt32(LTDCConstants.hsync - 1) }
+    ltdc.bpcr.modify { $0.raw.ahbp = UInt32(LTDCConstants.hsync + LTDCConstants.hbp - 1) }
+    ltdc.bpcr.modify { $0.raw.avbp = UInt32(LTDCConstants.vsync + LTDCConstants.vbp - 1) }
+    ltdc.awcr.modify { $0.raw.aah = UInt32(LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp - 1) }
+    ltdc.awcr.modify { $0.raw.aaw = UInt32(LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp - 1) }
+    ltdc.twcr.modify { $0.raw.totalw = UInt32(LTDCConstants.displayWidth + LTDCConstants.hsync + LTDCConstants.hbp + LTDCConstants.hfp - 1) }
+    ltdc.twcr.modify { $0.raw.totalh = UInt32(LTDCConstants.displayHeight + LTDCConstants.vsync + LTDCConstants.vbp + LTDCConstants.vfp - 1) }
 
-    // FIXME: ltdc.bccr.rawValue = 0x00_00_00_00  // background color
+    ltdc.bccr.modify { $0.raw.storage = 0x00_00_00_00 } // background color 
 
-    setLayer2Position(Point(x: 0, y: 0))
+    self.set(layer: 1, position: Point(x: 0, y: 0))
 
-    // FIXME: ltdc.l2pfcr.rawValue = 0  // Format ARGB8888
-    // FIXME: ltdc.l2cfbar.rawValue = UInt32(UInt(bitPattern: logoPixelDataStartPointer))
-    // FIXME: ltdc.l2cacr.consta = 255
-    // FIXME: ltdc.l2bfcr.bf1 = 5
-    // FIXME: ltdc.l2bfcr.bf2 = 4
-    // FIXME: ltdc.l2cfblr.rawValue = UInt32(UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth) << 16) | UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth + 3)
-    // FIXME: ltdc.l2cfblnr.cfblnbr = UInt16(LTDCConstants.layerHeight)
-    // FIXME: ltdc.l2cr.len = 1
+    ltdc.layer[1].pfcr.modify { $0.raw.storage = 0 } // Format ARGB8888
+    // ltdc.layer[1].cfbar.modify { $0.raw.storage = UInt32(UInt(bitPattern: logoPixelDataStartPointer)) }
+    ltdc.layer[1].cacr.modify { $0.raw.consta = 255 }
+    ltdc.layer[1].bfcr.modify { $0.raw.bf1 = 5 }
+    ltdc.layer[1].bfcr.modify { $0.raw.bf2 = 4 }
+    ltdc.layer[1].cfblr.modify { $0.raw.storage = UInt32(UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth) << 16) | UInt32(LTDCConstants.pixelSize * LTDCConstants.layerWidth + 3) }
+    ltdc.layer[1].cfblnr.modify { $0.raw.cfblnbr = UInt32(LTDCConstants.layerHeight) }
+    ltdc.layer[1].cr.modify { $0.raw.len = 1 }
 
-    // FIXME: ltdc.srcr.vbr = 1  // reload
+    ltdc.srcr.modify { $0.raw.vbr = 1 } // reload
 
-    // FIXME: ltdc.gcr.ltdcen = 1
+    ltdc.gcr.modify { $1.raw.ltdcen = 1 }
   }
 
-  static func setLayer2Position(_ point: Point) {
+  static func set(backgroundColor: Color) {
+    ltdc.bccr.modify {
+      $0.raw.bcred = UInt32(backgroundColor.red)
+      $0.raw.bcgreen = UInt32(backgroundColor.green)
+      $0.raw.bcblue = UInt32(backgroundColor.blue)
+    }
+  }
+
+  static func set(layer: Int, position point: Point) {
     let i: Int =
       ((LTDCConstants.layerWidth + LTDCConstants.hbp + LTDCConstants.hsync - 1
         + point.x) << 16) | (LTDCConstants.hbp + LTDCConstants.hsync + point.x)
-    // FIXME: ltdc.l2whpcr.rawValue = UInt32(i)
+    ltdc.layer[layer].whpcr.modify { $0.raw.storage = UInt32(i) }
     let j: Int =
       ((LTDCConstants.layerHeight + LTDCConstants.vsync + LTDCConstants.vbp - 1
         + point.y) << 16) | (LTDCConstants.vsync + LTDCConstants.vbp + point.y)
-    // FIXME: ltdc.l2wvpcr.rawValue = UInt32(j)
-    // FIXME: ltdc.srcr.vbr = 1
-  }
-
-  static func setBackgroundColor(_ color: Color) {
-    // FIXME: ltdc.bccr.rawValue = UInt32(color.r | (color.g << 8) | (color.b << 16))
+    ltdc.layer[layer].wvpcr.modify { $0.raw.storage = UInt32(j) }
+    ltdc.srcr.modify { $0.raw.vbr = 1 }
   }
 }
