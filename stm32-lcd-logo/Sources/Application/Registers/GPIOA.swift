@@ -55,63 +55,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct MODER {
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 30..<32, as: MODER15Values.self)
+        @ReadWrite(bits: 30..<32)
         var moder15: MODER15
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 28..<30, as: MODER14Values.self)
+        @ReadWrite(bits: 28..<30)
         var moder14: MODER14
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 26..<28, as: MODER13Values.self)
+        @ReadWrite(bits: 26..<28)
         var moder13: MODER13
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 24..<26, as: MODER12Values.self)
+        @ReadWrite(bits: 24..<26)
         var moder12: MODER12
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 22..<24, as: MODER11Values.self)
+        @ReadWrite(bits: 22..<24)
         var moder11: MODER11
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 20..<22, as: MODER10Values.self)
+        @ReadWrite(bits: 20..<22)
         var moder10: MODER10
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 18..<20, as: MODER9Values.self)
+        @ReadWrite(bits: 18..<20)
         var moder9: MODER9
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 16..<18, as: MODER8Values.self)
+        @ReadWrite(bits: 16..<18)
         var moder8: MODER8
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 14..<16, as: MODER7Values.self)
+        @ReadWrite(bits: 14..<16)
         var moder7: MODER7
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 12..<14, as: MODER6Values.self)
+        @ReadWrite(bits: 12..<14)
         var moder6: MODER6
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 10..<12, as: MODER5Values.self)
+        @ReadWrite(bits: 10..<12)
         var moder5: MODER5
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 8..<10, as: MODER4Values.self)
+        @ReadWrite(bits: 8..<10)
         var moder4: MODER4
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 6..<8, as: MODER3Values.self)
+        @ReadWrite(bits: 6..<8)
         var moder3: MODER3
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 4..<6, as: MODER2Values.self)
+        @ReadWrite(bits: 4..<6)
         var moder2: MODER2
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 2..<4, as: MODER1Values.self)
+        @ReadWrite(bits: 2..<4)
         var moder1: MODER1
 
         /// Port x configuration bits (y = 0..15)
@@ -123,63 +123,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct OTYPER {
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 15..<16, as: OT15Values.self)
+        @ReadWrite(bits: 15..<16)
         var ot15: OT15
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 14..<15, as: OT14Values.self)
+        @ReadWrite(bits: 14..<15)
         var ot14: OT14
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 13..<14, as: OT13Values.self)
+        @ReadWrite(bits: 13..<14)
         var ot13: OT13
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 12..<13, as: OT12Values.self)
+        @ReadWrite(bits: 12..<13)
         var ot12: OT12
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 11..<12, as: OT11Values.self)
+        @ReadWrite(bits: 11..<12)
         var ot11: OT11
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 10..<11, as: OT10Values.self)
+        @ReadWrite(bits: 10..<11)
         var ot10: OT10
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 9..<10, as: OT9Values.self)
+        @ReadWrite(bits: 9..<10)
         var ot9: OT9
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 8..<9, as: OT8Values.self)
+        @ReadWrite(bits: 8..<9)
         var ot8: OT8
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 7..<8, as: OT7Values.self)
+        @ReadWrite(bits: 7..<8)
         var ot7: OT7
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 6..<7, as: OT6Values.self)
+        @ReadWrite(bits: 6..<7)
         var ot6: OT6
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 5..<6, as: OT5Values.self)
+        @ReadWrite(bits: 5..<6)
         var ot5: OT5
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 4..<5, as: OT4Values.self)
+        @ReadWrite(bits: 4..<5)
         var ot4: OT4
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 3..<4, as: OT3Values.self)
+        @ReadWrite(bits: 3..<4)
         var ot3: OT3
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 2..<3, as: OT2Values.self)
+        @ReadWrite(bits: 2..<3)
         var ot2: OT2
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 1..<2, as: OT1Values.self)
+        @ReadWrite(bits: 1..<2)
         var ot1: OT1
 
         /// Port x configuration bits (y = 0..15)
@@ -191,63 +191,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct OSPEEDR {
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 30..<32, as: OSPEEDR15Values.self)
+        @ReadWrite(bits: 30..<32)
         var ospeedr15: OSPEEDR15
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 28..<30, as: OSPEEDR14Values.self)
+        @ReadWrite(bits: 28..<30)
         var ospeedr14: OSPEEDR14
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 26..<28, as: OSPEEDR13Values.self)
+        @ReadWrite(bits: 26..<28)
         var ospeedr13: OSPEEDR13
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 24..<26, as: OSPEEDR12Values.self)
+        @ReadWrite(bits: 24..<26)
         var ospeedr12: OSPEEDR12
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 22..<24, as: OSPEEDR11Values.self)
+        @ReadWrite(bits: 22..<24)
         var ospeedr11: OSPEEDR11
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 20..<22, as: OSPEEDR10Values.self)
+        @ReadWrite(bits: 20..<22)
         var ospeedr10: OSPEEDR10
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 18..<20, as: OSPEEDR9Values.self)
+        @ReadWrite(bits: 18..<20)
         var ospeedr9: OSPEEDR9
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 16..<18, as: OSPEEDR8Values.self)
+        @ReadWrite(bits: 16..<18)
         var ospeedr8: OSPEEDR8
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 14..<16, as: OSPEEDR7Values.self)
+        @ReadWrite(bits: 14..<16)
         var ospeedr7: OSPEEDR7
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 12..<14, as: OSPEEDR6Values.self)
+        @ReadWrite(bits: 12..<14)
         var ospeedr6: OSPEEDR6
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 10..<12, as: OSPEEDR5Values.self)
+        @ReadWrite(bits: 10..<12)
         var ospeedr5: OSPEEDR5
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 8..<10, as: OSPEEDR4Values.self)
+        @ReadWrite(bits: 8..<10)
         var ospeedr4: OSPEEDR4
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 6..<8, as: OSPEEDR3Values.self)
+        @ReadWrite(bits: 6..<8)
         var ospeedr3: OSPEEDR3
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 4..<6, as: OSPEEDR2Values.self)
+        @ReadWrite(bits: 4..<6)
         var ospeedr2: OSPEEDR2
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 2..<4, as: OSPEEDR1Values.self)
+        @ReadWrite(bits: 2..<4)
         var ospeedr1: OSPEEDR1
 
         /// Port x configuration bits (y = 0..15)
@@ -259,63 +259,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct PUPDR {
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 30..<32, as: PUPDR15Values.self)
+        @ReadWrite(bits: 30..<32)
         var pupdr15: PUPDR15
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 28..<30, as: PUPDR14Values.self)
+        @ReadWrite(bits: 28..<30)
         var pupdr14: PUPDR14
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 26..<28, as: PUPDR13Values.self)
+        @ReadWrite(bits: 26..<28)
         var pupdr13: PUPDR13
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 24..<26, as: PUPDR12Values.self)
+        @ReadWrite(bits: 24..<26)
         var pupdr12: PUPDR12
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 22..<24, as: PUPDR11Values.self)
+        @ReadWrite(bits: 22..<24)
         var pupdr11: PUPDR11
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 20..<22, as: PUPDR10Values.self)
+        @ReadWrite(bits: 20..<22)
         var pupdr10: PUPDR10
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 18..<20, as: PUPDR9Values.self)
+        @ReadWrite(bits: 18..<20)
         var pupdr9: PUPDR9
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 16..<18, as: PUPDR8Values.self)
+        @ReadWrite(bits: 16..<18)
         var pupdr8: PUPDR8
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 14..<16, as: PUPDR7Values.self)
+        @ReadWrite(bits: 14..<16)
         var pupdr7: PUPDR7
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 12..<14, as: PUPDR6Values.self)
+        @ReadWrite(bits: 12..<14)
         var pupdr6: PUPDR6
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 10..<12, as: PUPDR5Values.self)
+        @ReadWrite(bits: 10..<12)
         var pupdr5: PUPDR5
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 8..<10, as: PUPDR4Values.self)
+        @ReadWrite(bits: 8..<10)
         var pupdr4: PUPDR4
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 6..<8, as: PUPDR3Values.self)
+        @ReadWrite(bits: 6..<8)
         var pupdr3: PUPDR3
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 4..<6, as: PUPDR2Values.self)
+        @ReadWrite(bits: 4..<6)
         var pupdr2: PUPDR2
 
         /// Port x configuration bits (y = 0..15)
-        @ReadWrite(bits: 2..<4, as: PUPDR1Values.self)
+        @ReadWrite(bits: 2..<4)
         var pupdr1: PUPDR1
 
         /// Port x configuration bits (y = 0..15)
@@ -327,63 +327,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct IDR {
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 15..<16, as: IDR15Values.self)
+        @ReadOnly(bits: 15..<16)
         var idr15: IDR15
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 14..<15, as: IDR14Values.self)
+        @ReadOnly(bits: 14..<15)
         var idr14: IDR14
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 13..<14, as: IDR13Values.self)
+        @ReadOnly(bits: 13..<14)
         var idr13: IDR13
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 12..<13, as: IDR12Values.self)
+        @ReadOnly(bits: 12..<13)
         var idr12: IDR12
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 11..<12, as: IDR11Values.self)
+        @ReadOnly(bits: 11..<12)
         var idr11: IDR11
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 10..<11, as: IDR10Values.self)
+        @ReadOnly(bits: 10..<11)
         var idr10: IDR10
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 9..<10, as: IDR9Values.self)
+        @ReadOnly(bits: 9..<10)
         var idr9: IDR9
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 8..<9, as: IDR8Values.self)
+        @ReadOnly(bits: 8..<9)
         var idr8: IDR8
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 7..<8, as: IDR7Values.self)
+        @ReadOnly(bits: 7..<8)
         var idr7: IDR7
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 6..<7, as: IDR6Values.self)
+        @ReadOnly(bits: 6..<7)
         var idr6: IDR6
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 5..<6, as: IDR5Values.self)
+        @ReadOnly(bits: 5..<6)
         var idr5: IDR5
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 4..<5, as: IDR4Values.self)
+        @ReadOnly(bits: 4..<5)
         var idr4: IDR4
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 3..<4, as: IDR3Values.self)
+        @ReadOnly(bits: 3..<4)
         var idr3: IDR3
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 2..<3, as: IDR2Values.self)
+        @ReadOnly(bits: 2..<3)
         var idr2: IDR2
 
         /// Port input data (y = 0..15)
-        @ReadOnly(bits: 1..<2, as: IDR1Values.self)
+        @ReadOnly(bits: 1..<2)
         var idr1: IDR1
 
         /// Port input data (y = 0..15)
@@ -395,63 +395,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct ODR {
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 15..<16, as: ODR15Values.self)
+        @ReadWrite(bits: 15..<16)
         var odr15: ODR15
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 14..<15, as: ODR14Values.self)
+        @ReadWrite(bits: 14..<15)
         var odr14: ODR14
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 13..<14, as: ODR13Values.self)
+        @ReadWrite(bits: 13..<14)
         var odr13: ODR13
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 12..<13, as: ODR12Values.self)
+        @ReadWrite(bits: 12..<13)
         var odr12: ODR12
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 11..<12, as: ODR11Values.self)
+        @ReadWrite(bits: 11..<12)
         var odr11: ODR11
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 10..<11, as: ODR10Values.self)
+        @ReadWrite(bits: 10..<11)
         var odr10: ODR10
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 9..<10, as: ODR9Values.self)
+        @ReadWrite(bits: 9..<10)
         var odr9: ODR9
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 8..<9, as: ODR8Values.self)
+        @ReadWrite(bits: 8..<9)
         var odr8: ODR8
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 7..<8, as: ODR7Values.self)
+        @ReadWrite(bits: 7..<8)
         var odr7: ODR7
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 6..<7, as: ODR6Values.self)
+        @ReadWrite(bits: 6..<7)
         var odr6: ODR6
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 5..<6, as: ODR5Values.self)
+        @ReadWrite(bits: 5..<6)
         var odr5: ODR5
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 4..<5, as: ODR4Values.self)
+        @ReadWrite(bits: 4..<5)
         var odr4: ODR4
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 3..<4, as: ODR3Values.self)
+        @ReadWrite(bits: 3..<4)
         var odr3: ODR3
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 2..<3, as: ODR2Values.self)
+        @ReadWrite(bits: 2..<3)
         var odr2: ODR2
 
         /// Port output data (y = 0..15)
-        @ReadWrite(bits: 1..<2, as: ODR1Values.self)
+        @ReadWrite(bits: 1..<2)
         var odr1: ODR1
 
         /// Port output data (y = 0..15)
@@ -463,63 +463,63 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct BSRR {
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 31..<32, as: BR15Values.self)
+        @WriteOnly(bits: 31..<32)
         var br15: BR15
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 30..<31, as: BR14Values.self)
+        @WriteOnly(bits: 30..<31)
         var br14: BR14
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 29..<30, as: BR13Values.self)
+        @WriteOnly(bits: 29..<30)
         var br13: BR13
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 28..<29, as: BR12Values.self)
+        @WriteOnly(bits: 28..<29)
         var br12: BR12
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 27..<28, as: BR11Values.self)
+        @WriteOnly(bits: 27..<28)
         var br11: BR11
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 26..<27, as: BR10Values.self)
+        @WriteOnly(bits: 26..<27)
         var br10: BR10
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 25..<26, as: BR9Values.self)
+        @WriteOnly(bits: 25..<26)
         var br9: BR9
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 24..<25, as: BR8Values.self)
+        @WriteOnly(bits: 24..<25)
         var br8: BR8
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 23..<24, as: BR7Values.self)
+        @WriteOnly(bits: 23..<24)
         var br7: BR7
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 22..<23, as: BR6Values.self)
+        @WriteOnly(bits: 22..<23)
         var br6: BR6
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 21..<22, as: BR5Values.self)
+        @WriteOnly(bits: 21..<22)
         var br5: BR5
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 20..<21, as: BR4Values.self)
+        @WriteOnly(bits: 20..<21)
         var br4: BR4
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 19..<20, as: BR3Values.self)
+        @WriteOnly(bits: 19..<20)
         var br3: BR3
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 18..<19, as: BR2Values.self)
+        @WriteOnly(bits: 18..<19)
         var br2: BR2
 
         /// Port x reset bit y (y = 0..15)
-        @WriteOnly(bits: 17..<18, as: BR1Values.self)
+        @WriteOnly(bits: 17..<18)
         var br1: BR1
 
         /// Port x set bit y (y= 0..15)
@@ -527,63 +527,63 @@ extension GPIOA {
         var br0: BR0
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 15..<16, as: BS15Values.self)
+        @WriteOnly(bits: 15..<16)
         var bs15: BS15
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 14..<15, as: BS14Values.self)
+        @WriteOnly(bits: 14..<15)
         var bs14: BS14
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 13..<14, as: BS13Values.self)
+        @WriteOnly(bits: 13..<14)
         var bs13: BS13
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 12..<13, as: BS12Values.self)
+        @WriteOnly(bits: 12..<13)
         var bs12: BS12
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 11..<12, as: BS11Values.self)
+        @WriteOnly(bits: 11..<12)
         var bs11: BS11
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 10..<11, as: BS10Values.self)
+        @WriteOnly(bits: 10..<11)
         var bs10: BS10
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 9..<10, as: BS9Values.self)
+        @WriteOnly(bits: 9..<10)
         var bs9: BS9
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 8..<9, as: BS8Values.self)
+        @WriteOnly(bits: 8..<9)
         var bs8: BS8
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 7..<8, as: BS7Values.self)
+        @WriteOnly(bits: 7..<8)
         var bs7: BS7
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 6..<7, as: BS6Values.self)
+        @WriteOnly(bits: 6..<7)
         var bs6: BS6
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 5..<6, as: BS5Values.self)
+        @WriteOnly(bits: 5..<6)
         var bs5: BS5
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 4..<5, as: BS4Values.self)
+        @WriteOnly(bits: 4..<5)
         var bs4: BS4
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 3..<4, as: BS3Values.self)
+        @WriteOnly(bits: 3..<4)
         var bs3: BS3
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 2..<3, as: BS2Values.self)
+        @WriteOnly(bits: 2..<3)
         var bs2: BS2
 
         /// Port x set bit y (y= 0..15)
-        @WriteOnly(bits: 1..<2, as: BS1Values.self)
+        @WriteOnly(bits: 1..<2)
         var bs1: BS1
 
         /// Port x set bit y (y= 0..15)
@@ -599,63 +599,63 @@ extension GPIOA {
         var lckk: LCKK
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 15..<16, as: LCK15Values.self)
+        @ReadWrite(bits: 15..<16)
         var lck15: LCK15
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 14..<15, as: LCK14Values.self)
+        @ReadWrite(bits: 14..<15)
         var lck14: LCK14
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 13..<14, as: LCK13Values.self)
+        @ReadWrite(bits: 13..<14)
         var lck13: LCK13
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 12..<13, as: LCK12Values.self)
+        @ReadWrite(bits: 12..<13)
         var lck12: LCK12
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 11..<12, as: LCK11Values.self)
+        @ReadWrite(bits: 11..<12)
         var lck11: LCK11
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 10..<11, as: LCK10Values.self)
+        @ReadWrite(bits: 10..<11)
         var lck10: LCK10
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 9..<10, as: LCK9Values.self)
+        @ReadWrite(bits: 9..<10)
         var lck9: LCK9
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 8..<9, as: LCK8Values.self)
+        @ReadWrite(bits: 8..<9)
         var lck8: LCK8
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 7..<8, as: LCK7Values.self)
+        @ReadWrite(bits: 7..<8)
         var lck7: LCK7
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 6..<7, as: LCK6Values.self)
+        @ReadWrite(bits: 6..<7)
         var lck6: LCK6
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 5..<6, as: LCK5Values.self)
+        @ReadWrite(bits: 5..<6)
         var lck5: LCK5
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 4..<5, as: LCK4Values.self)
+        @ReadWrite(bits: 4..<5)
         var lck4: LCK4
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 3..<4, as: LCK3Values.self)
+        @ReadWrite(bits: 3..<4)
         var lck3: LCK3
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 2..<3, as: LCK2Values.self)
+        @ReadWrite(bits: 2..<3)
         var lck2: LCK2
 
         /// Port x lock bit y (y= 0..15)
-        @ReadWrite(bits: 1..<2, as: LCK1Values.self)
+        @ReadWrite(bits: 1..<2)
         var lck1: LCK1
 
         /// Port x lock bit y (y= 0..15)
@@ -667,31 +667,31 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct AFRL {
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 28..<32, as: AFRL7Values.self)
+        @ReadWrite(bits: 28..<32)
         var afrl7: AFRL7
 
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 24..<28, as: AFRL6Values.self)
+        @ReadWrite(bits: 24..<28)
         var afrl6: AFRL6
 
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 20..<24, as: AFRL5Values.self)
+        @ReadWrite(bits: 20..<24)
         var afrl5: AFRL5
 
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 16..<20, as: AFRL4Values.self)
+        @ReadWrite(bits: 16..<20)
         var afrl4: AFRL4
 
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 12..<16, as: AFRL3Values.self)
+        @ReadWrite(bits: 12..<16)
         var afrl3: AFRL3
 
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 8..<12, as: AFRL2Values.self)
+        @ReadWrite(bits: 8..<12)
         var afrl2: AFRL2
 
         /// Alternate function selection for port x bit y (y = 0..7)
-        @ReadWrite(bits: 4..<8, as: AFRL1Values.self)
+        @ReadWrite(bits: 4..<8)
         var afrl1: AFRL1
 
         /// Alternate function selection for port x bit y (y = 0..7)
@@ -703,31 +703,31 @@ extension GPIOA {
     @Register(bitWidth: 32)
     struct AFRH {
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 28..<32, as: AFRH15Values.self)
+        @ReadWrite(bits: 28..<32)
         var afrh15: AFRH15
 
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 24..<28, as: AFRH14Values.self)
+        @ReadWrite(bits: 24..<28)
         var afrh14: AFRH14
 
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 20..<24, as: AFRH13Values.self)
+        @ReadWrite(bits: 20..<24)
         var afrh13: AFRH13
 
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 16..<20, as: AFRH12Values.self)
+        @ReadWrite(bits: 16..<20)
         var afrh12: AFRH12
 
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 12..<16, as: AFRH11Values.self)
+        @ReadWrite(bits: 12..<16)
         var afrh11: AFRH11
 
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 8..<12, as: AFRH10Values.self)
+        @ReadWrite(bits: 8..<12)
         var afrh10: AFRH10
 
         /// Alternate function selection for port x bit y (y = 8..15)
-        @ReadWrite(bits: 4..<8, as: AFRH9Values.self)
+        @ReadWrite(bits: 4..<8)
         var afrh9: AFRH9
 
         /// Alternate function selection for port x bit y (y = 8..15)
@@ -805,201 +805,6 @@ extension GPIOA {
 }
 
 extension GPIOA.MODER {
-    struct MODER15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
-    struct MODER1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.MODER {
     struct MODER0Values: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 2
 
@@ -1025,201 +830,6 @@ extension GPIOA.MODER {
 }
 
 extension GPIOA.OTYPER {
-    struct OT15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
-    struct OT1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OTYPER {
     struct OT0Values: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
 
@@ -1228,201 +838,6 @@ extension GPIOA.OTYPER {
 
         /// Output open-drain
         static let OpenDrain = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.OSPEEDR {
-    struct OSPEEDR1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
 
         var rawValue: UInt8
 
@@ -1459,201 +874,6 @@ extension GPIOA.OSPEEDR {
 }
 
 extension GPIOA.PUPDR {
-    struct PUPDR15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
-    struct PUPDR1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.PUPDR {
     struct PUPDR0Values: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 2
 
@@ -1675,396 +895,6 @@ extension GPIOA.PUPDR {
     }
 }
 
-extension GPIOA.IDR {
-    struct IDR15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.IDR {
-    struct IDR1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.ODR {
-    struct ODR1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension GPIOA.ODR {
     struct ODR0Values: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
@@ -2074,396 +904,6 @@ extension GPIOA.ODR {
 
         /// Set output to logic high
         static let High = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BR1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.BSRR {
-    struct BS1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -2494,201 +934,6 @@ extension GPIOA.LCKR {
 }
 
 extension GPIOA.LCKR {
-    struct LCK15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK8Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
-    struct LCK1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.LCKR {
     struct LCK0Values: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
 
@@ -2697,97 +942,6 @@ extension GPIOA.LCKR {
 
         /// Port configuration locked
         static let Locked = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL7Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL6Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL5Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL4Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL3Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRL {
-    struct AFRL1Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
 
         var rawValue: UInt8
 
@@ -2849,97 +1003,6 @@ extension GPIOA.AFRL {
 
         /// AF15
         static let AF15 = Self(rawValue: 0xf)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH15Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH14Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH13Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH12Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH11Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH10Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension GPIOA.AFRH {
-    struct AFRH9Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 4
 
         var rawValue: UInt8
 

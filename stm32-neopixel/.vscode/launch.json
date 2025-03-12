@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:stm32-neopixel}",
+            "name": "Debug Application",
+            "program": "${workspaceFolder:stm32-neopixel}/.build/debug/Application",
+            "preLaunchTask": "swift: Build Debug Application"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:stm32-neopixel}",
+            "name": "Release Application",
+            "program": "${workspaceFolder:stm32-neopixel}/.build/release/Application",
+            "preLaunchTask": "swift: Build Release Application"
+        }
+    ]
+}

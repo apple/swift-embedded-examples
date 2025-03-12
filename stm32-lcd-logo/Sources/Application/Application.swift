@@ -11,58 +11,106 @@
 
 import Support
 
+let logoLayerSize = Size(width: 50, height: 50)
+let displaySize = Size(
+  width: STM32F746.LTDCConstants.displayWidth,
+  height: STM32F746.LTDCConstants.displayHeight)
+
+let ledPin = 1
+let led = LED(pin: ledPin, port: gpioi)
+
 @main
 struct Application {
-  static func main() {
-    var board = STM32F746Board()
 
-    let blink = {
-      board.ledOn()
-      board.delay(milliseconds: 10)
-      board.ledOff()
-      board.delay(milliseconds: 20)
-    }
-
-    board.delay(milliseconds: 10)
-
-    let maxLogoPosition = Point(
-      x: board.displaySize.width - board.logoLayerSize.width,
-      y: board.displaySize.height - board.logoLayerSize.height)
-
-    var logoPosition = Point(x: 100, y: 0)
-    board.moveLogo(to: logoPosition)
-
-    var logoDelta = Point(x: 1, y: 1)
+  mutating func run() {
+    self.configureFlash()
+    self.configureLED()
+    STM32F746.configureLTCD()
+    
+    blink()
 
     var iteration = 0
+    
+    var logoPosition = Point(x: 100, y: 0)
+    var logoDelta = Point(x: 1, y: 1)
+    let maxLogoPosition = Point(
+      x: displaySize.width - logoLayerSize.width,
+      y: displaySize.height - logoLayerSize.height)
+
+    var backgroundGray: UInt8 = 0
+    var backgroundDelta: Int8 = 1
 
     while true {
-      board.delay(milliseconds: 10)
+      self.delay(milliseconds: 10)
 
-      logoPosition = logoPosition.offset(by: logoDelta)
-      board.moveLogo(to: logoPosition)
+      iteration += 1
+      if iteration.isMultiple(of: 16) {
+        self.blink()
+      }
 
       if logoPosition.x <= 0 || logoPosition.x >= maxLogoPosition.x {
         logoDelta.x *= -1
       }
+
       if logoPosition.y <= 0 || logoPosition.y >= maxLogoPosition.y {
         logoDelta.y *= -1
       }
 
-      if iteration % 16 == 0 { blink() }
+      logoPosition = logoPosition.offset(by: logoDelta)
+      self.moveLogo(to: logoPosition)
 
-      let backgroundGray: Int
-      if iteration % 512 < 256 {
-        backgroundGray = iteration % 256
-      } else if iteration % 512 == 256 {
-        backgroundGray = 255
-      } else {
-        backgroundGray = (512 - (iteration % 512)) % 256
+      if backgroundGray == .min || backgroundGray == .max {
+        backgroundDelta *= -1
       }
-      board.setBackgroundColor(
-        color: Color(r: backgroundGray, g: backgroundGray, b: backgroundGray))
 
-      iteration += 1
+      backgroundGray = UInt8(Int16(backgroundGray) + Int16(backgroundDelta))
+      self.setBackgroundColor(color: .gray(backgroundGray))
     }
+  }
+
+  func configureLED() {
+    rcc.enableGPIOPortClock(.i)
+    gpioi.configure(
+      pin: ledPin,
+      as: .init(
+        mode: .output,
+        outputType: .pushPull,
+        outputSpeed: .high,
+        pull: .down,
+        alternateFunction: 0))
+  }
+
+  func blink() {
+    led.on()
+    self.delay(milliseconds: 10)
+    led.off()
+    self.delay(milliseconds: 20)
+  }
+
+  func delay(milliseconds: Int) {
+    for _ in 0..<100_000 * milliseconds {
+      nop()
+    }
+  }
+
+  func moveLogo(to point: Point) {
+    STM32F746.setLayer2Position(point)
+  }
+
+  func setBackgroundColor(color: Color) {
+    STM32F746.setBackgroundColor(color)
+  }
+
+  func configureFlash() {
+    // FIXME: flashAcr.volatileStore(0x5)
+    // Set FLASH_ACR to 0x5
+    flash.acr.modify { $0.latency = .WS5 }
+  }
+}
+
+extension Application {
+  static func main() {
+    var app = Application()
+    app.run()
   }
 }

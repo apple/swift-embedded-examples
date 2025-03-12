@@ -2,6 +2,9 @@
 
 import MMIO
 
+/// FLASH
+let flash = FLASH(unsafeAddress: 0x40023c00)
+
 /// General-purpose I/Os
 let gpioa = GPIOA(unsafeAddress: 0x40020000)
 

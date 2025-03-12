@@ -22,7 +22,8 @@ TARGET           := $(ARCH)-apple-none-macho
 SWIFT_BUILD_ARGS := \
 	--configuration release \
 	--triple $(TARGET) \
-	--toolset $(TOOLSET)
+	--toolset $(TOOLSET) \
+	--disable-local-rpath
 BUILDROOT        := $(shell $(SWIFT_BUILD) $(SWIFT_BUILD_ARGS) --show-bin-path)
 
 .PHONY: build
@@ -45,7 +46,7 @@ build:
 
 	@echo "extracting binary..."
 	$(MACHO2BIN) \
-		$(BUILDROOT)/Application $(BUILDROOT)/Application.bin --base-address 0x00200000 --segments '__TEXT,__DATA,__VECTORS'
+		$(BUILDROOT)/Application $(BUILDROOT)/Application.bin --base-address 0x20010000 --segments '__TEXT,__DATA,__VECTORS'
 
 .PHONY: clean
 clean:

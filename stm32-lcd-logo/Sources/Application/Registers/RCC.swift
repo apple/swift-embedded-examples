@@ -115,19 +115,19 @@ extension RCC {
     @Register(bitWidth: 32)
     struct CR {
         /// PLLI2S clock ready flag
-        @ReadOnly(bits: 27..<28, as: PLLI2SRDYValues.self)
+        @ReadOnly(bits: 27..<28)
         var plli2srdy: PLLI2SRDY
 
         /// PLLI2S enable
-        @ReadWrite(bits: 26..<27, as: PLLI2SONValues.self)
+        @ReadWrite(bits: 26..<27)
         var plli2son: PLLI2SON
 
         /// Main PLL (PLL) clock ready flag
-        @ReadOnly(bits: 25..<26, as: PLLRDYValues.self)
+        @ReadOnly(bits: 25..<26)
         var pllrdy: PLLRDY
 
         /// Main PLL (PLL) enable
-        @ReadWrite(bits: 24..<25, as: PLLONValues.self)
+        @ReadWrite(bits: 24..<25)
         var pllon: PLLON
 
         /// Clock security system enable
@@ -139,11 +139,11 @@ extension RCC {
         var hsebyp: HSEBYP
 
         /// HSE clock ready flag
-        @ReadOnly(bits: 17..<18, as: HSERDYValues.self)
+        @ReadOnly(bits: 17..<18)
         var hserdy: HSERDY
 
         /// HSE clock enable
-        @ReadWrite(bits: 16..<17, as: HSEONValues.self)
+        @ReadWrite(bits: 16..<17)
         var hseon: HSEON
 
         /// Internal high-speed clock calibration
@@ -163,11 +163,11 @@ extension RCC {
         var hsion: HSION
 
         /// PLLSAI clock ready flag
-        @ReadOnly(bits: 29..<30, as: PLLSAIRDYValues.self)
+        @ReadOnly(bits: 29..<30)
         var pllsairdy: PLLSAIRDY
 
         /// PLLSAI enable
-        @ReadWrite(bits: 28..<29, as: PLLSAIONValues.self)
+        @ReadWrite(bits: 28..<29)
         var pllsaion: PLLSAION
     }
 
@@ -203,7 +203,7 @@ extension RCC {
         var mco2: MCO2
 
         /// MCO2 prescaler
-        @ReadWrite(bits: 27..<30, as: MCO2PREValues.self)
+        @ReadWrite(bits: 27..<30)
         var mco2pre: MCO2PRE
 
         /// MCO1 prescaler
@@ -223,7 +223,7 @@ extension RCC {
         var rtcpre: RTCPRE
 
         /// APB high-speed prescaler (APB2)
-        @ReadWrite(bits: 13..<16, as: PPRE2Values.self)
+        @ReadWrite(bits: 13..<16)
         var ppre2: PPRE2
 
         /// APB Low speed prescaler (APB1)
@@ -251,27 +251,27 @@ extension RCC {
         var cssc: CSSC
 
         /// PLLSAI Ready Interrupt Clear
-        @WriteOnly(bits: 22..<23, as: PLLSAIRDYCValues.self)
+        @WriteOnly(bits: 22..<23)
         var pllsairdyc: PLLSAIRDYC
 
         /// PLLI2S ready interrupt clear
-        @WriteOnly(bits: 21..<22, as: PLLI2SRDYCValues.self)
+        @WriteOnly(bits: 21..<22)
         var plli2srdyc: PLLI2SRDYC
 
         /// Main PLL(PLL) ready interrupt clear
-        @WriteOnly(bits: 20..<21, as: PLLRDYCValues.self)
+        @WriteOnly(bits: 20..<21)
         var pllrdyc: PLLRDYC
 
         /// HSE ready interrupt clear
-        @WriteOnly(bits: 19..<20, as: HSERDYCValues.self)
+        @WriteOnly(bits: 19..<20)
         var hserdyc: HSERDYC
 
         /// HSI ready interrupt clear
-        @WriteOnly(bits: 18..<19, as: HSIRDYCValues.self)
+        @WriteOnly(bits: 18..<19)
         var hsirdyc: HSIRDYC
 
         /// LSE ready interrupt clear
-        @WriteOnly(bits: 17..<18, as: LSERDYCValues.self)
+        @WriteOnly(bits: 17..<18)
         var lserdyc: LSERDYC
 
         /// LSI ready interrupt clear
@@ -279,27 +279,27 @@ extension RCC {
         var lsirdyc: LSIRDYC
 
         /// PLLSAI Ready Interrupt Enable
-        @ReadWrite(bits: 14..<15, as: PLLSAIRDYIEValues.self)
+        @ReadWrite(bits: 14..<15)
         var pllsairdyie: PLLSAIRDYIE
 
         /// PLLI2S ready interrupt enable
-        @ReadWrite(bits: 13..<14, as: PLLI2SRDYIEValues.self)
+        @ReadWrite(bits: 13..<14)
         var plli2srdyie: PLLI2SRDYIE
 
         /// Main PLL (PLL) ready interrupt enable
-        @ReadWrite(bits: 12..<13, as: PLLRDYIEValues.self)
+        @ReadWrite(bits: 12..<13)
         var pllrdyie: PLLRDYIE
 
         /// HSE ready interrupt enable
-        @ReadWrite(bits: 11..<12, as: HSERDYIEValues.self)
+        @ReadWrite(bits: 11..<12)
         var hserdyie: HSERDYIE
 
         /// HSI ready interrupt enable
-        @ReadWrite(bits: 10..<11, as: HSIRDYIEValues.self)
+        @ReadWrite(bits: 10..<11)
         var hsirdyie: HSIRDYIE
 
         /// LSE ready interrupt enable
-        @ReadWrite(bits: 9..<10, as: LSERDYIEValues.self)
+        @ReadWrite(bits: 9..<10)
         var lserdyie: LSERDYIE
 
         /// LSI ready interrupt enable
@@ -311,27 +311,27 @@ extension RCC {
         var cssf: CSSF
 
         /// PLLSAI ready interrupt flag
-        @ReadOnly(bits: 6..<7, as: PLLSAIRDYFValues.self)
+        @ReadOnly(bits: 6..<7)
         var pllsairdyf: PLLSAIRDYF
 
         /// PLLI2S ready interrupt flag
-        @ReadOnly(bits: 5..<6, as: PLLI2SRDYFValues.self)
+        @ReadOnly(bits: 5..<6)
         var plli2srdyf: PLLI2SRDYF
 
         /// Main PLL (PLL) ready interrupt flag
-        @ReadOnly(bits: 4..<5, as: PLLRDYFValues.self)
+        @ReadOnly(bits: 4..<5)
         var pllrdyf: PLLRDYF
 
         /// HSE ready interrupt flag
-        @ReadOnly(bits: 3..<4, as: HSERDYFValues.self)
+        @ReadOnly(bits: 3..<4)
         var hserdyf: HSERDYF
 
         /// HSI ready interrupt flag
-        @ReadOnly(bits: 2..<3, as: HSIRDYFValues.self)
+        @ReadOnly(bits: 2..<3)
         var hsirdyf: HSIRDYF
 
         /// LSE ready interrupt flag
-        @ReadOnly(bits: 1..<2, as: LSERDYFValues.self)
+        @ReadOnly(bits: 1..<2)
         var lserdyf: LSERDYF
 
         /// LSI ready interrupt flag
@@ -343,67 +343,67 @@ extension RCC {
     @Register(bitWidth: 32)
     struct AHB1RSTR {
         /// USB OTG HS module reset
-        @ReadWrite(bits: 29..<30, as: OTGHSRSTValues.self)
+        @ReadWrite(bits: 29..<30)
         var otghsrst: OTGHSRST
 
         /// Ethernet MAC reset
-        @ReadWrite(bits: 25..<26, as: ETHMACRSTValues.self)
+        @ReadWrite(bits: 25..<26)
         var ethmacrst: ETHMACRST
 
         /// DMA2D reset
-        @ReadWrite(bits: 23..<24, as: DMA2DRSTValues.self)
+        @ReadWrite(bits: 23..<24)
         var dma2drst: DMA2DRST
 
         /// DMA2 reset
-        @ReadWrite(bits: 22..<23, as: DMA2RSTValues.self)
+        @ReadWrite(bits: 22..<23)
         var dma2rst: DMA2RST
 
         /// DMA2 reset
-        @ReadWrite(bits: 21..<22, as: DMA1RSTValues.self)
+        @ReadWrite(bits: 21..<22)
         var dma1rst: DMA1RST
 
         /// CRC reset
-        @ReadWrite(bits: 12..<13, as: CRCRSTValues.self)
+        @ReadWrite(bits: 12..<13)
         var crcrst: CRCRST
 
         /// IO port K reset
-        @ReadWrite(bits: 10..<11, as: GPIOKRSTValues.self)
+        @ReadWrite(bits: 10..<11)
         var gpiokrst: GPIOKRST
 
         /// IO port J reset
-        @ReadWrite(bits: 9..<10, as: GPIOJRSTValues.self)
+        @ReadWrite(bits: 9..<10)
         var gpiojrst: GPIOJRST
 
         /// IO port I reset
-        @ReadWrite(bits: 8..<9, as: GPIOIRSTValues.self)
+        @ReadWrite(bits: 8..<9)
         var gpioirst: GPIOIRST
 
         /// IO port H reset
-        @ReadWrite(bits: 7..<8, as: GPIOHRSTValues.self)
+        @ReadWrite(bits: 7..<8)
         var gpiohrst: GPIOHRST
 
         /// IO port G reset
-        @ReadWrite(bits: 6..<7, as: GPIOGRSTValues.self)
+        @ReadWrite(bits: 6..<7)
         var gpiogrst: GPIOGRST
 
         /// IO port F reset
-        @ReadWrite(bits: 5..<6, as: GPIOFRSTValues.self)
+        @ReadWrite(bits: 5..<6)
         var gpiofrst: GPIOFRST
 
         /// IO port E reset
-        @ReadWrite(bits: 4..<5, as: GPIOERSTValues.self)
+        @ReadWrite(bits: 4..<5)
         var gpioerst: GPIOERST
 
         /// IO port D reset
-        @ReadWrite(bits: 3..<4, as: GPIODRSTValues.self)
+        @ReadWrite(bits: 3..<4)
         var gpiodrst: GPIODRST
 
         /// IO port C reset
-        @ReadWrite(bits: 2..<3, as: GPIOCRSTValues.self)
+        @ReadWrite(bits: 2..<3)
         var gpiocrst: GPIOCRST
 
         /// IO port B reset
-        @ReadWrite(bits: 1..<2, as: GPIOBRSTValues.self)
+        @ReadWrite(bits: 1..<2)
         var gpiobrst: GPIOBRST
 
         /// IO port A reset
@@ -415,19 +415,19 @@ extension RCC {
     @Register(bitWidth: 32)
     struct AHB2RSTR {
         /// USB OTG FS module reset
-        @ReadWrite(bits: 7..<8, as: OTGFSRSTValues.self)
+        @ReadWrite(bits: 7..<8)
         var otgfsrst: OTGFSRST
 
         /// Random number generator module reset
-        @ReadWrite(bits: 6..<7, as: RNGRSTValues.self)
+        @ReadWrite(bits: 6..<7)
         var rngrst: RNGRST
 
         /// Hash module reset
-        @ReadWrite(bits: 5..<6, as: HSAHRSTValues.self)
+        @ReadWrite(bits: 5..<6)
         var hsahrst: HSAHRST
 
         /// Cryptographic module reset
-        @ReadWrite(bits: 4..<5, as: CRYPRSTValues.self)
+        @ReadWrite(bits: 4..<5)
         var cryprst: CRYPRST
 
         /// Camera interface reset
@@ -443,7 +443,7 @@ extension RCC {
         var fmcrst: FMCRST
 
         /// Quad SPI memory controller reset
-        @ReadWrite(bits: 1..<2, as: QSPIRSTValues.self)
+        @ReadWrite(bits: 1..<2)
         var qspirst: QSPIRST
     }
 
@@ -455,115 +455,115 @@ extension RCC {
         var tim2rst: TIM2RST
 
         /// TIM3 reset
-        @ReadWrite(bits: 1..<2, as: TIM3RSTValues.self)
+        @ReadWrite(bits: 1..<2)
         var tim3rst: TIM3RST
 
         /// TIM4 reset
-        @ReadWrite(bits: 2..<3, as: TIM4RSTValues.self)
+        @ReadWrite(bits: 2..<3)
         var tim4rst: TIM4RST
 
         /// TIM5 reset
-        @ReadWrite(bits: 3..<4, as: TIM5RSTValues.self)
+        @ReadWrite(bits: 3..<4)
         var tim5rst: TIM5RST
 
         /// TIM6 reset
-        @ReadWrite(bits: 4..<5, as: TIM6RSTValues.self)
+        @ReadWrite(bits: 4..<5)
         var tim6rst: TIM6RST
 
         /// TIM7 reset
-        @ReadWrite(bits: 5..<6, as: TIM7RSTValues.self)
+        @ReadWrite(bits: 5..<6)
         var tim7rst: TIM7RST
 
         /// TIM12 reset
-        @ReadWrite(bits: 6..<7, as: TIM12RSTValues.self)
+        @ReadWrite(bits: 6..<7)
         var tim12rst: TIM12RST
 
         /// TIM13 reset
-        @ReadWrite(bits: 7..<8, as: TIM13RSTValues.self)
+        @ReadWrite(bits: 7..<8)
         var tim13rst: TIM13RST
 
         /// TIM14 reset
-        @ReadWrite(bits: 8..<9, as: TIM14RSTValues.self)
+        @ReadWrite(bits: 8..<9)
         var tim14rst: TIM14RST
 
         /// Window watchdog reset
-        @ReadWrite(bits: 11..<12, as: WWDGRSTValues.self)
+        @ReadWrite(bits: 11..<12)
         var wwdgrst: WWDGRST
 
         /// SPI 2 reset
-        @ReadWrite(bits: 14..<15, as: SPI2RSTValues.self)
+        @ReadWrite(bits: 14..<15)
         var spi2rst: SPI2RST
 
         /// SPI 3 reset
-        @ReadWrite(bits: 15..<16, as: SPI3RSTValues.self)
+        @ReadWrite(bits: 15..<16)
         var spi3rst: SPI3RST
 
         /// USART 2 reset
-        @ReadWrite(bits: 17..<18, as: USART2RSTValues.self)
+        @ReadWrite(bits: 17..<18)
         var usart2rst: USART2RST
 
         /// USART 3 reset
-        @ReadWrite(bits: 18..<19, as: USART3RSTValues.self)
+        @ReadWrite(bits: 18..<19)
         var usart3rst: USART3RST
 
         /// USART 4 reset
-        @ReadWrite(bits: 19..<20, as: UART4RSTValues.self)
+        @ReadWrite(bits: 19..<20)
         var uart4rst: UART4RST
 
         /// USART 5 reset
-        @ReadWrite(bits: 20..<21, as: UART5RSTValues.self)
+        @ReadWrite(bits: 20..<21)
         var uart5rst: UART5RST
 
         /// I2C 1 reset
-        @ReadWrite(bits: 21..<22, as: I2C1RSTValues.self)
+        @ReadWrite(bits: 21..<22)
         var i2c1rst: I2C1RST
 
         /// I2C 2 reset
-        @ReadWrite(bits: 22..<23, as: I2C2RSTValues.self)
+        @ReadWrite(bits: 22..<23)
         var i2c2rst: I2C2RST
 
         /// I2C3 reset
-        @ReadWrite(bits: 23..<24, as: I2C3RSTValues.self)
+        @ReadWrite(bits: 23..<24)
         var i2c3rst: I2C3RST
 
         /// CAN1 reset
-        @ReadWrite(bits: 25..<26, as: CAN1RSTValues.self)
+        @ReadWrite(bits: 25..<26)
         var can1rst: CAN1RST
 
         /// CAN2 reset
-        @ReadWrite(bits: 26..<27, as: CAN2RSTValues.self)
+        @ReadWrite(bits: 26..<27)
         var can2rst: CAN2RST
 
         /// Power interface reset
-        @ReadWrite(bits: 28..<29, as: PWRRSTValues.self)
+        @ReadWrite(bits: 28..<29)
         var pwrrst: PWRRST
 
         /// DAC reset
-        @ReadWrite(bits: 29..<30, as: DACRSTValues.self)
+        @ReadWrite(bits: 29..<30)
         var dacrst: DACRST
 
         /// UART7 reset
-        @ReadWrite(bits: 30..<31, as: UART7RSTValues.self)
+        @ReadWrite(bits: 30..<31)
         var uart7rst: UART7RST
 
         /// UART8 reset
-        @ReadWrite(bits: 31..<32, as: UART8RSTValues.self)
+        @ReadWrite(bits: 31..<32)
         var uart8rst: UART8RST
 
         /// SPDIF-RX reset
-        @ReadWrite(bits: 16..<17, as: SPDIFRXRSTValues.self)
+        @ReadWrite(bits: 16..<17)
         var spdifrxrst: SPDIFRXRST
 
         /// HDMI-CEC reset
-        @ReadWrite(bits: 27..<28, as: CECRSTValues.self)
+        @ReadWrite(bits: 27..<28)
         var cecrst: CECRST
 
         /// Low power timer 1 reset
-        @ReadWrite(bits: 9..<10, as: LPTIM1RSTValues.self)
+        @ReadWrite(bits: 9..<10)
         var lptim1rst: LPTIM1RST
 
         /// I2C 4 reset
-        @ReadWrite(bits: 24..<25, as: I2C4RSTValues.self)
+        @ReadWrite(bits: 24..<25)
         var i2c4rst: I2C4RST
     }
 
@@ -575,67 +575,67 @@ extension RCC {
         var tim1rst: TIM1RST
 
         /// TIM8 reset
-        @ReadWrite(bits: 1..<2, as: TIM8RSTValues.self)
+        @ReadWrite(bits: 1..<2)
         var tim8rst: TIM8RST
 
         /// USART1 reset
-        @ReadWrite(bits: 4..<5, as: USART1RSTValues.self)
+        @ReadWrite(bits: 4..<5)
         var usart1rst: USART1RST
 
         /// USART6 reset
-        @ReadWrite(bits: 5..<6, as: USART6RSTValues.self)
+        @ReadWrite(bits: 5..<6)
         var usart6rst: USART6RST
 
         /// ADC interface reset (common to all ADCs)
-        @ReadWrite(bits: 8..<9, as: ADCRSTValues.self)
+        @ReadWrite(bits: 8..<9)
         var adcrst: ADCRST
 
         /// SPI 1 reset
-        @ReadWrite(bits: 12..<13, as: SPI1RSTValues.self)
+        @ReadWrite(bits: 12..<13)
         var spi1rst: SPI1RST
 
         /// SPI4 reset
-        @ReadWrite(bits: 13..<14, as: SPI4RSTValues.self)
+        @ReadWrite(bits: 13..<14)
         var spi4rst: SPI4RST
 
         /// System configuration controller reset
-        @ReadWrite(bits: 14..<15, as: SYSCFGRSTValues.self)
+        @ReadWrite(bits: 14..<15)
         var syscfgrst: SYSCFGRST
 
         /// TIM9 reset
-        @ReadWrite(bits: 16..<17, as: TIM9RSTValues.self)
+        @ReadWrite(bits: 16..<17)
         var tim9rst: TIM9RST
 
         /// TIM10 reset
-        @ReadWrite(bits: 17..<18, as: TIM10RSTValues.self)
+        @ReadWrite(bits: 17..<18)
         var tim10rst: TIM10RST
 
         /// TIM11 reset
-        @ReadWrite(bits: 18..<19, as: TIM11RSTValues.self)
+        @ReadWrite(bits: 18..<19)
         var tim11rst: TIM11RST
 
         /// SPI5 reset
-        @ReadWrite(bits: 20..<21, as: SPI5RSTValues.self)
+        @ReadWrite(bits: 20..<21)
         var spi5rst: SPI5RST
 
         /// SPI6 reset
-        @ReadWrite(bits: 21..<22, as: SPI6RSTValues.self)
+        @ReadWrite(bits: 21..<22)
         var spi6rst: SPI6RST
 
         /// SAI1 reset
-        @ReadWrite(bits: 22..<23, as: SAI1RSTValues.self)
+        @ReadWrite(bits: 22..<23)
         var sai1rst: SAI1RST
 
         /// LTDC reset
-        @ReadWrite(bits: 26..<27, as: LTDCRSTValues.self)
+        @ReadWrite(bits: 26..<27)
         var ltdcrst: LTDCRST
 
         /// SAI2 reset
-        @ReadWrite(bits: 23..<24, as: SAI2RSTValues.self)
+        @ReadWrite(bits: 23..<24)
         var sai2rst: SAI2RST
 
         /// SDMMC1 reset
-        @ReadWrite(bits: 11..<12, as: SDMMC1RSTValues.self)
+        @ReadWrite(bits: 11..<12)
         var sdmmc1rst: SDMMC1RST
     }
 
@@ -643,91 +643,91 @@ extension RCC {
     @Register(bitWidth: 32)
     struct AHB1ENR {
         /// USB OTG HSULPI clock enable
-        @ReadWrite(bits: 30..<31, as: OTGHSULPIENValues.self)
+        @ReadWrite(bits: 30..<31)
         var otghsulpien: OTGHSULPIEN
 
         /// USB OTG HS clock enable
-        @ReadWrite(bits: 29..<30, as: OTGHSENValues.self)
+        @ReadWrite(bits: 29..<30)
         var otghsen: OTGHSEN
 
         /// Ethernet PTP clock enable
-        @ReadWrite(bits: 28..<29, as: ETHMACPTPENValues.self)
+        @ReadWrite(bits: 28..<29)
         var ethmacptpen: ETHMACPTPEN
 
         /// Ethernet Reception clock enable
-        @ReadWrite(bits: 27..<28, as: ETHMACRXENValues.self)
+        @ReadWrite(bits: 27..<28)
         var ethmacrxen: ETHMACRXEN
 
         /// Ethernet Transmission clock enable
-        @ReadWrite(bits: 26..<27, as: ETHMACTXENValues.self)
+        @ReadWrite(bits: 26..<27)
         var ethmactxen: ETHMACTXEN
 
         /// Ethernet MAC clock enable
-        @ReadWrite(bits: 25..<26, as: ETHMACENValues.self)
+        @ReadWrite(bits: 25..<26)
         var ethmacen: ETHMACEN
 
         /// DMA2D clock enable
-        @ReadWrite(bits: 23..<24, as: DMA2DENValues.self)
+        @ReadWrite(bits: 23..<24)
         var dma2den: DMA2DEN
 
         /// DMA2 clock enable
-        @ReadWrite(bits: 22..<23, as: DMA2ENValues.self)
+        @ReadWrite(bits: 22..<23)
         var dma2en: DMA2EN
 
         /// DMA1 clock enable
-        @ReadWrite(bits: 21..<22, as: DMA1ENValues.self)
+        @ReadWrite(bits: 21..<22)
         var dma1en: DMA1EN
 
         /// CCM data RAM clock enable
-        @ReadWrite(bits: 20..<21, as: DTCMRAMENValues.self)
+        @ReadWrite(bits: 20..<21)
         var dtcmramen: DTCMRAMEN
 
         /// Backup SRAM interface clock enable
-        @ReadWrite(bits: 18..<19, as: BKPSRAMENValues.self)
+        @ReadWrite(bits: 18..<19)
         var bkpsramen: BKPSRAMEN
 
         /// CRC clock enable
-        @ReadWrite(bits: 12..<13, as: CRCENValues.self)
+        @ReadWrite(bits: 12..<13)
         var crcen: CRCEN
 
         /// IO port K clock enable
-        @ReadWrite(bits: 10..<11, as: GPIOKENValues.self)
+        @ReadWrite(bits: 10..<11)
         var gpioken: GPIOKEN
 
         /// IO port J clock enable
-        @ReadWrite(bits: 9..<10, as: GPIOJENValues.self)
+        @ReadWrite(bits: 9..<10)
         var gpiojen: GPIOJEN
 
         /// IO port I clock enable
-        @ReadWrite(bits: 8..<9, as: GPIOIENValues.self)
+        @ReadWrite(bits: 8..<9)
         var gpioien: GPIOIEN
 
         /// IO port H clock enable
-        @ReadWrite(bits: 7..<8, as: GPIOHENValues.self)
+        @ReadWrite(bits: 7..<8)
         var gpiohen: GPIOHEN
 
         /// IO port G clock enable
-        @ReadWrite(bits: 6..<7, as: GPIOGENValues.self)
+        @ReadWrite(bits: 6..<7)
         var gpiogen: GPIOGEN
 
         /// IO port F clock enable
-        @ReadWrite(bits: 5..<6, as: GPIOFENValues.self)
+        @ReadWrite(bits: 5..<6)
         var gpiofen: GPIOFEN
 
         /// IO port E clock enable
-        @ReadWrite(bits: 4..<5, as: GPIOEENValues.self)
+        @ReadWrite(bits: 4..<5)
         var gpioeen: GPIOEEN
 
         /// IO port D clock enable
-        @ReadWrite(bits: 3..<4, as: GPIODENValues.self)
+        @ReadWrite(bits: 3..<4)
         var gpioden: GPIODEN
 
         /// IO port C clock enable
-        @ReadWrite(bits: 2..<3, as: GPIOCENValues.self)
+        @ReadWrite(bits: 2..<3)
         var gpiocen: GPIOCEN
 
         /// IO port B clock enable
-        @ReadWrite(bits: 1..<2, as: GPIOBENValues.self)
+        @ReadWrite(bits: 1..<2)
         var gpioben: GPIOBEN
 
         /// IO port A clock enable
@@ -739,19 +739,19 @@ extension RCC {
     @Register(bitWidth: 32)
     struct AHB2ENR {
         /// USB OTG FS clock enable
-        @ReadWrite(bits: 7..<8, as: OTGFSENValues.self)
+        @ReadWrite(bits: 7..<8)
         var otgfsen: OTGFSEN
 
         /// Random number generator clock enable
-        @ReadWrite(bits: 6..<7, as: RNGENValues.self)
+        @ReadWrite(bits: 6..<7)
         var rngen: RNGEN
 
         /// Hash modules clock enable
-        @ReadWrite(bits: 5..<6, as: HASHENValues.self)
+        @ReadWrite(bits: 5..<6)
         var hashen: HASHEN
 
         /// Cryptographic modules clock enable
-        @ReadWrite(bits: 4..<5, as: CRYPENValues.self)
+        @ReadWrite(bits: 4..<5)
         var crypen: CRYPEN
 
         /// Camera interface enable
@@ -767,7 +767,7 @@ extension RCC {
         var fmcen: FMCEN
 
         /// Quad SPI memory controller clock enable
-        @ReadWrite(bits: 1..<2, as: QSPIENValues.self)
+        @ReadWrite(bits: 1..<2)
         var qspien: QSPIEN
     }
 
@@ -779,115 +779,115 @@ extension RCC {
         var tim2en: TIM2EN
 
         /// TIM3 clock enable
-        @ReadWrite(bits: 1..<2, as: TIM3ENValues.self)
+        @ReadWrite(bits: 1..<2)
         var tim3en: TIM3EN
 
         /// TIM4 clock enable
-        @ReadWrite(bits: 2..<3, as: TIM4ENValues.self)
+        @ReadWrite(bits: 2..<3)
         var tim4en: TIM4EN
 
         /// TIM5 clock enable
-        @ReadWrite(bits: 3..<4, as: TIM5ENValues.self)
+        @ReadWrite(bits: 3..<4)
         var tim5en: TIM5EN
 
         /// TIM6 clock enable
-        @ReadWrite(bits: 4..<5, as: TIM6ENValues.self)
+        @ReadWrite(bits: 4..<5)
         var tim6en: TIM6EN
 
         /// TIM7 clock enable
-        @ReadWrite(bits: 5..<6, as: TIM7ENValues.self)
+        @ReadWrite(bits: 5..<6)
         var tim7en: TIM7EN
 
         /// TIM12 clock enable
-        @ReadWrite(bits: 6..<7, as: TIM12ENValues.self)
+        @ReadWrite(bits: 6..<7)
         var tim12en: TIM12EN
 
         /// TIM13 clock enable
-        @ReadWrite(bits: 7..<8, as: TIM13ENValues.self)
+        @ReadWrite(bits: 7..<8)
         var tim13en: TIM13EN
 
         /// TIM14 clock enable
-        @ReadWrite(bits: 8..<9, as: TIM14ENValues.self)
+        @ReadWrite(bits: 8..<9)
         var tim14en: TIM14EN
 
         /// Window watchdog clock enable
-        @ReadWrite(bits: 11..<12, as: WWDGENValues.self)
+        @ReadWrite(bits: 11..<12)
         var wwdgen: WWDGEN
 
         /// SPI2 clock enable
-        @ReadWrite(bits: 14..<15, as: SPI2ENValues.self)
+        @ReadWrite(bits: 14..<15)
         var spi2en: SPI2EN
 
         /// SPI3 clock enable
-        @ReadWrite(bits: 15..<16, as: SPI3ENValues.self)
+        @ReadWrite(bits: 15..<16)
         var spi3en: SPI3EN
 
         /// USART 2 clock enable
-        @ReadWrite(bits: 17..<18, as: USART2ENValues.self)
+        @ReadWrite(bits: 17..<18)
         var usart2en: USART2EN
 
         /// USART3 clock enable
-        @ReadWrite(bits: 18..<19, as: USART3ENValues.self)
+        @ReadWrite(bits: 18..<19)
         var usart3en: USART3EN
 
         /// UART4 clock enable
-        @ReadWrite(bits: 19..<20, as: UART4ENValues.self)
+        @ReadWrite(bits: 19..<20)
         var uart4en: UART4EN
 
         /// UART5 clock enable
-        @ReadWrite(bits: 20..<21, as: UART5ENValues.self)
+        @ReadWrite(bits: 20..<21)
         var uart5en: UART5EN
 
         /// I2C1 clock enable
-        @ReadWrite(bits: 21..<22, as: I2C1ENValues.self)
+        @ReadWrite(bits: 21..<22)
         var i2c1en: I2C1EN
 
         /// I2C2 clock enable
-        @ReadWrite(bits: 22..<23, as: I2C2ENValues.self)
+        @ReadWrite(bits: 22..<23)
         var i2c2en: I2C2EN
 
         /// I2C3 clock enable
-        @ReadWrite(bits: 23..<24, as: I2C3ENValues.self)
+        @ReadWrite(bits: 23..<24)
         var i2c3en: I2C3EN
 
         /// CAN 1 clock enable
-        @ReadWrite(bits: 25..<26, as: CAN1ENValues.self)
+        @ReadWrite(bits: 25..<26)
         var can1en: CAN1EN
 
         /// CAN 2 clock enable
-        @ReadWrite(bits: 26..<27, as: CAN2ENValues.self)
+        @ReadWrite(bits: 26..<27)
         var can2en: CAN2EN
 
         /// Power interface clock enable
-        @ReadWrite(bits: 28..<29, as: PWRENValues.self)
+        @ReadWrite(bits: 28..<29)
         var pwren: PWREN
 
         /// DAC interface clock enable
-        @ReadWrite(bits: 29..<30, as: DACENValues.self)
+        @ReadWrite(bits: 29..<30)
         var dacen: DACEN
 
         /// UART7 clock enable
-        @ReadWrite(bits: 30..<31, as: UART7ENValues.self)
+        @ReadWrite(bits: 30..<31)
         var uart7en: UART7EN
 
         /// UART8 clock enable
-        @ReadWrite(bits: 31..<32, as: UART8ENValues.self)
+        @ReadWrite(bits: 31..<32)
         var uart8en: UART8EN
 
         /// SPDIF-RX clock enable
-        @ReadWrite(bits: 16..<17, as: SPDIFRXENValues.self)
+        @ReadWrite(bits: 16..<17)
         var spdifrxen: SPDIFRXEN
 
         /// HDMI-CEN clock enable
-        @ReadWrite(bits: 27..<28, as: CECENValues.self)
+        @ReadWrite(bits: 27..<28)
         var cecen: CECEN
 
         /// Low power timer 1 clock enable
-        @ReadWrite(bits: 9..<10, as: LPTIM1ENValues.self)
+        @ReadWrite(bits: 9..<10)
         var lptim1en: LPTIM1EN
 
         /// I2C4 clock enable
-        @ReadWrite(bits: 24..<25, as: I2C4ENValues.self)
+        @ReadWrite(bits: 24..<25)
         var i2c4en: I2C4EN
     }
 
@@ -899,75 +899,75 @@ extension RCC {
         var tim1en: TIM1EN
 
         /// TIM8 clock enable
-        @ReadWrite(bits: 1..<2, as: TIM8ENValues.self)
+        @ReadWrite(bits: 1..<2)
         var tim8en: TIM8EN
 
         /// USART1 clock enable
-        @ReadWrite(bits: 4..<5, as: USART1ENValues.self)
+        @ReadWrite(bits: 4..<5)
         var usart1en: USART1EN
 
         /// USART6 clock enable
-        @ReadWrite(bits: 5..<6, as: USART6ENValues.self)
+        @ReadWrite(bits: 5..<6)
         var usart6en: USART6EN
 
         /// ADC1 clock enable
-        @ReadWrite(bits: 8..<9, as: ADC1ENValues.self)
+        @ReadWrite(bits: 8..<9)
         var adc1en: ADC1EN
 
         /// ADC2 clock enable
-        @ReadWrite(bits: 9..<10, as: ADC2ENValues.self)
+        @ReadWrite(bits: 9..<10)
         var adc2en: ADC2EN
 
         /// ADC3 clock enable
-        @ReadWrite(bits: 10..<11, as: ADC3ENValues.self)
+        @ReadWrite(bits: 10..<11)
         var adc3en: ADC3EN
 
         /// SPI1 clock enable
-        @ReadWrite(bits: 12..<13, as: SPI1ENValues.self)
+        @ReadWrite(bits: 12..<13)
         var spi1en: SPI1EN
 
         /// SPI4 clock enable
-        @ReadWrite(bits: 13..<14, as: SPI4ENValues.self)
+        @ReadWrite(bits: 13..<14)
         var spi4en: SPI4EN
 
         /// System configuration controller clock enable
-        @ReadWrite(bits: 14..<15, as: SYSCFGENValues.self)
+        @ReadWrite(bits: 14..<15)
         var syscfgen: SYSCFGEN
 
         /// TIM9 clock enable
-        @ReadWrite(bits: 16..<17, as: TIM9ENValues.self)
+        @ReadWrite(bits: 16..<17)
         var tim9en: TIM9EN
 
         /// TIM10 clock enable
-        @ReadWrite(bits: 17..<18, as: TIM10ENValues.self)
+        @ReadWrite(bits: 17..<18)
         var tim10en: TIM10EN
 
         /// TIM11 clock enable
-        @ReadWrite(bits: 18..<19, as: TIM11ENValues.self)
+        @ReadWrite(bits: 18..<19)
         var tim11en: TIM11EN
 
         /// SPI5 clock enable
-        @ReadWrite(bits: 20..<21, as: SPI5ENValues.self)
+        @ReadWrite(bits: 20..<21)
         var spi5en: SPI5EN
 
         /// SPI6 clock enable
-        @ReadWrite(bits: 21..<22, as: SPI6ENValues.self)
+        @ReadWrite(bits: 21..<22)
         var spi6en: SPI6EN
 
         /// SAI1 clock enable
-        @ReadWrite(bits: 22..<23, as: SAI1ENValues.self)
+        @ReadWrite(bits: 22..<23)
         var sai1en: SAI1EN
 
         /// LTDC clock enable
-        @ReadWrite(bits: 26..<27, as: LTDCENValues.self)
+        @ReadWrite(bits: 26..<27)
         var ltdcen: LTDCEN
 
         /// SAI2 clock enable
-        @ReadWrite(bits: 23..<24, as: SAI2ENValues.self)
+        @ReadWrite(bits: 23..<24)
         var sai2en: SAI2EN
 
         /// SDMMC1 clock enable
-        @ReadWrite(bits: 11..<12, as: SDMMC1ENValues.self)
+        @ReadWrite(bits: 11..<12)
         var sdmmc1en: SDMMC1EN
     }
 
@@ -979,103 +979,103 @@ extension RCC {
         var gpioalpen: GPIOALPEN
 
         /// IO port B clock enable during Sleep mode
-        @ReadWrite(bits: 1..<2, as: GPIOBLPENValues.self)
+        @ReadWrite(bits: 1..<2)
         var gpioblpen: GPIOBLPEN
 
         /// IO port C clock enable during Sleep mode
-        @ReadWrite(bits: 2..<3, as: GPIOCLPENValues.self)
+        @ReadWrite(bits: 2..<3)
         var gpioclpen: GPIOCLPEN
 
         /// IO port D clock enable during Sleep mode
-        @ReadWrite(bits: 3..<4, as: GPIODLPENValues.self)
+        @ReadWrite(bits: 3..<4)
         var gpiodlpen: GPIODLPEN
 
         /// IO port E clock enable during Sleep mode
-        @ReadWrite(bits: 4..<5, as: GPIOELPENValues.self)
+        @ReadWrite(bits: 4..<5)
         var gpioelpen: GPIOELPEN
 
         /// IO port F clock enable during Sleep mode
-        @ReadWrite(bits: 5..<6, as: GPIOFLPENValues.self)
+        @ReadWrite(bits: 5..<6)
         var gpioflpen: GPIOFLPEN
 
         /// IO port G clock enable during Sleep mode
-        @ReadWrite(bits: 6..<7, as: GPIOGLPENValues.self)
+        @ReadWrite(bits: 6..<7)
         var gpioglpen: GPIOGLPEN
 
         /// IO port H clock enable during Sleep mode
-        @ReadWrite(bits: 7..<8, as: GPIOHLPENValues.self)
+        @ReadWrite(bits: 7..<8)
         var gpiohlpen: GPIOHLPEN
 
         /// IO port I clock enable during Sleep mode
-        @ReadWrite(bits: 8..<9, as: GPIOILPENValues.self)
+        @ReadWrite(bits: 8..<9)
         var gpioilpen: GPIOILPEN
 
         /// IO port J clock enable during Sleep mode
-        @ReadWrite(bits: 9..<10, as: GPIOJLPENValues.self)
+        @ReadWrite(bits: 9..<10)
         var gpiojlpen: GPIOJLPEN
 
         /// IO port K clock enable during Sleep mode
-        @ReadWrite(bits: 10..<11, as: GPIOKLPENValues.self)
+        @ReadWrite(bits: 10..<11)
         var gpioklpen: GPIOKLPEN
 
         /// CRC clock enable during Sleep mode
-        @ReadWrite(bits: 12..<13, as: CRCLPENValues.self)
+        @ReadWrite(bits: 12..<13)
         var crclpen: CRCLPEN
 
         /// Flash interface clock enable during Sleep mode
-        @ReadWrite(bits: 15..<16, as: FLITFLPENValues.self)
+        @ReadWrite(bits: 15..<16)
         var flitflpen: FLITFLPEN
 
         /// SRAM 1interface clock enable during Sleep mode
-        @ReadWrite(bits: 16..<17, as: SRAM1LPENValues.self)
+        @ReadWrite(bits: 16..<17)
         var sram1lpen: SRAM1LPEN
 
         /// SRAM 2 interface clock enable during Sleep mode
-        @ReadWrite(bits: 17..<18, as: SRAM2LPENValues.self)
+        @ReadWrite(bits: 17..<18)
         var sram2lpen: SRAM2LPEN
 
         /// Backup SRAM interface clock enable during Sleep mode
-        @ReadWrite(bits: 18..<19, as: BKPSRAMLPENValues.self)
+        @ReadWrite(bits: 18..<19)
         var bkpsramlpen: BKPSRAMLPEN
 
         /// SRAM 3 interface clock enable during Sleep mode
-        @ReadWrite(bits: 19..<20, as: SRAM3LPENValues.self)
+        @ReadWrite(bits: 19..<20)
         var sram3lpen: SRAM3LPEN
 
         /// DMA1 clock enable during Sleep mode
-        @ReadWrite(bits: 21..<22, as: DMA1LPENValues.self)
+        @ReadWrite(bits: 21..<22)
         var dma1lpen: DMA1LPEN
 
         /// DMA2 clock enable during Sleep mode
-        @ReadWrite(bits: 22..<23, as: DMA2LPENValues.self)
+        @ReadWrite(bits: 22..<23)
         var dma2lpen: DMA2LPEN
 
         /// DMA2D clock enable during Sleep mode
-        @ReadWrite(bits: 23..<24, as: DMA2DLPENValues.self)
+        @ReadWrite(bits: 23..<24)
         var dma2dlpen: DMA2DLPEN
 
         /// Ethernet MAC clock enable during Sleep mode
-        @ReadWrite(bits: 25..<26, as: ETHMACLPENValues.self)
+        @ReadWrite(bits: 25..<26)
         var ethmaclpen: ETHMACLPEN
 
         /// Ethernet transmission clock enable during Sleep mode
-        @ReadWrite(bits: 26..<27, as: ETHMACTXLPENValues.self)
+        @ReadWrite(bits: 26..<27)
         var ethmactxlpen: ETHMACTXLPEN
 
         /// Ethernet reception clock enable during Sleep mode
-        @ReadWrite(bits: 27..<28, as: ETHMACRXLPENValues.self)
+        @ReadWrite(bits: 27..<28)
         var ethmacrxlpen: ETHMACRXLPEN
 
         /// Ethernet PTP clock enable during Sleep mode
-        @ReadWrite(bits: 28..<29, as: ETHMACPTPLPENValues.self)
+        @ReadWrite(bits: 28..<29)
         var ethmacptplpen: ETHMACPTPLPEN
 
         /// USB OTG HS clock enable during Sleep mode
-        @ReadWrite(bits: 29..<30, as: OTGHSLPENValues.self)
+        @ReadWrite(bits: 29..<30)
         var otghslpen: OTGHSLPEN
 
         /// USB OTG HS ULPI clock enable during Sleep mode
-        @ReadWrite(bits: 30..<31, as: OTGHSULPILPENValues.self)
+        @ReadWrite(bits: 30..<31)
         var otghsulpilpen: OTGHSULPILPEN
 
         /// AXI to AHB bridge clock enable during Sleep mode
@@ -1091,19 +1091,19 @@ extension RCC {
     @Register(bitWidth: 32)
     struct AHB2LPENR {
         /// USB OTG FS clock enable during Sleep mode
-        @ReadWrite(bits: 7..<8, as: OTGFSLPENValues.self)
+        @ReadWrite(bits: 7..<8)
         var otgfslpen: OTGFSLPEN
 
         /// Random number generator clock enable during Sleep mode
-        @ReadWrite(bits: 6..<7, as: RNGLPENValues.self)
+        @ReadWrite(bits: 6..<7)
         var rnglpen: RNGLPEN
 
         /// Hash modules clock enable during Sleep mode
-        @ReadWrite(bits: 5..<6, as: HASHLPENValues.self)
+        @ReadWrite(bits: 5..<6)
         var hashlpen: HASHLPEN
 
         /// Cryptography modules clock enable during Sleep mode
-        @ReadWrite(bits: 4..<5, as: CRYPLPENValues.self)
+        @ReadWrite(bits: 4..<5)
         var cryplpen: CRYPLPEN
 
         /// Camera interface enable during Sleep mode
@@ -1119,7 +1119,7 @@ extension RCC {
         var fmclpen: FMCLPEN
 
         /// Quand SPI memory controller clock enable during Sleep mode
-        @ReadWrite(bits: 1..<2, as: QSPILPENValues.self)
+        @ReadWrite(bits: 1..<2)
         var qspilpen: QSPILPEN
     }
 
@@ -1131,115 +1131,115 @@ extension RCC {
         var tim2lpen: TIM2LPEN
 
         /// TIM3 clock enable during Sleep mode
-        @ReadWrite(bits: 1..<2, as: TIM3LPENValues.self)
+        @ReadWrite(bits: 1..<2)
         var tim3lpen: TIM3LPEN
 
         /// TIM4 clock enable during Sleep mode
-        @ReadWrite(bits: 2..<3, as: TIM4LPENValues.self)
+        @ReadWrite(bits: 2..<3)
         var tim4lpen: TIM4LPEN
 
         /// TIM5 clock enable during Sleep mode
-        @ReadWrite(bits: 3..<4, as: TIM5LPENValues.self)
+        @ReadWrite(bits: 3..<4)
         var tim5lpen: TIM5LPEN
 
         /// TIM6 clock enable during Sleep mode
-        @ReadWrite(bits: 4..<5, as: TIM6LPENValues.self)
+        @ReadWrite(bits: 4..<5)
         var tim6lpen: TIM6LPEN
 
         /// TIM7 clock enable during Sleep mode
-        @ReadWrite(bits: 5..<6, as: TIM7LPENValues.self)
+        @ReadWrite(bits: 5..<6)
         var tim7lpen: TIM7LPEN
 
         /// TIM12 clock enable during Sleep mode
-        @ReadWrite(bits: 6..<7, as: TIM12LPENValues.self)
+        @ReadWrite(bits: 6..<7)
         var tim12lpen: TIM12LPEN
 
         /// TIM13 clock enable during Sleep mode
-        @ReadWrite(bits: 7..<8, as: TIM13LPENValues.self)
+        @ReadWrite(bits: 7..<8)
         var tim13lpen: TIM13LPEN
 
         /// TIM14 clock enable during Sleep mode
-        @ReadWrite(bits: 8..<9, as: TIM14LPENValues.self)
+        @ReadWrite(bits: 8..<9)
         var tim14lpen: TIM14LPEN
 
         /// Window watchdog clock enable during Sleep mode
-        @ReadWrite(bits: 11..<12, as: WWDGLPENValues.self)
+        @ReadWrite(bits: 11..<12)
         var wwdglpen: WWDGLPEN
 
         /// SPI2 clock enable during Sleep mode
-        @ReadWrite(bits: 14..<15, as: SPI2LPENValues.self)
+        @ReadWrite(bits: 14..<15)
         var spi2lpen: SPI2LPEN
 
         /// SPI3 clock enable during Sleep mode
-        @ReadWrite(bits: 15..<16, as: SPI3LPENValues.self)
+        @ReadWrite(bits: 15..<16)
         var spi3lpen: SPI3LPEN
 
         /// USART2 clock enable during Sleep mode
-        @ReadWrite(bits: 17..<18, as: USART2LPENValues.self)
+        @ReadWrite(bits: 17..<18)
         var usart2lpen: USART2LPEN
 
         /// USART3 clock enable during Sleep mode
-        @ReadWrite(bits: 18..<19, as: USART3LPENValues.self)
+        @ReadWrite(bits: 18..<19)
         var usart3lpen: USART3LPEN
 
         /// UART4 clock enable during Sleep mode
-        @ReadWrite(bits: 19..<20, as: UART4LPENValues.self)
+        @ReadWrite(bits: 19..<20)
         var uart4lpen: UART4LPEN
 
         /// UART5 clock enable during Sleep mode
-        @ReadWrite(bits: 20..<21, as: UART5LPENValues.self)
+        @ReadWrite(bits: 20..<21)
         var uart5lpen: UART5LPEN
 
         /// I2C1 clock enable during Sleep mode
-        @ReadWrite(bits: 21..<22, as: I2C1LPENValues.self)
+        @ReadWrite(bits: 21..<22)
         var i2c1lpen: I2C1LPEN
 
         /// I2C2 clock enable during Sleep mode
-        @ReadWrite(bits: 22..<23, as: I2C2LPENValues.self)
+        @ReadWrite(bits: 22..<23)
         var i2c2lpen: I2C2LPEN
 
         /// I2C3 clock enable during Sleep mode
-        @ReadWrite(bits: 23..<24, as: I2C3LPENValues.self)
+        @ReadWrite(bits: 23..<24)
         var i2c3lpen: I2C3LPEN
 
         /// CAN 1 clock enable during Sleep mode
-        @ReadWrite(bits: 25..<26, as: CAN1LPENValues.self)
+        @ReadWrite(bits: 25..<26)
         var can1lpen: CAN1LPEN
 
         /// CAN 2 clock enable during Sleep mode
-        @ReadWrite(bits: 26..<27, as: CAN2LPENValues.self)
+        @ReadWrite(bits: 26..<27)
         var can2lpen: CAN2LPEN
 
         /// Power interface clock enable during Sleep mode
-        @ReadWrite(bits: 28..<29, as: PWRLPENValues.self)
+        @ReadWrite(bits: 28..<29)
         var pwrlpen: PWRLPEN
 
         /// DAC interface clock enable during Sleep mode
-        @ReadWrite(bits: 29..<30, as: DACLPENValues.self)
+        @ReadWrite(bits: 29..<30)
         var daclpen: DACLPEN
 
         /// UART7 clock enable during Sleep mode
-        @ReadWrite(bits: 30..<31, as: UART7LPENValues.self)
+        @ReadWrite(bits: 30..<31)
         var uart7lpen: UART7LPEN
 
         /// UART8 clock enable during Sleep mode
-        @ReadWrite(bits: 31..<32, as: UART8LPENValues.self)
+        @ReadWrite(bits: 31..<32)
         var uart8lpen: UART8LPEN
 
         /// SPDIF-RX clock enable during sleep mode
-        @ReadWrite(bits: 16..<17, as: SPDIFRXLPENValues.self)
+        @ReadWrite(bits: 16..<17)
         var spdifrxlpen: SPDIFRXLPEN
 
         /// HDMI-CEN clock enable during Sleep mode
-        @ReadWrite(bits: 27..<28, as: CECLPENValues.self)
+        @ReadWrite(bits: 27..<28)
         var ceclpen: CECLPEN
 
         /// low power timer 1 clock enable during Sleep mode
-        @ReadWrite(bits: 9..<10, as: LPTIM1LPENValues.self)
+        @ReadWrite(bits: 9..<10)
         var lptim1lpen: LPTIM1LPEN
 
         /// I2C4 clock enable during Sleep mode
-        @ReadWrite(bits: 24..<25, as: I2C4LPENValues.self)
+        @ReadWrite(bits: 24..<25)
         var i2c4lpen: I2C4LPEN
     }
 
@@ -1251,75 +1251,75 @@ extension RCC {
         var tim1lpen: TIM1LPEN
 
         /// TIM8 clock enable during Sleep mode
-        @ReadWrite(bits: 1..<2, as: TIM8LPENValues.self)
+        @ReadWrite(bits: 1..<2)
         var tim8lpen: TIM8LPEN
 
         /// USART1 clock enable during Sleep mode
-        @ReadWrite(bits: 4..<5, as: USART1LPENValues.self)
+        @ReadWrite(bits: 4..<5)
         var usart1lpen: USART1LPEN
 
         /// USART6 clock enable during Sleep mode
-        @ReadWrite(bits: 5..<6, as: USART6LPENValues.self)
+        @ReadWrite(bits: 5..<6)
         var usart6lpen: USART6LPEN
 
         /// ADC1 clock enable during Sleep mode
-        @ReadWrite(bits: 8..<9, as: ADC1LPENValues.self)
+        @ReadWrite(bits: 8..<9)
         var adc1lpen: ADC1LPEN
 
         /// ADC2 clock enable during Sleep mode
-        @ReadWrite(bits: 9..<10, as: ADC2LPENValues.self)
+        @ReadWrite(bits: 9..<10)
         var adc2lpen: ADC2LPEN
 
         /// ADC 3 clock enable during Sleep mode
-        @ReadWrite(bits: 10..<11, as: ADC3LPENValues.self)
+        @ReadWrite(bits: 10..<11)
         var adc3lpen: ADC3LPEN
 
         /// SPI 1 clock enable during Sleep mode
-        @ReadWrite(bits: 12..<13, as: SPI1LPENValues.self)
+        @ReadWrite(bits: 12..<13)
         var spi1lpen: SPI1LPEN
 
         /// SPI 4 clock enable during Sleep mode
-        @ReadWrite(bits: 13..<14, as: SPI4LPENValues.self)
+        @ReadWrite(bits: 13..<14)
         var spi4lpen: SPI4LPEN
 
         /// System configuration controller clock enable during Sleep mode
-        @ReadWrite(bits: 14..<15, as: SYSCFGLPENValues.self)
+        @ReadWrite(bits: 14..<15)
         var syscfglpen: SYSCFGLPEN
 
         /// TIM9 clock enable during sleep mode
-        @ReadWrite(bits: 16..<17, as: TIM9LPENValues.self)
+        @ReadWrite(bits: 16..<17)
         var tim9lpen: TIM9LPEN
 
         /// TIM10 clock enable during Sleep mode
-        @ReadWrite(bits: 17..<18, as: TIM10LPENValues.self)
+        @ReadWrite(bits: 17..<18)
         var tim10lpen: TIM10LPEN
 
         /// TIM11 clock enable during Sleep mode
-        @ReadWrite(bits: 18..<19, as: TIM11LPENValues.self)
+        @ReadWrite(bits: 18..<19)
         var tim11lpen: TIM11LPEN
 
         /// SPI 5 clock enable during Sleep mode
-        @ReadWrite(bits: 20..<21, as: SPI5LPENValues.self)
+        @ReadWrite(bits: 20..<21)
         var spi5lpen: SPI5LPEN
 
         /// SPI 6 clock enable during Sleep mode
-        @ReadWrite(bits: 21..<22, as: SPI6LPENValues.self)
+        @ReadWrite(bits: 21..<22)
         var spi6lpen: SPI6LPEN
 
         /// SAI1 clock enable during sleep mode
-        @ReadWrite(bits: 22..<23, as: SAI1LPENValues.self)
+        @ReadWrite(bits: 22..<23)
         var sai1lpen: SAI1LPEN
 
         /// LTDC clock enable during sleep mode
-        @ReadWrite(bits: 26..<27, as: LTDCLPENValues.self)
+        @ReadWrite(bits: 26..<27)
         var ltdclpen: LTDCLPEN
 
         /// SAI2 clock enable during sleep mode
-        @ReadWrite(bits: 23..<24, as: SAI2LPENValues.self)
+        @ReadWrite(bits: 23..<24)
         var sai2lpen: SAI2LPEN
 
         /// SDMMC1 clock enable during Sleep mode
-        @ReadWrite(bits: 11..<12, as: SDMMC1LPENValues.self)
+        @ReadWrite(bits: 11..<12)
         var sdmmc1lpen: SDMMC1LPEN
     }
 
@@ -1359,27 +1359,27 @@ extension RCC {
     @Register(bitWidth: 32)
     struct CSR {
         /// Low-power reset flag
-        @ReadWrite(bits: 31..<32, as: LPWRRSTFValues.self)
+        @ReadWrite(bits: 31..<32)
         var lpwrrstf: LPWRRSTF
 
         /// Window watchdog reset flag
-        @ReadWrite(bits: 30..<31, as: WWDGRSTFValues.self)
+        @ReadWrite(bits: 30..<31)
         var wwdgrstf: WWDGRSTF
 
         /// Independent watchdog reset flag
-        @ReadWrite(bits: 29..<30, as: WDGRSTFValues.self)
+        @ReadWrite(bits: 29..<30)
         var wdgrstf: WDGRSTF
 
         /// Software reset flag
-        @ReadWrite(bits: 28..<29, as: SFTRSTFValues.self)
+        @ReadWrite(bits: 28..<29)
         var sftrstf: SFTRSTF
 
         /// POR/PDR reset flag
-        @ReadWrite(bits: 27..<28, as: PORRSTFValues.self)
+        @ReadWrite(bits: 27..<28)
         var porrstf: PORRSTF
 
         /// PIN reset flag
-        @ReadWrite(bits: 26..<27, as: PADRSTFValues.self)
+        @ReadWrite(bits: 26..<27)
         var padrstf: PADRSTF
 
         /// BOR reset flag
@@ -1499,27 +1499,27 @@ extension RCC {
         var usart2sel: USART2SEL
 
         /// USART 3 clock source selection
-        @ReadWrite(bits: 4..<6, as: USART3SELValues.self)
+        @ReadWrite(bits: 4..<6)
         var usart3sel: USART3SEL
 
         /// UART 4 clock source selection
-        @ReadWrite(bits: 6..<8, as: UART4SELValues.self)
+        @ReadWrite(bits: 6..<8)
         var uart4sel: UART4SEL
 
         /// UART 5 clock source selection
-        @ReadWrite(bits: 8..<10, as: UART5SELValues.self)
+        @ReadWrite(bits: 8..<10)
         var uart5sel: UART5SEL
 
         /// USART 6 clock source selection
-        @ReadWrite(bits: 10..<12, as: USART6SELValues.self)
+        @ReadWrite(bits: 10..<12)
         var usart6sel: USART6SEL
 
         /// UART 7 clock source selection
-        @ReadWrite(bits: 12..<14, as: UART7SELValues.self)
+        @ReadWrite(bits: 12..<14)
         var uart7sel: UART7SEL
 
         /// UART 8 clock source selection
-        @ReadWrite(bits: 14..<16, as: UART8SELValues.self)
+        @ReadWrite(bits: 14..<16)
         var uart8sel: UART8SEL
 
         /// I2C1 clock source selection
@@ -1527,15 +1527,15 @@ extension RCC {
         var i2c1sel: I2C1SEL
 
         /// I2C2 clock source selection
-        @ReadWrite(bits: 18..<20, as: I2C2SELValues.self)
+        @ReadWrite(bits: 18..<20)
         var i2c2sel: I2C2SEL
 
         /// I2C3 clock source selection
-        @ReadWrite(bits: 20..<22, as: I2C3SELValues.self)
+        @ReadWrite(bits: 20..<22)
         var i2c3sel: I2C3SEL
 
         /// I2C4 clock source selection
-        @ReadWrite(bits: 22..<24, as: I2C4SELValues.self)
+        @ReadWrite(bits: 22..<24)
         var i2c4sel: I2C4SEL
 
         /// Low power timer 1 clock source selection
@@ -1553,58 +1553,6 @@ extension RCC {
         /// SDMMC clock source selection
         @ReadWrite(bits: 28..<29, as: SDMMC1SELValues.self)
         var sdmmc1sel: SDMMC1SEL
-    }
-}
-
-extension RCC.CR {
-    struct PLLI2SRDYValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
-    struct PLLI2SONValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
-    struct PLLRDYValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
-    struct PLLONValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
     }
 }
 
@@ -1647,32 +1595,6 @@ extension RCC.CR {
 }
 
 extension RCC.CR {
-    struct HSERDYValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
-    struct HSEONValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
     struct HSIONValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
 
@@ -1681,32 +1603,6 @@ extension RCC.CR {
 
         /// Clock On
         static let On = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
-    struct PLLSAIRDYValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CR {
-    struct PLLSAIONValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -1787,19 +1683,6 @@ extension RCC.CFGR {
 }
 
 extension RCC.CFGR {
-    struct MCO2PREValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 3
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CFGR {
     struct MCO1PREValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 3
 
@@ -1861,19 +1744,6 @@ extension RCC.CFGR {
 
         /// PLL clock selected
         static let PLL = Self(rawValue: 0x3)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CFGR {
-    struct PPRE2Values: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 3
 
         var rawValue: UInt8
 
@@ -1975,162 +1845,6 @@ extension RCC.CFGR {
 }
 
 extension RCC.CIR {
-    struct PLLSAIRDYCValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLI2SRDYCValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLRDYCValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct HSERDYCValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct HSIRDYCValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct LSERDYCValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLSAIRDYIEValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLI2SRDYIEValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLRDYIEValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct HSERDYIEValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct HSIRDYIEValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct LSERDYIEValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
     struct LSIRDYIEValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
 
@@ -2149,350 +1863,12 @@ extension RCC.CIR {
     }
 }
 
-extension RCC.CIR {
-    struct PLLSAIRDYFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLI2SRDYFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct PLLRDYFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct HSERDYFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct HSIRDYFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CIR {
-    struct LSERDYFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct OTGHSRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct ETHMACRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct DMA2DRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct DMA2RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct DMA1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct CRCRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOKRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOJRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOIRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOHRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOGRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOFRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOERSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIODRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOCRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1RSTR {
-    struct GPIOBRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.AHB1RSTR {
     struct GPIOARSTValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
 
         /// Reset the selected module
         static let Reset = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2RSTR {
-    struct OTGFSRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2RSTR {
-    struct RNGRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2RSTR {
-    struct HSAHRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2RSTR {
-    struct CRYPRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -2535,389 +1911,12 @@ extension RCC.AHB3RSTR {
     }
 }
 
-extension RCC.AHB3RSTR {
-    struct QSPIRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.APB1RSTR {
     struct TIM2RSTValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
 
         /// Reset the selected module
         static let Reset = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM3RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM4RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM5RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM6RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM7RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM12RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM13RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct TIM14RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct WWDGRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct SPI2RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct SPI3RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct USART2RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct USART3RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct UART4RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct UART5RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct I2C1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct I2C2RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct I2C3RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct CAN1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct CAN2RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct PWRRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct DACRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct UART7RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct UART8RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct SPDIFRXRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct CECRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct LPTIM1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1RSTR {
-    struct I2C4RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -2944,500 +1943,6 @@ extension RCC.APB2RSTR {
     }
 }
 
-extension RCC.APB2RSTR {
-    struct TIM8RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct USART1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct USART6RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct ADCRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SPI1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SPI4RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SYSCFGRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct TIM9RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct TIM10RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct TIM11RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SPI5RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SPI6RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SAI1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct LTDCRSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SAI2RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2RSTR {
-    struct SDMMC1RSTValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct OTGHSULPIENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct OTGHSENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct ETHMACPTPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct ETHMACRXENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct ETHMACTXENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct ETHMACENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct DMA2DENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct DMA2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct DMA1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct DTCMRAMENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct BKPSRAMENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct CRCENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOKENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOJENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOIENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOHENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOGENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOFENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOEENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIODENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOCENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1ENR {
-    struct GPIOBENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.AHB1ENR {
     struct GPIOAENValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
@@ -3447,58 +1952,6 @@ extension RCC.AHB1ENR {
 
         /// The selected clock is enabled
         static let Enabled = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2ENR {
-    struct OTGFSENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2ENR {
-    struct RNGENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2ENR {
-    struct HASHENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2ENR {
-    struct CRYPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -3547,19 +2000,6 @@ extension RCC.AHB3ENR {
     }
 }
 
-extension RCC.AHB3ENR {
-    struct QSPIENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.APB1ENR {
     struct TIM2ENValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
@@ -3569,370 +2009,6 @@ extension RCC.APB1ENR {
 
         /// The selected clock is enabled
         static let Enabled = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM3ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM4ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM5ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM6ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM7ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM12ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM13ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct TIM14ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct WWDGENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct SPI2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct SPI3ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct USART2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct USART3ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct UART4ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct UART5ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct I2C1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct I2C2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct I2C3ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct CAN1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct CAN2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct PWRENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct DACENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct UART7ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct UART8ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct SPDIFRXENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct CECENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct LPTIM1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1ENR {
-    struct I2C4ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -3962,240 +2038,6 @@ extension RCC.APB2ENR {
     }
 }
 
-extension RCC.APB2ENR {
-    struct TIM8ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct USART1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct USART6ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct ADC1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct ADC2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct ADC3ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SPI1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SPI4ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SYSCFGENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct TIM9ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct TIM10ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct TIM11ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SPI5ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SPI6ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SAI1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct LTDCENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SAI2ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2ENR {
-    struct SDMMC1ENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.AHB1LPENR {
     struct GPIOALPENValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
@@ -4205,383 +2047,6 @@ extension RCC.AHB1LPENR {
 
         /// Selected module is enabled during Sleep mode
         static let EnabledInSleep = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOBLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOCLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIODLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOELPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOFLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOGLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOHLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOILPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOJLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct GPIOKLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct CRCLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct FLITFLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct SRAM1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct SRAM2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct BKPSRAMLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct SRAM3LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct DMA1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct DMA2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct DMA2DLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct ETHMACLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct ETHMACTXLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct ETHMACRXLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct ETHMACPTPLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct OTGHSLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB1LPENR {
-    struct OTGHSULPILPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2LPENR {
-    struct OTGFSLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2LPENR {
-    struct RNGLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2LPENR {
-    struct HASHLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.AHB2LPENR {
-    struct CRYPLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -4630,19 +2095,6 @@ extension RCC.AHB3LPENR {
     }
 }
 
-extension RCC.AHB3LPENR {
-    struct QSPILPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.APB1LPENR {
     struct TIM2LPENValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
@@ -4662,370 +2114,6 @@ extension RCC.APB1LPENR {
     }
 }
 
-extension RCC.APB1LPENR {
-    struct TIM3LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM4LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM5LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM6LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM7LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM12LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM13LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct TIM14LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct WWDGLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct SPI2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct SPI3LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct USART2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct USART3LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct UART4LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct UART5LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct I2C1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct I2C2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct I2C3LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct CAN1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct CAN2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct PWRLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct DACLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct UART7LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct UART8LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct SPDIFRXLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct CECLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct LPTIM1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB1LPENR {
-    struct I2C4LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
 extension RCC.APB2LPENR {
     struct TIM1LPENValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 1
@@ -5035,240 +2123,6 @@ extension RCC.APB2LPENR {
 
         /// Selected module is enabled during Sleep mode
         static let EnabledInSleep = Self(rawValue: 0x1)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct TIM8LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct USART1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct USART6LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct ADC1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct ADC2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct ADC3LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SPI1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SPI4LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SYSCFGLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct TIM9LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct TIM10LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct TIM11LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SPI5LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SPI6LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SAI1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct LTDCLPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SAI2LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.APB2LPENR {
-    struct SDMMC1LPENValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -5395,84 +2249,6 @@ extension RCC.BDCR {
 
         /// HSE oscillator clock divided by a prescaler used as RTC clock
         static let HSE = Self(rawValue: 0x3)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CSR {
-    struct LPWRRSTFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CSR {
-    struct WWDGRSTFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CSR {
-    struct WDGRSTFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CSR {
-    struct SFTRSTFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CSR {
-    struct PORRSTFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.CSR {
-    struct PADRSTFValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 1
 
         var rawValue: UInt8
 
@@ -5953,84 +2729,6 @@ extension RCC.DCKCFGR2 {
 }
 
 extension RCC.DCKCFGR2 {
-    struct USART3SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct UART4SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct UART5SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct USART6SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct UART7SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct UART8SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
     struct I2C1SELValues: BitFieldProjectable, RawRepresentable {
         static let bitWidth = 2
 
@@ -6042,45 +2740,6 @@ extension RCC.DCKCFGR2 {
 
         /// HSI clock selected as I2C clock
         static let HSI = Self(rawValue: 0x2)
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct I2C2SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct I2C3SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
-
-        var rawValue: UInt8
-
-        @inlinable @inline(__always)
-        init(rawValue: Self.RawValue) {
-            self.rawValue = rawValue
-        }
-    }
-}
-
-extension RCC.DCKCFGR2 {
-    struct I2C4SELValues: BitFieldProjectable, RawRepresentable {
-        static let bitWidth = 2
 
         var rawValue: UInt8
 
