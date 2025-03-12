@@ -69,7 +69,7 @@ extension SPINeoPixel {
     let peripheral = UInt32(spi.dr.unsafeAddress)
     let count = UInt32(
       self.pixels.buffer.count * MemoryLayout<SPINeoPixelGRB64Pixel>.size)
-    
+
     let index = 4
     self.dma.st[index].cr.modify { rw in
       rw.raw.chsel = 0  // Set the DMA channel to 0 (spi tx).
