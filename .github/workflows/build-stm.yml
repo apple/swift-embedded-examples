@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         example: [stm32-blink]
-        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
+        swift: [swift-DEVELOPMENT-SNAPSHOT-2025-03-04-a]
 
     steps:
       - name: Checkout repo

@@ -115,7 +115,7 @@ extension GPIOA {
     var moder1: MODER1
 
     /// Port x configuration bits (y = 0..15)
-    @ReadWrite(bits: 0..<2)
+    @ReadWrite(bits: 0..<2, as: MODER0Values.self)
     var moder0: MODER0
   }
 
@@ -183,7 +183,7 @@ extension GPIOA {
     var ot1: OT1
 
     /// Port x configuration bits (y = 0..15)
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: OT0Values.self)
     var ot0: OT0
   }
 
@@ -251,7 +251,7 @@ extension GPIOA {
     var ospeedr1: OSPEEDR1
 
     /// Port x configuration bits (y = 0..15)
-    @ReadWrite(bits: 0..<2)
+    @ReadWrite(bits: 0..<2, as: OSPEEDR0Values.self)
     var ospeedr0: OSPEEDR0
   }
 
@@ -319,7 +319,7 @@ extension GPIOA {
     var pupdr1: PUPDR1
 
     /// Port x configuration bits (y = 0..15)
-    @ReadWrite(bits: 0..<2)
+    @ReadWrite(bits: 0..<2, as: PUPDR0Values.self)
     var pupdr0: PUPDR0
   }
 
@@ -455,7 +455,7 @@ extension GPIOA {
     var odr1: ODR1
 
     /// Port output data (y = 0..15)
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: ODR0Values.self)
     var odr0: ODR0
   }
 
@@ -595,7 +595,7 @@ extension GPIOA {
   @Register(bitWidth: 32)
   struct LCKR {
     /// Port x lock bit y (y= 0..15)
-    @ReadWrite(bits: 16..<17)
+    @ReadWrite(bits: 16..<17, as: LCKKValues.self)
     var lckk: LCKK
 
     /// Port x lock bit y (y= 0..15)
@@ -659,7 +659,7 @@ extension GPIOA {
     var lck1: LCK1
 
     /// Port x lock bit y (y= 0..15)
-    @ReadWrite(bits: 0..<1)
+    @ReadWrite(bits: 0..<1, as: LCK0Values.self)
     var lck0: LCK0
   }
 
@@ -695,7 +695,7 @@ extension GPIOA {
     var afrl1: AFRL1
 
     /// Alternate function selection for port x bit y (y = 0..7)
-    @ReadWrite(bits: 0..<4)
+    @ReadWrite(bits: 0..<4, as: AFRL0Values.self)
     var afrl0: AFRL0
   }
 
@@ -731,7 +731,7 @@ extension GPIOA {
     var afrh9: AFRH9
 
     /// Alternate function selection for port x bit y (y = 8..15)
-    @ReadWrite(bits: 0..<4)
+    @ReadWrite(bits: 0..<4, as: AFRH8Values.self)
     var afrh8: AFRH8
   }
 
@@ -801,5 +801,275 @@ extension GPIOA {
     /// Port A Reset bit 15
     @ReadWrite(bits: 15..<16)
     var br15: BR15
+  }
+}
+
+extension GPIOA.MODER {
+  struct MODER0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// Input mode (reset state)
+    static let Input = Self(rawValue: 0x0)
+
+    /// General purpose output mode
+    static let Output = Self(rawValue: 0x1)
+
+    /// Alternate function mode
+    static let Alternate = Self(rawValue: 0x2)
+
+    /// Analog mode
+    static let Analog = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.OTYPER {
+  struct OT0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Output push-pull (reset state)
+    static let PushPull = Self(rawValue: 0x0)
+
+    /// Output open-drain
+    static let OpenDrain = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.OSPEEDR {
+  struct OSPEEDR0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// Low speed
+    static let LowSpeed = Self(rawValue: 0x0)
+
+    /// Medium speed
+    static let MediumSpeed = Self(rawValue: 0x1)
+
+    /// High speed
+    static let HighSpeed = Self(rawValue: 0x2)
+
+    /// Very high speed
+    static let VeryHighSpeed = Self(rawValue: 0x3)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.PUPDR {
+  struct PUPDR0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 2
+
+    /// No pull-up, pull-down
+    static let Floating = Self(rawValue: 0x0)
+
+    /// Pull-up
+    static let PullUp = Self(rawValue: 0x1)
+
+    /// Pull-down
+    static let PullDown = Self(rawValue: 0x2)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.ODR {
+  struct ODR0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Set output to logic low
+    static let Low = Self(rawValue: 0x0)
+
+    /// Set output to logic high
+    static let High = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.LCKR {
+  struct LCKKValues: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Port configuration lock key not active
+    static let NotActive = Self(rawValue: 0x0)
+
+    /// Port configuration lock key active
+    static let Active = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.LCKR {
+  struct LCK0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 1
+
+    /// Port configuration not locked
+    static let Unlocked = Self(rawValue: 0x0)
+
+    /// Port configuration locked
+    static let Locked = Self(rawValue: 0x1)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.AFRL {
+  struct AFRL0Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 4
+
+    /// AF0
+    static let AF0 = Self(rawValue: 0x0)
+
+    /// AF1
+    static let AF1 = Self(rawValue: 0x1)
+
+    /// AF2
+    static let AF2 = Self(rawValue: 0x2)
+
+    /// AF3
+    static let AF3 = Self(rawValue: 0x3)
+
+    /// AF4
+    static let AF4 = Self(rawValue: 0x4)
+
+    /// AF5
+    static let AF5 = Self(rawValue: 0x5)
+
+    /// AF6
+    static let AF6 = Self(rawValue: 0x6)
+
+    /// AF7
+    static let AF7 = Self(rawValue: 0x7)
+
+    /// AF8
+    static let AF8 = Self(rawValue: 0x8)
+
+    /// AF9
+    static let AF9 = Self(rawValue: 0x9)
+
+    /// AF10
+    static let AF10 = Self(rawValue: 0xa)
+
+    /// AF11
+    static let AF11 = Self(rawValue: 0xb)
+
+    /// AF12
+    static let AF12 = Self(rawValue: 0xc)
+
+    /// AF13
+    static let AF13 = Self(rawValue: 0xd)
+
+    /// AF14
+    static let AF14 = Self(rawValue: 0xe)
+
+    /// AF15
+    static let AF15 = Self(rawValue: 0xf)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
+  }
+}
+
+extension GPIOA.AFRH {
+  struct AFRH8Values: BitFieldProjectable, RawRepresentable {
+    static let bitWidth = 4
+
+    /// AF0
+    static let AF0 = Self(rawValue: 0x0)
+
+    /// AF1
+    static let AF1 = Self(rawValue: 0x1)
+
+    /// AF2
+    static let AF2 = Self(rawValue: 0x2)
+
+    /// AF3
+    static let AF3 = Self(rawValue: 0x3)
+
+    /// AF4
+    static let AF4 = Self(rawValue: 0x4)
+
+    /// AF5
+    static let AF5 = Self(rawValue: 0x5)
+
+    /// AF6
+    static let AF6 = Self(rawValue: 0x6)
+
+    /// AF7
+    static let AF7 = Self(rawValue: 0x7)
+
+    /// AF8
+    static let AF8 = Self(rawValue: 0x8)
+
+    /// AF9
+    static let AF9 = Self(rawValue: 0x9)
+
+    /// AF10
+    static let AF10 = Self(rawValue: 0xa)
+
+    /// AF11
+    static let AF11 = Self(rawValue: 0xb)
+
+    /// AF12
+    static let AF12 = Self(rawValue: 0xc)
+
+    /// AF13
+    static let AF13 = Self(rawValue: 0xd)
+
+    /// AF14
+    static let AF14 = Self(rawValue: 0xe)
+
+    /// AF15
+    static let AF15 = Self(rawValue: 0xf)
+
+    var rawValue: UInt8
+
+    @inlinable @inline(__always)
+    init(rawValue: Self.RawValue) {
+      self.rawValue = rawValue
+    }
   }
 }
