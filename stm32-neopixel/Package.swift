@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.2
 
 import PackageDescription
 
@@ -8,22 +8,22 @@ let package = Package(
     .macOS(.v10_15)
   ],
   products: [
-    .library(name: "Application", type: .static, targets: ["Application"])
+    .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    .package(
-      url: "https://github.com/apple/swift-mmio",
-      branch: "swift-embedded-examples")
+    .package(url: "https://github.com/apple/swift-mmio", branch: "main")
   ],
   targets: [
-    .target(
+    // SVD2Swift \
+    // -i ../Tools/SVDs/stm32f7x6.patched.svd \
+    // -o Sources/Application/Registers \
+    // --indentation-width 2 \
+    // -p DMA1 DMA2 GPIOA GPIOB GPIOI RCC SPI1 SPI2 USART1
+    .executableTarget(
       name: "Application",
       dependencies: [
         .product(name: "MMIO", package: "swift-mmio"),
         "Support",
-      ],
-      swiftSettings: [
-        .enableExperimentalFeature("Embedded")
       ]),
     .target(name: "Support"),
   ])

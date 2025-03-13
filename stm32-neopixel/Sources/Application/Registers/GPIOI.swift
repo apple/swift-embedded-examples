@@ -2,4 +2,6 @@
 
 import MMIO
 
+/// General-purpose I/Os
 typealias GPIOI = GPIOA
+
