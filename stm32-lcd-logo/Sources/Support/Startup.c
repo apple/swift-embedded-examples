@@ -16,6 +16,7 @@ extern int main(int argc, char *argv[]);
 
 void reset(void) {
     main(0, NULL);
+    while (1) {}
 }
 
 void interrupt(void) {
@@ -24,7 +25,7 @@ void interrupt(void) {
 
 __attribute((used)) __attribute((section("__VECTORS,__text")))
 void *vector_table[114] = {
-    (void *)0x2000fffc, // initial SP
+    (void *)0x20050000, // initial SP
     reset, // Reset
 
     interrupt, // NMI

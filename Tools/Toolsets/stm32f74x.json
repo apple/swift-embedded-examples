@@ -13,11 +13,11 @@
       "-arch", "armv7em",
       "-dead_strip",
       "-static",
-      "-e", "_reset",
+      "-e", "_vector_table",
       "-no_zero_fill_sections",
       "-segalign", "4",
-      "-segaddr", "__VECTORS", "0x20010000",
-      "-seg1addr", "0x20010200",
+      "-segaddr", "__VECTORS", "0x08000000",
+      "-seg1addr", "0x08000200",
       "-pagezero_size", "0",
       "-allow_dead_duplicates"
     ]

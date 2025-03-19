@@ -46,7 +46,7 @@ build:
 
 	@echo "extracting binary..."
 	$(MACHO2BIN) \
-		$(BUILDROOT)/Application $(BUILDROOT)/Application.bin --base-address 0x20010000 --segments '__TEXT,__DATA,__VECTORS'
+		$(BUILDROOT)/Application $(BUILDROOT)/Application.bin --base-address 0x08000000 --segments '__TEXT,__DATA,__VECTORS'
 
 .PHONY: clean
 clean:
