@@ -1,4 +1,10 @@
-#!/usr/bin/env python3 -u -tt
+#! /usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = [
+#   "macholib==1.16.3",
+# ]
+# ///
 
 # This source file is part of the Swift open source project
 #
