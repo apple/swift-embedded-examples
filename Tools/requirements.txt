@@ -1,2 +1,0 @@
-macholib==1.16.3
-pyelftools==0.31
