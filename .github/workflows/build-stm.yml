@@ -28,6 +28,9 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
       - name: Install ${{ matrix.swift }}
         run: |
           wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
@@ -39,6 +42,5 @@ jobs:
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
         run: |
-          pip3 install -r ../Tools/requirements.txt
           export STM_BOARD=STM32F746G_DISCOVERY
           ./build-elf.sh

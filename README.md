@@ -19,14 +19,9 @@ Each example in this repository contains build and deployment instructions, howe
 	
   You can follow the [tutorial here](https://apple.github.io/swift-matter-examples/tutorials/swiftmatterexamples/setup-macos/) for instructions on installing and using nighly Swift toolchains.
 
-2. Install the Python3 dependencies listed in `requirements.txt`.
+2. Install [`uv`](https://github.com/astral-sh/uv) "an extremely fast Python package and project manager".
 
-  ```console
-  $ cd swift-embedded-examples
-  $ python3 -m venv .venv
-  $ source .venv/bin/activate
-  $ python3 -m pip install -r Tools/requirements.txt
-  ```
+  You can follow the [instructions here](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
 
 ## Catalog of Examples
 

@@ -1,4 +1,10 @@
-#!/usr/bin/env -S python3 -u -tt
+#! /usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = [
+#   "pyelftools==0.31",
+# ]
+# ///
 
 # This source file is part of the Swift open source project
 #
