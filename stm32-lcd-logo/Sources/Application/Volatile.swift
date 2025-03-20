@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+import Support
+
 extension UnsafeMutablePointer where Pointee == UInt32 {
   func volatileLoad() -> Pointee {
     volatile_load_uint32_t(self)
