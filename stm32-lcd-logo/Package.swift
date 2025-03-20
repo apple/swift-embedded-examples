@@ -22,7 +22,7 @@ let package = Package(
       name: "Application",
       dependencies: [
         // .product(name: "MMIO", package: "swift-mmio"),
-        "Support",
+        "Support"
       ]),
     .target(name: "Support"),
   ])
