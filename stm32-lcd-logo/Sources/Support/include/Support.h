@@ -25,4 +25,4 @@ static inline void nop() {
     asm volatile("nop");
 }
 
-extern uint32_t *logoPixelDataStartPointer;
+extern uint32_t const * const logoPixelDataStartPointer;
