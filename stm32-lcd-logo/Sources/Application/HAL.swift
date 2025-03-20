@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+import Support
+
 public protocol GPIOPlatform {
   associatedtype Pin
   static func configure(_ pin: Pin, _ configuration: GPIOConfiguration)
