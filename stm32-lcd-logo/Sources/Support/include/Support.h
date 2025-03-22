@@ -11,10 +11,6 @@
 
 #pragma once
 
-#include <stdint.h>
-
 static inline void nop() {
     asm volatile("nop");
 }
-
-extern uint32_t const * const logoPixelDataStartPointer;

@@ -12,7 +12,7 @@
 import Support
 
 @main
-struct Main {
+struct Application {
   static let logoSize = Size(
     width: LTDC.Constants.layerWidth,
     height: LTDC.Constants.layerHeight)
