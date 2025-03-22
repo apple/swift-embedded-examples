@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "stm32-lcd-logo",
   platforms: [
-    .macOS(.v10_15)
+    .macOS("16")
   ],
   products: [
     .executable(name: "Application", targets: ["Application"])
@@ -23,6 +23,10 @@ let package = Package(
       dependencies: [
         .product(name: "MMIO", package: "swift-mmio"),
         "Support",
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("InlineArrayTypeSugar"),
+        .enableExperimentalFeature("SymbolLinkageMarkers"),
       ]),
     .target(name: "Support"),
   ])
