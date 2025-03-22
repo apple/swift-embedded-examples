@@ -9,36 +9,34 @@
 //
 //===----------------------------------------------------------------------===//
 
+import Support
+
 @main
 struct Main {
+  static let logoSize = Size(
+    width: LTDC.Constants.layerWidth,
+    height: LTDC.Constants.layerHeight)
+  static let displaySize = Size(
+    width: LTDC.Constants.displayWidth,
+    height: LTDC.Constants.displayHeight)
+  static let maxLogoPosition = Point(
+    x: Self.displaySize.width - Self.logoSize.width,
+    y: Self.displaySize.height - Self.logoSize.height)
+
   static func main() {
-    var board = STM32F746Board()
+    // FIXME: remove sleep hack for some bug in clock configuration
+    Self.delay(milliseconds: 1)
+    configureFlash()
+    initializeLTCD()
+    ltdc.configure()
 
-    let blink = {
-      board.ledOn()
-      board.delay(milliseconds: 10)
-      board.ledOff()
-      board.delay(milliseconds: 20)
-    }
-
-    board.delay(milliseconds: 10)
-
-    let maxLogoPosition = Point(
-      x: board.displaySize.width - board.logoLayerSize.width,
-      y: board.displaySize.height - board.logoLayerSize.height)
-
-    var logoPosition = Point(x: 100, y: 0)
-    board.moveLogo(to: logoPosition)
-
+    var logoPosition = Point(x: 100, y: 100)
     var logoDelta = Point(x: 1, y: 1)
-
-    var iteration = 0
+    var backgroundGray: UInt8 = .min
+    var backgroundDelta: Int8 = -1
 
     while true {
-      board.delay(milliseconds: 10)
-
-      logoPosition = logoPosition.offset(by: logoDelta)
-      board.moveLogo(to: logoPosition)
+      Self.delay(milliseconds: 10)
 
       if logoPosition.x <= 0 || logoPosition.x >= maxLogoPosition.x {
         logoDelta.x *= -1
@@ -46,21 +44,36 @@ struct Main {
       if logoPosition.y <= 0 || logoPosition.y >= maxLogoPosition.y {
         logoDelta.y *= -1
       }
+      logoPosition = logoPosition.offset(by: logoDelta)
+      ltdc.set(layer: 1, position: logoPosition)
 
-      if iteration % 16 == 0 { blink() }
-
-      let backgroundGray: Int
-      if iteration % 512 < 256 {
-        backgroundGray = iteration % 256
-      } else if iteration % 512 == 256 {
-        backgroundGray = 255
-      } else {
-        backgroundGray = (512 - (iteration % 512)) % 256
+      if backgroundGray == .min || backgroundGray == .max {
+        backgroundDelta *= -1
       }
-      board.setBackgroundColor(
-        color: Color(r: backgroundGray, g: backgroundGray, b: backgroundGray))
-
-      iteration += 1
+      backgroundGray = UInt8(Int16(backgroundGray) + Int16(backgroundDelta))
+      ltdc.set(backgroundColor: .gray(backgroundGray))
     }
+  }
+
+  static func delay(milliseconds: Int) {
+    for _ in 0..<100_000 * milliseconds {
+      nop()
+    }
+  }
+
+  static func configureFlash() {
+    flash.acr.modify { $0.latency = .WS5 }
+  }
+
+  static func initializeLTCD() {
+    rcc.cfgr.write { $0.raw.storage = 0 }
+    rcc.cr.modify { r, w in
+      w.hsion = .On
+      w.csson = .Off
+      w.raw.hseon = 1
+      w.raw.pllon = 0
+      w.raw.hsebyp = 0
+    }
+    while rcc.cr.read().raw.hserdy == 0 {}
   }
 }
