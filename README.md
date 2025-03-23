@@ -16,7 +16,7 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 Each example in this repository contains build and deployment instructions, however there are a couple common steps needed for many of the examples included below:
 
 1. Install the latest downloadable 'main' [Development Snapshot](https://www.swift.org/install/macos/#development-snapshots) from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
-	
+
   You can follow the [tutorial here](https://apple.github.io/swift-matter-examples/tutorials/swiftmatterexamples/setup-macos/) for instructions on installing and using nighly Swift toolchains.
 
 2. Install [`uv`](https://github.com/astral-sh/uv) "an extremely fast Python package and project manager".
@@ -29,6 +29,8 @@ Each example in this repository contains build and deployment instructions, howe
 | ---- | -------- | --- | ----------- | ----- |
 | [esp32-led-blink-sdk](./esp32-led-blink-sdk) | ESP32-C6-Bug | ESP-IDF SDK | Blink an LED repeatedly with Swift & the ESP-IDF. | <img width="300" src="esp32-led-blink-sdk/assets/images/ledon.jpg"> |
 | [esp32-led-strip-sdk](./esp32-led-strip-sdk) | ESP32-C6-DevKitC-1 | ESP-IDF SDK | Control NeoPixel LEDs with Swift & the ESP-IDF. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be"> |
+| [arduino-esp32-led-blink-sdk](./arduino-esp32-led-blink-sdk) | ESP32-C6-Bug | ESP-IDF SDK | Blink an LED repeatedly with Swift, the ESP-IDF and the Arduino libraries. | |
+| [arduino-esp32-wifi-scan-sdk](./arduino-esp32-wifi-scan-sdk) | ESP32-C6-DevKitC-1 | ESP-IDF SDK | Blink an LED repeatedly with Swift, the ESP-IDF and the Arduino libraries. | |
 | [nrfx-blink-sdk](./nrfx-blink-sdk) | nRF52840-DK | Zephyr SDK | Blink an LED repeatedly with Swift & Zephyr. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0"> |
 | [nuttx-riscv-blink](./nuttx-riscv-blink) | QEMU | NuttX | Blink a virualized led in QEMU using the Apache NuttX RTOS | |
 | [pico-blink-sdk](./pico-blink-sdk) | Raspberry Pi Pico, Pico 2 | Pico SDK | Blink an LED repeatedly with Swift & the Pico SDK. | <img width="300" src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb"> |
