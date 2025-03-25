@@ -26,7 +26,7 @@ $ export TOOLCHAINS='<toolchain-identifier>'
 $ export PICO_BOARD=pico_w
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
 $ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>'
-$ cmake -B build -G Ninja .
+$ cmake -B build -G Ninja . -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 $ cmake --build build
 ```
 

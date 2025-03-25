@@ -58,7 +58,7 @@ The firmware for Harmony is built using CMake and requires the Raspberry Pi Pico
 
 4.  Generate the build files using CMake:
     ```bash
-    cmake -B build -G Ninja .
+    cmake -B build -G Ninja . -DCMAKE_EXPORT_COMPILE_COMMANDS=On
     ```
 
 5.  Build the firmware:
