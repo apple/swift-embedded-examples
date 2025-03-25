@@ -28,7 +28,7 @@ $ export PICO_BOARD='<board-name>' # Examples: pico, pico2
 $ export PICO_PLATFORM='<optional-platform-name>' # Optional; useful if you'd like to compile for RISC-V. Examples: rp2040, rp2350-arm-s, rp2350-riscv 
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
 $ export PICO_TOOLCHAIN_PATH='<path-to-the-compiler-toolchain>' # A default `brew` install will be located at `/Applications/ArmGNUToolchain/[version]/arm-none-eabi`. This can also be a RISC-V toolchain for the RP2350.
-$ cmake -B build -G Ninja .
+$ cmake -B build -G Ninja . -DCMAKE_EXPORT_COMPILE_COMMANDS=On
 $ cmake --build build
 ```
 
