@@ -11,18 +11,18 @@ let package = Package(
     .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    // .package(url: "https://github.com/apple/swift-mmio", branch: "main")
+    .package(url: "https://github.com/apple/swift-mmio", branch: "main")
   ],
   targets: [
     // SVD2Swift \
     // --input Tools/SVDs/stm32f7x6.patched.svd \
     // --output stm32-lcd-logo/Sources/STM32F7x6 \
-    // --peripherals LTDC RCC GPIOA GPIOB GPIOC GPIOD GPIOE GPIOF GPIOG GPIOH GPIOI GPIOJ GPIOK
+    // --peripherals FLASH GPIOA GPIOB GPIOC GPIOD GPIOE GPIOF GPIOG GPIOH GPIOI GPIOJ GPIOK LTDC RCC
     .executableTarget(
       name: "Application",
       dependencies: [
-        // .product(name: "MMIO", package: "swift-mmio"),
-        "Support"
+        .product(name: "MMIO", package: "swift-mmio"),
+        "Support",
       ]),
     .target(name: "Support"),
   ])
