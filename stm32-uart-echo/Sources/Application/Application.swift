@@ -50,7 +50,8 @@ public struct Application {
     gpiob.afrl.modify { $0.raw.afrl7 = 0b0111 }
 
     // Configure UART1
-    // Set the baud rate to 16Mhz
+    // Set the baud rate to 115200 (by computing the divisor based on the 16Mhz
+    // default post-reset CPU clock frequency)
     usart1.brr.modify { $0.raw.storage = 16_000_000 / 115200 }
 
     usart1.cr1.modify { rw in
