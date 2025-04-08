@@ -1,0 +1,14 @@
+{
+  "swiftPM": {
+    "configuration": "release",
+    "triple": "armv7em-none-none-eabi",
+
+    "__comment": "XXX SourceKit-LSP seems to ignore the toolset (relative or absolute path)...",
+    "toolset": ".../toolset.json",
+
+    "swiftCompilerFlags": [
+      "-enable-experimental-feature", "Embedded",
+      "-enable-experimental-feature", "Extern",
+    ]
+  }
+}

@@ -36,10 +36,16 @@ def main():
     parser.add_argument('input')
     parser.add_argument('output')
     parser.add_argument('--symbol-map')
+    parser.add_argument('--relocate', action='append')
     args = parser.parse_args()
 
     inf = open(args.input, "rb")
     outf = open(args.output, "wb")
+
+    relocations = {}
+    for r in args.relocate:
+        (a, b) = r.split(":")
+        relocations[int(a, 16)] = int(b, 16)
 
     def emitrecord(record):
         checksum = 0
@@ -75,7 +81,16 @@ def main():
             continue
         vmaddr = segment.header.p_paddr
         data = segment.data()
-        emit(segment.header.p_paddr, data)
+        flags = ""
+        flags += "r" if segment.header.p_flags & 0x4 else "-"
+        flags += "w" if segment.header.p_flags & 0x2 else "-"
+        flags += "x" if segment.header.p_flags & 0x1 else "-"
+        print(f"PT_LOAD {flags} at 0x{segment.header.p_paddr:08x} - 0x{segment.header.p_paddr + len(data):08x}, size {len(data)} (0x{len(data):04x})")
+        placement_addr = segment.header.p_paddr
+        if segment.header.p_paddr in relocations:
+            placement_addr = relocations[segment.header.p_paddr]
+            print(f"  ... relocating to 0x{placement_addr:08x}")
+        emit(placement_addr, data)
 
     chunklen = 0
     vmaddr = 0
