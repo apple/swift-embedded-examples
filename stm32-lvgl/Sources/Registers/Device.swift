@@ -44,6 +44,18 @@ public let gpioj = GPIOJ(unsafeAddress: 0x40022400)
 /// General-purpose I/Os
 public let gpiok = GPIOK(unsafeAddress: 0x40022800)
 
+/// Inter-integrated circuit
+public let i2c1 = I2C1(unsafeAddress: 0x40005400)
+
+/// Inter-integrated circuit
+public let i2c2 = I2C2(unsafeAddress: 0x40005800)
+
+/// Inter-integrated circuit
+public let i2c3 = I2C3(unsafeAddress: 0x40005c00)
+
+/// Inter-integrated circuit
+public let i2c4 = I2C4(unsafeAddress: 0x40006000)
+
 /// LCD-TFT Controller
 public let ltdc = LTDC(unsafeAddress: 0x40016800)
 
