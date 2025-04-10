@@ -27,10 +27,10 @@ struct Main {
     initUartOutput()
 
     withInterruptsDisabled {
-      log("initClock")
+      log("initClock()")
       initClocks()
 
-      log("initInterrupts")
+      log("initInterrupts()")
       initInterrupts()
 
       // Reset the vector table to where it should be.
@@ -38,16 +38,16 @@ struct Main {
       scb.vtor.modify { $0.storage = 0x0800_0000 }
     }
 
-    log("systemSetCoreClock")
+    log("systemSetCoreClock()")
     systemSetCoreClock()
 
     // We are running at 200 MHz CPU frequency now. Set the UART baud rate to
     // 115200 again based on the new CPU frequency.
     usart1.brr.modify { $0.raw.storage = 100_000_000 / 115_200 }
 
-    log("initGpio")
+    log("initGpio()")
     initGpio()
-    log("initSdram")
+    log("initSdram()")
     initSdram()
     log("Lcd.initialize()")
     Lcd.initialize()
@@ -57,11 +57,14 @@ struct Main {
 
     // Everything is initialized now. Run application logic.
 
-    //log("dramTest")
+    //log("dramTest()")
     //dramTest()
 
-    log("lvglTest")
-    lvglTest()
+    log("TouchPanel.initialize()")
+    TouchPanel.initialize()
+
+    log("lvglDemo()")
+    lvglDemo()
   }
 
   static func dramTest() {
@@ -94,7 +97,11 @@ struct Main {
     fillAndCheckWithIndexXor(pattern: 0xFFFF_FFFF)
   }
 
-  static func lvglTest() {
+  static var clickCount = 0
+  static var button: OpaquePointer! = nil
+  static var buttonLabel: OpaquePointer! = nil
+
+  static func lvglDemo() {
     lv_init()
     lv_tick_set_cb({ UInt32(uptimeInMs) })
 
@@ -127,6 +134,23 @@ struct Main {
         // the lv_display_flush_ready() will happen in the LCD frame interrupt.
       })
 
+    let touch = lv_indev_create()
+    lv_indev_set_type(touch, LV_INDEV_TYPE_POINTER)
+    lv_indev_set_read_cb(
+      touch,
+      { indev, data in
+        let touchData = TouchPanel.readTouchData()
+        if touchData.numberOfTouchPoints > 0 {
+          data!.pointee.point.x = Int32(touchData.x)
+          data!.pointee.point.y = Int32(touchData.y)
+          data!.pointee.state = LV_INDEV_STATE_PRESSED
+          print("pressed: \(touchData.x) \(touchData.y)")
+        } else {
+          data!.pointee.state = LV_INDEV_STATE_RELEASED
+          print("released")
+        }
+      })
+
     // Get the active screen
     let screen = lv_screen_active()
 
@@ -152,6 +176,20 @@ struct Main {
     // Apply the style to the screen
     lv_obj_add_style(screen, &style, 0)
 
+    // Create a button in the top right
+    button = lv_button_create(screen)
+    lv_obj_set_size(button, 120, 50)
+    lv_obj_align(button, LV_ALIGN_TOP_RIGHT, -10, 10)
+    buttonLabel = lv_label_create(button)
+    lv_label_set_text(buttonLabel, "Click me")
+    lv_obj_center(buttonLabel)
+    lv_obj_add_event_cb(
+      button,
+      { event in
+        Self.clickCount += 1
+        lv_label_set_text(Self.buttonLabel, "Clicked \(Self.clickCount)")
+      }, LV_EVENT_CLICKED, nil)
+
     // Create a label
     let label = lv_label_create(screen)
     lv_label_set_text(label, "Hello LVGL!")
@@ -174,6 +212,21 @@ struct Main {
 
     // Configure spinner animation
     lv_spinner_set_anim_params(spinner, 2_000, 200)  // anim time, angle
+
+    // Create a dropdown menu
+    let dropdown = lv_dropdown_create(screen)
+    lv_dropdown_set_options(dropdown, "Option 1\nOption 2\nOption 3\nOption 4")
+    lv_obj_set_size(dropdown, 150, 40)
+    lv_obj_align(dropdown, LV_ALIGN_TOP_LEFT, 10, 10)
+
+    // Add event handler for dropdown selection
+    lv_obj_add_event_cb(
+      dropdown,
+      { event in
+        let dropdown = lv_event_get_target_obj(event)
+        let selectedIndex = lv_dropdown_get_selected(dropdown)
+        print("Selected option \(selectedIndex)")
+      }, LV_EVENT_VALUE_CHANGED, nil)
 
     // Add a label under the spinner
     let spinnerLabel = lv_label_create(screen)

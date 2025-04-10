@@ -24,8 +24,9 @@ let package = Package(
     // SVD2Swift \
     // --input Tools/SVDs/stm32f7x6.patched.svd \
     // --output stm32-lvgl/Sources/STM32F7x6 \
-    // --peripherals FLASH LTDC RCC PWR FMC SCB DBGMCU USART1 STK NVIC \
+    // --peripherals FLASH LTDC RCC PWR FMC SCB DBGMCU USART1 STK NVIC SYSCFG \
     //               GPIOA GPIOB GPIOC GPIOD GPIOE GPIOF GPIOG GPIOH GPIOI GPIOJ GPIOK \
+    //               I2C1 I2C2 I2C3 I2C4 \
     // --access-level public
     .target(name: "Registers",
       dependencies: [
