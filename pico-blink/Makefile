@@ -12,12 +12,13 @@
 # Paths
 REPOROOT         := $(shell git rev-parse --show-toplevel)
 TOOLSROOT        := $(REPOROOT)/Tools
-TOOLSET          := $(TOOLSROOT)/Toolsets/stm32f74x.json
-MACHO2BIN        := $(TOOLSROOT)/macho2bin.py
+TOOLSET          := $(TOOLSROOT)/Toolsets/pico.json
+MACHO2UF2        := $(TOOLSROOT)/macho2uf2.py
 SWIFT_BUILD      := swift build
 
 # Flags
-ARCH             := armv7em
+PICO_FAMILY      := rp2040
+ARCH             := armv6m
 TARGET           := $(ARCH)-apple-none-macho
 SWIFT_BUILD_ARGS := \
 	--configuration release \
@@ -45,8 +46,13 @@ build:
 		| c++filt | swift demangle > $(BUILDROOT)/Application.disassembly
 
 	@echo "extracting binary..."
-	$(MACHO2BIN) \
-		$(BUILDROOT)/Application $(BUILDROOT)/Application.bin --base-address 0x20010000 --segments '__TEXT,__DATA,__VECTORS'
+	$(MACHO2UF2) \
+		--pico-family "$(PICO_FAMILY)" \
+		"$(BUILDROOT)/Application" \
+		"$(BUILDROOT)/Application.uf2" \
+		--base-address 0x20000000 \
+		--segments '__TEXT,__DATA,__VECTORS,__RESET'
+
 
 .PHONY: clean
 clean:
