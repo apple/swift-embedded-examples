@@ -29,13 +29,13 @@ PYTHON_EXEC=${PYTHON_EXEC:-$(xcrun -f python3)}
 MACHO2UF2=$TOOLSROOT/macho2uf2.py
 
 # Build with Swift package manager
-$SWIFT_EXEC build "$SWIFT_BUILD_FLAGS"
+$SWIFT_EXEC build $SWIFT_BUILD_FLAGS
 
 # Get the output directory
-BUILDROOT=$($SWIFT_EXEC build "$SWIFT_BUILD_FLAGS" --show-bin-path)
+BUILDROOT=$($SWIFT_EXEC build $SWIFT_BUILD_FLAGS --show-bin-path)
 
 # Link
-$CLANG .build/release/Support.build/Support.c.o .build/release/Support.build/crt0.S.o .build/release/Blinky.build/*.o -target armv6m-apple-none-macho -o "$BUILDROOT"/blinky "$LD_FLAGS"
+$CLANG .build/release/Support.build/Support.c.o .build/release/Support.build/crt0.S.o .build/release/Blinky.build/*.o -target armv6m-apple-none-macho -o "$BUILDROOT"/blinky $LD_FLAGS
 
 # Extract sections from executable into flashable binary
 $PYTHON_EXEC "$MACHO2UF2" --pico-family $PICO_FAMILY "$BUILDROOT"/blinky "$BUILDROOT"/blinky.uf2 --base-address 0x20000000 --segments '__TEXT,__DATA,__VECTORS,__RESET'
