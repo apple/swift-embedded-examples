@@ -43,9 +43,10 @@ def main():
     outf = open(args.output, "wb")
 
     relocations = {}
-    for r in args.relocate:
-        (a, b) = r.split(":")
-        relocations[int(a, 16)] = int(b, 16)
+    if args.relocate is not None:
+        for r in args.relocate:
+            (a, b) = r.split(":")
+            relocations[int(a, 16)] = int(b, 16)
 
     def emitrecord(record):
         checksum = 0

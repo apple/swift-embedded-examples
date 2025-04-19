@@ -60,4 +60,4 @@ fi
 ###
 
 rm -rf ./lvgl || true
-git clone git@github.com:lvgl/lvgl.git --branch release/v9.2
+git clone https://github.com/lvgl/lvgl.git --branch release/v9.2
