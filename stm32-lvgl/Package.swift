@@ -14,7 +14,8 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-mmio", branch: "main")
   ],
   targets: [
-    .executableTarget(name: "Application",
+    .executableTarget(
+      name: "Application",
       dependencies: [
         "Registers",
         "Support",
@@ -28,12 +29,13 @@ let package = Package(
     //               GPIOA GPIOB GPIOC GPIOD GPIOE GPIOF GPIOG GPIOH GPIOI GPIOJ GPIOK \
     //               I2C1 I2C2 I2C3 I2C4 \
     // --access-level public
-    .target(name: "Registers",
+    .target(
+      name: "Registers",
       dependencies: [
-        .product(name: "MMIO", package: "swift-mmio"),
+        .product(name: "MMIO", package: "swift-mmio")
       ]),
 
     .target(name: "Support"),
-    
+
     .target(name: "CLVGL"),
   ])

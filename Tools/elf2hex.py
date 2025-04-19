@@ -85,7 +85,10 @@ def main():
         flags += "r" if segment.header.p_flags & 0x4 else "-"
         flags += "w" if segment.header.p_flags & 0x2 else "-"
         flags += "x" if segment.header.p_flags & 0x1 else "-"
-        print(f"PT_LOAD {flags} at 0x{segment.header.p_paddr:08x} - 0x{segment.header.p_paddr + len(data):08x}, size {len(data)} (0x{len(data):04x})")
+        print(f"PT_LOAD {flags} at 0x{segment.header.p_paddr:08x} - "
+              f"0x{segment.header.p_paddr + len(data):08x}, "
+              f"size {len(data)} "
+              f"(0x{len(data):04x})")
         placement_addr = segment.header.p_paddr
         if segment.header.p_paddr in relocations:
             placement_addr = relocations[segment.header.p_paddr]

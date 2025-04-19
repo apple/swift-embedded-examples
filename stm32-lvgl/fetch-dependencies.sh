@@ -8,20 +8,20 @@ set -vex
 
 VER=19.1.5
 
-if [[ "`uname -s`" == "Darwin" ]]; then
+if [[ "$(uname -s)" == "Darwin" ]]; then
     FILE=LLVM-ET-Arm-${VER}-Darwin-universal
     EXT=dmg
     SHA=0451e67dc9a9066c17f746c26654962fa3889d4df468db1245d1bae69438eaf5
-elif [[ "`uname -s`" == "Linux" && "`uname -m`" == "aarch64" ]]; then
+elif [[ "$(uname -s)" == "Linux" && "$(uname -m)" == "aarch64" ]]; then
     FILE=LLVM-ET-Arm-${VER}-Linux-AArch64
     EXT=tar.xz
     SHA=5e2f6b8c77464371ae2d7445114b4bdc19f56138e8aa864495181b52f57d0b85
-elif [[ "`uname -s`" == "Linux" && "`uname -m`" == "x86_64" ]]; then
+elif [[ "$(uname -s)" == "Linux" && "$(uname -m)" == "x86_64" ]]; then
     FILE=LLVM-ET-Arm-${VER}-Linux-x86_64
     EXT=tar.xz
     SHA=34ee877aadc78c5e9f067e603a1bc9745ed93ca7ae5dbfc9b4406508dc153920
 else
-    echo "No LLVM toolchain for this OS/arch (`uname -s`, `uname -m`)"
+    echo "No LLVM toolchain for this OS/arch ($(uname -s), $(uname -m))"
     exit 1
 fi
 
