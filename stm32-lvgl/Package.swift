@@ -47,11 +47,13 @@ let package = Package(
     //
     // HOST TARGETS
     //
-    
-    .executableTarget(name: "HostSDLApp", dependencies: [
+
+    .executableTarget(
+      name: "HostSDLApp",
+      dependencies: [
         .product(name: "SDL", package: "SwiftSDL2"),
-        "CLVGL"
-        ],
-        swiftSettings: [.enableExperimentalFeature("Extern")],
-        linkerSettings: [.unsafeFlags(["-L.build/lvgl-host/lib", "-llvgl", "-llvgl_demos"])]),
+        "CLVGL",
+      ],
+      swiftSettings: [.enableExperimentalFeature("Extern")],
+      linkerSettings: [.unsafeFlags(["-L.build/lvgl-host/lib", "-llvgl", "-llvgl_demos"])]),
   ])

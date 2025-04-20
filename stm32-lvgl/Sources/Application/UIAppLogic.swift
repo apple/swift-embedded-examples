@@ -26,10 +26,10 @@ enum UIAppLogic {
   static var style = lv_style_t()
   static var labelStyle = lv_style_t()
   static var gradient = lv_grad_dsc_t()
-  
+
   static var widgetDemoScreen: OpaquePointer! = nil
 
-  static func createUI() {    
+  static func createUI() {
     // Get the active screen
     let screen = lv_screen_active()
 
@@ -60,11 +60,13 @@ enum UIAppLogic {
     buttonLabel = lv_label_create(button)
     lv_label_set_text(buttonLabel, "Click me")
     lv_obj_center(buttonLabel)
-    lv_obj_add_event_cb(button, { event in
+    lv_obj_add_event_cb(
+      button,
+      { event in
         Self.clickCount += 1
         lv_label_set_text(Self.buttonLabel, "Clicked \(Self.clickCount)")
       }, LV_EVENT_CLICKED, nil)
-      
+
     // Create a 'Demo' button in the bottom right
     let demoButton = lv_button_create(screen)
     lv_obj_set_size(demoButton, 120, 50)
@@ -72,9 +74,11 @@ enum UIAppLogic {
     let demoButtonLabel = lv_label_create(demoButton)
     lv_label_set_text(demoButtonLabel, "Widget Demo")
     lv_obj_center(demoButtonLabel)
-    lv_obj_add_event_cb(demoButton, { event in
+    lv_obj_add_event_cb(
+      demoButton,
+      { event in
         lv_screen_load(Self.widgetDemoScreen)
-    }, LV_EVENT_CLICKED, nil)
+      }, LV_EVENT_CLICKED, nil)
 
     // Create a label
     let label = lv_label_create(screen)
@@ -118,7 +122,7 @@ enum UIAppLogic {
     lv_label_set_text(spinnerLabel, "Loading...")
     lv_obj_align(spinnerLabel, LV_ALIGN_BOTTOM_LEFT, 20, -20)
     lv_obj_add_style(spinnerLabel, &labelStyle, 0)
-    
+
     // Create a 2nd screen with the widgets demo app from LVGL, then switch back
     // to the original screen.
     widgetDemoScreen = lv_obj_create(nil)

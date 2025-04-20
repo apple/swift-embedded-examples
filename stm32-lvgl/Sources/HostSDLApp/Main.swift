@@ -38,14 +38,18 @@ struct Main {
     let disp = lv_display_create(Int32(drawSize.width), Int32(drawSize.height))!
     lv_display_set_color_format(disp, LV_COLOR_FORMAT_ARGB8888)
     lv_display_set_buffers(disp, buf1, buf2, bufSize, LV_DISPLAY_RENDER_MODE_FULL)
-    lv_display_set_flush_cb(disp, { disp, _, bufferToShow in
+    lv_display_set_flush_cb(
+      disp,
+      { disp, _, bufferToShow in
         _ = SDL_UpdateTexture(texture, nil, bufferToShow, Int32(drawSize.width * 4))
         lv_display_flush_ready(disp)
       })
 
     let touch = lv_indev_create()
     lv_indev_set_type(touch, LV_INDEV_TYPE_POINTER)
-    lv_indev_set_read_cb(touch, { indev, data in
+    lv_indev_set_read_cb(
+      touch,
+      { indev, data in
         if mouseEvent.type == SDL_MOUSEBUTTONDOWN.rawValue {
           data!.pointee.point.x = Int32(mouseEvent.button.x) / windowScale
           data!.pointee.point.y = Int32(mouseEvent.button.y) / windowScale

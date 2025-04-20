@@ -55,13 +55,13 @@ struct Main {
     log("initSysTick")
     initSysTick()
 
+    log("TouchPanel.initialize()")
+    TouchPanel.initialize()
+
     // Everything is initialized now. Run application logic.
 
     //log("dramTest()")
     //dramTest()
-
-    log("TouchPanel.initialize()")
-    TouchPanel.initialize()
 
     log("lvglDemo()")
     lvglDemo()
@@ -103,13 +103,11 @@ struct Main {
 
     let bufSize: UInt32 = UInt32(Lcd.LCD_WIDTH * Lcd.LCD_HEIGHT * 4)
     let buf1 = UnsafeMutableRawPointer(bitPattern: 0xC000_0000 as UInt)!
-    let buf2 = UnsafeMutableRawPointer(
-      bitPattern: (0xC000_0000 as UInt) + UInt(bufSize))!
+    let buf2 = UnsafeMutableRawPointer(bitPattern: (0xC000_0000 as UInt) + UInt(bufSize))!
 
     let disp = lv_display_create(Int32(Lcd.LCD_WIDTH), Int32(Lcd.LCD_HEIGHT))!
     lv_display_set_color_format(disp, LV_COLOR_FORMAT_ARGB8888)
-    lv_display_set_buffers(
-      disp, buf1, buf2, bufSize, LV_DISPLAY_RENDER_MODE_FULL)
+    lv_display_set_buffers(disp, buf1, buf2, bufSize, LV_DISPLAY_RENDER_MODE_FULL)
     lv_display_set_flush_cb(
       disp,
       { disp, _, bufferToShow in
@@ -140,10 +138,10 @@ struct Main {
           data!.pointee.point.x = Int32(touchData.x)
           data!.pointee.point.y = Int32(touchData.y)
           data!.pointee.state = LV_INDEV_STATE_PRESSED
-          print("pressed: \(touchData.x) \(touchData.y)")
+          //print("pressed: \(touchData.x) \(touchData.y)")
         } else {
           data!.pointee.state = LV_INDEV_STATE_RELEASED
-          print("released")
+          //print("released")
         }
       })
 
@@ -152,13 +150,12 @@ struct Main {
 
     log("LVGL setup done, starting render loop")
 
-    var frameCounter = 0
     while true {
       // If we're pending a render, wait.
       while lcdInterruptVerticalSyncHandler != nil { /* busy wait */ nop() }
 
       lv_timer_handler()
-      
+
       // Update UI of application logic
       UIAppLogic.updateFrame()
     }
