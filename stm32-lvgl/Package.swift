@@ -5,15 +5,20 @@ import PackageDescription
 let package = Package(
   name: "stm32-lvgl",
   platforms: [
-    .macOS(.v10_15)
+    .macOS(.v11)
   ],
   products: [
     .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-mmio", branch: "main")
+    .package(url: "https://github.com/apple/swift-mmio", branch: "main"),
+    .package(url: "https://github.com/ctreffs/SwiftSDL2.git", from: "1.4.0"),
   ],
   targets: [
+    //
+    // FIRMWARE TARGETS
+    //
+
     .executableTarget(
       name: "Application",
       dependencies: [
@@ -38,4 +43,15 @@ let package = Package(
     .target(name: "Support"),
 
     .target(name: "CLVGL"),
+
+    //
+    // HOST TARGETS
+    //
+    
+    .executableTarget(name: "HostSDLApp", dependencies: [
+        .product(name: "SDL", package: "SwiftSDL2"),
+        "CLVGL"
+        ],
+        swiftSettings: [.enableExperimentalFeature("Extern")],
+        linkerSettings: [.unsafeFlags(["-L.build/lvgl-host/lib", "-llvgl", "-llvgl_demos"])]),
   ])

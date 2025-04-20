@@ -35,7 +35,7 @@
       "-lc",
       "-lclang_rt.builtins",
       "-L.build/lvgl/lib",
-      "-llvgl",
+      "-llvgl", "-llvgl_demos",
       "-static",
       "-e", "_start_elf",
       "--orphan-handling=error"

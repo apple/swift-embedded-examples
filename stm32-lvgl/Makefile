@@ -25,7 +25,7 @@ SWIFT_BUILD_ARGS := \
 	--configuration release \
 	--triple $(TARGET) \
 	--toolset $(TOOLSET) \
-	--disable-local-rpath
+	--product Application
 BUILDROOT        := $(shell $(SWIFT_BUILD) $(SWIFT_BUILD_ARGS) --show-bin-path)
 
 .PHONY: build
@@ -74,6 +74,26 @@ build:
 flash:
 	@echo "flashing..."
 	st-flash --reset --format ihex write $(BUILDROOT)/Application.hex
+	
+simulator:
+	mkdir -p .build
+
+	@echo "configuring LVGL..."
+	cmake -B .build/lvgl-host -G Ninja ./lvgl \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=On \
+        -DLV_CONF_PATH=../Sources/CLVGL/include/lv_conf.h
+
+	@echo "building LVGL..."
+	cmake --build .build/lvgl-host
+	
+	@echo "building..."
+	$(SWIFT_BUILD) \
+	    --configuration release \
+		--product HostSDLApp \
+		--verbose
+	
+	@echo "running..."
+	$(PWD)/.build/release/HostSDLApp
 
 .PHONY: clean
 clean:
