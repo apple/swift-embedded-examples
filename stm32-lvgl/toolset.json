@@ -9,7 +9,8 @@
       "-Xfrontend", "-function-sections",
       "-Xfrontend", "-mergeable-symbols",
       "-Xfrontend", "-enable-single-module-llvm-emission",
-      "-assert-config", "Debug"
+      "-assert-config", "Debug",
+      "-Xclang-linker", "-fuse-ld=lld"
     ]
   },
   "cCompiler": {
