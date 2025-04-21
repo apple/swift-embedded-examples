@@ -18,6 +18,8 @@ void enable_fpu(void) {
 
 // Reset entrypoint. Enables FPU, relocates the data sections from FLASH to DRAM
 // and jumps to main (implemented in Application/Main.swift).
+//
+// See linkerscript.ld for a detailed explanation.
 __attribute__((naked)) __attribute__((noreturn)) void ResetISR(void) {
   asm volatile("bl    enable_fpu");
   asm volatile("ldr   r0, =__data_start // dst");

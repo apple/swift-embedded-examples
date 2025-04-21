@@ -44,3 +44,7 @@ Optionally, you can also run build and run the code in a desktop OS SDL "simulat
 ```console
 $ make simulator
 ```
+
+## Additional information
+
+- The ELF linking, linker script and packaging scheme is destribed in detail [inside the linker script](Sources/Support/linkerscript.ld).
