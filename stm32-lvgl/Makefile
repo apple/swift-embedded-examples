@@ -60,14 +60,8 @@ build:
 		| c++filt | swift demangle > $(BUILDROOT)/Application.disassembly
 
 	@echo "extracting binary..."
-	$(eval FLASH_DATA_START = `$(NM) -p $(BUILDROOT)/Application | grep __flash_data_start | cut -d' ' -f1`)
-	@echo "   FLASH_DATA_START = 0x$(FLASH_DATA_START)"
-	$(eval SRAM_DATA_START = `$(NM) -p $(BUILDROOT)/Application | grep __data_start | cut -d' ' -f1`)
-	@echo "   SRAM_DATA_START = 0x$(SRAM_DATA_START)"
-	$(eval FLASH_DATA_LEN = `$(NM) -p $(BUILDROOT)/Application | grep __flash_data_len | cut -d' ' -f1`)
-	@echo "   FLASH_DATA_LEN = 0x$(FLASH_DATA_LEN)"
 	$(ELF2HEX) \
-		$(BUILDROOT)/Application $(BUILDROOT)/Application.hex --relocate "0x$(SRAM_DATA_START):0x$(FLASH_DATA_START)"
+		$(BUILDROOT)/Application $(BUILDROOT)/Application.hex --relocate
 	ls -al $(BUILDROOT)/Application.hex
 	@echo "\n   *** All done, build succeeded!\n"
 
