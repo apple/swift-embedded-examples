@@ -7,7 +7,7 @@ runs:
     - name: Install apt dependencies
       shell: bash
       run: |
-        SUDO=$([[ $EUID -ne 0 ]] && echo sudo)
+        SUDO=$(if [[ $EUID -ne 0 ]]; then echo sudo; fi)
         $SUDO apt-get -qq update
         $SUDO apt-get -qq -y install curl gpg binutils git unzip gnupg2 \
           libc6-dev libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev \
