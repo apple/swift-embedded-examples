@@ -19,6 +19,7 @@ runs:
     - name: Install Swiftly
       shell: bash
       run: |
+        set -ex
         UNAME=$(uname -m)
         curl -O "https://download.swift.org/swiftly/linux/swiftly-$UNAME.tar.gz"
         tar zxf "swiftly-$UNAME.tar.gz"
@@ -35,15 +36,19 @@ runs:
         export PATH="$SWIFTLY_BIN_DIR:$PATH"
         echo "PATH=$PATH" >> $GITHUB_ENV
         echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> ~/.bashrc
+        echo $HOME
 
     - name: Install Swift
       shell: bash
       run: |
         set -ex
-        echo $SHELL
-        echo $PATH
-        cat ~/.profile
-        cat ~/.bashrc
-        cat ~/.bash_profile
+        echo SHELL=$SHELL
+        echo PATH=$PATH
+        echo HOME=$HOME
+        
+        cat $HOME/.bashrc || true
+        cat $HOME/.profile || true
+        cat $HOME/.bash_profile || true
+
         swiftly install
         swift --version
