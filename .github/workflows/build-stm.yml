@@ -19,53 +19,22 @@ jobs:
         example: [stm32-blink]
 
     steps:
-      # - name: Checkout repo
-      #   uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: 3.11
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
 
-      # - name: Install uv
-      #   uses: astral-sh/setup-uv@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
       - name: Install Swift
         uses: ./.github/actions/install-swift
-        with:
-          who-to-greet: 'Mona the Octocat'
 
-      # - name: Install apt dependencies
-      #   run: apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config tzdata zlib1g-dev
-
-      # - name: Install Swiftly
-      #   run: |
-      #     curl -O "https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz"
-      #     tar zxf "swiftly-$(uname -m).tar.gz"
-      #     ./swiftly init --skip-install --assume-yes
-
-      #     export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
-      #     echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
-          
-      #     export SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
-      #     echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
-
-      #     export PATH="$SWIFTLY_BIN_DIR:$PATH"
-      #     echo "PATH=$PATH" >> $GITHUB_ENV
-
-      # - name: Install Swift
-      #   run: |
-      #     set -ex
-      #     ls /root/.local/share/swiftly/bin
-      #     echo $PATH
-      #     echo which swiftly
-      #     which swiftly
-
-      #     swiftly install
-      #     swift --version
-
-      # - name: Build ${{ matrix.example }}
-      #   working-directory: ${{ matrix.example }}
-      #   run: |
-      #     export STM_BOARD=STM32F746G_DISCOVERY
-      #     ./build-elf.sh
+      - name: Build ${{ matrix.example }}
+        working-directory: ${{ matrix.example }}
+        run: |
+          export STM_BOARD=STM32F746G_DISCOVERY
+          ./build-elf.sh

@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         example: [nuttx-riscv-blink]
-        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-22-a]
 
     steps:
       - name: Checkout repo
@@ -50,18 +49,11 @@ jobs:
           echo "PATH=$PATH" >> $GITHUB_ENV
           riscv-none-elf-gcc --version
 
-      - name: Install ${{ matrix.swift }}
-        run: |
-          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
-          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-          swiftc --version
-
-      - name: Config ${{ matrix.example }}
-        working-directory: ${{ matrix.example }}
-        run: cmake -B build -GNinja -DBOARD_CONFIG=rv-virt:leds_swift -DENABLE_NUTTX_TRACE=ON
-
+      - name: Install Swift
+        uses: ./.github/actions/install-swift
+  
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
-        run: cmake --build build
+        run: |
+          cmake -B build -GNinja -DBOARD_CONFIG=rv-virt:leds_swift -DENABLE_NUTTX_TRACE=ON
+          cmake --build build

@@ -17,7 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         example: [nrfx-blink-sdk]
-        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
 
     steps:
       - name: Checkout repo
@@ -34,13 +33,8 @@ jobs:
           app-path: ${{ matrix.example }}
           toolchains: arm-zephyr-eabi
 
-      - name: Install ${{ matrix.swift }}
-        run: |
-          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
-          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-          swiftc --version
+      - name: Install Swift
+        uses: ./.github/actions/install-swift
 
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}

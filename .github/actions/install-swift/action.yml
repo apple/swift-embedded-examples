@@ -1,60 +1,35 @@
-
-name: 'Hello World'
-description: 'Greet someone'
-
-inputs:
-  who-to-greet:
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
+name: 'Install Swift'
+description: 'Installs the Swift specified by a .swift-version file'
 
 runs:
   using: "composite"
   steps:
-    - name: Set Greeting
-      run: echo "Hello $INPUT_WHO_TO_GREET."
+    - name: Install apt dependencies
+      run: |
+        apt-get -qq update
+        apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev \
+          libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev \
+          libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config \
+          tzdata zlib1g-dev
       env:
-        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+        DEBIAN_FRONTEND: noninteractive
 
-    - name: Random Number Generator
-      id: random-number-generator
-      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+    - name: Install Swiftly
+      run: |
+        curl -O "https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz"
+        tar zxf "swiftly-$(uname -m).tar.gz"
+        ./swiftly init --skip-install --assume-yes --quiet-shell-followup
 
-    - name: Set GitHub Path
-      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
+        export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
+        echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
+        
+        export SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
+        echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
 
-      # - name: Install apt dependencies
-      #   run: apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config tzdata zlib1g-dev
+        export PATH="$SWIFTLY_BIN_DIR:$PATH"
+        echo "PATH=$PATH" >> $GITHUB_ENV
 
-      # - name: Install Swiftly
-      #   run: |
-      #     curl -O "https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz"
-      #     tar zxf "swiftly-$(uname -m).tar.gz"
-      #     ./swiftly init --skip-install --assume-yes
-
-      #     export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
-      #     echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
-          
-      #     export SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
-      #     echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
-
-      #     export PATH="$SWIFTLY_BIN_DIR:$PATH"
-      #     echo "PATH=$PATH" >> $GITHUB_ENV
-
-      # - name: Install Swift
-      #   run: |
-      #     set -ex
-      #     ls /root/.local/share/swiftly/bin
-      #     echo $PATH
-      #     echo which swiftly
-      #     which swiftly
-
-      #     swiftly install
-      #     swift --version
+    - name: Install Swift
+      run: |
+        swiftly install
+        swift --version
