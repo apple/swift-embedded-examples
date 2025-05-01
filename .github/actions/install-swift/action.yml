@@ -5,6 +5,7 @@ runs:
   using: "composite"
   steps:
     - name: Install apt dependencies
+      shell: bash
       run: |
         sudo apt-get -qq update
         sudo apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev \
@@ -15,6 +16,7 @@ runs:
         DEBIAN_FRONTEND: noninteractive
 
     - name: Install Swiftly
+      shell: bash
       run: |
         curl -O "https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz"
         tar zxf "swiftly-$(uname -m).tar.gz"
@@ -30,6 +32,7 @@ runs:
         echo "PATH=$PATH" >> $GITHUB_ENV
 
     - name: Install Swift
+      shell: bash
       run: |
         swiftly install
         swift --version
