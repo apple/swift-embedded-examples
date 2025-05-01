@@ -6,8 +6,8 @@ runs:
   steps:
     - name: Install apt dependencies
       run: |
-        apt-get -qq update
-        apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev \
+        sudo apt-get -qq update
+        sudo apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev \
           libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev \
           libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config \
           tzdata zlib1g-dev
