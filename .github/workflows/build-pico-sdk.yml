@@ -48,7 +48,7 @@ jobs:
 
       - name: Install Swift
         uses: ./.github/actions/install-swift
-  
+
       - name: Clone Pico SDK
         run: |
           git clone https://github.com/raspberrypi/pico-sdk.git

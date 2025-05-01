@@ -7,9 +7,10 @@ runs:
     - name: Install apt dependencies
       shell: bash
       run: |
-        sudo apt-get -qq update
-        sudo apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev \
-          libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev \
+        SUDO=$([[ $EUID -ne 0 ]] && echo sudo)
+        $SUDO apt-get -qq update
+        $SUDO apt-get -qq -y install curl gpg binutils git unzip gnupg2 \
+          libc6-dev libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev \
           libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config \
           tzdata zlib1g-dev
       env:
@@ -24,7 +25,7 @@ runs:
 
         export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
         echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
-        
+
         export SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
 
