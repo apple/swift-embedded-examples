@@ -1,39 +1,34 @@
-name: Build STM32 Examples
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
-  schedule:
-    # Build on Mondays at 9am PST every week
-    - cron: '0 17 * * 1'
+name: 'Hello World'
+description: 'Greet someone'
 
-jobs:
-  build-stm32:
-    runs-on: ubuntu-24.04
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    required: true
+    default: 'World'
 
-    strategy:
-      fail-fast: false
-      matrix:
-        example: [stm32-blink]
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
 
-    steps:
-      # - name: Checkout repo
-      #   uses: actions/checkout@v4
+runs:
+  using: "composite"
+  steps:
+    - name: Set Greeting
+      run: echo "Hello $INPUT_WHO_TO_GREET."
+      env:
+        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: 3.11
+    - name: Random Number Generator
+      id: random-number-generator
+      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
 
-      # - name: Install uv
-      #   uses: astral-sh/setup-uv@v5
-
-      - name: Install Swift
-        uses: ./.github/actions/install-swift
-        with:
-          who-to-greet: 'Mona the Octocat'
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
 
       # - name: Install apt dependencies
       #   run: apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y install curl gpg binutils git unzip gnupg2 libc6-dev libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config tzdata zlib1g-dev
@@ -63,9 +58,3 @@ jobs:
 
       #     swiftly install
       #     swift --version
-
-      # - name: Build ${{ matrix.example }}
-      #   working-directory: ${{ matrix.example }}
-      #   run: |
-      #     export STM_BOARD=STM32F746G_DISCOVERY
-      #     ./build-elf.sh
