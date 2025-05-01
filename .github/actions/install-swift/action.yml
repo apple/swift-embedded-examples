@@ -39,5 +39,11 @@ runs:
     - name: Install Swift
       shell: bash
       run: |
+        set -ex
+        echo $SHELL
+        echo $PATH
+        cat ~/.profile
+        cat ~/.bashrc
+        cat ~/.bash_profile
         swiftly install
         swift --version
