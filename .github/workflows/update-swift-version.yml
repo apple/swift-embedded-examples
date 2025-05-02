@@ -66,25 +66,25 @@ jobs:
           git push -u origin "$BRANCH"
 
           gh auth setup-git
-          pr_number=$(gh pr list --head ci/update-swift-version --state open --json number --jq '.[0]')
+          pr=$(gh pr list --head ci/update-swift-version --state open --json number --jq '.[0].number')
 
-          TITLE="ci: update Swift version to $latest"
-          BODY="This PR updates the \`.swift-version\` file to Swift $latest.
+          title="ci: update Swift version to $latest"
+          body="This PR updates the \`.swift-version\` file to Swift $latest.
 
           > This PR was automatically generated."
 
-          if [[ -z "$pr_number" ]]; then
+          if [[ -z "$pr" ]]; then
             gh pr create \
-              --title "$TITLE" \
-              --body "$BODY" \
+              --title "$title" \
+              --body "$body" \
               --head "ci/update-swift-version" \
               --base "main"
           else
-            echo "PR already exists: #$pr_number"
-            gh pr edit $pr_number --title "$TITLE" --body "$BODY"
+            echo "PR already exists: #$pr"
+            gh pr edit "$pr" --title "$title" --body "$body"
           fi
 
-          gh pr merge $pr_number --auto --squash
+          gh pr merge "$pr" --auto --squash
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
