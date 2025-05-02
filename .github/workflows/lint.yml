@@ -4,7 +4,9 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+    types: [opened, reopened, synchronize]
+  repository_dispatch:
+    types: [create-pull-request]
 
 jobs:
   validate_format_config:
