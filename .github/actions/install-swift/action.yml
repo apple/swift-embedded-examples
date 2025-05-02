@@ -16,8 +16,6 @@ runs:
     - name: Install Swiftly
       shell: bash
       run: |
-        UNAME=$(uname -m)
-
         export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
         echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
         echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $HOME/.bashrc
@@ -26,6 +24,7 @@ runs:
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $HOME/.bashrc
 
+        UNAME=$(uname -m)
         curl -O "https://download.swift.org/swiftly/linux/swiftly-$UNAME.tar.gz"
         tar zxf "swiftly-$UNAME.tar.gz"
         ./swiftly init \
