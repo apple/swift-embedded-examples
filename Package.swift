@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.0
 
 import PackageDescription
 
@@ -8,7 +8,8 @@ let package = Package(
     .library(name: "EmbeddedSwift", targets: ["EmbeddedSwift"])
   ],
   dependencies: [
-    .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0"),
+    .package(
+      url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0"),
   ],
   targets: [
     .target(name: "EmbeddedSwift")
