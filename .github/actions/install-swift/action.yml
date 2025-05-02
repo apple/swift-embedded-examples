@@ -19,7 +19,6 @@ runs:
     - name: Install Swiftly
       shell: bash
       run: |
-        set -ex
         UNAME=$(uname -m)
 
         export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
@@ -36,22 +35,9 @@ runs:
 
         echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
         echo "PATH=\$SWIFTLY_BIN_DIR:\$PATH" >> $HOME/.bashrc
-        echo $HOME
 
     - name: Install Swift
       shell: bash
       run: |
-        set -ex
-        echo SHELL=$SHELL
-        echo PATH=$PATH
-        echo HOME=$HOME
-
-        ls /github/home/.local/share/swiftly/bin/swiftly
-        which swiftly
-
-        cat $HOME/.bashrc || true
-        cat $HOME/.profile || true
-        cat $HOME/.bash_profile || true
-
         swiftly install
         swift --version
