@@ -37,8 +37,8 @@ jobs:
 
           git fetch
           BRANCH=ci/update-swift-version
-          if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
-            git checkout "$BRANCH"
+          if git ls-remote --exit-code --heads origin "$BRANCH"; then
+            git checkout -b "$BRANCH" --track "origin/$BRANCH"
           else
             git checkout -b "$BRANCH"
           fi
