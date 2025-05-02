@@ -9,10 +9,7 @@ runs:
       run: |
         SUDO=$(if [[ $EUID -ne 0 ]]; then echo sudo; fi)
         $SUDO apt-get -qq update
-        $SUDO apt-get -qq -y install curl gpg binutils git unzip gnupg2 \
-          libc6-dev libcurl4-openssl-dev libedit2 libgcc-13-dev libpython3-dev \
-          libstdc++-13-dev libxml2-dev libncurses-dev libz3-dev pkg-config \
-          tzdata zlib1g-dev
+        $SUDO apt-get -qq -y install curl gpg
       env:
         DEBIAN_FRONTEND: noninteractive
 
@@ -39,5 +36,5 @@ runs:
     - name: Install Swift
       shell: bash
       run: |
-        swiftly install
+        swiftly install --post-install-file /dev/null
         swift --version
