@@ -63,7 +63,7 @@ jobs:
           fi
 
           title="Update to $latest"
-          body="Updates the \`.swift-version\` file to Swift `$latest`.
+          body="Updates the \`.swift-version\` file to Swift \`$latest\`.
 
           > This PR was automatically generated."
 
