@@ -1,6 +1,10 @@
 name: Update Swift Version
 
 on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
   schedule:
     - cron: '0 0 */14 * *'  # Every 14 days at midnight UTC
   workflow_dispatch:
