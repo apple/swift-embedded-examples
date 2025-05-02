@@ -4,10 +4,9 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+    types: [opened, reopened, synchronize]
   schedule:
     - cron: '0 0 */14 * *'  # Every 14 days at midnight UTC
-  workflow_dispatch:
 
 jobs:
   update-swift-version:

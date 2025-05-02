@@ -4,10 +4,7 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
-  schedule:
-    # Build on Mondays at 9am PST every week
-    - cron: '0 17 * * 1'
+    types: [opened, reopened, synchronize]
 
 jobs:
   build-esp:
