@@ -36,16 +36,16 @@ jobs:
           set -ex
 
           git fetch
-          branch=$branch
+          branch=ci/update-swift-version
           if git ls-remote --exit-code --heads origin "$branch"; then
             git checkout -b "$branch" --track "origin/$branch"
           else
             git checkout -b "$branch"
           fi
 
-          UNAME=$(uname -m)
-          curl -O "https://download.swift.org/swiftly/linux/swiftly-$UNAME.tar.gz"
-          tar zxf "swiftly-$UNAME.tar.gz"
+          uname=$(uname -m)
+          curl -O "https://download.swift.org/swiftly/linux/swiftly-$uname.tar.gz"
+          tar zxf "swiftly-$uname.tar.gz"
           ./swiftly init \
             --skip-install \
             --assume-yes \
@@ -53,10 +53,11 @@ jobs:
             --no-modify-profile
           . "$HOME/.local/share/swiftly/env.sh"
 
+          swift_version=".swift-version"
           latest=$(swiftly list-available main-snapshot | grep main-snapshot | head -n 1 | awk '{print $1}')
-          echo -n "$latest" > .swift-version
+          echo -n "$latest" > "$swift_version"
           echo "version=$latest" >> "$GITHUB_OUTPUT"
-          if [[ -z "$(git status --porcelain .swift-version)" ]]; then
+          if [[ -z "$(git status --porcelain "$swift_version")" ]]; then
             echo "Already set to the latest Swift release, exiting."
             exit 0
           fi
@@ -66,7 +67,7 @@ jobs:
 
           > This PR was automatically generated."
 
-          git add .swift-version
+          git add "$swift_version"
           git commit -m "$title" -m "$body"
           git push -u origin "$branch"
 
