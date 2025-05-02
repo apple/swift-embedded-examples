@@ -75,7 +75,7 @@ jobs:
               --title "$title" \
               --body "$body" \
               --head "$branch" \
-              --base "main"
+              --base "main" \
               --draft
           else
             gh pr edit \
