@@ -30,9 +30,12 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y curl jq
 
-      - name: Create or update branch
+      - name: Open pull request if needed
         id: update
         run: |
+          set -ex
+
+          git fetch
           BRANCH=ci/update-swift-version
           if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
             git checkout "$BRANCH"
