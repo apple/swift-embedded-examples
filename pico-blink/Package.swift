@@ -5,11 +5,10 @@ import PackageDescription
 let package = Package(
   name: "RP2040",
   products: [
-    .library(name: "Blinky", type: .static, targets: ["Blinky"])
+    .executable(name: "Application", targets: ["Application"])
   ],
   targets: [
-    .target(name: "Blinky", dependencies: ["RP2040"]),
+    .executableTarget(name: "Application", dependencies: ["RP2040"]),
     .target(name: "Support"),
     .target(name: "RP2040", dependencies: ["Support"]),
-  ]
-)
+  ])
