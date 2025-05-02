@@ -1,10 +1,10 @@
-name: 'Install Swift'
-description: 'Installs the Swift specified by a .swift-version file'
+name: Install Swift
+description: Installs the Swift specified by a .swift-version file
 
 runs:
   using: "composite"
   steps:
-    - name: Install apt dependencies
+    - name: Install `apt` Dependencies
       shell: bash
       run: |
         SUDO=$(if [[ $EUID -ne 0 ]]; then echo sudo; fi)
@@ -28,7 +28,11 @@ runs:
 
         curl -O "https://download.swift.org/swiftly/linux/swiftly-$UNAME.tar.gz"
         tar zxf "swiftly-$UNAME.tar.gz"
-        ./swiftly init --skip-install --assume-yes --quiet-shell-followup
+        ./swiftly init \
+          --skip-install \
+          --assume-yes \
+          --quiet-shell-followup \
+          --no-modify-profile
 
         echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
         echo "PATH=\$SWIFTLY_BIN_DIR:\$PATH" >> $HOME/.bashrc
@@ -36,5 +40,5 @@ runs:
     - name: Install Swift
       shell: bash
       run: |
-        swiftly install --post-install-file /dev/null
+        swiftly install --post-install-file ./out.sh
         swift --version
