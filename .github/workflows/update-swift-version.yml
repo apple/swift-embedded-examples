@@ -61,17 +61,17 @@ jobs:
             exit 0
           fi
 
+          title="Update to $latest"
+          body="Updates the \`.swift-version\` file to Swift `$latest`.
+
+          > This PR was automatically generated."
+
           git add .swift-version
-          git commit -m "Update Swift version to $latest"
+          git commit -m "$title" -m "$body"
           git push -u origin "$branch"
 
           gh auth setup-git
           pr=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')
-
-          title="ci: update Swift version to $latest"
-          body="Updates the \`.swift-version\` file to Swift `$latest`.
-
-          > This PR was automatically generated."
 
           if [[ -z "$pr" ]]; then
             gh pr create \
