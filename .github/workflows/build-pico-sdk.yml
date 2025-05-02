@@ -12,6 +12,7 @@ on:
 jobs:
   build-pico-sdk:
     runs-on: ubuntu-24.04
+
     strategy:
       fail-fast: false
       matrix:
@@ -22,7 +23,6 @@ jobs:
             board: pico_w
           - name: harmony
             board: pico_w
-        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
 
     steps:
       - name: Checkout repo
@@ -46,14 +46,8 @@ jobs:
           curl -sL https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-$ARCH-arm-none-eabi.tar.xz -O
           tar xf arm-gnu-toolchain-14.2.rel1-$ARCH-arm-none-eabi.tar.xz
 
-      - name: Install ${{ matrix.swift }}
-        run: |
-          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
-          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-          which swiftc
-          swiftc --version
+      - name: Install Swift
+        uses: ./.github/actions/install-swift
 
       - name: Clone Pico SDK
         run: |
@@ -78,7 +72,7 @@ jobs:
           echo "PICO_TOOLCHAIN_PATH=`pwd`/arm-gnu-toolchain-14.2.rel1-$ARCH-arm-none-eabi" >> $GITHUB_ENV
 
       - name: Build ${{ matrix.example.name }}
+        working-directory: ${{ matrix.example.name }}
         run: |
-          cd ${{ matrix.example.name }}
           cmake -B build -G Ninja .
           cmake --build build

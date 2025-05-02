@@ -8,14 +8,15 @@ on:
   schedule:
     # Build on Mondays at 9am PST every week
     - cron: '0 17 * * 1'
+
 jobs:
   build-rpi-baremetal:
     runs-on: ubuntu-24.04
+
     strategy:
       fail-fast: false
       matrix:
-        example: [rpi5-blink, rpi4b-blink]
-        swift: [swift-DEVELOPMENT-SNAPSHOT-2024-12-04-a]
+        example: [rpi4b-blink, rpi5-blink]
 
     steps:
       - name: Checkout repo
@@ -24,16 +25,9 @@ jobs:
       - name: Install apt dependencies
         run: sudo apt-get -qq update && sudo apt-get -qq -y install make llvm
 
-      - name: Install ${{ matrix.swift }}
-        run: |
-          wget -q https://download.swift.org/development/ubuntu2404/${{ matrix.swift }}/${{ matrix.swift }}-ubuntu24.04.tar.gz
-          tar xzf ${{ matrix.swift }}-ubuntu24.04.tar.gz
-          export PATH="`pwd`/${{ matrix.swift }}-ubuntu24.04/usr/bin/:$PATH"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-          which swiftc
-          swiftc --version
+      - name: Install Swift
+        uses: ./.github/actions/install-swift
 
       - name: Build ${{ matrix.example }}
-        run: |
-          cd ${{ matrix.example }}
-          make
+        working-directory: ${{ matrix.example }}
+        run: make
