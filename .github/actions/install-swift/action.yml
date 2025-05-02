@@ -25,17 +25,16 @@ runs:
         tar zxf "swiftly-$UNAME.tar.gz"
         ./swiftly init --skip-install --assume-yes --quiet-shell-followup
 
-        export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
+        SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
         echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
-        echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> ~/.bashrc
+        echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> ~/.bashrc
 
-        export SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
+        SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> ~/.bashrc
 
-        export PATH="$SWIFTLY_BIN_DIR:$PATH"
-        echo "PATH=$PATH" >> $GITHUB_ENV
-        echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> ~/.bashrc
+        echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
+        echo "PATH=$SWIFTLY_BIN_DIR:\$PATH" >> ~/.bashrc
         echo $HOME
 
     - name: Install Swift
