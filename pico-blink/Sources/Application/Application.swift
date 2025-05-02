@@ -12,7 +12,7 @@
 import RP2040
 
 @main
-struct Main {
+struct Application {
   // swift-format-ignore: NeverUseImplicitlyUnwrappedOptionals
   static var board: RP2040! = nil
 
