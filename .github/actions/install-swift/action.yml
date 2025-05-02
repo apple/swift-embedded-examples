@@ -27,14 +27,14 @@ runs:
 
         SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
         echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $GITHUB_ENV
-        echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> ~/.bashrc
+        echo "SWIFTLY_HOME_DIR=$SWIFTLY_HOME_DIR" >> $HOME/.bashrc
 
         SWIFTLY_BIN_DIR="$HOME/.local/share/swiftly/bin"
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
-        echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> ~/.bashrc
+        echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $HOME/.bashrc
 
         echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
-        echo "PATH=$SWIFTLY_BIN_DIR:\$PATH" >> ~/.bashrc
+        echo "PATH=\$SWIFTLY_BIN_DIR:\$PATH" >> $HOME/.bashrc
         echo $HOME
 
     - name: Install Swift
@@ -44,7 +44,10 @@ runs:
         echo SHELL=$SHELL
         echo PATH=$PATH
         echo HOME=$HOME
-        
+
+        ls /github/home/.local/share/swiftly/bin/swiftly
+        which swiftly
+
         cat $HOME/.bashrc || true
         cat $HOME/.profile || true
         cat $HOME/.bash_profile || true
