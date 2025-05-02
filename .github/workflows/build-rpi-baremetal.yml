@@ -31,5 +31,3 @@ jobs:
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
         run: make
-
-
