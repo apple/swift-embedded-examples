@@ -1,0 +1,86 @@
+name: Update Swift Version
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: '0 0 */14 * *'  # Every 14 days at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  update-swift-version:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y curl jq
+
+      - name: Create or update branch
+        id: latest
+        run: |
+          BRANCH=ci/update-swift-version
+          git checkout -B "$BRANCH"
+
+          UNAME=$(uname -m)
+          curl -O "https://download.swift.org/swiftly/linux/swiftly-$UNAME.tar.gz"
+          tar zxf "swiftly-$UNAME.tar.gz"
+          ./swiftly init \
+            --skip-install \
+            --assume-yes \
+            --quiet-shell-followup \
+            --no-modify-profile
+          . "$HOME/.local/share/swiftly/env.sh"
+
+          latest=$(swiftly list-available main-snapshot | grep main-snapshot | head -n 1 | awk '{print $1}')
+          echo -n "$latest" > .swift-version
+          if [[ -z "$(git status --porcelain .swift-version)" ]]; then
+            echo "No changes. Exiting."
+            exit 78  # neutral exit status
+          fi
+
+          git add .swift-version
+          git commit -m "Update Swift version to $latest"
+          git push -u origin "$BRANCH"
+
+      - name: Create or update PR
+        id: find-pr
+        run: |
+          gh auth setup-git
+          pr_number=$(gh pr list --head ci/update-swift-version --state open --json number --jq '.[0]')
+
+          TITLE="ci: update Swift version to ${{ steps.latest.outputs.version }}"
+          BODY="This PR updates the \`.swift-version\` file to Swift ${{ steps.latest.outputs.version }}.
+
+          > This PR was automatically generated."
+
+          if [[ -z "$pr_number" ]]; then
+            gh pr create \
+              --title "$TITLE" \
+              --body "$BODY" \
+              --head "ci/update-swift-version" \
+              --base "main"
+          else
+            echo "PR already exists: #$pr_number"
+            gh pr edit $pr_number --title "$TITLE" --body "$BODY"
+          fi
+
+          gh pr merge $pr_number --auto --squash
+
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
