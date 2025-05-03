@@ -1,4 +1,4 @@
-name: Build ESP Examples
+name: ESP
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
-  build-esp:
+  build:
+    name: Build
     runs-on: ubuntu-24.04
     container: espressif/idf:latest
 

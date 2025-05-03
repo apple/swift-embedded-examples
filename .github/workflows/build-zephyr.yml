@@ -1,4 +1,4 @@
-name: Build Zephyr Examples
+name: Zephyr
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
-  build-zephyr:
+  build:
+    name: Build
     runs-on: ubuntu-24.04
 
     strategy:
