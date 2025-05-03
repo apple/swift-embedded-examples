@@ -16,7 +16,7 @@ jobs:
         example:
           - name: rpi-pico-blink-sdk
             board: pico
-          - name: rpi-pico-w-blink-sdk
+          - name: rpi-picow-blink-sdk
             board: pico_w
           - name: harmony
             board: pico_w
