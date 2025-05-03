@@ -2,8 +2,6 @@
   "schemaVersion": "1.0",
   "swiftCompiler": {
     "extraCLIOptions": [
-      "-Xcc", "-D__APPLE__",
-      "-Xcc", "-D__MACH__",
       "-Xfrontend", "-disable-stack-protector",
       "-enable-experimental-feature", "Embedded"
     ]
