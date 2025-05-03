@@ -22,7 +22,7 @@ fi
 SWIFT_EXEC=${SWIFT_EXEC:-$(xcrun -f swiftc)}
 SWIFT_FLAGS="-target $TARGET -Osize"
 SWIFT_FLAGS+=" -import-bridging-header $SRCROOT/BridgingHeader.h -wmo -enable-experimental-feature Embedded"
-SWIFT_FLAGS+=" -Xcc -D__APPLE__ -Xcc -D__MACH__ -Xcc -ffreestanding"
+SWIFT_FLAGS+=" -Xcc -ffreestanding"
 SWIFT_FLAGS+=" -D${STM_BOARD}"
 
 CLANG_EXEC=${CLANG_EXEC:-$(xcrun -f clang)}
