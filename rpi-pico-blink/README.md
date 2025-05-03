@@ -1,4 +1,4 @@
-# pico-blink
+# rpi-pico-blink
 
 <img src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb">
 
@@ -13,7 +13,7 @@
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 
 ``` console
-$ cd pico-blink
+$ cd rpi-pico-blink
 $ make
 $ cp .build/Application.uf2 /Volumes/RP2040
 ```

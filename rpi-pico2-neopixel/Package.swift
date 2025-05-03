@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "pico2-neopixel",
+  name: "rpi-pico2-neopixel",
   products: [
     .executable(name: "Application", targets: ["Application"])
   ],
