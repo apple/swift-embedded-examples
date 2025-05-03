@@ -95,7 +95,6 @@ pico_add_extra_outputs(swift-blinky)
 With these three files, we can now configure and build a Swift firmware for the Pico:
 
 ```bash
-$ export TOOLCHAINS=org.swift.59202401301a
 $ export PICO_BOARD=pico
 $ export PICO_SDK_PATH=<path_to_pico_sdk>
 $ export PICO_TOOLCHAIN_PATH=<path_to_arm_toolchain>

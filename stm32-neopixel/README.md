@@ -24,7 +24,6 @@ We recommend including a capacitor across the LED strip power supply.
 - Build and upload the program to flash memory of the STM:
 ```console
 $ cd stm32-neopixel
-$ export TOOLCHAINS='<toolchain-identifier>'
 $ make
 $ st-flash --reset write .build/release/Application.bin 0x08000000
 ```

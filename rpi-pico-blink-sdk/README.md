@@ -23,7 +23,6 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 
 ``` console
 $ cd rpi-pico-blink-sdk
-$ export TOOLCHAINS='<toolchain-identifier>'
 $ export PICO_BOARD='<board-name>' # Examples: pico, pico2
 $ export PICO_PLATFORM='<optional-platform-name>' # Optional; useful if you'd like to compile for RISC-V. Examples: rp2040, rp2350-arm-s, rp2350-riscv 
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
