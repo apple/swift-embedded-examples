@@ -1,4 +1,4 @@
-name: Build Pico SDK Examples
+name: Build Raspberry Pi SDK Examples
 
 on:
   push:
@@ -7,16 +7,16 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
-  build-pico-sdk:
+  build-rpi-pico-sdk:
     runs-on: ubuntu-24.04
 
     strategy:
       fail-fast: false
       matrix:
         example:
-          - name: pico-blink-sdk
+          - name: rpi-pico-blink-sdk
             board: pico
-          - name: pico-w-blink-sdk
+          - name: rpi-pico-w-blink-sdk
             board: pico_w
           - name: harmony
             board: pico_w

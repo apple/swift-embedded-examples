@@ -1,4 +1,4 @@
-# pico2-neopixel
+# rpi-pico2-neopixel
 
 An example project demonstrating how to drive a Neopixel RGB LED from an RP2350.
 
@@ -15,10 +15,10 @@ This example uses the hard coded constant `LED_PIN` in `Application.swift` to se
 Example diff:
 
 ```diff
-diff --git a/pico2-neopixel/Sources/Application/Application.swift b/pico2-neopixel/Sources/Application/Application.swift
+diff --git a/rpi-pico2-neopixel/Sources/Application/Application.swift b/rpi-pico2-neopixel/Sources/Application/Application.swift
 index f6867b5..a2291db 100644
---- a/pico2-neopixel/Sources/Application/Application.swift
-+++ b/pico2-neopixel/Sources/Application/Application.swift
+--- a/rpi-pico2-neopixel/Sources/Application/Application.swift
++++ b/rpi-pico2-neopixel/Sources/Application/Application.swift
 @@ -11,7 +11,7 @@
  
  import RP2350
@@ -36,7 +36,7 @@ index f6867b5..a2291db 100644
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 ``` console
-$ cd pico2-neopixel
+$ cd rpi-pico2-neopixel
 $ TOOLCHAINS='<toolchain-identifier>' make
 $ cp .build/release/Application.uf2 /Volumes/RP2350
 ```

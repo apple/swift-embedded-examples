@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        example: [rpi4b-blink, rpi5-blink]
+        example: [rpi-4b-blink, rpi-5-blink]
 
     steps:
       - name: Checkout repo

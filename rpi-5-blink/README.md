@@ -1,4 +1,4 @@
-# rpi5-blink
+# rpi-5-blink
 
 <img src="assets/hero.jpg">
 
@@ -13,7 +13,7 @@
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
 - Build the program, then copy the kernel image to the SD card.
 ``` console
-$ cd rpi5-blink
+$ cd rpi-5-blink
 $ export TOOLCHAINS='<toolchain-identifier>' # Your Swift nightly toolchain identifier
 $ make
 $ cp kernel8.img /Volumes/bootfs  # Copy kernel image to SD card
