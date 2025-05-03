@@ -161,7 +161,7 @@ struct Application {
       // This is a poor excuse for writing pixel data at some frequency. Really
       // this program should setup the system clocks at a chosen frequency and
       // use the timer peripheral to sleep for N ms.
-      if x.isMultiple(of: 1 << 16) {
+      if x.isMultiple(of: 1 << 12) {
         pioWritePixel(color)
         color.hue &+= 1
       }
