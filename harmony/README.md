@@ -51,7 +51,6 @@ The firmware for Harmony is built using CMake and requires the Raspberry Pi Pico
 
 3.  Set the necessary environment variables:
     ```bash
-    export TOOLCHAINS='<toolchain-identifier>' # e.g., gcc-arm-none-eabi
     export PICO_BOARD=pico_w
     export PICO_SDK_PATH='<path-to-your-pico-sdk>' # e.g., ../pico-sdk
     export PICO_EXTRAS_PATH='<path-to-your-pico-extras>' # e.g., ../pico-extras

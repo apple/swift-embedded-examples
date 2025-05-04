@@ -22,7 +22,6 @@ This example demonstrates how to integrate with the Pico SDK which is using CMak
 - Build and copy the program in the UF2 format to the Mass Storage device to trigger flashing the program into memory (after which the device will reboot and run the firmware):
 ``` console
 $ cd rpi-picow-blink-sdk
-$ export TOOLCHAINS='<toolchain-identifier>'
 $ export PICO_BOARD=pico_w
 $ export PICO_SDK_PATH='<path-to-your-pico-sdk>'
 $ export PICO_TOOLCHAIN_PATH='<path-to-the-arm-toolchain>'

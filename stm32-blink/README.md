@@ -15,7 +15,6 @@ This example shows a simple baremetal firmware for an STM32 board that blinks an
 - Build and upload the program to flash memory of the microcontroller:
 ```console
 $ cd stm32-blink
-$ export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/swift-latest.xctoolchain/Info.plist)
 $ export STM_BOARD=STM32F746G_DISCOVERY   # or NUCLEO_F103RB
 $ ./build-macho.sh
 $ st-flash --reset write .build/blink.bin 0x08000000
@@ -27,10 +26,6 @@ $ st-flash --reset write .build/blink.bin 0x08000000
 - Build and upload the program to flash memory of the microcontroller:
 ```console
 $ cd stm32-blink
-
-# If on macOS, select the right latest nightly toolchain (on Linux this is not needed):
-$ export TOOLCHAINS=$(plutil -extract CFBundleIdentifier raw /Library/Developer/Toolchains/swift-latest.xctoolchain/Info.plist)
-
 $ export STM_BOARD=STM32F746G_DISCOVERY   # or NUCLEO_F103RB
 $ ./build-elf.sh
 $ st-flash --format ihex --reset write .build/blink.hex

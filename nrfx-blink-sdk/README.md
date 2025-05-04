@@ -19,11 +19,10 @@ This example demonstrates how to integrate with the Zephyr SDK via CMake and how
 ## Building
 
 - Make sure you have a recent nightly Swift toolchain that has Embedded Swift support.
-- Build the program in the Zephyr virtualenv, specify the nightly toolchain to be used via the `TOOLCHAINS` environment variable and the target board type via the `-DBOARD=...` CMake setting:
+- Build the program in the Zephyr virtualenv, specify the target board type via the `-DBOARD=...` CMake setting:
 ``` console
 $ cd nrfx-blink-sdk
 $ source ~/zephyrproject/.venv/bin/activate
-(.venv) export TOOLCHAINS='<toolchain-identifier>'
 (.venv) cmake -B build -G Ninja -DBOARD=nrf52840dk_nrf52840 -DUSE_CCACHE=0 .
 (.venv) cmake --build build
 ```
