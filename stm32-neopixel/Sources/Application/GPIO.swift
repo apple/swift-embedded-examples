@@ -12,10 +12,6 @@
 import STM32F7X6
 
 extension GPIOA {
-  public enum Port: Int {
-    case a, b, c, d, e, f, g, h, i, j, k
-  }
-
   enum Mode: UInt32 {
     case input = 0x0
     case output = 0x1
@@ -96,15 +92,6 @@ extension GPIOA {
           mask: 0b1111,
           offset: (pin - 8) * 4)
       }
-    }
-  }
-
-  func set(pin: Int, to value: Bool) {
-    // Lower 16 bits are set, upper 16 bits are reset.
-    if value {
-      self.bsrr.write { $0.raw.storage = 1 << pin }
-    } else {
-      self.bsrr.write { $0.raw.storage = 1 << (pin + 16) }
     }
   }
 }
