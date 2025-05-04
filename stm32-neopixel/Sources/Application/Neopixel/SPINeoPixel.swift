@@ -9,6 +9,8 @@
 //
 //===----------------------------------------------------------------------===//
 
+import STM32F7X6
+
 class PixelBuffer {
   let buffer: UnsafeMutableBufferPointer<SPINeoPixelGRB64Pixel>
 

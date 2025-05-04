@@ -1,5 +1,5 @@
 {
-  "originHash" : "5728b1ec253c3300a921ee6ddc3c43ff685abaa7f6ca8d86433af91b7883bf79",
+  "originHash" : "0259de139c240d30a60426d7d7f2d119ccc92fffcb5377eccefe0c9a21e3ef9c",
   "pins" : [
     {
       "identity" : "swift-argument-parser",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/apple/swift-mmio",
       "state" : {
         "branch" : "main",
-        "revision" : "daf25ecacc0d9b71036c6af32cb7786a01802799"
+        "revision" : "5232c5129a8c70beafc3d6acfbae2716c1b6822a"
       }
     },
     {
