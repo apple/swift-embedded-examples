@@ -1,6 +1,8 @@
 # ``EmbeddedSwift``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+@Metadata {
+  @DisplayName("Embedded Swift")
+}
 
 ## Overview
 

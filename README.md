@@ -8,20 +8,13 @@ This repository is a set of demonstration projects of **Embedded Swift**. Embedd
 - [Embedded Swift Vision Document](https://github.com/apple/swift-evolution/blob/main/visions/embedded-swift.md)
 - [Documentation for Embedded Swift](https://github.com/apple/swift/tree/main/docs/EmbeddedSwift)
 
-> [!WARNING]
-> Embedded Swift is experimental. Some information on this page might be out of date with latest development.
-
 ## Building the examples
 
 Each example in this repository contains build and deployment instructions, however there are a couple common steps needed for many of the examples included below:
 
-1. Install the latest downloadable 'main' [Development Snapshot](https://www.swift.org/install/macos/#development-snapshots) from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
-	
-  You can follow the [tutorial here](https://apple.github.io/swift-matter-examples/tutorials/swiftmatterexamples/setup-macos/) for instructions on installing and using nighly Swift toolchains.
+1. Install [`swift`](https://swift.org) using the [instructions here](https://swiftpackageindex.com/apple/swift-embedded-examples/main/documentation/embeddedswift/installembeddedswift).
 
-2. Install [`uv`](https://github.com/astral-sh/uv) "an extremely fast Python package and project manager".
-
-  You can follow the [instructions here](https://docs.astral.sh/uv/getting-started/installation/) to install `uv`.
+2. Install [`uv`](https://github.com/astral-sh/uv), "an extremely fast Python package and project manager", using the [instructions here](https://docs.astral.sh/uv/getting-started/installation/).
 
 ## Catalog of Examples
 
