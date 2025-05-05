@@ -168,10 +168,14 @@ The malloc/calloc/free APIs are expected to be provided by the platform. The Swi
 
 ## Topics
 
-### GettingStarted
+### Getting Started
 
 - <doc:InstallEmbeddedSwift>
 - <doc:UserManual>
+
+### Guided Examples
+
+- <doc:rpi-pico-blink-sdk>
 
 ### Build System Support
 
@@ -194,3 +198,11 @@ The malloc/calloc/free APIs are expected to be provided by the platform. The Swi
 ### Development
 
 - <doc:Status>
+
+## See Also
+
+### Community Links
+
+- [Swift forums topic](https://forums.swift.org/)
+- [Slack channel](https://forums.swift.org/)
+- [Discord channel](https://forums.swift.org/)
