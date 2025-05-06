@@ -14,11 +14,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        example: [stm32-blink]
+        example: [stm32-blink, stm32-lvgl]
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Fixup for running locally in act
+        if: ${{ env.ACT }}
+        run: echo /opt/acttoolcache/node/18.20.8/x64/bin >> $GITHUB_PATH
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -34,5 +38,12 @@ jobs:
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
         run: |
-          export STM_BOARD=STM32F746G_DISCOVERY
-          ./build-elf.sh
+          if [[ "${{ matrix.example }}" == "stm32-blink" ]]; then
+            export STM_BOARD=STM32F746G_DISCOVERY
+            ./build-elf.sh
+          elif [[ "${{ matrix.example }}" == "stm32-lvgl" ]]; then
+            ./fetch-dependencies.sh
+            make
+          else
+            exit 1
+          fi
