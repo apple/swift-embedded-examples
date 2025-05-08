@@ -3,33 +3,18 @@
 import PackageDescription
 
 let package = Package(
-  name: "RPi5-Blink",
-  platforms: [
-    .macOS(.v14)
-  ],
+  name: "rpi-5-blink",
   products: [
-    .library(
-      name: "MainApp",
-      type: .static,
-      targets: ["MainApp"])
+    .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    .package(
-      url: "https://github.com/apple/swift-mmio.git",
-      branch: "swift-embedded-examples")
+    .package(url: "https://github.com/apple/swift-mmio.git", branch: "main")
   ],
   targets: [
-    .target(
-      name: "MainApp",
+    .executableTarget(
+      name: "Application",
       dependencies: [
         .product(name: "MMIO", package: "swift-mmio")
-      ],
-      swiftSettings: [
-        .enableExperimentalFeature("Embedded"),
-        .unsafeFlags(["-Xfrontend", "-function-sections"]),
-      ]
-    ),
+      ]),
     .target(name: "Support"),
-
-  ]
-)
+  ])
