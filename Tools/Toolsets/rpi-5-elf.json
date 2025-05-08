@@ -6,6 +6,7 @@
       "-Xfrontend", "-function-sections",
       "-enable-experimental-feature", "Embedded",
       "-Xfrontend", "-mergeable-symbols",
+      "-Xclang-linker", "-fuse-ld=lld",
       "-Xclang-linker", "-nostdlib"
     ]
   },
