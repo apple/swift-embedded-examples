@@ -3,17 +3,12 @@
 import PackageDescription
 
 let package = Package(
-  name: "RPi5-Blink",
-  platforms: [
-    .macOS(.v14)
-  ],
+  name: "rpi-5-blink",
   products: [
     .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
-    .package(
-      url: "https://github.com/apple/swift-mmio.git",
-      branch: "swift-embedded-examples")
+    .package(url: "https://github.com/apple/swift-mmio.git", branch: "main")
   ],
   targets: [
     .executableTarget(
@@ -22,5 +17,4 @@ let package = Package(
         .product(name: "MMIO", package: "swift-mmio")
       ]),
     .target(name: "Support"),
-  ]
-)
+  ])
