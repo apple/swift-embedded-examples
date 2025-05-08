@@ -1,4 +1,4 @@
-SWIFT_EXEC ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f swift; else which swift; fi)
+SWIFT_EXEC ?= swift
 CLANG ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f clang; else which clang; fi)
 LLVM_OBJCOPY ?= $(shell if [ "$(shell uname)" = "Darwin" ]; then xcrun -f llvm-objcopy; else which llvm-objcopy; fi)
 
@@ -16,7 +16,7 @@ kernel8.img: kernel8.elf
 
 kernel8.elf: $(BUILDROOT)/libMainApp.a $(BUILDROOT)/Support.build/boot.S.o link.ld
 	@echo "🔗 Linking with clang..."
-	$(CLANG) --target=aarch64-elf -o kernel8.elf $< $^ -fuse-ld=lld -nostdlib -Wl,--unresolved-symbols=ignore-in-object-files -Wl,-T ./link.ld
+	$(CLANG) --target=aarch64-elf -o kernel8.elf $< $^ -fuse-ld=lld -nostdlib -Wl,--unresolved-symbols=ignore-in-object-files -Wl,-T ./link.ld -###
 	@echo ""
 
 $(BUILDROOT)/libMainApp.a $(BUILDROOT)/Support.build/boot.S.o: 

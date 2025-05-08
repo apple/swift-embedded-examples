@@ -8,10 +8,7 @@ let package = Package(
     .macOS(.v14)
   ],
   products: [
-    .library(
-      name: "MainApp",
-      type: .static,
-      targets: ["MainApp"])
+    .executable(name: "Application", targets: ["Application"])
   ],
   dependencies: [
     .package(
@@ -19,17 +16,11 @@ let package = Package(
       branch: "swift-embedded-examples")
   ],
   targets: [
-    .target(
-      name: "MainApp",
+    .executableTarget(
+      name: "Application",
       dependencies: [
         .product(name: "MMIO", package: "swift-mmio")
-      ],
-      swiftSettings: [
-        .enableExperimentalFeature("Embedded"),
-        .unsafeFlags(["-Xfrontend", "-function-sections"]),
-      ]
-    ),
+      ]),
     .target(name: "Support"),
-
   ]
 )
