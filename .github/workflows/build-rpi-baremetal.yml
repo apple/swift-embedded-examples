@@ -35,5 +35,5 @@ jobs:
         with:
           name: ${{ matrix.example }}-binary
           path: |
-            ${{ matrix.example }}/build/kernel8*
+            ${{ matrix.example }}/.build/kernel8*
           retention-days: 30
