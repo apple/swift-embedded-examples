@@ -29,3 +29,11 @@ jobs:
       - name: Build ${{ matrix.example }}
         working-directory: ${{ matrix.example }}
         run: make
+
+      - name: Upload build files artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.example }}-binary
+          path: |
+            ${{ matrix.example }}/build/kernel8*
+          retention-days: 30
