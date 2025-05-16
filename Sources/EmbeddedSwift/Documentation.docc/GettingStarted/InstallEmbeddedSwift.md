@@ -1,10 +1,10 @@
 # Install Embedded Swift
 
-Get the tools needed to use Embedded Swift.
+Get the tools needed to use Embedded Swift
 
 ## Overview
 
-Embedded Swift is an experimental and rapidly developing feature of the Swift language, as such it is only available in "Development Snapshot". 
+> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
 
 The best way to install Swift is using [`swiftly`](http://github.com/swiftlang/swiftly), the official Swift toolchain installer and manager. For instructions on how to install `swiftly`, check out the [Getting Started](https://www.swift.org/swiftly/documentation/swiftly/getting-started) guide.
 

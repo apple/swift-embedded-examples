@@ -1,10 +1,6 @@
 # Existentials
 
-**⚠️ Embedded Swift is experimental. This document might be out of date with latest development.**
-
-**‼️ Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.**
-
-For an introduction and motivation into Embedded Swift, please see "[A Vision for Embedded Swift](https://github.com/swiftlang/swift-evolution/blob/main/visions/embedded-swift.md)", a Swift Evolution document highlighting the main goals and approaches.
+Restrictions on existentials ("any" types) that apply in Embedded Swift
 
 ## Background
 

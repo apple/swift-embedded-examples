@@ -1,5 +1,7 @@
 # Raspberry Pi Pico Blink (Pico SDK)
 
+Tutorial for targetting a Raspberry Pi Pico as an embedded device that runs a simple Swift program
+
 In this guide we'll be targeting a Raspberry Pi Pico as the embedded device that our Swift application will run on. If you don't physically have one, don't worry! You can still run the application in an online emulator.
 
 ## Installing Swift
@@ -14,7 +16,7 @@ To test that you have Swift installed, run `swift --version` from your shell or 
 
 ## Installing dependencies for embedded development
 
-Install the Raspberry Pi Pico SDK, and the Arm Embedded Toolchain by following the [Getting Started With Pico guide](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf). 
+Install the Raspberry Pi Pico SDK, and the Arm Embedded Toolchain by following the [Getting Started With Pico guide](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf).
 Export three environment variables to match your setup and hardware:
 
 ```shell
@@ -36,7 +38,7 @@ $ cmake --version
 cmake version 3.29.2
 $ echo $PICO_BOARD
 pico
-$ ls $PICO_SDK_PATH                              
+$ ls $PICO_SDK_PATH
 CMakeLists.txt          README.md               external/               pico_sdk_version.cmake  tools/
 CONTRIBUTING.md         cmake/                  lib/                    src/
 LICENSE.TXT             docs/                   pico_sdk_init.cmake     test/
@@ -167,48 +169,3 @@ If you don't have a physical Pico, or if you want to iterate quickly, [Wokwi](ht
 Open a [new Pico project in Wokwi](https://wokwi.com/projects/new/pi-pico). Instead of using the code editor to write C code, press F1 and choose "Upload Firmware and Start Simulation". Then select the UF2 file that our build process produced.
 
 Once you upload the UF2 file to Wokwi, the simulation will start, and the LED should begin blinking repeatedly. Hooray! Our first Embedded Swift program is running in an emulator!
-
-## Bonus: Building a simple program for your host OS with Embedded Swift
-
-While desktop operating systems like macOS and Linux are not the typical targets for Embedded Swift, you **absolutely can** build code for them using the Embedded Swift mode. This is useful for experimentation, trying out Embedded Swift, or to be able to iterate fast on an idea for some code that doesn't really need the physical device to work.
-
-The simplest program in Embedded Swift can just be a regular "Hello, World":
-
-```swift
-// HelloEmbedded.swift
-print("Hello, Embedded Swift 😊")
-```
-
-And building it into an executable can be done by calling the `swiftc` compiler directly, but we'll want to add flags to enable Embedded Swift, and also Whole Module Optimization.
-
-```shell
-$ swiftc HelloEmbedded.swift -o HelloEmbedded -enable-experimental-feature Embedded -wmo
-```
-
-This will produce a regular executable binary, but notice that it's very small in size and that it also *does not actually depend on the Swift runtime in the OS* (all Embedded Swift binaries carry their runtime+stdlib dependencies within):
-
-```shell
-$ ls -al
--rwxr-xr-x    1 kuba  staff    18K May 16 17:19 HelloEmbedded*
--rw-r--r--    1 kuba  staff    59B May 16 17:16 HelloEmbedded.swift
-$ otool -L HelloEmbedded
-HelloEmbedded:
-  /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1000.0.0)
-```
-
-Let's run it:
-
-```shell
-$ ./HelloEmbedded 
-Hello, Embedded Swift 😊
-```
-
-Hooray! Our first *host-side* Embedded Swift program is working!
-
-## Where to go next
-
-- The [Embedded Swift Vision Document](https://github.com/swiftlang/swift-evolution/blob/main/visions/embedded-swift.md) will give you an overview of the approaches and goals of Embedded Swift, and also what exactly is in the Embedded Swift language subset.
-- The [collection of Embedded Swift example projects](https://github.com/apple/swift-embedded-examples) on GitHub shows on which embedded devices can Swift work today, and the examples can also be used as templates for your own projects.
-- The [Embedded Swift User Manual](https://github.com/swiftlang/swift/blob/main/docs/EmbeddedSwift/UserManual.md) describes how to use the Embedded Swift compilation mode and how to interact with the compiler.
-- The [Tools page](https://www.swift.org/tools/#editors) has guides for setting up Swift integration in your editor to enable features like indexing, autocomplete, jump-to-definition, and others.
-- The [Swift forums](https://forums.swift.org/) are the best place to ask questions, give feedback or share your cool projects.
