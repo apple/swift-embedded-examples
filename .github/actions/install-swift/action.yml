@@ -4,12 +4,12 @@ description: Installs the Swift specified by a .swift-version file
 runs:
   using: "composite"
   steps:
-    - name: "Cache: Swift"
-      id: cache-swift
-      uses: actions/cache@v4
-      with:
-        path: "$HOME/.local/share/swiftly"
-        key: swift-${{ hashFiles('.swift-version') }}
+    # - name: "Cache: Swift"
+    #   id: cache-swift
+    #   uses: actions/cache@v4
+    #   with:
+    #     path: "$HOME/.local/share/swiftly"
+    #     key: swift-${{ hashFiles('.swift-version') }}
 
     - name: Setup Environment
       shell: bash
@@ -25,8 +25,15 @@ runs:
         echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
         echo "PATH=\$SWIFTLY_BIN_DIR:\$PATH" >> $HOME/.bashrc
 
-    - if: steps.cache-swift.outputs.cache-hit != 'true'
-      name: Install `apt` Dependencies
+    - name: "Restore: Swift"
+      uses: actions/cache/restore@v4
+      id: cache-swift
+      with:
+        path: "~/.local/share/swiftly"
+        key: swift-${{ hashFiles('**/.swift-version') }}
+
+    - name: Install `apt` Dependencies
+      if: steps.cache-swift.outputs.cache-hit != 'true'
       shell: bash
       run: |
         SUDO=$(if [[ $EUID -ne 0 ]]; then echo sudo; fi)
@@ -35,8 +42,8 @@ runs:
       env:
         DEBIAN_FRONTEND: noninteractive
 
-    - if: steps.cache-swift.outputs.cache-hit != 'true'
-      name: Install Swiftly
+    - name: Install Swiftly
+      if: steps.cache-swift.outputs.cache-hit != 'true'
       shell: bash
       run: |
         UNAME=$(uname -m)
@@ -48,10 +55,17 @@ runs:
           --quiet-shell-followup \
           --no-modify-profile
 
-    - if: steps.cache-swift.outputs.cache-hit != 'true'
-      name: Install Swift
+    - name: Install Swift
+      if: steps.cache-swift.outputs.cache-hit != 'true'
       shell: bash
       run: swiftly install --post-install-file ./out.sh
+
+    - name: "Save: Swift"
+      if: steps.cache-swift.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: "~/.local/share/swiftly"
+        key: swift-${{ hashFiles('**/.swift-version') }}
 
     - name: Print Swift Version
       shell: bash
