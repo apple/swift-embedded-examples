@@ -1,11 +1,5 @@
 # Existentials
 
-**⚠️ Embedded Swift is experimental. This document might be out of date with latest development.**
-
-**‼️ Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.**
-
-For an introduction and motivation into Embedded Swift, please see "[A Vision for Embedded Swift](https://github.com/swiftlang/swift-evolution/blob/main/visions/embedded-swift.md)", a Swift Evolution document highlighting the main goals and approaches.
-
 ## Background
 
 Existentials (also known as "any" types) in Swift are a way to express a type-erased value, where the actual type is not known statically, and at runtime it can be any type that conforms to the specified protocol. Because the possible types can vary in size, the representation of such a value is an "existential container" and the actual represented value is stored either inline (when it fits) or indirectly as a pointer to a heap allocation. There are also multiple concrete representations of the existential container that are optimized for different constraints (e.g. for class-bound existentials, the value does not make sense to ever store inline, so the size of the container is matched to hold exactly one pointer).
