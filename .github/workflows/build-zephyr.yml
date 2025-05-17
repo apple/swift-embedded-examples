@@ -3,6 +3,7 @@ name: Zephyr
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   build:
