@@ -3,8 +3,6 @@ name: Zephyr
 on:
   push:
     branches: ["main"]
-  pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
   build:
@@ -30,6 +28,7 @@ jobs:
         with:
           app-path: ${{ matrix.example }}
           toolchains: arm-zephyr-eabi
+          sdk-version: 0.17.0
 
       - name: Install Swift
         uses: ./.github/actions/install-swift
