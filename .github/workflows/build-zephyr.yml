@@ -30,6 +30,7 @@ jobs:
         with:
           app-path: ${{ matrix.example }}
           toolchains: arm-zephyr-eabi
+          sdk-version: 0.17.0
 
       - name: Install Swift
         uses: ./.github/actions/install-swift
