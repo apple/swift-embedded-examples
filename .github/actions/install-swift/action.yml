@@ -4,16 +4,14 @@ description: Installs the Swift specified by a .swift-version file
 runs:
   using: "composite"
   steps:
-    - name: Install `apt` Dependencies
-      shell: bash
-      run: |
-        SUDO=$(if [[ $EUID -ne 0 ]]; then echo sudo; fi)
-        $SUDO apt-get -qq update
-        $SUDO apt-get -qq -y install curl gpg
-      env:
-        DEBIAN_FRONTEND: noninteractive
+    - name: "Cache: Swift"
+      id: cache-swift
+      uses: actions/cache@v4
+      with:
+        path: "$HOME/.local/share/swiftly"
+        key: swift-${{ hashFiles('.swift-version') }}
 
-    - name: Install Swiftly
+    - name: Setup Environment
       shell: bash
       run: |
         export SWIFTLY_HOME_DIR="$HOME/.local/share/swiftly"
@@ -24,6 +22,23 @@ runs:
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $GITHUB_ENV
         echo "SWIFTLY_BIN_DIR=$SWIFTLY_BIN_DIR" >> $HOME/.bashrc
 
+        echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
+        echo "PATH=\$SWIFTLY_BIN_DIR:\$PATH" >> $HOME/.bashrc
+
+    - if: steps.cache-swift.outputs.cache-hit != 'true'
+      name: Install `apt` Dependencies
+      shell: bash
+      run: |
+        SUDO=$(if [[ $EUID -ne 0 ]]; then echo sudo; fi)
+        $SUDO apt-get -qq update
+        $SUDO apt-get -qq -y install curl gpg
+      env:
+        DEBIAN_FRONTEND: noninteractive
+
+    - if: steps.cache-swift.outputs.cache-hit != 'true'
+      name: Install Swiftly
+      shell: bash
+      run: |
         UNAME=$(uname -m)
         curl -O "https://download.swift.org/swiftly/linux/swiftly-$UNAME.tar.gz"
         tar zxf "swiftly-$UNAME.tar.gz"
@@ -33,11 +48,11 @@ runs:
           --quiet-shell-followup \
           --no-modify-profile
 
-        echo "PATH=$SWIFTLY_BIN_DIR:$PATH" >> $GITHUB_ENV
-        echo "PATH=\$SWIFTLY_BIN_DIR:\$PATH" >> $HOME/.bashrc
-
-    - name: Install Swift
+    - if: steps.cache-swift.outputs.cache-hit != 'true'
+      name: Install Swift
       shell: bash
-      run: |
-        swiftly install --post-install-file ./out.sh
-        swift --version
+      run: swiftly install --post-install-file ./out.sh
+
+    - name: Print Swift Version
+      shell: bash
+      run: swift --version
