@@ -6,7 +6,7 @@ manifest:
   projects:
     - name: zephyr
       remote: zephyrproject-rtos
-      revision: main
+      revision: v4.1.0
       import:
         name-allowlist:
           - cmsis  # required by the ARM port
