@@ -13,7 +13,7 @@
 REPOROOT         := $(shell git rev-parse --show-toplevel)
 TOOLSROOT        := $(REPOROOT)/Tools
 TOOLSET          := $(TOOLSROOT)/Toolsets/stm32f74x-elf.json
-MACHO2BIN        := $(TOOLSROOT)/elf2hex.py
+ELF2HEX          := $(TOOLSROOT)/elf2hex.py
 SWIFT_BUILD      := swift build
 
 # Flags
@@ -34,22 +34,20 @@ build:
 		-Xlinker -map -Xlinker $(BUILDROOT)/Application.mangled.map \
 		--verbose
 
-	@echo "demangling linker map..."
-	cat $(BUILDROOT)/Application.mangled.map \
-		| c++filt | swift demangle > $(BUILDROOT)/Application.map
+	# @echo "demangling linker map..."
+	# cat $(BUILDROOT)/Application.mangled.map \
+	# 	| c++filt | swift demangle > $(BUILDROOT)/Application.map
 
-	@echo "disassembling..."
-	otool \
-		-arch $(ARCH) -v -V -d -t \
-		$(BUILDROOT)/Application \
-		| c++filt | swift demangle > $(BUILDROOT)/Application.disassembly
+	# @echo "disassembling..."
+	# otool \
+	# 	-arch $(ARCH) -v -V -d -t \
+	# 	$(BUILDROOT)/Application \
+	# 	| c++filt | swift demangle > $(BUILDROOT)/Application.disassembly
 
 	@echo "extracting binary..."
-	$(MACHO2BIN) \
+	$(ELF2HEX) \
 		$(BUILDROOT)/Application \
-		$(BUILDROOT)/Application.bin \
-		--base-address 0x20010000 \
-		--segments '__TEXT,__DATA,__VECTORS'
+		$(BUILDROOT)/Application.hex
 
 .PHONY: clean
 clean:

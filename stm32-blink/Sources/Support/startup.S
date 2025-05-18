@@ -14,7 +14,7 @@
 
   .text
   .thumb
-  .section __TEXT,__text,regular,pure_instructions
+// .section __TEXT,__text,regular,pure_instructions
   .syntax unified
 
 // reset handler, main entry point
