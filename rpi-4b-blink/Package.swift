@@ -14,7 +14,8 @@ let package = Package(
     .executableTarget(
       name: "Application",
       dependencies: [
-        .product(name: "MMIO", package: "swift-mmio")
+        .product(name: "MMIO", package: "swift-mmio"),
+        "Support",
       ]),
     .target(name: "Support"),
   ])
