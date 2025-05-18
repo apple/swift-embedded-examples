@@ -1,0 +1,1 @@
+bazel_dep(name = "rules_swift", version = "2.8.1", repo_name = "rules_swift")
