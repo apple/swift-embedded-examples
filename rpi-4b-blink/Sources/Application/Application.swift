@@ -67,11 +67,9 @@ func ledOff() {
 }
 
 @main
-struct Main {
-
+struct Application {
   static func main() {
     setLedOutput()
-
     while true {
       ledOn()
       for _ in 1..<100000 {}  // just a delay
