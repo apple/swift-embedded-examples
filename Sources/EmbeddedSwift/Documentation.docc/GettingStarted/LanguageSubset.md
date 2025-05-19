@@ -2,9 +2,9 @@
 
 Details of the Embedded Swift language subset compared to full Swift
 
-Embedded Swift is a subset of the Swift language, and some features are not available in Embedded Swift. This is neccessary in order to achieve small binaries with effective dead-code elimination and minimized system dependencies.
+Embedded Swift is a subset of the Swift language, and some features are not available in Embedded Swift. This is necessary in order to achieve small binaries with effective dead-code elimination and minimized system dependencies.
 
-That said, *the vast majority* of the Swift language works exactly the same in Embedded Swift. This includes cenerics, protocols, enums with associated values, tuples, optionals, classes (instances are allocated on the heap and refcounted just like in regular Swift), inheritance, runtime polymorphism, arrays (heap-allocated copy-on-write just like in regular Swift) and much more.
+That said, *the vast majority* of the Swift language works exactly the same in Embedded Swift. This includes generics, protocols, enums with associated values, tuples, optionals, classes (instances are allocated on the heap and refcounted just like in regular Swift), inheritance, runtime polymorphism, arrays (heap-allocated copy-on-write just like in regular Swift) and much more.
 
 Note that there are no behavior changes in Embedded Swift compared to full Swift, and Embedded Swift is strictly a *subset* and not a *dialect*. Any code compatible with Embedded Swift will also compile and have the same semantics in full Swift.
 
@@ -15,8 +15,8 @@ Note that there are no behavior changes in Embedded Swift compared to full Swift
 - **Not available**: Throwing errors or `any Error` type (in contrast with "typed throws", which *is* supported in Embedded Swift).
 - **Not available**: Metatypes, e.g. `let t = SomeClass.Type` or `type(of: value)` are not allowed.
 - **Not available**: Printing and stringification of arbitrary types (which is achieved via reflection in desktop Swift).
-- **Not available**: Using non-fimal generic class methods. See <doc:NonFinalGenericMethods> for details on this.
-- **Not availble**: Weak and unowned references.
+- **Not available**: Using non-final generic class methods. See <doc:NonFinalGenericMethods> for details on this.
+- **Not available**: Weak and unowned references.
 
 ## Compilation facilities that are not available
 

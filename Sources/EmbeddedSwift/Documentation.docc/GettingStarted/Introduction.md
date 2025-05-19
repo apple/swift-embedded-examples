@@ -10,7 +10,7 @@ Embedded Swift is an experimental and rapidly developing feature of the Swift la
 
 ## How does Embedded Swift differ from regular Swift?
 
-Regular Swift is not a good fit for small constrained environments like microcontrollers, mainly due to codesize and memory footprint. Regular Swift typically requires at least a few megabytes of code and data to support dynamic language features like reflection, and separately compiled generics with ABI stability. Embedded Swift on the other hand can be deployed to environments with as little as kilobytes of available memory. This is achieved by:
+Regular Swift is not a good fit for small constrained environments like microcontrollers, mainly due to codesize and memory footprint. Regular Swift typically requires at least a few megabytes of code and data to support dynamic language features like reflection, and separately compiled generics with ABI stability. Embedded Swift, on the other hand, can be deployed to environments with as little as kilobytes of available memory. This is achieved by:
 
 - Eliminating runtime type metadata where possible
 - Removing reflection capabilities

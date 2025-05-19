@@ -17,7 +17,7 @@ Existentials are restricted in Embedded Swift in multiple ways, for multiple rea
 Embedded Swift allows and supports class-bound existentials:
 
 ```swift
-procotol ClassBoundProtocol: AnyObject { // ✅, this means any type that wants to conform to ClassBoundProtocol must be a class type
+protocol ClassBoundProtocol: AnyObject { // ✅, this means any type that wants to conform to ClassBoundProtocol must be a class type
     func foo()
 }
 

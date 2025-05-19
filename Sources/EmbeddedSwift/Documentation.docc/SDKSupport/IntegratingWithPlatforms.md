@@ -4,9 +4,9 @@ Understand the common patterns and approaches for integrating Swift with existin
 
 ## Overview
 
-Most embedded platforms provide SDKs consisting of drivers, libraries, and HAL (Hardware Abstraction Layer) components, typically written in C. Embedded Swift's C interoperability makes it possible to seamlessly integrate with these existing SDKs.
+Most embedded platforms provide SDKs consisting of drivers, libraries, and HAL (Hardware Abstraction Layer) components, typically written in the C language. Embedded Swift's C interoperability makes it possible to seamlessly integrate with these existing SDKs.
 
-This will enable using the entire API surface of an SDK directly from Swift, and it usually the easiest way to get started — because all functionality from the SDK will simply be available in your Swift code. Additionally, you could build Swift wrappers around the C SDK to provide a more idiomatic Swift API. This approach requires more a bit more work but can result in a more ergonomic and type-safe interface, leveraging Swift's strong type system and safety features to prevent common errors when interacting with low-level hardware.
+This will enable using the entire API surface of an SDK directly from Swift, and is usually the easiest way to get started — because all functionality from the SDK will simply be available in your Swift code. Additionally, you could build Swift wrappers around the C SDK to provide a more idiomatic Swift API. This approach requires a bit more work but can result in a more ergonomic and type-safe interface, leveraging Swift's strong type system and safety features to prevent common errors when interacting with low-level hardware.
 
 Alternatively, for the most constrained environments or when you need complete control over the hardware, you can develop baremetal Swift applications without relying on any SDK. This approach requires implementing your own hardware initialization code and peripheral drivers directly in Swift or in C with Swift wrappers. Baremetal development gives you the maximum flexibility but requires deeper understanding of the target hardware.
 

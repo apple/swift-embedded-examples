@@ -29,7 +29,7 @@ If you have the Wi-Fi enabled Pico W board instead of the regular Pico, note tha
 
 Install [CMake 3.29](https://cmake.org/) or newer.
 
-To test that you have all the neccessary parts installed, you can run the following commands in a terminal:
+To test that you have all the necessary parts installed, you can run the following commands in a terminal:
 
 ```shell
 $ swift --version

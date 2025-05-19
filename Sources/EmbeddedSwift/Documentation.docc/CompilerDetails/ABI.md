@@ -10,7 +10,7 @@ Similarly, do not mix Embedded Swift code with full Swift code, as the ABIs are 
 
 ## Symbol mangling under Embedded Swift
 
-Since Swift 5.0, the stable ABI mangling schema uses the `$s` prefix on all Swift symbols. Because Embedded Swift's ABI differs from the stable ABI, and furthermore because it's not expected to be stable, Embedded Swift uses a `$e` mangling prefix. The logic and structure of the mangling stays the same, the only difference is the prefix.
+Since Swift 5.0, the stable ABI mangling scheme uses the `$s` prefix on all Swift symbols. Because Embedded Swift's ABI differs from the stable ABI, and furthermore because it's not expected to be stable, Embedded Swift uses a `$e` mangling prefix. The logic and structure of the mangling stays the same, the only difference is the prefix.
 
 ## Calling convention of Embedded Swift
 
