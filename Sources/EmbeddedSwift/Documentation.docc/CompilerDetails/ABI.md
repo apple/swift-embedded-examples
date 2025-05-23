@@ -1,10 +1,6 @@
-# ABI
+# ABI of Embedded Swift
 
-**⚠️ Embedded Swift is experimental. This document might be out of date with latest development.**
-
-**‼️ Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.**
-
-For an introduction and motivation into Embedded Swift, please see "[A Vision for Embedded Swift](https://github.com/swiftlang/swift-evolution/blob/main/visions/embedded-swift.md)", a Swift Evolution document highlighting the main goals and approaches.
+Understanding the different ABI (Application Binary Interface) for Embedded Swift
 
 ## ABI stability
 
@@ -14,7 +10,7 @@ Similarly, do not mix Embedded Swift code with full Swift code, as the ABIs are 
 
 ## Symbol mangling under Embedded Swift
 
-Since Swift 5.0, the stable ABI mangling schema uses the `$s` prefix on all Swift symbols. Because Embedded Swift's ABI differs from the stable ABI, and furthermore because it's not expected to be stable, Embedded Swift uses a `$e` mangling prefix. The logic and structure of the mangling stays the same, the only difference is the prefix.
+Since Swift 5.0, the stable ABI mangling scheme uses the `$s` prefix on all Swift symbols. Because Embedded Swift's ABI differs from the stable ABI, and furthermore because it's not expected to be stable, Embedded Swift uses a `$e` mangling prefix. The logic and structure of the mangling stays the same, the only difference is the prefix.
 
 ## Calling convention of Embedded Swift
 

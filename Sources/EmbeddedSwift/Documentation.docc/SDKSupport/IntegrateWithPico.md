@@ -1,14 +1,8 @@
-# Integrating with Raspberry Pi Pico
+# Raspberry Pi Pico SDK
 
-**⚠️ Embedded Swift is experimental. This document might be out of date with latest development.**
+Setting up a project that can seamlessly use C APIs from the Pico SDK.
 
-**‼️ Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.**
-
-For an introduction and motivation into Embedded Swift, please see "[A Vision for Embedded Swift](https://github.com/swiftlang/swift-evolution/blob/main/visions/embedded-swift.md)", a Swift Evolution document highlighting the main goals and approaches.
-
-The following document sketches how to integrate Swift code into some popular embedded platforms' SDKs and build systems.
-
-## Integrating with Raspberry Pi Pico (W) build system:
+> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
 
 Development for [Raspberry Pi Pico and Pico W](https://www.raspberrypi.com/products/raspberry-pi-pico/) normally uses the [Pico SDK](https://github.com/raspberrypi/pico-sdk) and the vendor provides several [sample projects in the pico-examples repository](https://github.com/raspberrypi/pico-examples). The SDK and sample project setup is described in:
 
