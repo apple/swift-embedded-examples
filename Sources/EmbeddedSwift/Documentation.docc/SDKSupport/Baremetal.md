@@ -46,26 +46,17 @@ gpioDataRegister.pointee |= (1 << 5) // Set bit 5
 Hardware registers are volatile - their values can change independently of your program's execution (due to hardware events, interrupts, or peripheral operation). To ensure correct behavior, you must inform the compiler that these memory locations are volatile, preventing unwanted optimizations:
 
 ```swift
-// ✅ Correct approach using volatile operations
-@inline(never)
-func volatileStore(_ value: UInt32, to address: UInt) {
-    UnsafeMutablePointer<UInt32>(bitPattern: address)!.pointee = value
-}
+// Need to use these flags: -enable-experimental-feature Volatile
+import _Volatile
 
-@inline(never)
-func volatileLoad(from address: UInt) -> UInt32 {
-    return UnsafeMutablePointer<UInt32>(bitPattern: address)!.pointee
-}
-
-// Using the volatile operations
-let gpioBase = 0x40010000
-let currentValue = volatileLoad(from: gpioBase)
-volatileStore(currentValue | (1 << 5), to: gpioBase)
+// ✅ Use VolatileMappedRegister for volatile semantics
+let gpioBase: UInt = 0x40010000
+let gpioDataRegister = VolatileMappedRegister<UInt32>(unsafeBitPattern: gpioBase)
+... = gpioDataRegister.load()
+gpioDataRegister.store(1 << 5)
 ```
 
-The `@inline(never)` attribute prevents the compiler from inlining these functions, which helps ensure the memory accesses actually occur.
-
-Consider using Swift MMIO (see below) which uses compiler intrinsics for true volatile semantics and abstracts this problem away from the user.
+Whenever possible, consider using Swift MMIO (see below) which does also provide proper volatile semantics, but more importantly provides type safety on individual registers and their fields.
 
 ### 2. Using Swift MMIO for type-safe register access
 
