@@ -41,7 +41,7 @@ For a detailed introduction and motivation into Embedded Swift, please see "[A V
 
 The Swift toolchain has the ability to produce code for almost any standard ARM and RISC-V platform, and that makes Embedded Swift versatile and not limited to specific platforms or hardware devices. This way, Embedded Swift can potentially target many different microcontroller families and embedded devices.
 
-Boards with active community support include the Raspberry Pi Pico, various STM32 development boards, and several ESP32 variants, with more platforms being regularly added as the community grows.
+Boards with active community support include the Raspberry Pi Pico, various STM32 development boards, various nRF52840 based boards and several ESP32 variants, with more platforms being regularly added as the community grows.
 
 ## Interoperability with existing SDKs
 
