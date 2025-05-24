@@ -6,13 +6,11 @@ In this guide we'll be targeting a Raspberry Pi Pico as the embedded device that
 
 ## Installing Swift
 
-If you don’t have Swift installed, [install it first](https://www.swift.org/install). Because Embedded Swift is experimental and only available in preview toolchains, make sure to install the "Development Snapshot" toolchain (main) instead of a release toolchain (6.0). If you're using a macOS machine, you will need to make sure the installed toolchain is selected as active e.g. by exporting the `TOOLCHAINS` environment variable:
+> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
 
-```shell
-$ export TOOLCHAINS=org.swift.59202405011a
-```
+To install Swift for embedded development, follow the instructions in <doc:InstallEmbeddedSwift>, which guides you through using `swiftly` to install the latest development snapshot with Embedded Swift support.
 
-To test that you have Swift installed, run `swift --version` from your shell or terminal app. It should say "6.0-dev", meaning you have a "Development Snapshot" toolchain.
+To test that you have Swift installed, run `swift --version` from your shell or terminal app. It should say "6.2-dev" or similar, confirming you have a "Development Snapshot" toolchain.
 
 ## Installing dependencies for embedded development
 
@@ -33,7 +31,7 @@ To test that you have all the necessary parts installed, you can run the followi
 
 ```shell
 $ swift --version
-Apple Swift version 6.0-dev (LLVM b66077aefd3be08, Swift 84d36181a762913)
+Apple Swift version 6.2-dev (LLVM 81ab6d9f7e4810f, Swift 9cc1947527bacea)
 $ cmake --version
 cmake version 3.29.2
 $ echo $PICO_BOARD
