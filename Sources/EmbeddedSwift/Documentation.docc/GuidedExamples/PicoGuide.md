@@ -49,7 +49,7 @@ bin/                                               libexec/
 ## Building a "blinky" embedded app
 
 The standard "Hello, World" in embedded development is a program that repeatedly blinks an LED. Let's build one. The following setup can be also found in [swift-embedded-examples](https://github.com/apple/swift-embedded-examples/blob/main/pico-blink-sdk/README.md), but we're going to show below that all you need is just three files.
-Let's create a new empty directory and prepare a simple structure for a CMake-based project that can be used on top the Pico SDK:
+Let's create a new empty directory and prepare a simple structure for a CMake-based project that can be used on top of the Pico SDK:
 
 ```
 embedded-swift-tutorial

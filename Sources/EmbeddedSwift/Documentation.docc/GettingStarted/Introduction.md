@@ -22,7 +22,7 @@ It's also a good mental model to think of the Swift compiler in Embedded Swift m
 This results in properties that are a great fit for embedded software development:
 
 - **Small binaries** that can be as tiny as a few hundred bytes for "Hello World"-like programs (fully self-contained).
-- **No hidden runtime costs** – Embedded Swift's runtime library does not manage any data structures behind your back, is itself less than a kilobyte in size, and it eligible to be removed if unused.
+- **No hidden runtime costs** – Embedded Swift's runtime library does not manage any data structures behind your back, is itself less than a kilobyte in size, and is eligible to be removed if unused.
 - **No hidden allocations** which would cause unpredictable performance cliffs.
 - **Full C/C++ interoperability** to directly interact with existing C libraries and hardware-specific code, making it easy to integrate with vendor SDKs.
 - **Modern language features** like optionals, generics, and strong type safety are all available in Embedded Swift.
