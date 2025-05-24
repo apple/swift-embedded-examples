@@ -167,7 +167,7 @@ To build an Embedded Swift baremetal project with SwiftPM, you will need a setup
 
 - Your main application target defined in Package.swift.
 - A helper C code helper target defined in Package.swift - this will contain your C startup code, vector table and possibly an assembly file.
-- Invoke `swift build` with a `--triple` argument that specifies.
+- Invoke `swift build` with a `--triple` argument that specifies the target CPU architecture and output object file format.
 - Use a `toolset.json` file that defines the common Swift and C compilation flags, and linking flags. This will e.g. enable the Embedded Swift mode when compiling Swift code, and point the linker at the right linker script.
 
 Example file structure:
