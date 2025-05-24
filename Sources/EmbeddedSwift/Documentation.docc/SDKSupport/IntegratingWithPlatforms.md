@@ -66,7 +66,7 @@ For detailed instructions on integrating with the Raspberry Pi Pico SDK, see <do
 
 ### ESP32
 
-For ESP microcontrollers using the ESP-IDF framework, see <doc:IntegrateWithESP>. Note that only chips based on RISC-V architecture (e.g. ESP32-C3, ESP32-C6, ESP32-P4) are supported with Embedded Swift. The Xtensa ISA (used in e.g. ESP8266 or ESP32-S2 and ESP32-S3).
+For ESP microcontrollers using the ESP-IDF framework, see <doc:IntegrateWithESP>. Note that only chips based on RISC-V architecture (e.g. ESP32-C3, ESP32-C6, ESP32-P4) are supported with Embedded Swift. The Xtensa ISA (used in e.g. ESP8266 or ESP32-S2 and ESP32-S3) is not supported.
 
 ### STM32
 

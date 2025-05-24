@@ -30,7 +30,7 @@ The layout of Embedded Swift's class metadata is *different* from full Swift:
 - The **destructor pointer** is stored at **offset 1**. This function is invoked by Swift's deallocator when the class instance is destroyed.
 - The **ivar destroyer** is stored at **offset 2**. This function is invoked to destroy instance members when creation of the object is cancelled (e.g. in a failable initializer).
 - Lastly, the **vtable** is stored at **offset 3**: For each Swift class in the class's inheritance hierarchy, in order starting
-  from the root class and working down to the most derived class, the function pointers to the implementation of every method of the class in declaration order in stored.
+  from the root class and working down to the most derived class, the function pointers to the implementation of every method of the class in declaration order is stored.
 
 ### Witness Tables ABI
 
