@@ -120,9 +120,9 @@ void ResetISR(void) {
 }
 ```
 
-Both these code snippets are not fully functional, they are only demonstrating the complexity of what the linker script and startup code need to do to initialize handle global variables.
+Both these code snippets are not fully functional, they are only demonstrating the complexity of what the linker script and startup code need to do to initialize global variables.
 
-Tip: If this handling is not done correctly, a typical symptom is that global variables "don't work", i.e. reading from them doesn't yield the right value, and writing to them doesn't persist. A good way to double check this is by using a debugging a dumping memory at runtime and checking if it matches the virtual memory layout of the ELF file.
+Tip: If this handling is not done correctly, a typical symptom is that global variables "don't work", i.e. reading from them doesn't yield the right value, and writing to them doesn't persist. A good way to double check this is by using a debugger, dumping memory at runtime and checking if it matches the virtual memory layout of the ELF file.
 
 ## Vector table and interrupts
 
