@@ -75,6 +75,10 @@ STM32 microcontrollers can be programmed with Embedded Swift in two ways:
 1. Using the STM32Cube HAL/LL libraries - This requires proper integration with the STM32Cube build system
 2. Bare-metal approach - See <doc:STM32BaremetalGuide> for details
 
+### Zephyr
+
+For detailed documentation on how to integrate Embedded Swift with Zephyr, see <doc:IntegrateWithZephyr>.
+
 ### Bare-metal Development
 
 For completely bare-metal development without any SDK, see <doc:Baremetal> for guidance on implementing the necessary startup code and hardware initialization.
