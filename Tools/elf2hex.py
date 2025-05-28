@@ -18,10 +18,22 @@
 # file format suitable for flashing onto some embedded devices.
 #
 # Usage:
-#   $ elf2hex.py <input> <output> [--symbol-map <output>]
+#   $ elf2hex.py <input> <output> [--symbol-map <output>] [--relocate-data-segment]
 #
 # Example:
 #   $ elf2hex.py ./blink ./blink.hex --symbol-map ./blink.symbols
+#
+# The --relocate-data-segment option expects to be able to locate symbols with names
+#   - __data_start
+#   - __flash_data_start
+#   - __flash_data_len
+# and then it physically relocates a segment located at __data_start to
+# __flash_data_start, without changing virtual/physical addresses of any ELF
+# headers. This means that the .hex file is not validly mapped until a boot-time
+# reverse relocation step.
+#
+# See the linker script used in a particular demo folder for a detailed
+# explanation of the linking, packing, and runtime relocation scheme.
 #
 
 import argparse
@@ -36,6 +48,7 @@ def main():
     parser.add_argument('input')
     parser.add_argument('output')
     parser.add_argument('--symbol-map')
+    parser.add_argument('--relocate-data-segment', action='store_true')
     args = parser.parse_args()
 
     inf = open(args.input, "rb")
@@ -70,24 +83,11 @@ def main():
             vmaddr += chunklen
 
     elffile = elftools.elf.elffile.ELFFile(inf)
-    for segment in elffile.iter_segments():
-        if segment.header.p_type != "PT_LOAD":
-            continue
-        vmaddr = segment.header.p_paddr
-        data = segment.data()
-        emit(segment.header.p_paddr, data)
-
-    chunklen = 0
-    vmaddr = 0
-    recordtype = "01"  # EOF
-    emitrecord(f"{chunklen:02X}{vmaddr:04X}{recordtype}")
 
     symbol_map = {}
     symtab_section = elffile.get_section_by_name(".symtab")
     for s in symtab_section.iter_symbols():
         if s.entry.st_info.type not in ["STT_FUNC", "STT_NOTYPE"]:
-            continue
-        if s.entry.st_shndx == "SHN_ABS":
             continue
         if s.name == "":
             continue
@@ -95,6 +95,41 @@ def main():
 
     if args.symbol_map is not None:
         pathlib.Path(args.symbol_map).write_text(json.dumps(symbol_map))
+
+    relocations = {}
+    if args.relocate_data_segment:
+        __flash_data_start = symbol_map["__flash_data_start"]
+        __data_start = symbol_map["__data_start"]
+        __flash_data_len = symbol_map["__flash_data_len"]
+        print("Relocation info:")
+        print(f"  __flash_data_start = 0x{__flash_data_start:08x}")
+        print(f"  __data_start       = 0x{__data_start:08x}")
+        print(f"  __flash_data_len   = 0x{__flash_data_len:08x}")
+        relocations = {__data_start: __flash_data_start}
+
+    for segment in elffile.iter_segments():
+        if segment.header.p_type != "PT_LOAD":
+            continue
+        vmaddr = segment.header.p_paddr
+        data = segment.data()
+        flags = ""
+        flags += "r" if segment.header.p_flags & 0x4 else "-"
+        flags += "w" if segment.header.p_flags & 0x2 else "-"
+        flags += "x" if segment.header.p_flags & 0x1 else "-"
+        print(f"PT_LOAD {flags} at 0x{segment.header.p_paddr:08x} - "
+              f"0x{segment.header.p_paddr + len(data):08x}, "
+              f"size {len(data)} "
+              f"(0x{len(data):04x})")
+        placement_addr = segment.header.p_paddr
+        if segment.header.p_paddr in relocations:
+            placement_addr = relocations[segment.header.p_paddr]
+            print(f"  ... relocating to 0x{placement_addr:08x}")
+        emit(placement_addr, data)
+
+    chunklen = 0
+    vmaddr = 0
+    recordtype = "01"  # EOF
+    emitrecord(f"{chunklen:02X}{vmaddr:04X}{recordtype}")
 
     inf.close()
     outf.close()
