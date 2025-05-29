@@ -6,6 +6,20 @@ For an introduction and motivation into Embedded Swift, please see "[A Vision fo
 
 The following document outlines how to setup a Swift to Zephyr project for an emulated ARM Cortex M0, explaining a few key concepts along the way. For a complete working example on real hardware, however, refer to the [nrfx-blink-sdk](../../../../nrfx-blink-sdk/) project that is compatible with nRF or other boards.
 
+## Zephyr Target Architecture Compatibility
+
+Zephyr [supports quite a few target architectures](https://docs.zephyrproject.org/latest/introduction/index.html), but not all are supported by Embedded Swift. Please refer to the following table for an overview of Zephyr-supported architectures that are supported by Swift, along with the correct target triple to use:
+
+| Architecture | Details             | Swift Triple            |
+|--------------|---------------------|-------------------------|
+| ARMv6-M      | Cortex M0, M1, M3   | armv6m-none-none-eabi   |
+| ARMv7-M      | Cortex M4, M7       | armv7em-none-none-eabi  |
+| ARMv8-M      | Cortex M23-85       | aarch64-none-none-elf   |
+| Intel        | 32-bit (i686)       | i686-unknown-none-elf   |
+| Intel        | 64-bit (x86_64)     | x86_64-unknown-none-elf |
+| RISC-V       | 32-bit              | riscv32-none-none-eabi  |
+| RISC-V       | 64-bit              | riscv64-none-none-eabi  |
+
 ## Zephyr Setup
 
 Before setting up a Swift project that works with Zephyr, you need to setup dependencies and a Zephyr workspace as per the [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html). Regardless of your platform (macOS or Linux), ensure that you can build the blinky example without errors before starting with Swift integration:
@@ -113,12 +127,16 @@ set(CMAKE_Swift_COMPILATION_MODE wholemodule)
 project(SwiftZephyrProject Swift)
 ```
 
-Next, set the compiler target to the arch you are building for. For this example we use `armv6m-none-none-eabi` which is compatible with the [Cortex-M0](https://docs.zephyrproject.org/latest/boards/qemu/cortex_m0/doc/index.html) which we will compile for in a later step. The `mfloat-abi=soft`, `-fshort-enums`, and `-fno-pic` flags are specifically for 32-bit arm architectures, so for other architectures they can be removed. However, the other flags and required for building Swift for Embedded and against Zephyr:
+Next, set the compiler target to the arch you are building for. For this example we use `armv6m-none-none-eabi` which is compatible with the [Cortex-M0](https://docs.zephyrproject.org/latest/boards/qemu/cortex_m0/doc/index.html) which we will compile for in a later step. If you are targeting a different architecture, see the [Zephyr Target Architecture Compatibility](#zephyr-target-architecture-compatibility) to see which target triple to use.
 
 ```cmake
 # Use the armv6m-none-none-eabi target triple for Swift
 set(CMAKE_Swift_COMPILER_TARGET armv6m-none-none-eabi)
+```
 
+After setting the target triple, some additional additional Swift compiler flags need to be defined:
+
+```cmake
 # Set global Swift compiler flags
 add_compile_options(
     # Enable Embedded Swift
@@ -127,21 +145,31 @@ add_compile_options(
     # Enable function sections to enable dead code stripping on elf
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xfrontend -function-sections>"
 
-    # Use software floating point operations matching GCC
-    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -mfloat-abi=soft>"
-
-    # Use compacted C enums matching GCC
-    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fshort-enums>"
-
     # Disable PIC
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pic>"
 
-    # Add Libc include paths
-    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -I -Xcc ${ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/picolibc/include>"
+    # Disable PIE
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pie>"
 )
 ```
 
-The following block will automatically grab Zephyr compilation flags (such as `-D__ZEPHYR__=1` and `-DKERNEL`) and set them as Swift compiler definitions. This is required to successfully build Swift code that works with Zephyr:
+There are quite a few other Zephyr flags that must also be imported in order to get Zephyr include paths and flags such `-mcpu`, `-mfloat-abi`, and so on:
+
+```cmake
+# Import TOOLCHAIN_C_FLAGS from Zephyr as -Xcc flags
+foreach(flag ${TOOLCHAIN_C_FLAGS})
+    # Skip flags that are not known to swiftc
+    string(FIND "${flag}" "-imacro" is_imacro)
+    string(FIND "${flag}" "-mfp16-format" is_mfp16)
+    if(NOT is_imacro EQUAL -1 OR NOT is_mfp16 EQUAL -1)
+        continue()
+    endif()
+
+    add_compile_options("$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc ${flag}>")
+endforeach()
+```
+
+Next, add the following block to automatically grab Zephyr compilation flags (such as `-D__ZEPHYR__=1` and `-DKERNEL`) and set them as Swift compiler definitions. This is required to successfully build Swift code that works with Zephyr:
 
 ```cmake
 # Add definitions from Zephyr to -Xcc flags
@@ -287,7 +315,7 @@ Loop
 Loop
 ```
 
-This setup may also desirable since `west flash` is also available and can be used instead of invoking the flashing tools manually.
+This setup may also be desirable since `west flash` is also available and can be used instead of invoking the flashing tools manually.
 
 If compiling a firmware for a real/physical board such as the `nrf52840dk/nrf52840`, `west flash` will work if the SEGGER J-Link host tools are installed. As an example, with the [nrfx-blink-sdk](../../../../nrfx-blink-sdk/) project:
 
