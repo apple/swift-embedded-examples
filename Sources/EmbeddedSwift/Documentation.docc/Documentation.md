@@ -1,9 +1,9 @@
-# ``EmbeddedSwift``
+# Embedded Swift
 
 Embedded Swift is a compilation and language mode that enables development of baremetal, embedded and standalone software in Swift
 
 @Metadata {
-  @DisplayName("Embedded Swift")
+  @TechnologyRoot
 }
 
 ## Topics

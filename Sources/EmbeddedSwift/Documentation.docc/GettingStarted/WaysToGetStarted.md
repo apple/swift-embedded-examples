@@ -4,8 +4,6 @@ Possible directions to explore to start using Embedded Swift
 
 ## Introduction
 
-> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
-
 Embedded Swift is a way to write code for embedded systems using the Swift programming language. Depending on the use case, there are different ways of using it, different ways of integrating with existing ecosystems, and different setups for different hardware devices. This guide will help you explore various paths to get started with embedded development using Swift.
 
 Before diving into Embedded Swift development, you should have:
@@ -14,6 +12,8 @@ Before diving into Embedded Swift development, you should have:
 - A Swift toolchain installed on your development host
 - A target embedded platform in mind (e.g. a Raspberry Pi Pico)
   - this can also be a simulated hardware platform (e.g. in QEMU), or even a full desktop OS environment in case you're not interested in controlling low-level hardware or custom electronic peripherals
+  
+> Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 
 ## Guided Tutorials
 

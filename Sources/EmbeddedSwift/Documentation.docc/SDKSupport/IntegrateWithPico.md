@@ -2,7 +2,7 @@
 
 Setting up a project that can seamlessly use C APIs from the Pico SDK.
 
-> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
+> Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 
 Development for [Raspberry Pi Pico and Pico W](https://www.raspberrypi.com/products/raspberry-pi-pico/) normally uses the [Pico SDK](https://github.com/raspberrypi/pico-sdk) and the vendor provides several [sample projects in the pico-examples repository](https://github.com/raspberrypi/pico-examples). The SDK and sample project setup is described in:
 
