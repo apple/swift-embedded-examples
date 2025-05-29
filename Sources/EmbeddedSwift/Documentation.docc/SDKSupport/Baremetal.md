@@ -120,9 +120,9 @@ void ResetISR(void) {
 }
 ```
 
-Both these code snippets are not fully functional, they are only demonstrating the complexity of what the linker script and startup code need to do to initialize handle global variables.
+Both these code snippets are not fully functional, they are only demonstrating the complexity of what the linker script and startup code need to do to initialize global variables.
 
-Tip: If this handling is not done correctly, a typical symptom is that global variables "don't work", i.e. reading from them doesn't yield the right value, and writing to them doesn't persist. A good way to double check this is by using a debugging a dumping memory at runtime and checking if it matches the virtual memory layout of the ELF file.
+Tip: If this handling is not done correctly, a typical symptom is that global variables "don't work", i.e. reading from them doesn't yield the right value, and writing to them doesn't persist. A good way to double check this is by using a debugger, dumping memory at runtime and checking if it matches the virtual memory layout of the ELF file.
 
 ## Vector table and interrupts
 
@@ -167,7 +167,7 @@ To build an Embedded Swift baremetal project with SwiftPM, you will need a setup
 
 - Your main application target defined in Package.swift.
 - A helper C code helper target defined in Package.swift - this will contain your C startup code, vector table and possibly an assembly file.
-- Invoke `swift build` with a `--triple` argument that specifies.
+- Invoke `swift build` with a `--triple` argument that specifies the target CPU architecture and output object file format.
 - Use a `toolset.json` file that defines the common Swift and C compilation flags, and linking flags. This will e.g. enable the Embedded Swift mode when compiling Swift code, and point the linker at the right linker script.
 
 Example file structure:

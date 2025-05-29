@@ -16,7 +16,7 @@ Implementation status of compiler and language features in Embedded Swift, compa
 | Metatypes                                             | No, currently only allowed as unused arguments (type hints)                        |
 | Untyped throwing                                      | No, intentionally unsupported long-term (typed throwing should be used instead)    |
 | Weak references, unowned references                   | No                                                                                 |
-| Non-final generic class methods                       | No, intentionally unsupported long-term, see <[Embedded Swift -- Non-final generic methods](NonFinalGenericMethods.md)>|
+| Non-final generic class methods                       | No, intentionally unsupported long-term, see <doc:NonFinalGenericMethods>|
 | Parameter packs (variadic generics)                   | No, not yet supported                                                              |
 
 ## Embedded Standard Library Breakdown

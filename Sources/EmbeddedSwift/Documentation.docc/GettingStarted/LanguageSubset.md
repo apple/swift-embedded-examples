@@ -27,4 +27,4 @@ Note that there are no behavior changes in Embedded Swift compared to full Swift
 
 ## Further resources
 
-The above lists are describing features that are removed from Embedded Swift *by design*. Since Embedded Swift is currently an experimental preview, there might also be  features that are not yet implemented. See the in-development status at [Embedded Swift -- Status](EmbeddedSwiftStatus.md).
+The above lists are describing features that are removed from Embedded Swift *by design*. Since Embedded Swift is currently an experimental preview, there might also be  features that are not yet implemented. See the in-development status at <doc:Status>.
