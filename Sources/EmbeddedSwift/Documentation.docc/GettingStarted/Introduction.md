@@ -6,7 +6,7 @@ Write Swift code for microcontrollers, embedded systems, and bare-metal applicat
 
 Embedded Swift is an experimental and rapidly developing feature of the Swift language that enables development of baremetal, embedded and standalone software. It's a subset of the Swift language designed for producing small, efficient binaries with minimal dependencies, making it suitable for resource-constrained environments.
 
-> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
+> Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 
 ## How does Embedded Swift differ from regular Swift?
 

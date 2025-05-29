@@ -6,7 +6,7 @@ In this guide we'll be targeting a Raspberry Pi Pico as the embedded device that
 
 ## Installing Swift
 
-> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
+> Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 
 To install Swift for embedded development, follow the instructions in <doc:InstallEmbeddedSwift>, which guides you through using `swiftly` to install the latest development snapshot with Embedded Swift support.
 
