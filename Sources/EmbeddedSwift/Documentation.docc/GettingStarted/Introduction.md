@@ -17,10 +17,13 @@ Regular Swift is not a good fit for small constrained environments like microcon
 - Using compile-time specialization (monomorphization) for generic code
 - Minimizing dependencies on external libraries
 
+It's also a good mental model to think of the Swift compiler in Embedded Swift mode as operating on a way a *traditional C compiler* does — specifically in the sense that the compiler produces an object file that does not call into or depend on symbols that are not explicitly used in the source code. This is achieved even for code that uses generics, protocols, tuples, arrays, and more — all the higher-level language features are "compiled out" (e.g. generics are specialized), and standard library code is pulled into the object file as needed (e.g. array implementation).
+
 This results in properties that are a great fit for embedded software development:
 
 - **Small binaries** that can be as tiny as a few hundred bytes for "Hello World"-like programs (fully self-contained).
-- **No hidden runtime costs** – Embedded Swift's runtime library does not manage any data structures behind your back, is itself less than a kilobyte in size, and it eligible to be removed if unused.
+- **No hidden runtime costs** – Embedded Swift's runtime library does not manage any data structures behind your back, is itself less than a kilobyte in size, and is eligible to be removed if unused.
+- **No hidden allocations** which would cause unpredictable performance cliffs.
 - **Full C/C++ interoperability** to directly interact with existing C libraries and hardware-specific code, making it easy to integrate with vendor SDKs.
 - **Modern language features** like optionals, generics, and strong type safety are all available in Embedded Swift.
 - **Full safety of Swift** is retained in Embedded Swift.
@@ -38,7 +41,7 @@ For a detailed introduction and motivation into Embedded Swift, please see "[A V
 
 The Swift toolchain has the ability to produce code for almost any standard ARM and RISC-V platform, and that makes Embedded Swift versatile and not limited to specific platforms or hardware devices. This way, Embedded Swift can potentially target many different microcontroller families and embedded devices.
 
-Boards with active community support include the Raspberry Pi Pico, various STM32 development boards, and several ESP32 variants, with more platforms being regularly added as the community grows.
+Boards with active community support include the Raspberry Pi Pico, various STM32 development boards, various nRF52840 based boards and several ESP32 variants, with more platforms being regularly added as the community grows.
 
 ## Interoperability with existing SDKs
 

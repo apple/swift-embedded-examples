@@ -6,13 +6,11 @@ In this guide we'll be targeting a Raspberry Pi Pico as the embedded device that
 
 ## Installing Swift
 
-If you don’t have Swift installed, [install it first](https://www.swift.org/install). Because Embedded Swift is experimental and only available in preview toolchains, make sure to install the "Development Snapshot" toolchain (main) instead of a release toolchain (6.0). If you're using a macOS machine, you will need to make sure the installed toolchain is selected as active e.g. by exporting the `TOOLCHAINS` environment variable:
+> Warning: Embedded Swift is experimental. Use the latest downloadable 'Trunk Development' snapshot from swift.org to use Embedded Swift. Public releases of Swift do not yet support Embedded Swift.
 
-```shell
-$ export TOOLCHAINS=org.swift.59202405011a
-```
+To install Swift for embedded development, follow the instructions in <doc:InstallEmbeddedSwift>, which guides you through using `swiftly` to install the latest development snapshot with Embedded Swift support.
 
-To test that you have Swift installed, run `swift --version` from your shell or terminal app. It should say "6.0-dev", meaning you have a "Development Snapshot" toolchain.
+To test that you have Swift installed, run `swift --version` from your shell or terminal app. It should say "6.2-dev" or similar, confirming you have a "Development Snapshot" toolchain.
 
 ## Installing dependencies for embedded development
 
@@ -25,7 +23,7 @@ $ export PICO_SDK_PATH=...       # location to your Pico SDK
 $ export PICO_TOOLCHAIN_PATH=... # location to the Arm Embedded Toolchain
 ```
 
-If you have the Wi-Fi enabled Pico W board instead of the regular Pico, note that you will need a slightly different setup described in the [Pico W example project](https://github.com/apple/swift-embedded-examples/tree/main/pico-w-blink-sdk), and just specifying `PICO_BOARD=pico_w` is not going to work.
+If you have the Wi-Fi enabled Pico W board instead of the regular Pico, note that you will need a slightly different setup described in the [Pico W example project](https://github.com/apple/swift-embedded-examples/tree/main/rpi-picow-blink-sdk), and just specifying `PICO_BOARD=pico_w` is not going to work.
 
 Install [CMake 3.29](https://cmake.org/) or newer.
 
@@ -33,7 +31,7 @@ To test that you have all the necessary parts installed, you can run the followi
 
 ```shell
 $ swift --version
-Apple Swift version 6.0-dev (LLVM b66077aefd3be08, Swift 84d36181a762913)
+Apple Swift version 6.2-dev (LLVM 81ab6d9f7e4810f, Swift 9cc1947527bacea)
 $ cmake --version
 cmake version 3.29.2
 $ echo $PICO_BOARD
@@ -50,8 +48,8 @@ bin/                                               libexec/
 
 ## Building a "blinky" embedded app
 
-The standard "Hello, World" in embedded development is a program that repeatedly blinks an LED. Let's build one. The following setup can be also found in [swift-embedded-examples](https://github.com/apple/swift-embedded-examples/blob/main/pico-blink-sdk/README.md), but we're going to show below that all you need is just three files.
-Let's create a new empty directory and prepare a simple structure for a CMake-based project that can be used on top the Pico SDK:
+The standard "Hello, World" in embedded development is a program that repeatedly blinks an LED. Let's build one. The following setup can be also found in [swift-embedded-examples](https://github.com/apple/swift-embedded-examples/blob/main/rpi-pico-blink-sdk/README.md), but we're going to show below that all you need is just three files.
+Let's create a new empty directory and prepare a simple structure for a CMake-based project that can be used on top of the Pico SDK:
 
 ```
 embedded-swift-tutorial

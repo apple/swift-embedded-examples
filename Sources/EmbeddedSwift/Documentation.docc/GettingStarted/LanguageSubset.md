@@ -14,9 +14,10 @@ Note that there are no behavior changes in Embedded Swift compared to full Swift
 - **Not available**: Values of protocol types ("existentials"), unless the protocol is restricted to be class-bound (derived from AnyObject). E.g. `let a: Hashable = ...` is not allowed. `Any` is also not allowed. See <doc:Existentials> for details and alternatives of existentials.
 - **Not available**: Throwing errors or `any Error` type (in contrast with "typed throws", which *is* supported in Embedded Swift).
 - **Not available**: Metatypes, e.g. `let t = SomeClass.Type` or `type(of: value)` are not allowed.
+- **Not available**: Standard library types that rely on the above, for example `Codable` and `KeyPath`, are not allowed.
 - **Not available**: Printing and stringification of arbitrary types (which is achieved via reflection in desktop Swift).
 - **Not available**: Using non-final generic class methods. See <doc:NonFinalGenericMethods> for details on this.
-- **Not available**: Weak and unowned references.
+- **Not available**: Weak and unowned references are not allowed (unsafe unowned references *are* available).
 
 ## Compilation facilities that are not available
 
@@ -26,4 +27,4 @@ Note that there are no behavior changes in Embedded Swift compared to full Swift
 
 ## Further resources
 
-The above lists are describing features that are removed from Embedded Swift *by design*. Since Embedded Swift is currently an experimental preview, there might also be  features that are not yet implemented. See the in-development status at [Embedded Swift -- Status](EmbeddedSwiftStatus.md).
+The above lists are describing features that are removed from Embedded Swift *by design*. Since Embedded Swift is currently an experimental preview, there might also be  features that are not yet implemented. See the in-development status at <doc:Status>.
