@@ -14,7 +14,6 @@
 - Build the program, then copy the kernel image to the SD card.
 ``` console
 $ cd rpi-5-blink
-$ export TOOLCHAINS='<toolchain-identifier>' # Your Swift nightly toolchain identifier
 $ make
 $ cp kernel8.img /Volumes/bootfs  # Copy kernel image to SD card
 $ rm /Volumes/bootfs/kernel_2712.img # Delete this kernel image so our kernel8.img is used
@@ -22,4 +21,3 @@ $ # You can also rename our kernel8.img to kernel_2712.img, or set it to anythin
 ```
 - Place the SD card in your Raspberry Pi 5, and connect it to power.
 - After the boot sequence, the green (ACT) led will start blinking in a regular pattern.
-
