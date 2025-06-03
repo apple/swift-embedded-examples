@@ -12,8 +12,9 @@ Zephyr [supports quite a few target architectures](https://docs.zephyrproject.or
 
 | Architecture | Details             | Swift Triple            |
 |--------------|---------------------|-------------------------|
-| ARMv6-M      | Cortex M0, M1, M3   | armv6m-none-none-eabi   |
-| ARMv7-M      | Cortex M4, M7       | armv7em-none-none-eabi  |
+| ARMv6-M      | Cortex M0, M0+, M1  | armv6m-none-none-eabi   |
+| ARMv7-M      | Cortex M3           | armv7-none-none-eabi    |
+| ARMv7-EM     | Cortex M4/M4F, M7   | armv7em-none-none-eabi  |
 | ARMv8-M      | Cortex M23-85       | aarch64-none-none-elf   |
 | Intel        | 32-bit (i686)       | i686-unknown-none-elf   |
 | Intel        | 64-bit (x86_64)     | x86_64-unknown-none-elf |
@@ -134,7 +135,10 @@ Next, set the compiler target to the arch you are building for. For this example
 set(CMAKE_Swift_COMPILER_TARGET armv6m-none-none-eabi)
 ```
 
-After setting the target triple, some additional additional Swift compiler flags need to be defined:
+After setting the target triple, some additional additional Swift compiler flags need to be defined.
+Please note that the `-mfloat-abi=soft` flag may need to change to `-mfloat-abi=hard` for ARM CPUs
+that support hard-float, such as the Cortex-M4F and Cortex-M7. This and the `-fshort-enums` flags
+should not be required for non-ARM architectures such as Intel and RISC-V.
 
 ```cmake
 # Set global Swift compiler flags
@@ -145,6 +149,12 @@ add_compile_options(
     # Enable function sections to enable dead code stripping on elf
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xfrontend -function-sections>"
 
+    # Use software floating point operations matching GCC
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -mfloat-abi=soft>"
+
+    # Use compacted C enums matching GCC
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fshort-enums>"
+
     # Disable PIC
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pic>"
 
@@ -153,7 +163,7 @@ add_compile_options(
 )
 ```
 
-There are quite a few other Zephyr flags that must also be imported in order to get Zephyr include paths and flags such `-mcpu`, `-mfloat-abi`, and so on:
+There are quite a few other Zephyr flags that must also be imported in order to get Zephyr include paths and flags such `-mcpu`, `mthumb`, `-mabi`, and so on:
 
 ```cmake
 # Import TOOLCHAIN_C_FLAGS from Zephyr as -Xcc flags
