@@ -53,7 +53,7 @@ func ledOff() {
 }
 
 func delay() {
-  for _ in 1..<100000 { nop() }
+  for _ in 1..<1000000 { nop() }
 }
 
 @main
