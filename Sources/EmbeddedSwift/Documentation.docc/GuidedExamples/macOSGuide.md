@@ -37,7 +37,7 @@ HelloEmbedded:
         /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1000.0.0)
 ```
 
-However, the singular object file that was used to build this executable was produced by the compiler in the same fashion that a real embedded build would. If we ask the compiler and linker to minimize the size of the outputs and to remove any unused code, we can observe that the binary has no dependencies other than `putchar` from `libSystem` and that the machine code section is very small (176 bytes in the `__text` section)::
+However, the singular object file that was used to build this executable was produced by the compiler in the same fashion that a real embedded build would. If we ask the compiler and linker to minimize the size of the outputs and to remove any unused code, we can observe that the binary has no dependencies other than `putchar` from `libSystem` and that the machine code section is very small (176 bytes in the `__text` section):
 
 ```shell
 $ swiftc HelloEmbedded.swift -o HelloEmbedded -enable-experimental-feature Embedded -wmo -Osize -Xlinker -dead_strip
