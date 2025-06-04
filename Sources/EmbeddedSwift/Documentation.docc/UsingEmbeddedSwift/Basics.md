@@ -76,31 +76,3 @@ It's very common to integrate with existing SDKs in embedded development. This t
 Most embedded SDKs provide a build system integration, commonly with CMake, Make, or their own custom build scripts. At the most basic level, it's always possible to manually call the compiler (`swiftc`) as described above from any build system. This will produce a .o file for the entire Swift module, and then a .o file can typically be directly used in the build system.
 
 For details and concrete examples of how to integrate with more common platforms, SDKs and build systems, see <doc:IntegratingWithPlatforms>.
-
-### Building a macOS Embedded Swift program:
-
-It's also possible to build in Embedded Swift mode for regular non-embedded operating systems, like macOS. This is very useful for testing purposes, or if you just want to observe and experiment with Embedded Swift. A simple source code like this:
-
-```swift
-print("Hello, embedded world!")
-```
-
-...can be compiled using the `-enable-experimental-feature Embedded` flag (the implicit `-target` matches the host OS):
-
-```bash
-$ swiftc hello.swift -enable-experimental-feature Embedded -wmo
-$ ./hello
-Hello, embedded world!
-```
-
-Note that the resulting executable is still a *dynamically-linked executable*, so it's not fully standalone in the embedded sense. Namely is still uses `putchar` from Libsystem. But the singular object file that was used to build this executable was produced by the compiler in the same fashion that a real embedded build would. If we ask the compiler and linker to minimize the size of the outputs and to remove any unused code, we can observe that the binary has no other dependencies other than `putchar` and that the machine code section is very small (172 bytes in the `__text` section):
-
-```bash
-$ swiftc hello.swift -enable-experimental-feature Embedded -wmo -Osize -Xlinker -dead_strip
-$ nm -um ./hello
-                 (undefined) external _putchar (from libSystem)
-$ size -m ./hello
-Segment __TEXT: 16384
-  Section __text: 172
-...
-```
