@@ -89,7 +89,7 @@ let package = Package(
     .executable(name: "STM32BlinkLED", targets: ["STM32BlinkLED"])
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-mmio", branch: "main"),
+    .package(url: "https://github.com/swiftlang/swift-mmio", branch: "main"),
   ],
   targets: [
     .executableTarget(
@@ -119,7 +119,7 @@ First, we'll build the SVD2Swift tool from the swift-mmio package we added as a 
 
 ```shell
 $ swift build --product SVD2Swift
-$ curl -L "https://github.com/apple/swift-embedded-examples/raw/refs/heads/main/Tools/SVDs/stm32f7x6.patched.svd" -O
+$ curl -L "https://github.com/swiftlang/swift-embedded-examples/raw/refs/heads/main/Tools/SVDs/stm32f7x6.patched.svd" -O
 $ .build/debug/SVD2Swift --input stm32f7x6.patched.svd --output Sources/Registers --access-level public \
   --peripherals RCC USART1 GPIOA GPIOB GPIOC GPIOD GPIOE GPIOF GPIOG GPIOH GPIOI GPIOJ GPIOK
 ```
@@ -363,7 +363,7 @@ as published by the Free Software Foundation; either version
 Then let's fetch the elf2hex tool:
 
 ```shell
-$ curl -L "https://raw.githubusercontent.com/apple/swift-embedded-examples/refs/heads/main/Tools/elf2hex.py" -O
+$ curl -L "https://raw.githubusercontent.com/swiftlang/swift-embedded-examples/refs/heads/main/Tools/elf2hex.py" -O
 $ chmod +x elf2hex.py
 ```
 

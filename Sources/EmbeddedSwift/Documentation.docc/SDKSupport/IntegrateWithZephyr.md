@@ -2,7 +2,7 @@
 
 Integrating Swift with Zephyr RTOS for embedded systems development
 
-The following document outlines how to setup a Swift to Zephyr project for an emulated ARM Cortex M0, explaining a few key concepts along the way. For a complete working example on real hardware, however, refer to the [nrfx-blink-sdk](https://github.com/apple/swift-embedded-examples/tree/main/nrfx-blink-sdk) project that is compatible with nRF or other boards.
+The following document outlines how to setup a Swift to Zephyr project for an emulated ARM Cortex M0, explaining a few key concepts along the way. For a complete working example on real hardware, however, refer to the [nrfx-blink-sdk](https://github.com/swiftlang/swift-embedded-examples/tree/main/nrfx-blink-sdk) project that is compatible with nRF or other boards.
 
 > Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 

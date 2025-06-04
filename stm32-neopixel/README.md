@@ -1,6 +1,6 @@
 # stm32-neopixel
 
-<img src="https://github.com/apple/swift-embedded-examples/assets/1186214/9c5d8f74-f8aa-4632-831e-212a3e35e75a">
+<img src="https://github.com/swiftlang/swift-embedded-examples/assets/1186214/9c5d8f74-f8aa-4632-831e-212a3e35e75a">
 
 This demo is designed to run on an STM32 microcontroller and some additional hardware, detailed below:
 

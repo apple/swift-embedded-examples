@@ -23,7 +23,7 @@ $ export PICO_SDK_PATH=...       # location to your Pico SDK
 $ export PICO_TOOLCHAIN_PATH=... # location to the Arm Embedded Toolchain
 ```
 
-If you have the Wi-Fi enabled Pico W board instead of the regular Pico, note that you will need a slightly different setup described in the [Pico W example project](https://github.com/apple/swift-embedded-examples/tree/main/rpi-picow-blink-sdk), and just specifying `PICO_BOARD=pico_w` is not going to work.
+If you have the Wi-Fi enabled Pico W board instead of the regular Pico, note that you will need a slightly different setup described in the [Pico W example project](https://github.com/swiftlang/swift-embedded-examples/tree/main/rpi-picow-blink-sdk), and just specifying `PICO_BOARD=pico_w` is not going to work.
 
 Install [CMake 3.29](https://cmake.org/) or newer.
 
@@ -48,7 +48,7 @@ bin/                                               libexec/
 
 ## Building a "blinky" embedded app
 
-The standard "Hello, World" in embedded development is a program that repeatedly blinks an LED. Let's build one. The following setup can be also found in [swift-embedded-examples](https://github.com/apple/swift-embedded-examples/blob/main/rpi-pico-blink-sdk/README.md), but we're going to show below that all you need is just three files.
+The standard "Hello, World" in embedded development is a program that repeatedly blinks an LED. Let's build one. The following setup can be also found in [swift-embedded-examples](https://github.com/swiftlang/swift-embedded-examples/blob/main/rpi-pico-blink-sdk/README.md), but we're going to show below that all you need is just three files.
 Let's create a new empty directory and prepare a simple structure for a CMake-based project that can be used on top of the Pico SDK:
 
 ```
