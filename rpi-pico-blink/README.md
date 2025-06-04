@@ -1,6 +1,6 @@
 # rpi-pico-blink
 
-<img src="https://github.com/apple/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb">
+<img src="https://github.com/swiftlang/swift-embedded-examples/assets/1186214/f2c45c18-f9a4-48b4-a941-1298ecc942cb">
 
 ## Requirements
 

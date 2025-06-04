@@ -2,7 +2,7 @@
 
 This example demonstrates how to integrate with the ESP-IDF SDK via CMake and how to use the existing LED strip library to control WS8212 lights from Swift. This example is specifically made for the RISC-V MCUs from ESP32 (the Xtensa MCUs are not currently supported by Swift).
 
-<img src="https://github.com/apple/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be">
+<img src="https://github.com/swiftlang/swift-embedded-examples/assets/1186214/15f8a3e0-953e-426d-ad2d-3902baf859be">
 
 ## Requirements
 
