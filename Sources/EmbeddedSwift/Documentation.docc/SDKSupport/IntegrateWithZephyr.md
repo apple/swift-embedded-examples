@@ -2,11 +2,13 @@
 
 Integrating Swift with Zephyr RTOS for embedded systems development
 
+[Zephyr](https://www.zephyrproject.org/) is an open-source RTOS for embedded systems that is sponsored by the Linux Foundation. Since it depends on CMake primarily for its build system, it can easily be integrated to be used with Embedded Swift.
+
 The following document outlines how to setup a Swift to Zephyr project for an emulated ARM Cortex M0, explaining a few key concepts along the way. For a complete working example on real hardware, however, refer to the [nrfx-blink-sdk](https://github.com/apple/swift-embedded-examples/tree/main/nrfx-blink-sdk) project that is compatible with nRF or other boards.
 
 > Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 
-## Zephyr Target Architecture Compatibility
+## Target Architecture Compatibility
 
 Zephyr [supports quite a few target architectures](https://docs.zephyrproject.org/latest/introduction/index.html), but not all are supported by Embedded Swift. Please refer to the following table for an overview of Zephyr-supported architectures that are supported by Swift, along with the correct target triple to use:
 
@@ -136,9 +138,6 @@ set(CMAKE_Swift_COMPILER_TARGET armv6m-none-none-eabi)
 ```
 
 After setting the target triple, some additional additional Swift compiler flags need to be defined.
-Please note that the `-mfloat-abi=soft` flag may need to change to `-mfloat-abi=hard` for ARM CPUs
-that support hard-float, such as the Cortex-M4F and Cortex-M7. This and the `-fshort-enums` flags
-should not be required for non-ARM architectures such as Intel and RISC-V.
 
 ```cmake
 # Set global Swift compiler flags
@@ -160,10 +159,15 @@ add_compile_options(
 
     # Disable PIE
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pie>"
+
+    # Add Libc include paths
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -I -Xcc ${ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/picolibc/include>"
 )
 ```
 
-There are quite a few other Zephyr flags that must also be imported in order to get Zephyr include paths and flags such `-mcpu`, `mthumb`, `-mabi`, and so on:
+- NOTE: The `-mfloat-abi=soft` flag may need to change to `-mfloat-abi=hard` for ARM CPUs that support hard-float, such as the Cortex-M4F and Cortex-M7. This and the `-fshort-enums` flags are not required for non-ARM architectures such as Intel and RISC-V.
+
+There are quite a few other Zephyr flags that can also be imported (optional) in order to get Zephyr include paths and flags such `-mcpu`, `mthumb`, `-mabi`, and so on:
 
 ```cmake
 # Import TOOLCHAIN_C_FLAGS from Zephyr as -Xcc flags
@@ -299,7 +303,8 @@ manifest:
           - cmsis  # required by the ARM port
 ```
 
-It is recommended to set the `revision` to a tagged version of Zephyr instead of always getting the main revision, which could have changing APIs.
+- It is recommended to set the `revision` to a tagged version of Zephyr instead of always getting the main revision, which could have changing APIs.
+- Also, please note that depending on what architecture you are targeting, you may need to add more/different targets to the `name-allowlist`, which is useful to get needed dependencies when compiling a project from a CI. See the [Zephyr workflow from swift-embedded-examples](https://github.com/swiftlang/swift-embedded-examples/blob/main/.github/workflows/build-zephyr.yml) for an example of setting up a CI for Zephyr.
 
 Next, set the `ZEPHYR_BASE` environment variable to tell `west` where the Zephyr workspace is located:
 
@@ -345,3 +350,4 @@ ninja: no work to do.
 ```
 
 The `-r jlink` param is needed for this example to use the J-Link tools instead of using `nrfjprog`, which is the default for this board and also [deprecated](https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools).
+
