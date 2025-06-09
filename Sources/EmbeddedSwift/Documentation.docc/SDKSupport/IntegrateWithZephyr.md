@@ -351,3 +351,75 @@ ninja: no work to do.
 
 The `-r jlink` param is needed for this example to use the J-Link tools instead of using `nrfjprog`, which is the default for this board and also [deprecated](https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools).
 
+## Customizing the Linker
+
+The default linker configuration for building a Zephyr project from CMake works well for simple projects, but it can be customized as needed. The following sections show off some useful ways to customize linking Zephyr projects for Swift.
+
+### Stripping Out Unused Sections
+
+When compiling Swift to Zephyr projects, you may see some warnings about orphaned sections from the linker, like `.swift_modhash`:
+
+```console
+~/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd: warning: orphan section `.swift_modhash' from `app/libapp.a(Main.swift.obj)' being placed in section `.swift_modhash'
+[135/135] Linking C executable zephyr/zephyr.elf
+~/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd: warning: orphan section `.swift_modhash' from `app/libapp.a(Main.swift.obj)' being placed in section `.swift_modhash
+```
+
+These types of warnings can be suppressed by passing a custom linker script to Zephyr that discards the sections, especially if they are not needed. For example, a script called `sections.ld` can be created at the root of the project with the following contents:
+
+```ld
+/DISCARD/ : { *(.swift_modhash*) }
+/DISCARD/ : { *(.ARM.attributes*) *(.ARM.exidx) }
+```
+
+Then, in `CMakeLists.txt`, add the following line:
+
+```cmake
+# Remove unused sections
+zephyr_linker_sources(SECTIONS "sections.ld")
+```
+
+This can also help to reduce the size of the output elf/binary since unused sections are stripped out. Be careful what sections you strip out, however, as some sections may be required.
+
+### Linking Swift Libraries
+
+This example adds the `swiftUnicodeDataTables` library from Swift to be linked into the Zephyr project. This is useful for linking unicode symbols when using strings. See <doc:Strings> for more information on this.
+
+In order to add additional linker params, the CMake `target_link_libraries` invocation can be used against `zephyr_pre0` and `zephyr_final`, like this:
+
+```cmake
+# The code is using a String as a Dictionary key and thus require linking with libswiftUnicodeDataTables.a
+# We compute the path where this file reside, taking into accout how the toolchain is referenced (Swiftly or TOOLCHAINS env variable). 
+find_program(SWIFTLY "swiftly")
+IF(SWIFTLY)
+  execute_process(COMMAND swiftly use --print-location OUTPUT_VARIABLE toolchain_path)
+  cmake_path(SET additional_lib_path NORMALIZE "${toolchain_path}/usr/lib/swift/embedded/${CMAKE_Swift_COMPILER_TARGET}")
+ELSE()
+  get_filename_component(compiler_bin_dir ${CMAKE_Swift_COMPILER} DIRECTORY)
+  cmake_path(SET additional_lib_path NORMALIZE "${compiler_bin_dir}/../lib/swift/embedded/${CMAKE_Swift_COMPILER_TARGET}")
+ENDIF()
+
+target_link_directories(zephyr_pre0 PRIVATE "${additional_lib_path}")
+target_link_libraries(zephyr_pre0
+    -Wl,--whole-archive
+    swiftUnicodeDataTables
+    -Wl,--no-whole-archive
+    )
+
+target_link_directories(zephyr_final PRIVATE "${additional_lib_path}")
+target_link_libraries(zephyr_final
+    -Wl,--whole-archive
+    swiftUnicodeDataTables
+    -Wl,--no-whole-archive
+    )
+```
+
+Extra code is required to find the right paths where the `swiftUnicodeDataTables.a` file is located, depending on how Swift is installed.
+
+When this is built, depending on the target architecture, warnings may then be printed about 32-bit enums, like this:
+
+```console
+~/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd: warning: ~/.local/share/swiftly/toolchains/6.1.0/usr/lib/swift/embedded/armv6m-none-none-eabi/libswiftUnicodeDataTables.a(UnicodeWord.cpp.o) uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail
+```
+
+To suppress these, simply add `-Wl,--no-enum-size-warning` to the `target_link_libraries` invocations.
