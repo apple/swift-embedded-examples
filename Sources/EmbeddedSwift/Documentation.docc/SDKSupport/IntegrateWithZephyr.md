@@ -1,4 +1,4 @@
-# Integrating with Zephyr
+# Zephyr RTOS SDK
 
 Integrating Swift with Zephyr RTOS for embedded systems development
 
