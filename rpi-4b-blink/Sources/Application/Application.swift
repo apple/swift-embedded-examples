@@ -2,7 +2,7 @@
 //
 // This source file is part of the Swift open source project
 //
-// Copyright (c) 2024 Apple Inc. and the Swift project authors.
+// Copyright (c) 2025 Apple Inc. and the Swift project authors.
 // Licensed under Apache License v2.0 with Runtime Library Exception
 //
 // See https://swift.org/LICENSE.txt for license information
@@ -10,6 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 import MMIO
+import Support
 
 @Register(bitWidth: 32)
 struct GPSET1 {
@@ -66,17 +67,19 @@ func ledOff() {
   }
 }
 
-@main
-struct Main {
+func delay() {
+  for _ in 1..<1_000_000 { nop() }
+}
 
+@main
+struct Application {
   static func main() {
     setLedOutput()
-
     while true {
       ledOn()
-      for _ in 1..<100000 {}  // just a delay
+      delay()
       ledOff()
-      for _ in 1..<100000 {}  // just a delay
+      delay()
     }
   }
 }

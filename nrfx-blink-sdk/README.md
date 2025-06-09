@@ -2,7 +2,7 @@
 
 This example demonstrates how to integrate with the Zephyr SDK via CMake and how to build a Swift firmware application on top of the SDK and the libraries from it. The example was tested on a nRF52840-DK board, but it should also work on other Zephyr-supported boards.
 
-<img src="https://github.com/apple/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0">
+<img src="https://github.com/swiftlang/swift-embedded-examples/assets/1186214/ae3ff153-dd33-4460-8a08-4eac442bf7b0">
 
 ## Requirements
 

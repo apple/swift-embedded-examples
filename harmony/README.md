@@ -45,7 +45,7 @@ The firmware for Harmony is built using CMake and requires the Raspberry Pi Pico
 
 2.  Clone the swift-embedded-examples repository (if not already done):
     ```bash
-    git clone https://github.com/apple/swift-embedded-examples.git
+    git clone https://github.com/swiftlang/swift-embedded-examples.git
     cd harmony
     ```
 
