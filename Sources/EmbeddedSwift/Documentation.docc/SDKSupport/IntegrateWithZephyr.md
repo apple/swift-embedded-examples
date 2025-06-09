@@ -1,19 +1,22 @@
-# Integrating with Zephyr
+# Zephyr RTOS SDK
 
 Integrating Swift with Zephyr RTOS for embedded systems development
+
+[Zephyr](https://www.zephyrproject.org/) is an open-source RTOS for embedded systems that is sponsored by the Linux Foundation. Since it depends on CMake primarily for its build system, it can easily be integrated to be used with Embedded Swift.
 
 The following document outlines how to setup a Swift to Zephyr project for an emulated ARM Cortex M0, explaining a few key concepts along the way. For a complete working example on real hardware, however, refer to the [nrfx-blink-sdk](https://github.com/swiftlang/swift-embedded-examples/tree/main/nrfx-blink-sdk) project that is compatible with nRF or other boards.
 
 > Note: Embedded Swift is experimental. Public releases of Swift do not support Embedded Swift, yet. See <doc:InstallEmbeddedSwift> for details.
 
-## Zephyr Target Architecture Compatibility
+## Target Architecture Compatibility
 
 Zephyr [supports quite a few target architectures](https://docs.zephyrproject.org/latest/introduction/index.html), but not all are supported by Embedded Swift. Please refer to the following table for an overview of Zephyr-supported architectures that are supported by Swift, along with the correct target triple to use:
 
 | Architecture | Details             | Swift Triple            |
 |--------------|---------------------|-------------------------|
-| ARMv6-M      | Cortex M0, M1, M3   | armv6m-none-none-eabi   |
-| ARMv7-M      | Cortex M4, M7       | armv7em-none-none-eabi  |
+| ARMv6-M      | Cortex M0, M0+, M1  | armv6m-none-none-eabi   |
+| ARMv7-M      | Cortex M3           | armv7-none-none-eabi    |
+| ARMv7-EM     | Cortex M4/M4F, M7   | armv7em-none-none-eabi  |
 | ARMv8-M      | Cortex M23-85       | aarch64-none-none-elf   |
 | Intel        | 32-bit (i686)       | i686-unknown-none-elf   |
 | Intel        | 64-bit (x86_64)     | x86_64-unknown-none-elf |
@@ -134,7 +137,7 @@ Next, set the compiler target to the arch you are building for. For this example
 set(CMAKE_Swift_COMPILER_TARGET armv6m-none-none-eabi)
 ```
 
-After setting the target triple, some additional additional Swift compiler flags need to be defined:
+After setting the target triple, some additional additional Swift compiler flags need to be defined.
 
 ```cmake
 # Set global Swift compiler flags
@@ -145,15 +148,26 @@ add_compile_options(
     # Enable function sections to enable dead code stripping on elf
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xfrontend -function-sections>"
 
+    # Use software floating point operations matching GCC
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -mfloat-abi=soft>"
+
+    # Use compacted C enums matching GCC
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fshort-enums>"
+
     # Disable PIC
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pic>"
 
     # Disable PIE
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pie>"
+
+    # Add Libc include paths
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -I -Xcc ${ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/picolibc/include>"
 )
 ```
 
-There are quite a few other Zephyr flags that must also be imported in order to get Zephyr include paths and flags such `-mcpu`, `-mfloat-abi`, and so on:
+- NOTE: The `-mfloat-abi=soft` flag may need to change to `-mfloat-abi=hard` for ARM CPUs that support hard-float, such as the Cortex-M4F and Cortex-M7. This and the `-fshort-enums` flags are not required for non-ARM architectures such as Intel and RISC-V.
+
+There are quite a few other Zephyr flags that can also be imported (optional) in order to get Zephyr include paths and flags such `-mcpu`, `mthumb`, `-mabi`, and so on:
 
 ```cmake
 # Import TOOLCHAIN_C_FLAGS from Zephyr as -Xcc flags
@@ -289,7 +303,8 @@ manifest:
           - cmsis  # required by the ARM port
 ```
 
-It is recommended to set the `revision` to a tagged version of Zephyr instead of always getting the main revision, which could have changing APIs.
+- It is recommended to set the `revision` to a tagged version of Zephyr instead of always getting the main revision, which could have changing APIs.
+- Also, please note that depending on what architecture you are targeting, you may need to add more/different targets to the `name-allowlist`, which is useful to get needed dependencies when compiling a project from a CI. See the [Zephyr workflow from swift-embedded-examples](https://github.com/swiftlang/swift-embedded-examples/blob/main/.github/workflows/build-zephyr.yml) for an example of setting up a CI for Zephyr.
 
 Next, set the `ZEPHYR_BASE` environment variable to tell `west` where the Zephyr workspace is located:
 
@@ -335,3 +350,76 @@ ninja: no work to do.
 ```
 
 The `-r jlink` param is needed for this example to use the J-Link tools instead of using `nrfjprog`, which is the default for this board and also [deprecated](https://www.nordicsemi.com/Products/Development-tools/nRF-Command-Line-Tools).
+
+## Customizing the Linker
+
+The default linker configuration for building a Zephyr project from CMake works well for simple projects, but it can be customized as needed. The following sections show off some useful ways to customize linking Zephyr projects for Swift.
+
+### Stripping Out Unused Sections
+
+When compiling Swift to Zephyr projects, you may see some warnings about orphaned sections from the linker, like `.swift_modhash`:
+
+```console
+~/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd: warning: orphan section `.swift_modhash' from `app/libapp.a(Main.swift.obj)' being placed in section `.swift_modhash'
+[135/135] Linking C executable zephyr/zephyr.elf
+~/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd: warning: orphan section `.swift_modhash' from `app/libapp.a(Main.swift.obj)' being placed in section `.swift_modhash
+```
+
+These types of warnings can be suppressed by passing a custom linker script to Zephyr that discards the sections, especially if they are not needed. For example, a script called `sections.ld` can be created at the root of the project with the following contents:
+
+```ld
+/DISCARD/ : { *(.swift_modhash*) }
+/DISCARD/ : { *(.ARM.attributes*) *(.ARM.exidx) }
+```
+
+Then, in `CMakeLists.txt`, add the following line:
+
+```cmake
+# Remove unused sections
+zephyr_linker_sources(SECTIONS "sections.ld")
+```
+
+This can also help to reduce the size of the output elf/binary since unused sections are stripped out. Be careful what sections you strip out, however, as some sections may be required.
+
+### Linking Swift Libraries
+
+This example adds the `swiftUnicodeDataTables` library from Swift to be linked into the Zephyr project. This is useful for linking unicode symbols when using strings. See <doc:Strings> for more information on this.
+
+In order to add additional linker params, the CMake `target_link_libraries` invocation can be used against `zephyr_pre0` and `zephyr_final`, like this:
+
+```cmake
+# The code is using a String as a Dictionary key and thus require linking with libswiftUnicodeDataTables.a
+# We compute the path where this file reside, taking into accout how the toolchain is referenced (Swiftly or TOOLCHAINS env variable). 
+find_program(SWIFTLY "swiftly")
+IF(SWIFTLY)
+  execute_process(COMMAND swiftly use --print-location OUTPUT_VARIABLE toolchain_path)
+  cmake_path(SET additional_lib_path NORMALIZE "${toolchain_path}/usr/lib/swift/embedded/${CMAKE_Swift_COMPILER_TARGET}")
+ELSE()
+  get_filename_component(compiler_bin_dir ${CMAKE_Swift_COMPILER} DIRECTORY)
+  cmake_path(SET additional_lib_path NORMALIZE "${compiler_bin_dir}/../lib/swift/embedded/${CMAKE_Swift_COMPILER_TARGET}")
+ENDIF()
+
+target_link_directories(zephyr_pre0 PRIVATE "${additional_lib_path}")
+target_link_libraries(zephyr_pre0
+    -Wl,--whole-archive
+    swiftUnicodeDataTables
+    -Wl,--no-whole-archive
+    )
+
+target_link_directories(zephyr_final PRIVATE "${additional_lib_path}")
+target_link_libraries(zephyr_final
+    -Wl,--whole-archive
+    swiftUnicodeDataTables
+    -Wl,--no-whole-archive
+    )
+```
+
+Extra code is required to find the right paths where the `swiftUnicodeDataTables.a` file is located, depending on how Swift is installed.
+
+When this is built, depending on the target architecture, warnings may then be printed about 32-bit enums, like this:
+
+```console
+~/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd: warning: ~/.local/share/swiftly/toolchains/6.1.0/usr/lib/swift/embedded/armv6m-none-none-eabi/libswiftUnicodeDataTables.a(UnicodeWord.cpp.o) uses 32-bit enums yet the output is to use variable-size enums; use of enum values across objects may fail
+```
+
+To suppress these, simply add `-Wl,--no-enum-size-warning` to the `target_link_libraries` invocations.
