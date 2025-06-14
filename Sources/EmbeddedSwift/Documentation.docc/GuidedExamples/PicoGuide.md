@@ -23,7 +23,7 @@ $ export PICO_SDK_PATH=...       # location to your Pico SDK
 $ export PICO_TOOLCHAIN_PATH=... # location to the Arm Embedded Toolchain
 ```
 
-If you have the Wi-Fi enabled Pico W board instead of the regular Pico, note that you will need a slightly different setup described in the [Pico W example project](https://github.com/swiftlang/swift-embedded-examples/tree/main/rpi-picow-blink-sdk), and just specifying `PICO_BOARD=pico_w` is not going to work.
+If you have the Wi-Fi enabled Pico W / Pico 2W board instead of the regular Pico, note that you will need a slightly different setup described in the [Pico W example project](https://github.com/swiftlang/swift-embedded-examples/tree/main/rpi-picow-blink-sdk), and just specifying `PICO_BOARD=pico_w` is not going to work.
 
 Install [CMake 3.29](https://cmake.org/) or newer.
 
